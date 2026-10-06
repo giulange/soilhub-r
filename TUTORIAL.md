@@ -8,16 +8,18 @@ there and send the error message to Giuliano, without passwords or tokens.
 
 ## 1. Install Or Update Once
 
-Version 0.1.4 includes the session-renewal fix. Its download link works after
-the maintainer publishes the release. Do not repeat installation at every login.
+The example installs the published 0.1.3 package. The session-renewal correction
+is currently local development work, not part of this published package. Its
+release version will be decided after the open issues are completed. Do not
+repeat installation at every login.
 
 ```r
 download.file(
-  "https://github.com/giulange/soilhub-r/releases/download/v0.1.4/soilhub_0.1.4.tar.gz",
-  "soilhub_0.1.4.tar.gz",
+  "https://github.com/giulange/soilhub-r/releases/download/v0.1.3/soilhub_0.1.3.tar.gz",
+  "soilhub_0.1.3.tar.gz",
   mode = "wb"
 )
-install.packages("soilhub_0.1.4.tar.gz", repos = NULL, type = "source")
+install.packages("soilhub_0.1.3.tar.gz", repos = NULL, type = "source")
 ```
 
 Dependencies are assumed installed on your RStudio Server. If R reports a missing
