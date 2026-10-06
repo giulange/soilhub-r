@@ -74,6 +74,11 @@ arguments override environment variables, which override public defaults.
 
 ## Student Tutorial And Help
 
+Start with [Your First Data Table In RStudio](TUTORIAL.md): one short path from
+login to a table of WoSIS observations, then saving the result. It targets 0.1.4,
+whose release is pending publication. The previous detailed guide is retained
+as `soilhub-reference.Rmd` in 0.1.4 rather than being required for beginners.
+
 ```r
 file.edit(system.file("doc", "soilhub-student.Rmd", package = "soilhub"))
 ?soil_consistency
