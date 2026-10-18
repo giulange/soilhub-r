@@ -19,6 +19,22 @@
   `soil_markings()`, `soil_revised_rules()`, `soil_first_layer()`, print and
   summary methods. The long layout, `with_geometry = "sf"` and
   `too_large = "export"` follow in the next work packages.
+* Writes and jobs (WP8), gated by the rights of the session (checked
+  locally when the token declares them, else decided by the API; a 403 is a
+  `soilhub_permission_error` naming the right): `soil_register_variable()`
+  (validate then register, capability `variable_registration`),
+  `soil_product()`, `soil_product_version()`, `soil_run_open()`,
+  `soil_run_complete()`, `soil_run_fail()`, `soil_publish_values()` and
+  `soil_publish_health()` (local checks of every record, server validation,
+  synchronous up to 10,000 records, else an NDJSON file uploaded with its
+  SHA-256 checksum as a job, never retried; receipts reconciled with the
+  records sent, `soilhub_reconciliation_warning`), `soil_job()`,
+  `soil_job_wait()`, `soil_job_cancel()` and `soil_refresh_countries()`.
+  A 409 is a `soilhub_conflict_error` that says what to do (the API has no
+  GET for products, versions or runs); a job that fails or is cancelled is a
+  `soilhub_job_error` with the rejected rows in `e$errors`.
+* A 403 on a session whose token does not declare its rights no longer
+  reports the rights as `FALSE`.
 
 * Discovery and version check (WP3): after the login `soil_connect()` reads
   `/capabilities` and checks the API version (0.5.0 or later, major 0) and

@@ -29,7 +29,8 @@ REQUIRED_CAPABILITIES <- c(
 OPTIONAL_CAPABILITIES <- c(
   "revised_view", "profile_type_filter", "raw_markings", "source_ingest",
   "variable_registration", "bulk_soil_health", "code_lists",
-  "sotwis_ttr_flags", "dataset_notes", "sotwis_estimates", "country_inventory"
+  "sotwis_ttr_flags", "dataset_notes", "sotwis_estimates", "country_inventory",
+  "publish_generic_values", "generic_bulk_publication", "publish_soil_health_sync"
 )
 
 # "0.5.0" -> c(0, 5, 0); NULL when the text is not a version.

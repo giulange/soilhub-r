@@ -140,7 +140,8 @@ session_rights <- function(soil) {
   identity <- session_cached(soil, "identity")
   if (!is.list(identity)) return(NULL)
   if (isTRUE(identity$rights_known)) return(identity$roles)
-  identity$rights
+  # `[[` (not `$`): `$rights` would partially match `rights_known`
+  identity[["rights"]]
 }
 
 normalise_right <- function(right) {

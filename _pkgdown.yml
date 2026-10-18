@@ -42,6 +42,23 @@ reference:
       - soil_markings
       - soil_revised_rules
       - soil_first_layer
+  - title: Writing data
+    desc: >
+      Variables, products, versions and runs, publication of derived values
+      and soil-health scores (rights `soil:publish`, `soil:admin`).
+    contents:
+      - soil_register_variable
+      - soil_product
+      - soil_product_version
+      - soil_run_open
+      - soil_publish_values
+      - soil_publish_health
+  - title: Jobs
+    contents:
+      - soil_job
+      - soil_job_wait
+      - soil_job_cancel
+      - soil_refresh_countries
   - title: Configuration and errors
     contents:
       - soilhub-config
