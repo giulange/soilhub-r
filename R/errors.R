@@ -12,7 +12,7 @@
 #' | --- | --- | --- |
 #' | `soilhub_argument_error` | a bad argument is caught before any request (bbox, enum value, `NA`, `"ALL"`) | `argument` |
 #' | `soilhub_dependency_error` | a suggested package (e.g. `sf`) is needed and not installed | `package` |
-#' | `soilhub_auth_error` | login denied or timed out, session expired and not renewable, HTTP 401 | `reason` (`login_denied`, `login_timeout`, `session_expired`, `no_refresh_token`, `not_logged_in`), `partial` |
+#' | `soilhub_auth_error` | login denied or timed out, session expired and not renewable, HTTP 401, no default session | `reason` (`login_denied`, `login_timeout`, `session_expired`, `no_refresh_token`, `not_logged_in`, `no_session`), `partial` |
 #' | `soilhub_permission_error` | the session lacks the right an operation needs, or HTTP 403 | `required_right`, `rights`, `status`, `endpoint`, `request_id` |
 #' | `soilhub_api_error` | any other non-2xx response, an invalid JSON response, retries exhausted | `status`, `endpoint`, `method`, `detail`, `request_id`, `code`, `attempts` |
 #' | `soilhub_validation_error` | HTTP 422: the API rejected the request content | as `soilhub_api_error`, plus `errors` (a data frame) |

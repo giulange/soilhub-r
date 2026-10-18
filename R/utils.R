@@ -2,11 +2,17 @@
 
 `%||%` <- function(x, y) if (is.null(x)) y else x
 
-# Package-level state: the sleep function used between retries (replaced by
-# tests through `local_soilhub_sleep()`) and the one-time messages already shown.
+# Package-level state: the clock and the sleep function (replaced by tests
+# through `local_fake_sleep()` and `local_fake_clock()`), the browser opener of
+# the device login and the one-time messages already shown.
 soilhub_env <- new.env(parent = emptyenv())
 soilhub_env$sleep <- function(seconds) Sys.sleep(seconds)
+soilhub_env$now <- function() Sys.time()
+soilhub_env$browse <- function(url) utils::browseURL(url)
 soilhub_env$shown <- character()
+
+# The current time as seen by the session code (token expiry, renewal).
+soil_now <- function() soilhub_env$now()
 
 http_sleep <- function(seconds) {
   if (seconds > 0) soilhub_env$sleep(seconds)
@@ -42,4 +48,14 @@ format_count <- function(x) {
 
 is_string <- function(x) {
   is.character(x) && length(x) == 1L && !is.na(x) && nzchar(x)
+}
+
+# A warning of class `soilhub_warning` (and `subclass`), suppressible with
+# `suppressWarnings()` or a calling handler on the class.
+soilhub_warning <- function(text, subclass = NULL) {
+  cond <- structure(
+    class = c(subclass, "soilhub_warning", "warning", "condition"),
+    list(message = text, call = NULL)
+  )
+  warning(cond)
 }

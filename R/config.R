@@ -13,6 +13,7 @@
 #' | Verbosity | `verbose` | `soilhub.verbose` | `SOILHUB_VERBOSE` | 1 when interactive, else 0 |
 #' | Export directory | `dir` | `soilhub.export_dir` | `SOILHUB_EXPORT_DIR` | `file.path(tempdir(), "soilhub-exports")` |
 #' | Page size | `page_size` | `soilhub.page_size` | -- | the server's `max_page_size` (1000 when unknown) |
+#' | Proactive refresh margin (seconds) | -- | `soilhub.refresh_margin` | `SOILHUB_REFRESH_MARGIN` | 60 |
 #'
 #' Verbosity levels: `0` silent; `1` user messages (pages read, retries,
 #' session renewed, export progress); `2` also one line per HTTP request
@@ -25,6 +26,11 @@
 #'
 #' The timeout is the total time allowed for one request (connection 10 s);
 #' long pages over whole datasets take 40--90 s.
+#'
+#' The refresh margin is how long before the expiry of the access token the
+#' next request renews it (see [soil_connect()]); it is read at each request,
+#' so it applies to existing sessions too. A margin longer than the token
+#' lifetime renews the token before every request.
 #'
 #' The variable names of soilhub 0.1.x are read as a fallback, with a
 #' one-time message: `SOIL_API_URL` for the API base URL, `KEYCLOAK_TOKEN_URL`
@@ -238,7 +244,7 @@ soil_verbosity <- function(soil = NULL) {
 # server's `max_page_size` when it is known (capabilities, WP3).
 resolve_page_size <- function(soil, page_size = NULL) {
   server_max <- tryCatch(
-    soil$capabilities$limits$max_page_size,
+    session_cached(soil, "capabilities")$limits$max_page_size,
     error = function(e) NULL
   )
   value <- page_size %||% soil$page_size %||% getOption("soilhub.page_size") %||%

@@ -8,6 +8,13 @@ template:
 # Reference groups are filled as the functions are added (design 8).
 # Planned groups: Session, Discovery, Reads, Exports, Writing, Results.
 reference:
+  - title: Session and identity
+    contents:
+      - soil_connect
+      - soil_login
+      - soil_logout
+      - soil_session
+      - soil_whoami
   - title: Configuration and errors
     contents:
       - soilhub-config

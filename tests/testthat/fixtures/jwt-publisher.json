@@ -1,0 +1,10 @@
+{
+  "exp": 1792332000, "iat": 1792324800, "jti": "fixture-publisher",
+  "iss": "https://kc.weatherprogapp.it/realms/ams", "aud": ["soil-api", "soil-api-dev"],
+  "sub": "00000000-0000-4000-8000-000000000002", "typ": "Bearer", "azp": "ams-r",
+  "scope": "openid soil", "preferred_username": "publisher",
+  "resource_access": {
+    "soil-api": {"roles": ["soil:summary", "soil:read", "soil:publish", "soil:admin"]},
+    "soil-api-dev": {"roles": ["soil:summary"]}
+  }
+}

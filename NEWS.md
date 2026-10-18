@@ -1,5 +1,15 @@
 # soilhub (development version)
 
+* Sessions (WP2): `soil_connect()` signs in with the Keycloak device login
+  (PKCE, human users only, tokens in memory only), `soil_login()`,
+  `soil_logout()`, the default session `soil_session()` and `soil_whoami()`
+  (user, rights read from the token, advertised limits, session lifetime).
+  The access token is renewed automatically before it expires (margin
+  `soilhub.refresh_margin`, default 60 s) and once after an HTTP 401, storing
+  the rotated refresh token; a session Keycloak no longer renews fails with
+  `soilhub_auth_error(reason = "session_expired")`. The print method of a
+  session never shows a token. A 403 names the right the request needs.
+
 * HTTP layer, errors and paging (WP1): one internal request function with
   client request ids (`X-Request-ID`), retries on transport failures and HTTP
   429/502/503/504 honouring `Retry-After` (capped at 10 s), connect timeout

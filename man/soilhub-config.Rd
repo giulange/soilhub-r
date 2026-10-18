@@ -14,6 +14,7 @@ Every setting is resolved with the precedence
    Verbosity \tab \code{verbose} \tab \code{soilhub.verbose} \tab \code{SOILHUB_VERBOSE} \tab 1 when interactive, else 0 \cr
    Export directory \tab \code{dir} \tab \code{soilhub.export_dir} \tab \code{SOILHUB_EXPORT_DIR} \tab \code{file.path(tempdir(), "soilhub-exports")} \cr
    Page size \tab \code{page_size} \tab \code{soilhub.page_size} \tab -- \tab the server's \code{max_page_size} (1000 when unknown) \cr
+   Proactive refresh margin (seconds) \tab -- \tab \code{soilhub.refresh_margin} \tab \code{SOILHUB_REFRESH_MARGIN} \tab 60 \cr
 }
 
 
@@ -28,6 +29,11 @@ existing session.
 
 The timeout is the total time allowed for one request (connection 10 s);
 long pages over whole datasets take 40--90 s.
+
+The refresh margin is how long before the expiry of the access token the
+next request renews it (see \code{\link[=soil_connect]{soil_connect()}}); it is read at each request,
+so it applies to existing sessions too. A margin longer than the token
+lifetime renews the token before every request.
 
 The variable names of soilhub 0.1.x are read as a fallback, with a
 one-time message: \code{SOIL_API_URL} for the API base URL, \code{KEYCLOAK_TOKEN_URL}
