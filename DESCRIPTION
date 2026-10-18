@@ -1,0 +1,31 @@
+Package: soilhub
+Title: R Client for the Global Soil Data Hub API
+Version: 0.1.9000
+Authors@R: 
+    person("Giuliano", "Langella", , "giuliano.langella@gmail.com", role = c("aut", "cre"))
+Description: Discover, read and export harmonised soil profile data (WoSIS,
+    WISE, SOTER, SOTWIS) from the Global Soil Data Hub API, and publish
+    derived values with the appropriate rights.
+License: MIT + file LICENSE
+URL: https://github.com/giulange/soilhub-r,
+    https://giulange.github.io/soilhub-r
+BugReports: https://github.com/giulange/soilhub-r/issues
+Depends: 
+    R (>= 4.1)
+Imports: 
+    curl,
+    httr2 (>= 1.0.0),
+    jsonlite (>= 1.8),
+    openssl,
+    stats,
+    utils
+Suggests: 
+    knitr,
+    rmarkdown,
+    sf (>= 1.0),
+    testthat (>= 3.0.0),
+    webfakes
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
