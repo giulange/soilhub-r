@@ -8,6 +8,7 @@
 fake_api <- function(routes = list(), .local_envir = parent.frame()) {
   testthat::skip_if_not_installed("webfakes")
   app <- webfakes::new_app()
+  app$use(webfakes::mw_json())
   app$get("/health", function(req, res) {
     res$send_json(list(status = "ok"), auto_unbox = TRUE)
   })
