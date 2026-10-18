@@ -234,6 +234,7 @@ test_that("a transport failure is retried, then unavailable", {
   e <- expect_error(soil_request(soil, "GET", "/health"),
                     class = "soilhub_unavailable_error")
   expect_identical(e$code, "transport_error")
+  expect_identical(e$reason, "transport_error")
   expect_identical(e$attempts, 3L)
   expect_null(e$status)
   expect_match(e$request_id, request_id_pattern)
@@ -241,14 +242,46 @@ test_that("a transport failure is retried, then unavailable", {
   expect_match(conditionMessage(e), "could not be reached after 3 attempt")
 })
 
-test_that("the total timeout applies per request", {
+test_that("a request reaching the total timeout is not retried", {
   sleeps <- local_fake_sleep()
   slow <- fake_api(http_routes)
   soil <- test_session(slow, timeout = 0.3)
-  e <- expect_error(soil_request(soil, "GET", "/slow", retry = FALSE),
+  e <- expect_error(soil_request(soil, "GET", "/slow"),
                     class = "soilhub_unavailable_error")
-  expect_identical(e$code, "transport_error")
-  expect_match(conditionMessage(e), "[Tt]imeout|timed out")
+  expect_identical(e$reason, "timeout")
+  expect_identical(e$code, "timeout")
+  expect_identical(e$attempts, 1L)
+  expect_length(sleeps$waits, 0L)
+  expect_match(conditionMessage(e), "did not complete within the timeout of 0.3 s and was not repeated")
+  expect_match(conditionMessage(e), "narrow the selection", fixed = TRUE)
+  expect_match(conditionMessage(e), "soil_export()", fixed = TRUE)
+})
+
+test_that("connection timeouts are retried, the total timeout is not", {
+  curl_failure <- function(class, message) {
+    parent <- structure(class = c(class, "curl_error", "error", "condition"),
+                        list(message = message, call = NULL))
+    structure(class = c("httr2_failure", "error", "condition"),
+              list(message = "Failed to perform HTTP request.", parent = parent))
+  }
+  expect_true(is_total_timeout(curl_failure(
+    "curl_error_operation_timedout",
+    "Timeout was reached [h]: Operation timed out after 300000 milliseconds with 0 bytes received"
+  )))
+  expect_false(is_total_timeout(curl_failure(
+    "curl_error_operation_timedout",
+    "Timeout was reached [h]: Failed to connect to h port 443 after 10002 ms: Timeout was reached"
+  )))
+  expect_false(is_total_timeout(curl_failure(
+    "curl_error_operation_timedout", "Resolving timed out after 10000 milliseconds"
+  )))
+  expect_false(is_total_timeout(curl_failure(
+    "curl_error_couldnt_resolve_host", "Could not resolve host: h"
+  )))
+  expect_false(is_total_timeout(curl_failure(
+    "curl_error_recv_error", "Recv failure: Connection reset by peer"
+  )))
+  expect_false(is_total_timeout(NULL))
 })
 
 test_that("404, 409, 403, 400 and 500 map to their classes with safe fields", {

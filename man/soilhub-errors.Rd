@@ -33,7 +33,7 @@ content of an uploaded file.\tabular{lll}{
    \code{soilhub_load_limit_error} \tab HTTP 422 \code{load_limit_exceeded}: the selection is above the limit of synchronous requests (or of exports) \tab as \code{soilhub_api_error}, plus \code{channel}, \code{max_observations}, \code{observation_count}, \code{observation_count_exact}, \code{exports_url}, \code{request}, \code{selection} \cr
    \code{soilhub_not_found_error} \tab HTTP 404 \tab as \code{soilhub_api_error} \cr
    \code{soilhub_conflict_error} \tab HTTP 409 (idempotency replay with different content, duplicate product, illegal job transition) \tab as \code{soilhub_api_error} \cr
-   \code{soilhub_unavailable_error} \tab HTTP 503 after the retries, or the API cannot be reached \tab as \code{soilhub_api_error}, \code{attempts} \cr
+   \code{soilhub_unavailable_error} \tab HTTP 503 after the retries, the API cannot be reached, or the request reached the total timeout (not repeated: narrow the selection or export) \tab as \code{soilhub_api_error}, \code{attempts}, \code{reason} (\code{timeout}, \code{transport_error}) \cr
    \code{soilhub_capability_error} \tab the server lacks a capability, or its API version is outside the supported range \tab \code{capability}, \code{api_version}, \code{minimum} \cr
    \code{soilhub_job_error} \tab an export or job \code{failed} or was \code{cancelled}, polling timed out, or the job id is unknown \tab \code{job}, \code{job_id}, \code{reason} \cr
 }

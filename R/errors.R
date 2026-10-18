@@ -19,7 +19,7 @@
 #' | `soilhub_load_limit_error` | HTTP 422 `load_limit_exceeded`: the selection is above the limit of synchronous requests (or of exports) | as `soilhub_api_error`, plus `channel`, `max_observations`, `observation_count`, `observation_count_exact`, `exports_url`, `request`, `selection` |
 #' | `soilhub_not_found_error` | HTTP 404 | as `soilhub_api_error` |
 #' | `soilhub_conflict_error` | HTTP 409 (idempotency replay with different content, duplicate product, illegal job transition) | as `soilhub_api_error` |
-#' | `soilhub_unavailable_error` | HTTP 503 after the retries, or the API cannot be reached | as `soilhub_api_error`, `attempts` |
+#' | `soilhub_unavailable_error` | HTTP 503 after the retries, the API cannot be reached, or the request reached the total timeout (not repeated: narrow the selection or export) | as `soilhub_api_error`, `attempts`, `reason` (`timeout`, `transport_error`) |
 #' | `soilhub_capability_error` | the server lacks a capability, or its API version is outside the supported range | `capability`, `api_version`, `minimum` |
 #' | `soilhub_job_error` | an export or job `failed` or was `cancelled`, polling timed out, or the job id is unknown | `job`, `job_id`, `reason` |
 #'

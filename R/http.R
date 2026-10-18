@@ -45,7 +45,8 @@ soil_request <- function(soil, method, path, body = NULL, query = NULL,
   method <- toupper(method)
   timeout <- check_timeout(timeout %||% soil$timeout %||% config_defaults$timeout)
   request_id <- new_request_id()
-  context <- list(method = method, endpoint = path, request_id = request_id)
+  context <- list(method = method, endpoint = path, request_id = request_id,
+                  timeout = timeout)
 
   renewed <- FALSE
   repeat {
@@ -160,9 +161,13 @@ perform_with_retries <- function(soil, req, context, max_tries) {
     status <- if (is.null(response)) NULL else httr2::resp_status(response)
     log_request(soil, context, status, elapsed, response)
 
-    transient <- is.null(response) || status %in% http_transient_status
+    # A request that reached the total timeout is a heavy query: it is not
+    # repeated (connection timeouts, DNS and reset errors are).
+    timed_out <- is_total_timeout(failure)
+    transient <- if (is.null(response)) !timed_out else status %in% http_transient_status
     if (!transient || attempt >= max_tries) {
-      return(list(response = response, failure = failure, attempts = attempt))
+      return(list(response = response, failure = failure, attempts = attempt,
+                  timed_out = timed_out))
     }
     wait <- retry_wait(response, attempt)
     soil_inform(soil, 1, sprintf(
@@ -206,10 +211,36 @@ parse_retry_after <- function(header) {
   as.numeric(difftime(when, Sys.time(), units = "secs"))
 }
 
+# TRUE when a transport failure is the total request timeout (curl error 28
+# "Operation timed out"), FALSE for a connection or DNS timeout ("Failed to
+# connect", "Connection timed out", "Resolving timed out") and other failures.
+is_total_timeout <- function(failure) {
+  if (is.null(failure)) return(FALSE)
+  cause <- failure$parent %||% failure
+  inherits(cause, "curl_error_operation_timedout") &&
+    !grepl("connect|resolv", conditionMessage(cause), ignore.case = TRUE)
+}
+
 transport_error <- function(outcome, soil, context) {
   cause <- outcome$failure
   reason <- if (!is.null(cause$parent)) conditionMessage(cause$parent) else conditionMessage(cause)
   reason <- sub("^\\s+", "", reason)
+  if (isTRUE(outcome$timed_out)) {
+    return(soilhub_api_error(
+      paste0(
+        sprintf(
+          "The request did not complete within the timeout of %s s and was not repeated: ",
+          format(context$timeout)
+        ),
+        "narrow the selection (bbox, country, datasets, variables, layer, profile_type), ",
+        "request an export with soil_export(), or raise `timeout`.",
+        request_suffix(NULL, context$method, context$endpoint, context$request_id)
+      ),
+      status = NULL, endpoint = context$endpoint, method = context$method,
+      request_id = context$request_id, code = "timeout", reason = "timeout",
+      attempts = outcome$attempts, subclass = "unavailable"
+    ))
+  }
   soilhub_api_error(
     paste0(
       sprintf(
@@ -220,7 +251,8 @@ transport_error <- function(outcome, soil, context) {
     ),
     status = NULL, endpoint = context$endpoint, method = context$method,
     request_id = context$request_id, code = "transport_error",
-    attempts = outcome$attempts, subclass = "unavailable"
+    reason = "transport_error", attempts = outcome$attempts,
+    subclass = "unavailable"
   )
 }
 
