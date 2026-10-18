@@ -1,7 +1,11 @@
 # soilhub
 
-R client for the Global Soil Data Hub API. Read soil datasets and horizon-level
-observations with personal authentication. Publishing requires additional roles.
+R client for the Global Soil Data Hub API: discover, read and export
+harmonised soil profile data, and (with the appropriate rights) publish derived
+values. The package is **under development** (version 0.2.0 redesign); this
+repository currently holds the package skeleton only, with no user-facing
+functions yet. The 0.1.x client is documented in
+[docs/legacy/TUTORIAL-0.1.md](docs/legacy/TUTORIAL-0.1.md).
 
 ## Install Or Update
 
@@ -10,7 +14,7 @@ stable GitHub release and installs its attached R source package, without a
 hard-coded version. No GitHub account or private repository access is required.
 
 ```r
-dependencies <- c("httr2", "jsonlite", "curl", "openssl", "sf")
+dependencies <- c("httr2", "jsonlite", "curl", "openssl")
 missing <- dependencies[!vapply(dependencies, requireNamespace,
                                 quietly = TRUE, FUN.VALUE = logical(1))]
 if (length(missing)) {
@@ -49,8 +53,10 @@ library(soilhub)
 packageVersion("soilhub")
 ```
 
-On Linux, dependencies such as `sf`, `curl` and `openssl` may require system
-libraries: ask your RStudio Server administrator if installation fails. Accept
+`sf` is optional: install it (`install.packages("sf")`) only if you need
+geometry. On Linux, dependencies such as `curl` and `openssl` (and `sf`) may
+require system libraries: ask your RStudio Server administrator if installation
+fails. Accept
 a personal library if the shared library is not writable. The script installs
 missing dependencies; it does not automatically upgrade every existing package.
 
@@ -59,37 +65,16 @@ If GitHub's public API rate limit is reached, retry later or download the
 Do not install GitHub's automatic "Source code" archive: the installable package
 is the explicitly attached `soilhub_*.tar.gz` file.
 
-## Personal Login
+## Development Install
+
+To try the development version from the repository (requires the `remotes`
+package):
 
 ```r
-soil <- soil_connect_device()
-invisible(soil_login(soil))
-soil_datasets(soil)
+remotes::install_github("giulange/soilhub-r", ref = "develop")
 ```
 
-Open the displayed verification link and log in with your own authorized
-Keycloak account. Never share passwords, tokens or device codes. No ETL secret
-is needed. Defaults use `https://soilhub.weatherprogapp.it/api/v1`; explicit
-arguments override environment variables, which override public defaults.
-
-## Student Tutorial And Help
-
-Start with [Your First Data Table In RStudio](TUTORIAL.md): one short path from
-login to a table of WoSIS observations, then saving the result. This is a local
-documentation update; the next package version is not decided. The published
-package is 0.1.3. The previous detailed guide is retained in the development
-builder as `soilhub-reference.Rmd` rather than being required for beginners.
-
-```r
-file.edit(system.file("doc", "soilhub-student.Rmd", package = "soilhub"))
-?soil_consistency
-?soil_get_data
-```
-
-Copy the tutorial into your project before editing. Chunks use `eval=FALSE`:
-run them interactively as needed. Knitting does not automatically install
-packages, authenticate or download soil data. For current installation
-instructions, use this README rather than a version-pinned tutorial example.
+Design documents of the redesign are in [docs/design/](docs/design/).
 
 API documentation: [Global Soil Data Hub](https://soilhub.weatherprogapp.it/docs).
 The client is MIT licensed; provider data retain their original licenses.

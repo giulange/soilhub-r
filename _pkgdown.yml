@@ -1,0 +1,12 @@
+url: https://giulange.github.io/soilhub-r
+
+destination: site
+
+template:
+  bootstrap: 5
+
+# Skeleton (design 8): reference groups are filled as the functions are added.
+# Planned groups: Session, Discovery, Reads, Exports, Writing, Results, Errors.
+reference: []
+
+# Articles (vignettes) are added in WP11.

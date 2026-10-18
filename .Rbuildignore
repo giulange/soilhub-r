@@ -1,0 +1,17 @@
+^LICENSE\.md$
+^README\.md$
+^NEWS\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^tools$
+^tests/contract$
+^tests/live$
+^\.gitignore$
+^\.Rproj\.user$
+^.*\.Rproj$
+^\.Rhistory$
+^\.DS_Store$
+^site$
+^\.git$
