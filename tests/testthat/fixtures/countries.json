@@ -1,0 +1,8 @@
+{
+  "metadata": {"schema_version": "1.0", "request_id": "soilhub-20261018080000-0a1b2c3d", "filters": {}, "total_count": 3, "returned_count": 3, "limit": null, "offset": null, "has_more": null, "warnings": [], "country_assignment": "intersects"},
+  "countries": [
+    {"iso_a2": "AQ", "iso_a3": "ATA", "name": "Antarctica", "dataset_count": 0, "feature_count": 0, "point_count": 0, "polygon_count": 0, "profile_count": 0, "horizon_count": 0, "original_observation_count": 0, "value_count": 0, "observation_count": 0, "variable_count": 0, "as_of": null},
+    {"iso_a2": "KE", "iso_a3": "KEN", "name": "Kenya", "dataset_count": 6, "feature_count": 9214, "point_count": 3105, "polygon_count": 6109, "profile_count": 9214, "horizon_count": 61022, "original_observation_count": 1210933, "value_count": 0, "observation_count": 1210933, "variable_count": 74, "as_of": "2026-10-18T02:15:07.551203Z"},
+    {"iso_a2": "TN", "iso_a3": "TUN", "name": "Tunisia", "dataset_count": 5, "feature_count": 2211, "point_count": 412, "polygon_count": 1799, "profile_count": 2211, "horizon_count": 14420, "original_observation_count": 260117, "value_count": 0, "observation_count": 260117, "variable_count": 61, "as_of": "2026-10-18T02:15:07.551203Z"}
+  ]
+}

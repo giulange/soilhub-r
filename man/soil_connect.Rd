@@ -69,6 +69,13 @@ them: do not save it; \code{\link[=soil_logout]{soil_logout()}} empties it.
 
 Rights: none needed to connect. A user without \code{soil:summary} is warned
 that discovery calls will be refused.
+
+\strong{Version check.} After the login the capabilities of the server are read
+(\code{\link[=soil_capabilities]{soil_capabilities()}}) and checked: an API older than 0.5.0 or of another
+major version, or a server lacking a capability every session needs,
+stops with a \code{soilhub_capability_error}: no default session is
+registered and the session, signed out, is in \code{e$session} for
+\code{\link[=soil_api_info]{soil_api_info()}}. A newer minor version only prints a message.
 }
 \examples{
 \dontrun{

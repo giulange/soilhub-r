@@ -1,0 +1,8 @@
+{
+  "metadata": {"schema_version": "1.0", "request_id": null, "filters": {"attribute": ["LNDF"]}, "total_count": 2, "returned_count": 2, "limit": null, "offset": null, "has_more": null, "warnings": [], "code_list": "SOTWIS_codes"},
+  "code_list": "SOTWIS_codes",
+  "codes": [
+    {"attribute": "LNDF", "code": "LP", "description": "plain", "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c", "source_dataset_name": "sotwis_senegal_gambia", "source_table": "SOTWIS_codes", "source_row_number": 412, "provider_code": "isric"},
+    {"attribute": "LNDF", "code": "SM", "description": "medium-gradient mountain", "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c", "source_dataset_name": "sotwis_senegal_gambia", "source_table": "SOTWIS_codes", "source_row_number": 418, "provider_code": "isric"}
+  ]
+}

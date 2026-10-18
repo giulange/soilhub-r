@@ -15,6 +15,21 @@ reference:
       - soil_logout
       - soil_session
       - soil_whoami
+  - title: Discovery and catalog
+    contents:
+      - soil_capabilities
+      - soil_api_info
+      - soil_datasets
+      - soil_dataset
+      - soil_citations
+      - soil_formats
+      - soil_variables
+      - soil_variable_mappings
+      - soil_countries
+      - soil_country
+      - soil_code_lists
+      - soil_code_list
+      - soil_ttr_flag_legend
   - title: Configuration and errors
     contents:
       - soilhub-config
