@@ -114,14 +114,14 @@ test_that("JSON bodies keep nulls, digits and length-one arrays; query vectors r
   body <- list(datasets = I("wosis_points"), bbox = c(-123.3, 49.1, -122.9, 49.4),
                country = NULL, value = 0.123456789012, flag = NA)
   out <- soil_request(soil, "POST", "/echo", body = body,
-                      query = list(a = c("x", "y"), b = NULL, c = 1))
+                      query = list(a = c("x", "yz"), b = NULL, c = c(1, 2.5)))
   expect_identical(out$body$datasets, list("wosis_points"))
   expect_equal(unlist(out$body$bbox), c(-123.3, 49.1, -122.9, 49.4))
   expect_null(out$body$country)
   expect_true("country" %in% names(out$body))
   expect_identical(out$body$value, 0.123456789012)
   expect_null(out$body$flag)
-  expect_identical(out$query, "a=x&a=y&c=1")
+  expect_identical(out$query, "a=x&a=yz&c=1&c=2.5")
 })
 
 test_that("an empty body returns NULL; invalid JSON is an api error", {

@@ -110,7 +110,15 @@ query_string <- function(query) {
   query <- Filter(Negate(is.null), query %||% list())
   if (length(query) == 0L) return("")
   pairs <- unlist(Map(function(name, value) {
-    value <- if (is.logical(value)) tolower(as.character(value)) else format(value, scientific = FALSE, trim = TRUE, digits = 15)
+    # element by element: format() of a vector pads its elements to a
+    # common width ("clay" -> "clay      ")
+    value <- if (is.logical(value)) {
+      tolower(as.character(value))
+    } else if (is.numeric(value)) {
+      vapply(value, format, character(1), scientific = FALSE, trim = TRUE, digits = 15)
+    } else {
+      as.character(value)
+    }
     paste0(curl::curl_escape(name), "=", curl::curl_escape(value))
   }, names(query), query), use.names = FALSE)
   paste0("?", paste(pairs, collapse = "&"))
