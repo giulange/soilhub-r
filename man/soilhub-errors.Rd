@@ -26,7 +26,7 @@ content of an uploaded file.\tabular{lll}{
    Class \tab Raised when \tab Fields \cr
    \code{soilhub_argument_error} \tab a bad argument is caught before any request (bbox, enum value, \code{NA}, \code{"ALL"}) \tab \code{argument} \cr
    \code{soilhub_dependency_error} \tab a suggested package (e.g. \code{sf}) is needed and not installed \tab \code{package} \cr
-   \code{soilhub_auth_error} \tab login denied or timed out, session expired and not renewable, HTTP 401 \tab \code{reason} (\code{login_denied}, \code{login_timeout}, \code{session_expired}, \code{no_refresh_token}, \code{not_logged_in}), \code{partial} \cr
+   \code{soilhub_auth_error} \tab login denied or timed out, session expired and not renewable, HTTP 401, no default session \tab \code{reason} (\code{login_denied}, \code{login_timeout}, \code{session_expired}, \code{no_refresh_token}, \code{not_logged_in}, \code{no_session}), \code{partial} \cr
    \code{soilhub_permission_error} \tab the session lacks the right an operation needs, or HTTP 403 \tab \code{required_right}, \code{rights}, \code{status}, \code{endpoint}, \code{request_id} \cr
    \code{soilhub_api_error} \tab any other non-2xx response, an invalid JSON response, retries exhausted \tab \code{status}, \code{endpoint}, \code{method}, \code{detail}, \code{request_id}, \code{code}, \code{attempts} \cr
    \code{soilhub_validation_error} \tab HTTP 422: the API rejected the request content \tab as \code{soilhub_api_error}, plus \code{errors} (a data frame) \cr

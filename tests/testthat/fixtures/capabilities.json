@@ -1,0 +1,19 @@
+{
+  "api_version": "0.5.0",
+  "response_schema_version": "1.0",
+  "authentication": {"enabled": true, "type": "oidc-bearer", "audience": "soil-api"},
+  "limits": {
+    "max_page_size": 1000,
+    "max_sync_observations": 1000000,
+    "max_export_observations": 10000000,
+    "max_publication_bytes": 104857600
+  },
+  "formats": {"query": ["geojson", "gpkg", "csv", "tsv", "shp"], "bulk_publication": ["ndjson", "parquet"]},
+  "capabilities": {
+    "query_canonical_observations": true,
+    "wide_layout": true,
+    "canonical_features": true,
+    "canonical_summary": true,
+    "first_layer_status": true
+  }
+}

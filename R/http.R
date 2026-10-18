@@ -3,7 +3,9 @@
 #
 # The session `soil` is a list (later a `soil_session`, WP2) with at least
 # `api_url` and `timeout` (from `soil_config()`), optionally `verbose`,
-# `identity` (rights, for 403 messages) and `auth`.
+# `identity` (rights, for 403 messages) and `auth`. A `soil_session` (WP2)
+# keeps `identity` and `capabilities` in its `state` environment
+# (`session_cached()`); its `auth` is `session_auth()` (auth-device.R).
 #
 # Authentication seam (WP2). When `soil$auth` is a function
 # `function(soil, renew = FALSE)`, it is called before every attempt and
@@ -36,17 +38,20 @@ http_transient_status <- c(429L, 502L, 503L, 504L)
 #' @param timeout Total seconds allowed for the request; `NULL` uses
 #'   `soil$timeout`, `Inf` none.
 #' @param retry `FALSE` disables the retries (multipart uploads).
+#' @param right The right the request needs (e.g. `"soil:admin"`), named in
+#'   the `soilhub_permission_error` of a 403; `NULL` when not stated.
 #' @return The parsed JSON body (`simplifyVector = FALSE`), `NULL` for an
 #'   empty body, with the attributes `request_id` and `status`.
 #' @keywords internal
 #' @noRd
 soil_request <- function(soil, method, path, body = NULL, query = NULL,
-                         timeout = NULL, retry = TRUE) {
+                         timeout = NULL, retry = TRUE, right = NULL) {
   method <- toupper(method)
   timeout <- check_timeout(timeout %||% soil$timeout %||% config_defaults$timeout)
   request_id <- new_request_id()
   context <- list(method = method, endpoint = path, request_id = request_id,
-                  timeout = timeout)
+                  timeout = timeout,
+                  right = if (is.null(right)) NULL else normalise_right(right))
 
   renewed <- FALSE
   repeat {
@@ -325,10 +330,20 @@ response_error <- function(soil, response, context, body, token, attempts) {
     )))
   }
   if (status == 403L) {
-    rights <- tryCatch(soil$identity$rights, error = function(e) NULL)
+    rights <- tryCatch(session_rights(soil), error = function(e) NULL)
+    needs <- if (is.null(context$right)) {
+      ""
+    } else if (is.null(rights)) {
+      sprintf(" (this request needs the right `%s`)", context$right)
+    } else {
+      sprintf(
+        " (this request needs the right `%s`; your session has %s)",
+        context$right, format_rights(rights)
+      )
+    }
     return(soilhub_permission_error(
-      paste0("Permission denied: ", text, suffix),
-      required_right = NULL, rights = rights, status = status,
+      paste0("Permission denied: ", text, needs, suffix),
+      required_right = context$right, rights = rights, status = status,
       endpoint = context$endpoint, request_id = context$request_id,
       method = context$method, detail = detail
     ))

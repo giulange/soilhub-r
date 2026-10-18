@@ -2,9 +2,9 @@
 
 R client for the Global Soil Data Hub API: discover, read and export
 harmonised soil profile data, and (with the appropriate rights) publish derived
-values. The package is **under development** (version 0.2.0 redesign); this
-repository currently holds the package skeleton only, with no user-facing
-functions yet. The 0.1.x client is documented in
+values. The package is **under development** (version 0.2.0 redesign): so far
+it provides the session functions (`soil_connect()`, `soil_whoami()`); the data
+functions follow. The 0.1.x client is documented in
 [docs/legacy/TUTORIAL-0.1.md](docs/legacy/TUTORIAL-0.1.md).
 
 ## Install Or Update
