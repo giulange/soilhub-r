@@ -160,10 +160,13 @@ print.soilhub_error <- function(x, ...) {
     cat(sprintf("  errors: data frame of %d row(s)\n", nrow(x$errors)))
   }
   if (!is.null(x$partial)) {
-    meta <- x$partial$metadata
+    # a soilhub_pages, or the soil_table typed from it by a read
+    typed <- is.data.frame(x$partial)
+    meta <- if (typed) attr(x$partial, "soil_metadata") else x$partial$metadata
     cat(sprintf(
       "  partial: %s row(s) read, next_offset = %s\n",
-      format_count(length(x$partial$items)), format(meta$next_offset)
+      format_count(if (typed) nrow(x$partial) else length(x$partial$items)),
+      format(meta$next_offset)
     ))
   }
   invisible(x)

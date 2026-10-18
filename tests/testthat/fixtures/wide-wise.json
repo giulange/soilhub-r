@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": null,
+    "filters": {},
+    "total_count": null,
+    "returned_count": 2,
+    "limit": 1000,
+    "offset": 0,
+    "has_more": false,
+    "warnings": [],
+    "datasets": ["wise_profiles"],
+    "geometry": "any",
+    "canonical": true,
+    "layout": "wide",
+    "geometry_format": "wkt",
+    "crs": "EPSG:4326",
+    "variables": [
+      {
+        "column": "gypsum",
+        "property_key": "gypsum",
+        "numeric": true,
+        "units": ["g/kg"],
+        "source_codes": ["GYPSUM"],
+        "horizon_count": 2,
+        "multi_value_cells": 0,
+        "methods": {"GY01": "Dissolved in water and precipitated by acetone"},
+        "source_notes": [
+          {"dataset": "wise_profiles", "source_code": "GYPSUM", "source_notes": "Unit g/kg (ISRIC Report 2008/02, Appendix 1)."}
+        ]
+      }
+    ]
+  },
+  "geometries": {
+    "w-1": "POINT(9.5 35.25)"
+  },
+  "rows": [
+    {
+      "dataset": "wise_profiles",
+      "provider_code": "isric",
+      "feature_id": "w-1",
+      "profile_id": "wp-1",
+      "component_id": null,
+      "component_rank": null,
+      "horizon_id": "wh-1",
+      "horizon_name": "Ap",
+      "upper_depth_cm": 0.0,
+      "lower_depth_cm": 25.0,
+      "source_support": "profile",
+      "release_code": "wise_3_1",
+      "profile_attr_iso": "TN",
+      "profile_attr_lab_id": "TN-01",
+      "horizon_attr_dcolor": "10YR5/3",
+      "horizon_attr_mcolor": "10YR3/3",
+      "geometry_kind": "POINT",
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "gypsum": 12.0,
+      "gypsum_units": "g/kg",
+      "gypsum_method": "GY01",
+      "gypsum_n": 1
+    },
+    {
+      "dataset": "wise_profiles",
+      "provider_code": "isric",
+      "feature_id": "w-2",
+      "profile_id": "wp-2",
+      "component_id": null,
+      "component_rank": null,
+      "horizon_id": "wh-2",
+      "horizon_name": "A",
+      "upper_depth_cm": 0.0,
+      "lower_depth_cm": 15.0,
+      "source_support": "profile",
+      "release_code": "wise_3_1",
+      "profile_attr_iso": "TN",
+      "profile_attr_lab_id": null,
+      "horizon_attr_dcolor": null,
+      "horizon_attr_mcolor": "7.5YR4/4",
+      "geometry_kind": "NONE",
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "gypsum": 0.5,
+      "gypsum_units": "g/kg",
+      "gypsum_method": "GY01",
+      "gypsum_n": 1
+    }
+  ]
+}

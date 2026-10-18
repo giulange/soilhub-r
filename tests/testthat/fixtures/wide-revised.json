@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": null,
+    "filters": {},
+    "total_count": null,
+    "returned_count": 2,
+    "limit": 1000,
+    "offset": 0,
+    "has_more": false,
+    "warnings": [],
+    "datasets": ["wosis_points", "sotwis_polygons"],
+    "geometry": "any",
+    "canonical": true,
+    "layout": "wide",
+    "geometry_format": "none",
+    "crs": "EPSG:4326",
+    "view": "revised",
+    "revised": {
+      "rules": [
+        {"id": "R6", "title": "SOTWIS PRID linked without case between summary and estimates (and the TTR flags of /sotwis/ttr-flags) where no estimate profile has the same spelling; pairs listed", "issue": "#69", "counts": {},
+         "pairs": [
+           {"source_dataset_name": "SOTWIS Tunisia", "source_record_id": "rec-tn", "CLAF": "CMe", "summary_prid": "TN-ab1", "estimate_prid": "TN-AB1", "summary_profiles": 2}
+         ]},
+        {"id": "R12", "title": "values impossible for the declared unit excluded; extremes flagged extreme; WoSIS PHPRTN above 100 flagged above_unit_maximum", "issue": "#54, #70, #71",
+         "counts": {"values_flagged:extreme": 12, "values_hidden": 3}},
+        {"id": "R16", "title": "WoSIS sand + silt + clay rescaled to 100 (texture_normalized with the original sum)", "issue": "#70",
+         "counts": {"values_changed": 40}},
+        {"id": "R17", "title": "WoSIS BDFIFM elements 'guessed value, expert field estimate' excluded (the cell disappears when none remains)", "issue": "#70",
+         "counts": {"values_hidden": 1}}
+      ],
+      "scope": "counts over the selection (every page): rows and values of the selected units, all layers; with layer=first, R2/R3/R14 count units (first_layer_units)",
+      "pending": [],
+      "unchanged": [
+        {"id": "R1", "note": "WoSIS horizons tied at 0: all candidates (tie), as raw"},
+        {"id": "R13", "note": "SOTER synthetic/virtual profiles: included, as raw"}
+      ]
+    },
+    "variables": [
+      {
+        "column": "sand",
+        "property_key": "sand",
+        "numeric": true,
+        "units": ["%"],
+        "source_codes": ["SAND"],
+        "horizon_count": 2,
+        "multi_value_cells": 0,
+        "methods": {},
+        "source_notes": [],
+        "method_facets": {}
+      }
+    ]
+  },
+  "geometries": null,
+  "rows": [
+    {
+      "dataset": "wosis_points",
+      "provider_code": "isric",
+      "feature_id": "f-1",
+      "profile_id": "p-1",
+      "component_id": null,
+      "component_rank": null,
+      "horizon_id": "h-1",
+      "horizon_name": "Ap",
+      "upper_depth_cm": 0.0,
+      "lower_depth_cm": 20.0,
+      "source_support": "profile",
+      "release_code": "wosis_2023_12",
+      "horizon_attr_organic_surface": "false",
+      "texture_sum": 102.0,
+      "consistency_flags": null,
+      "cell_markings": null,
+      "value_flags": {"sand": ["extreme"]},
+      "retired_in_release": null,
+      "retired_cells": null,
+      "revised_markings": {
+        "hidden_values": [
+          {"property_code": "BDFIFM", "rule": "R17", "source_value": ["1.2", "guessed value, expert field estimate"]},
+          {"property_code": "PHPRTN", "rule": "R12", "source_value": 140}
+        ],
+        "cells": {
+          "sand": {"texture_normalized": {"original_sum": 102.0}}
+        }
+      },
+      "sand": 41.17647,
+      "sand_units": "%",
+      "sand_method": null,
+      "sand_n": 1
+    },
+    {
+      "dataset": "wosis_points",
+      "provider_code": "isric",
+      "feature_id": "f-1",
+      "profile_id": "p-1",
+      "component_id": null,
+      "component_rank": null,
+      "horizon_id": "h-2",
+      "horizon_name": "Bw",
+      "upper_depth_cm": 20.0,
+      "lower_depth_cm": 45.5,
+      "source_support": "profile",
+      "release_code": "wosis_2023_12",
+      "horizon_attr_organic_surface": "false",
+      "texture_sum": null,
+      "consistency_flags": null,
+      "cell_markings": null,
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "revised_markings": null,
+      "sand": 38,
+      "sand_units": "%",
+      "sand_method": null,
+      "sand_n": 1
+    }
+  ]
+}
