@@ -203,6 +203,50 @@ test_that("a refused renewal ends the session with reason session_expired", {
   expect_identical(e$reason, "session_expired")
 })
 
+test_that("a refused proactive renewal keeps the valid access token until it expires", {
+  local_no_default_session()
+  clock <- local_fake_clock()
+  soil <- fake_connect(server)
+  expires_at <- soil$state$expires_at
+
+  # Keycloak ends the SSO session; the access token is still valid for 30 s
+  server_post(server, "/test/revoke-sso")
+  advance_clock(clock, 7200 - 30)
+  n <- length(server_state(server)$refresh_log)
+  w <- expect_warning(out <- soil_request(soil, "GET", "/protected"), class = "soilhub_renewal_warning")
+  expect_s3_class(w, "soilhub_warning")
+  expect_true(out$ok)
+  expect_match(conditionMessage(w), "invalid_grant: Session not active", fixed = TRUE)
+  expect_match(conditionMessage(w), "stays valid for 30s, until 2026-10-18 10:00:10 UTC", fixed = TRUE)
+  expect_match(conditionMessage(w), "soil_login(soil)", fixed = TRUE)
+  expect_length(server_state(server)$refresh_log, n + 1L)
+  expect_identical(soil$state$expires_at, expires_at)
+  expect_false(soil_whoami(soil)$session_renewable)
+
+  # until the expiry: no further warning and no further renewal attempt
+  advance_clock(clock, 20)
+  expect_no_warning(out <- soil_request(soil, "GET", "/protected"))
+  expect_true(out$ok)
+  expect_length(server_state(server)$refresh_log, n + 1L)
+
+  # at the expiry: session_expired (not no_refresh_token)
+  advance_clock(clock, 10)
+  e <- expect_error(soil_request(soil, "GET", "/protected"), class = "soilhub_auth_error")
+  expect_identical(e$reason, "session_expired")
+  expect_match(conditionMessage(e), "soil_login(soil)", fixed = TRUE)
+  expect_null(soil$state$access_token)
+  expect_length(server_state(server)$refresh_log, n + 1L)
+
+  # a 401 before the expiry also ends it with session_expired
+  suppressMessages(soil_login(soil))
+  server_post(server, "/test/revoke-sso")
+  advance_clock(clock, 7200 - 30)
+  expect_warning(soil_request(soil, "GET", "/protected"), class = "soilhub_renewal_warning")
+  server_post(server, "/test/invalidate")
+  e <- expect_error(soil_request(soil, "GET", "/protected"), class = "soilhub_auth_error")
+  expect_identical(e$reason, "session_expired")
+})
+
 test_that("Keycloak unreachable during a renewal keeps the session", {
   local_no_default_session()
   clock <- local_fake_clock()
@@ -314,17 +358,25 @@ test_that("login = FALSE creates a session to sign in later; soil_login() reuses
   expect_identical(server_state(server)$issued, issued + 1L)
 })
 
-test_that("rights: a user without soil:summary is warned; a token without rights is accepted", {
+test_that("rights: a user without soil:summary is warned; undeclared rights are left to the API", {
   local_no_default_session()
   local_fake_clock()
-  expect_warning(guest <- fake_connect(server, "noroles"), class = "soilhub_rights_warning")
-  expect_identical(soil_whoami(guest)$can, c(summary = FALSE, read = FALSE, publish = FALSE, admin = FALSE))
-  expect_error(soil_require_right(guest, "soil:read"), class = "soilhub_permission_error")
+  expect_warning(reader <- fake_connect(server, "readonly"), class = "soilhub_rights_warning")
+  expect_identical(soil_whoami(reader)$can, c(summary = FALSE, read = TRUE, publish = FALSE, admin = FALSE))
+  expect_error(soil_require_right(reader, "soil:summary"), class = "soilhub_permission_error")
+
+  # resource_access without the audience: no local check, the API decides
+  # (here /capabilities answers 403, reported as a warning)
+  expect_warning(guest <- fake_connect(server, "noroles"), class = "soilhub_capabilities_warning")
+  expect_false(soil_whoami(guest)$rights_known)
+  expect_identical(soil_whoami(guest)$can, c(summary = NA, read = NA, publish = NA, admin = NA))
+  expect_identical(soil_require_right(guest, "soil:read"), NA)
+  expect_match(format(guest)[5], "not declared in the token; the API decides", fixed = TRUE)
 
   pdp <- fake_connect(server, "pdp")
   expect_false(soil_whoami(pdp)$rights_known)
   expect_identical(soil_require_right(pdp, "soil:admin"), NA)
-  expect_match(format(pdp)[5], "not carried by the token")
+  expect_match(format(pdp)[5], "not declared in the token; the API decides", fixed = TRUE)
 })
 
 test_that("a 403 names the right the request needs and the session's rights", {

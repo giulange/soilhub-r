@@ -13,7 +13,8 @@ omitted.}
 \value{
 A \code{soil_identity} list: \code{username}, \code{subject}, \code{audience}, \code{roles}
 (character), \code{rights_known}, \code{can} (named logical: \code{summary}, \code{read},
-\code{publish}, \code{admin}; \code{NA} when the rights are unknown), \code{limits} (the
+\code{publish}, \code{admin}; \code{NA} when the rights are not declared in the
+token), \code{limits} (the
 \code{limits} of \verb{/capabilities}, advertised by the server for this
 deployment, \code{NULL} when not read), \code{token_expires_at},
 \code{session_expires_at} (expiry of the refresh token, \code{NA} when unknown),
@@ -30,9 +31,11 @@ the server and how long the session lasts.
 The API has no identity endpoint: rights are read from the token payload
 (\code{resource_access[[audience]]$roles}), as the API reads them; the audience
 comes from \code{\link[=soil_connect]{soil_connect()}}'s reading of \verb{/capabilities}
-(\code{authentication.audience}, \code{soil-api}). When the token carries no
-\code{resource_access} block the rights are reported as unknown (\code{can} is
-\code{NA}): the server decides each request.
+(\code{authentication.audience}, \code{soil-api}). When the token has no
+\code{resource_access} entry for the audience (no block at all, or a block
+without the audience, as with rights granted by a policy decision point)
+the rights are "not declared in the token; the API decides" (\code{can} is
+\code{NA}), and no local check is made before a request.
 
 Rights and functions:
 \itemize{

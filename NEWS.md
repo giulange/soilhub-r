@@ -7,7 +7,9 @@
   The access token is renewed automatically before it expires (margin
   `soilhub.refresh_margin`, default 60 s) and once after an HTTP 401, storing
   the rotated refresh token; a session Keycloak no longer renews fails with
-  `soilhub_auth_error(reason = "session_expired")`. The print method of a
+  `soilhub_auth_error(reason = "session_expired")` once the current access
+  token has expired (a warning announces it). Rights are checked locally only
+  when the token declares them for the API audience. The print method of a
   session never shows a token. A 403 names the right the request needs.
 
 * HTTP layer, errors and paging (WP1): one internal request function with

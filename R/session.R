@@ -21,7 +21,9 @@
 #' longer renews it (idle or maximum session time reached, session revoked):
 #' the next call then fails with `soilhub_auth_error` (`reason =
 #' "session_expired"`) and `soil_login(soil)` signs in again on the same
-#' session.
+#' session. When a renewal before the expiry is refused, a warning
+#' (`soilhub_renewal_warning`) says when the session ends and the current
+#' access token is used until then.
 #'
 #' **Tokens.** Tokens are kept in memory only, never written to disk or
 #' printed. Saving the session object (`saveRDS()`, `.RData`) would save
@@ -218,6 +220,7 @@ soil_logout <- function(soil = soil_session()) {
   clear_tokens(state)
   state$identity <- NULL
   state$ended <- NULL
+  state$renewal_failed <- NULL
   state$last_renewed_at <- NULL
   state$renewals <- NULL
   state$signed_out <- TRUE
@@ -287,7 +290,7 @@ format.soil_session <- function(x, ...) {
   status <- session_status(x)
   if (status == "signed_in") {
     rights <- if (!isTRUE(identity$rights_known)) {
-      "not carried by the token (the server decides)"
+      "not declared in the token; the API decides"
     } else if (length(identity$roles)) {
       paste(identity$roles, collapse = ", ")
     } else {

@@ -7,7 +7,8 @@
 #   ams-r      reader (soil:summary, soil:read), refresh tokens rotate
 #   publisher  reader + soil:publish
 #   pdp        a token without a `resource_access` block
-#   noroles    `resource_access` without the audience (no soil right)
+#   noroles    `resource_access` without the audience (rights undeclared)
+#   readonly   soil:read only (no soil:summary)
 #   norefresh  reader, no refresh token issued
 #   deny       the user denies the device login (access_denied)
 #   expire     the device code expires (expired_token)
@@ -19,7 +20,9 @@
 # openid-configuration (a discovery document pointing to the /realms/ams
 # endpoints). Test controls: POST /test/invalidate (the API stops accepting
 # the current access token), POST /test/revoke (Keycloak ends the SSO
-# session: refresh -> invalid_grant), GET /test/state.
+# session: refresh -> invalid_grant, and the API refuses the token), POST
+# /test/revoke-sso (refresh -> invalid_grant, the access token stays valid
+# at the API until it expires), GET /test/state.
 
 fake_session_server <- function(capabilities = read_fixture("capabilities.json"),
                                 .local_envir = parent.frame()) {
@@ -69,6 +72,7 @@ fake_session_server <- function(capabilities = read_fixture("capabilities.json")
     )
     roles <- switch(client,
       publisher = c("soil:summary", "soil:read", "soil:publish"),
+      readonly = "soil:read",
       c("soil:summary", "soil:read")
     )
     if (identical(client, "noroles")) {
@@ -216,6 +220,10 @@ fake_session_server <- function(capabilities = read_fixture("capabilities.json")
   }))
   app$post("/test/revoke", route(function(req, res) {
     req$app$locals$valid_access <- character()
+    req$app$locals$revoked <- TRUE
+    res$send_json(list(ok = TRUE), auto_unbox = TRUE)
+  }))
+  app$post("/test/revoke-sso", route(function(req, res) {
     req$app$locals$revoked <- TRUE
     res$send_json(list(ok = TRUE), auto_unbox = TRUE)
   }))

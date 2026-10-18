@@ -59,7 +59,9 @@ option \code{soilhub.refresh_margin}) and once more if the API refuses it, so a
 session lasts hours without a new browser step. It ends when Keycloak no
 longer renews it (idle or maximum session time reached, session revoked):
 the next call then fails with \code{soilhub_auth_error} (\code{reason = "session_expired"}) and \code{soil_login(soil)} signs in again on the same
-session.
+session. When a renewal before the expiry is refused, a warning
+(\code{soilhub_renewal_warning}) says when the session ends and the current
+access token is used until then.
 
 \strong{Tokens.} Tokens are kept in memory only, never written to disk or
 printed. Saving the session object (\code{saveRDS()}, \code{.RData}) would save

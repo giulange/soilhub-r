@@ -7,9 +7,12 @@
 # `GET /capabilities` `authentication.audience` (`soil-api` when unknown).
 #
 # Rights are "known" only when the token carries a `resource_access` block
-# (Keycloak today). A token without it (a future shape under the PDP) leaves
-# the rights unknown: the advisory pre-check is skipped and the API decides,
-# so no code change is needed the day the token changes shape.
+# with an entry for the API audience (Keycloak client roles today). A token
+# without it -- no `resource_access` at all (a future shape under the PDP) or
+# no entry for the audience (a PDP may grant rights that are not Keycloak
+# client roles) -- leaves the rights undeclared: the advisory pre-check is
+# skipped and the API decides, so no code change is needed the day the token
+# changes shape.
 
 default_audience <- "soil-api"
 
@@ -76,13 +79,14 @@ jwt_payload <- function(token) {
 #'   `NA` when rights are not carried by the token (authentication disabled).
 #' @return A list: `username`, `subject`, `audience`, `roles` (character,
 #'   sorted), `rights_known` (TRUE when the token has a `resource_access`
-#'   block), `token_exp` (the `exp` claim, POSIXct).
+#'   entry for `audience`), `token_exp` (the `exp` claim, POSIXct).
 #' @keywords internal
 #' @noRd
 token_identity <- function(token, audience = default_audience) {
   payload <- jwt_payload(token)
   access <- payload$resource_access
-  rights_known <- is.list(access) && is_string(audience)
+  rights_known <- is.list(access) && is_string(audience) &&
+    is.list(access[[audience]])
   roles <- if (rights_known) {
     sort(unique(as.character(unlist(access[[audience]]$roles))))
   } else {
@@ -158,8 +162,8 @@ format_rights <- function(rights, audience = default_audience) {
 #'
 #' Advisory (design 1.3): when the session's token carries its rights, a
 #' missing right raises `soilhub_permission_error` before anything is sent;
-#' when the rights are unknown (no `resource_access` block, or no identity)
-#' nothing is checked and the API decides.
+#' when the token does not declare them (no `resource_access` entry for the
+#' API audience, or no identity) nothing is checked and the API decides.
 #'
 #' @param soil The session.
 #' @param right The right, `"soil:admin"` or `"admin"`.
@@ -197,9 +201,11 @@ soil_require_right <- function(soil, right, what = NULL) {
 #' The API has no identity endpoint: rights are read from the token payload
 #' (`resource_access[[audience]]$roles`), as the API reads them; the audience
 #' comes from [soil_connect()]'s reading of `/capabilities`
-#' (`authentication.audience`, `soil-api`). When the token carries no
-#' `resource_access` block the rights are reported as unknown (`can` is
-#' `NA`): the server decides each request.
+#' (`authentication.audience`, `soil-api`). When the token has no
+#' `resource_access` entry for the audience (no block at all, or a block
+#' without the audience, as with rights granted by a policy decision point)
+#' the rights are "not declared in the token; the API decides" (`can` is
+#' `NA`), and no local check is made before a request.
 #'
 #' Rights and functions:
 #' * `soil:summary` -- discovery and catalog, summaries, availability,
@@ -212,7 +218,8 @@ soil_require_right <- function(soil, right, what = NULL) {
 #'   omitted.
 #' @return A `soil_identity` list: `username`, `subject`, `audience`, `roles`
 #'   (character), `rights_known`, `can` (named logical: `summary`, `read`,
-#'   `publish`, `admin`; `NA` when the rights are unknown), `limits` (the
+#'   `publish`, `admin`; `NA` when the rights are not declared in the
+#'   token), `limits` (the
 #'   `limits` of `/capabilities`, advertised by the server for this
 #'   deployment, `NULL` when not read), `token_expires_at`,
 #'   `session_expires_at` (expiry of the refresh token, `NA` when unknown),
@@ -277,7 +284,7 @@ print.soil_identity <- function(x, ...) {
     cat("  Rights:  ", if (length(x$roles)) paste(x$roles, collapse = ", ") else "none",
         " (audience ", x$audience, ")\n", sep = "")
   } else {
-    cat("  Rights:  not carried by the token; the server decides each request\n")
+    cat("  Rights:  not declared in the token; the API decides\n")
   }
   if (identical(x$status, "signed_in")) {
     cat("  Token:   valid for ", format_duration(as.numeric(difftime(x$token_expires_at, now, units = "secs"))),

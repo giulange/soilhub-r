@@ -24,6 +24,9 @@
 #   endpoints                       device and token URLs of the realm
 #   ended                           the `soilhub_auth_error` that ended the
 #                                   session (re-signalled until a new login)
+#   renewal_failed                  the `session_expired` error of a refused
+#                                   proactive renewal, raised when the still
+#                                   valid access token expires or is refused
 #   signed_out                      TRUE after `soil_logout()`
 
 auth_scope <- "openid soil"
@@ -284,6 +287,7 @@ store_tokens <- function(soil, token, renewed = FALSE) {
     state$refresh_expires_at <- NA
   }
   state$ended <- NULL
+  state$renewal_failed <- NULL
   state$signed_out <- NULL
   if (renewed) {
     state$last_renewed_at <- now
@@ -348,10 +352,14 @@ refresh_margin <- function() {
 # ---------------------------------------------------------------------------
 # Renewal (design 3.3).
 
-refresh_session <- function(soil) {
+# `proactive = TRUE`: a refused renewal while the access token is still
+# valid does not end the session at once: the refresh token is dropped, one
+# `soilhub_renewal_warning` says when the session ends, and the access token
+# is used until it expires or the API refuses it (then `session_expired`).
+refresh_session <- function(soil, proactive = FALSE) {
   state <- soil$state
   if (!is_string(state$refresh_token)) {
-    end_session(soil, no_refresh_token_error(state))
+    end_session(soil, state$renewal_failed %||% no_refresh_token_error(state))
   }
   endpoints <- auth_endpoints(soil)
   response <- oauth_post(soil, endpoints$token, list(
@@ -370,7 +378,7 @@ refresh_session <- function(soil) {
   if (response$status >= 500L) abort(keycloak_unavailable(response))
   # `invalid_grant` (SSO session idle or max reached, token revoked or
   # reused) and any other refusal: the session cannot be renewed.
-  end_session(soil, soilhub_auth_error(
+  expired <- soilhub_auth_error(
     sprintf(
       paste0(
         "Your Keycloak session has expired and cannot be renewed (%s): ",
@@ -381,7 +389,22 @@ refresh_session <- function(soil) {
     ),
     reason = "session_expired", status = response$status,
     endpoint = url_path(response$url), detail = oauth_error(response)
-  ))
+  )
+  remaining <- token_remaining(state)
+  if (isTRUE(proactive) && !is.na(remaining) && remaining > 0) {
+    state$refresh_token <- NULL
+    state$renewal_failed <- expired
+    soilhub_warning(sprintf(
+      paste0(
+        "Keycloak no longer renews this session (%s): the current access token ",
+        "stays valid for %s, until %s; then run `soil_login(soil)` to sign in again."
+      ),
+      oauth_error_text(response), format_duration(remaining),
+      format_time(state$expires_at)
+    ), "soilhub_renewal_warning")
+    return(invisible(state$access_token))
+  }
+  end_session(soil, expired)
 }
 
 no_refresh_token_error <- function(state) {
@@ -418,11 +441,12 @@ session_auth <- function(soil, renew = FALSE) {
   remaining <- token_remaining(state)
   if (!is.na(remaining) && remaining < refresh_margin()) {
     if (!is_string(state$refresh_token)) {
-      # Without a refresh token the access token is used to its expiry.
+      # Without a refresh token (none issued, or the renewal was refused)
+      # the access token is used to its expiry.
       if (remaining > 0) return(state$access_token)
-      end_session(soil, no_refresh_token_error(state))
+      end_session(soil, state$renewal_failed %||% no_refresh_token_error(state))
     }
-    refresh_session(soil)
+    refresh_session(soil, proactive = TRUE)
   }
   state$access_token
 }

@@ -44,16 +44,21 @@ test_that("roles are read for the audience advertised by /capabilities", {
   expect_identical(dev$roles, "soil:summary")
 })
 
-test_that("a token without resource_access leaves the rights unknown", {
+test_that("rights are undeclared without a resource_access entry for the audience", {
   pdp <- token_identity(fixture_jwt("jwt-pdp.json"), "soil-api")
   expect_false(pdp$rights_known)
   expect_identical(pdp$roles, character())
   expect_identical(pdp$username, "pdp-user")
 
-  # resource_access without the audience: rights known, none held
+  # resource_access without the audience: undeclared (a PDP may grant them)
   guest <- token_identity(fixture_jwt("jwt-noroles.json"), "soil-api")
-  expect_true(guest$rights_known)
+  expect_false(guest$rights_known)
   expect_identical(guest$roles, character())
+
+  # an entry for the audience with no role: declared, none held
+  visitor <- token_identity(fixture_jwt("jwt-emptyroles.json"), "soil-api")
+  expect_true(visitor$rights_known)
+  expect_identical(visitor$roles, character())
 
   # opaque token: nothing known
   opaque <- token_identity("opaque-token", "soil-api")
@@ -99,8 +104,8 @@ test_that("the permission pre-check refuses a missing right before any request",
   expect_identical(e$rights, c("soil:read", "soil:summary"))
   expect_null(e$status)
 
-  guest <- session_with_token(fixture_jwt("jwt-noroles.json"))
-  e <- expect_error(soil_require_right(guest, "read"), class = "soilhub_permission_error")
+  visitor <- session_with_token(fixture_jwt("jwt-emptyroles.json"))
+  e <- expect_error(soil_require_right(visitor, "read"), class = "soilhub_permission_error")
   expect_match(conditionMessage(e), "your session has no right of `soil-api`", fixed = TRUE)
 
   publisher <- session_with_token(fixture_jwt("jwt-publisher.json"))
@@ -110,6 +115,9 @@ test_that("the permission pre-check refuses a missing right before any request",
 test_that("the pre-check is skipped when the token carries no rights", {
   pdp <- session_with_token(fixture_jwt("jwt-pdp.json"))
   expect_identical(soil_require_right(pdp, "soil:admin"), NA)
+  # resource_access without the audience: the API decides
+  guest <- session_with_token(fixture_jwt("jwt-noroles.json"))
+  expect_identical(soil_require_right(guest, "soil:read"), NA)
   # no identity at all (a session never signed in, or a plain list)
   expect_identical(soil_require_right(list(api_url = "http://x"), "soil:admin"), NA)
   expect_error(soil_require_right(pdp, NA_character_), class = "soilhub_argument_error")
@@ -140,7 +148,9 @@ test_that("soil_whoami() reports user, rights, limits and the session lifetime",
   pdp <- soil_whoami(session_with_token(fixture_jwt("jwt-pdp.json")))
   expect_identical(pdp$can, c(summary = NA, read = NA, publish = NA, admin = NA))
   out <- capture.output(print(pdp))
-  expect_true(any(grepl("not carried by the token", out, fixed = TRUE)))
+  expect_true(any(grepl("Rights:  not declared in the token; the API decides", out, fixed = TRUE)))
+  guest <- soil_whoami(session_with_token(fixture_jwt("jwt-noroles.json")))
+  expect_identical(guest$can, c(summary = NA, read = NA, publish = NA, admin = NA))
 })
 
 test_that("the rights table names functions for the four rights", {
