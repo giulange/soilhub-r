@@ -32,6 +32,13 @@
 #' Rights: none needed to connect. A user without `soil:summary` is warned
 #' that discovery calls will be refused.
 #'
+#' **Version check.** After the login the capabilities of the server are read
+#' ([soil_capabilities()]) and checked: an API older than 0.5.0 or of another
+#' major version, or a server lacking a capability every session needs,
+#' stops with a `soilhub_capability_error`: no default session is
+#' registered and the session, signed out, is in `e$session` for
+#' [soil_api_info()]. A newer minor version only prints a message.
+#'
 #' @param api_url Base URL of the API (see [soilhub-config]).
 #' @param keycloak_url Keycloak realm URL.
 #' @param client_id OIDC public client (`ams-r`).
@@ -70,6 +77,24 @@ soil_connect <- function(api_url = NULL, keycloak_url = NULL, client_id = NULL,
   if (isTRUE(login)) soil_login(soil)
   if (isTRUE(set_default)) soil_session(soil)
   soil
+}
+
+# The server failed the version gate after a login (design 9.1): the session
+# is signed out (as with `soil_connect(login = FALSE)`), keeps the
+# capabilities read, and travels in the error (`e$session`) so that
+# `soil_api_info(e$session)` can show the versions. soil_connect() does not
+# register it as the default session (the error stops it before).
+incompatible_session <- function(soil, error) {
+  clear_tokens(soil$state)
+  soil$state$identity <- NULL
+  soil$state$signed_out <- TRUE
+  error$session <- soil
+  error$message <- paste0(
+    conditionMessage(error),
+    "\nThe session was signed out and is in `e$session`: ",
+    "soil_api_info(e$session) shows the versions."
+  )
+  error
 }
 
 new_soil_session <- function(config, open_browser = FALSE) {
@@ -151,26 +176,28 @@ soil_login <- function(soil = soil_session(), force = FALSE) {
     }
   )
   store_tokens(soil, token)
-  after_login(soil)
+  tryCatch(
+    after_login(soil),
+    soilhub_capability_error = function(e) abort(incompatible_session(soil, e))
+  )
   invisible(soil)
 }
 
-# After a device login: read /capabilities (the audience of the rights; the
-# version gate is added with capabilities.R), decode the identity, warn a
-# user without `soil:summary`.
+# After a device login: read /capabilities (the audience of the rights and
+# the version gate of capabilities.R), decode the identity, warn a user
+# without `soil:summary`. When /capabilities cannot be read (e.g. 403 for a
+# user without `soil:summary`) the gate is skipped with a warning.
 after_login <- function(soil) {
   state <- soil$state
+  state$compatibility <- NULL
   capabilities <- tryCatch(
-    soil_request(soil, "GET", "/capabilities"),
+    fetch_capabilities(soil),
     soilhub_error = function(e) e
   )
   failure <- NULL
-  if (inherits(capabilities, "soilhub_error")) {
-    failure <- capabilities
-  } else if (is.list(capabilities)) {
-    state$capabilities <- capabilities
-  }
+  if (inherits(capabilities, "soilhub_error")) failure <- capabilities
   identity <- update_identity(soil)
+  if (is.null(failure)) version_gate(soil, capabilities)
 
   if (isTRUE(identity$rights_known) && !"soil:summary" %in% identity$roles) {
     soilhub_warning(sprintf(

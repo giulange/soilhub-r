@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "variable_count": 2,
+    "unmapped_included": true,
+    "unmapped_source_code_count": 1,
+    "unmapped_source_codes": [
+      {"provider_code": "isric", "dataset_code": "sotwis_polygons", "source_code": "TAWK", "observation_count": 0}
+    ]
+  },
+  "variables": [
+    {
+      "variable_code": "carbon_nitrogen_ratio",
+      "name": "Carbon to nitrogen ratio",
+      "description": "Ratio of the organic carbon content to the total nitrogen content of the fine earth.",
+      "domain_code": "soil",
+      "value_type": "numeric",
+      "measurement_kind_code": "observed",
+      "allowed_target_levels": ["horizon"],
+      "property_family": "soil_organic_matter",
+      "property_family_name": "Soil organic matter",
+      "documentation_url": "https://files.isric.org/public/documents/isric_report_2007_02.pdf",
+      "value_count": 0,
+      "feature_count": 0,
+      "datasets": [],
+      "providers": [],
+      "available_target_levels": [],
+      "statuses": [],
+      "product_versions": [],
+      "min_depth_cm": null,
+      "max_depth_cm": null,
+      "valid_time_start": null,
+      "valid_time_end": null,
+      "coverage": null,
+      "source_mappings": [
+        {"provider_code": "isric", "dataset_code": "sotwis_polygons", "source_code": "CNrt", "source_official_code": "CNrt", "source_label": "C/N ratio", "source_unit": null, "procedure_code": null, "procedure_description": "As given by the source; no source states how it was computed.", "source_value_kind": "derived", "mapping_status": "confirmed", "documentation_url": "https://files.isric.org/public/documents/isric_report_2007_02.pdf", "semantic_status": "confirmed", "unit_status": "not_recorded", "unit_evidence": {"reason": "The source gives no unit for CNrt."}, "source_notes": "Central Africa only; undocumented unit.", "source_scope": null, "method_facets": []}
+      ]
+    },
+    {
+      "variable_code": "organic_carbon",
+      "name": "Organic carbon",
+      "description": "Organic carbon content of the fine earth.",
+      "domain_code": "soil",
+      "value_type": "numeric",
+      "measurement_kind_code": "observed",
+      "allowed_target_levels": ["horizon", "profile"],
+      "property_family": "soil_carbon",
+      "property_family_name": "Soil carbon",
+      "documentation_url": null,
+      "value_count": 1840,
+      "feature_count": 412,
+      "datasets": ["wosis_points"],
+      "providers": ["isric"],
+      "available_target_levels": ["horizon"],
+      "statuses": ["published"],
+      "product_versions": ["ocs-gap-fill:1.0.0"],
+      "min_depth_cm": 0,
+      "max_depth_cm": 30,
+      "valid_time_start": "2020-01-01T00:00:00Z",
+      "valid_time_end": "2025-01-01T00:00:00+00:00",
+      "coverage": {"type": "Polygon", "coordinates": [[[-123.3, 49.0], [-122.5, 49.0], [-122.5, 49.4], [-123.3, 49.4], [-123.3, 49.0]]]},
+      "source_mappings": [
+        {"provider_code": "isric", "dataset_code": "wise_profiles", "source_code": "ORGC", "source_official_code": "ORGC", "source_label": "Organic carbon", "source_unit": "g/kg", "procedure_code": null, "procedure_description": "Method retained in method options", "source_value_kind": "observed", "mapping_status": "confirmed", "documentation_url": null, "semantic_status": "confirmed", "unit_status": "documented", "unit_evidence": {}, "source_notes": "7 significant digits", "source_scope": null, "method_facets": []},
+        {"provider_code": "isric", "dataset_code": "wosis_points", "source_code": "orgc_value_avg", "source_official_code": "ORGC", "source_label": "Organic carbon", "source_unit": "g/kg", "procedure_code": null, "procedure_description": null, "source_value_kind": "observed", "mapping_status": "confirmed", "documentation_url": "https://docs.isric.org/globaldata/wosis/", "semantic_status": "confirmed", "unit_status": "documented", "unit_evidence": {"source_endpoint": "https://graphql.isric.org/wosis/graphql", "review_date": "2026-09-13"}, "source_notes": null, "source_scope": null, "method_facets": [
+          {"facet_key": "sample_pretreatment", "facet_value": "Sieved over 2 mm sieve", "element_count": 61204, "source_dataset_counts": {"US-NCSS": 40211, "AFSP": 20993}},
+          {"facet_key": "treatment", "facet_value": "Wet oxidation", "element_count": 48890, "source_dataset_counts": {"US-NCSS": 30010, "AFSP": 18880}}
+        ]}
+      ]
+    }
+  ]
+}

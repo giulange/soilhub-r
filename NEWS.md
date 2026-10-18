@@ -1,5 +1,22 @@
 # soilhub (development version)
 
+* Discovery and version check (WP3): after the login `soil_connect()` reads
+  `/capabilities` and checks the API version (0.5.0 or later, major 0) and
+  the required capabilities; an incompatible server stops with
+  `soilhub_capability_error` (the signed-out session in `e$session`), a newer
+  minor version prints a message. Optional capabilities are checked by the
+  functions that need them (`FALSE` is an error, not advertised a warning).
+  New: `soil_capabilities()`, `soil_api_info()`, `soil_datasets()` and
+  `soil_dataset()` (catalog with the provenance of the release, source assets
+  and notes), `soil_citations()` and `soil_licences()` (provider texts
+  verbatim, per source dataset from the notes when no dataset-level text
+  exists), `soil_formats()`, `soil_variables()`, `soil_variable_mappings()`,
+  `soil_countries()`, `soil_country()`, `soil_code_lists()`,
+  `soil_code_list()`, `soil_ttr_flag_legend()`. Every result is a typed data
+  frame; nested objects are list columns of data frames; fields unknown to
+  the client are kept as list columns with a `soilhub_contract_warning`.
+* Query strings no longer pad repeated character values to a common width.
+
 * Sessions (WP2): `soil_connect()` signs in with the Keycloak device login
   (PKCE, human users only, tokens in memory only), `soil_login()`,
   `soil_logout()`, the default session `soil_session()` and `soil_whoami()`

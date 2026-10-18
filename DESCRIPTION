@@ -30,3 +30,19 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Collate: 
+    'auth-device.R'
+    'capabilities.R'
+    'typing.R'
+    'catalog.R'
+    'code-lists.R'
+    'config.R'
+    'countries.R'
+    'errors.R'
+    'http.R'
+    'paging.R'
+    'rights.R'
+    'session.R'
+    'soilhub-package.R'
+    'utils.R'
+    'variables.R'

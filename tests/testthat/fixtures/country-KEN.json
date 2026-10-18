@@ -1,0 +1,12 @@
+{
+  "metadata": {"schema_version": "1.0", "request_id": "soilhub-20261018080001-1a2b3c4d", "filters": {}, "total_count": 1, "returned_count": 1, "limit": null, "offset": null, "has_more": null, "warnings": [], "country_assignment": "intersects", "as_of": "2026-10-18T02:15:07.551203Z"},
+  "country": {"iso_a2": "KE", "iso_a3": "KEN", "name": "Kenya", "dataset_count": 6, "feature_count": 9214, "point_count": 3105, "polygon_count": 6109, "profile_count": 9214, "horizon_count": 61022, "original_observation_count": 1210933, "value_count": 0, "observation_count": 1210933, "variable_count": 74, "source_signature": "4c1e0b8f2d", "aggregation_version": "1", "refresh_job_id": "8b0c6a3e-3f21-4d8e-9a57-2f0f5c7d1e44", "refreshed_at": "2026-10-18T02:15:07.551203Z"},
+  "datasets": [
+    {"provider_code": "isric", "dataset_code": "sotwis_polygons", "dataset_name": "SOTWIS polygon estimates", "country_id": 112, "dataset_id": 2, "feature_count": 6109, "point_count": 0, "polygon_count": 6109, "profile_count": 6109, "horizon_count": 42110, "original_observation_count": 803214, "value_count": 0, "observation_count": 803214, "variable_count": 21, "source_signature": "9e77a1", "aggregation_version": "1", "refresh_job_id": "8b0c6a3e-3f21-4d8e-9a57-2f0f5c7d1e44", "refreshed_at": "2026-10-18T02:15:07.551203Z"},
+    {"provider_code": "isric", "dataset_code": "wosis_points", "dataset_name": "WoSIS point profiles", "country_id": 112, "dataset_id": 1, "feature_count": 2311, "point_count": 2311, "polygon_count": 0, "profile_count": 2311, "horizon_count": 11402, "original_observation_count": 251077, "value_count": 0, "observation_count": 251077, "variable_count": 48, "source_signature": "1d0f42", "aggregation_version": "1", "refresh_job_id": null, "refreshed_at": "2026-10-17T02:14:59.000001Z"}
+  ],
+  "variables": [
+    {"provider_code": "isric", "dataset_code": "sotwis_polygons", "variable_code": "organic_carbon", "original_observation_count": 40210, "value_count": 0, "observation_count": 40210},
+    {"provider_code": "isric", "dataset_code": "wosis_points", "variable_code": "organic_carbon", "original_observation_count": 9817, "value_count": 0, "observation_count": 9817}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "metadata": {"schema_version": "1.0", "request_id": null, "filters": {}, "total_count": 1, "returned_count": 1, "limit": null, "offset": null, "has_more": null, "warnings": []},
+  "code_lists": [
+    {"code_list": "SOTWIS_codes", "provider_code": "isric", "row_count": 1527, "distinct_entries": 509,
+     "attributes": ["CLAF", "CLAF_m", "DRAI", "ISOC", "LITH", "LNDF", "PHAS"],
+     "source_datasets": [
+       {"source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c", "source_dataset_name": "sotwis_senegal_gambia"},
+       {"source_record_id": "c9a8e6f2-0d4c-4b7f-9e4c-2f1b8a4d7e10", "source_dataset_name": "sotwis_tunisia"},
+       {"source_record_id": "d2b7c1e4-5a3f-4c8e-8f1d-6e9a0b2c4d71", "source_dataset_name": "sotwis_upper_tana"}
+     ]}
+  ]
+}
