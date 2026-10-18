@@ -30,6 +30,18 @@ reference:
       - soil_code_lists
       - soil_code_list
       - soil_ttr_flag_legend
+  - title: Reads
+    contents:
+      - soil_observations
+  - title: Results
+    contents:
+      - soil_table
+      - soil_metadata
+      - soil_columns
+      - soil_flags
+      - soil_markings
+      - soil_revised_rules
+      - soil_first_layer
   - title: Configuration and errors
     contents:
       - soilhub-config

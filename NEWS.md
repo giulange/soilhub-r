@@ -1,5 +1,25 @@
 # soilhub (development version)
 
+* Wide observations (WP4): `soil_observations()` reads the canonical wide
+  layout (one row per horizon) page by page, with the selection of every
+  canonical read (`datasets`, `variables`, `bbox`, `country`, `geometry`,
+  `layer`, `view`, `profile_type`, `components`, `min_cumulative_percent`)
+  validated before any request; `view = "raw"` is sent explicitly. The result
+  is a `soil_table` (a data frame keeping its metadata through `[`), typed by
+  column family: fixed, first-layer, component, source attribute and marking
+  columns, `value_flags`, retirement, revised markings, WKT geometry text
+  (`with_geometry = "text"`) and the variable groups `<key>`, `_units`,
+  `_method`, `_n`. Multi-value WoSIS cells: `<key>` holds the mean of the
+  listed values and `<key>_values` every original value
+  (`multi_value_rule = "mean"`). Pages with different column sets are
+  aligned. A refused selection raises `soilhub_load_limit_error` naming the
+  `soil_export()` call of the same selection; a failure after some pages
+  keeps them as a typed partial `soil_table` in `e$partial`. Result helpers:
+  `soil_metadata()`, `soil_warnings()`, `soil_columns()`, `soil_flags()`,
+  `soil_markings()`, `soil_revised_rules()`, `soil_first_layer()`, print and
+  summary methods. The long layout, `with_geometry = "sf"` and
+  `too_large = "export"` follow in the next work packages.
+
 * Discovery and version check (WP3): after the login `soil_connect()` reads
   `/capabilities` and checks the API version (0.5.0 or later, major 0) and
   the required capabilities; an incompatible server stops with
