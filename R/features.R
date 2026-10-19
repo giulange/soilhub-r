@@ -78,8 +78,10 @@ polygon_kinds <- c("POLYGON", "MULTIPOLYGON")
 #' @param too_large What to do when the API refuses the selection as too
 #'   large for a synchronous read: `"stop"` raises
 #'   `soilhub_load_limit_error`, whose message names the equivalent
-#'   `soil_export(..., content = "features")` call. `"export"` is not
-#'   available in this version yet: it stops the same way.
+#'   `soil_export(..., content = "features")` call; `"export"` exports the
+#'   features of the selection (GeoJSON), waits, downloads, reads them back
+#'   and returns the same shape, with `soil_metadata(x)$via_export` the job
+#'   id.
 #' @return A `soil_table` with `soil_layout = "features"`: an `sf` object
 #'   (`with_geometry = "sf"`) or a data frame (`"text"`).
 #' @family reads
@@ -133,12 +135,17 @@ soil_features <- function(soil = soil_session(), datasets = NULL,
     soil_collect(soil, "/query/features", body, items = "features",
                  max_rows = max_rows, page_size = page_size, progress = progress),
     soilhub_load_limit_error = function(e) {
+      if (identical(too_large, "export") && identical(e$channel, "sync")) return(e)
       abort(features_load_limit(soil, e, selection, too_large, with_geometry))
     },
     soilhub_error = function(e) {
       abort(with_typed_features(soil, e, selection, with_geometry))
     }
   )
+  if (inherits(pages, "soilhub_load_limit_error")) {
+    # too_large = "export" (design 6.3): the features exported and read back
+    return(features_via_export(soil, selection, with_geometry, max_rows, progress))
+  }
   features_table(soil, pages, selection, with_geometry)
 }
 
@@ -267,12 +274,6 @@ features_load_limit <- function(soil, error, selection, too_large, with_geometry
     request_id = error$request_id, attempts = error$attempts
   )
   rebuilt$selection <- selection
-  if (identical(too_large, "export") && identical(rebuilt$channel, "sync")) {
-    rebuilt$message <- paste0(
-      conditionMessage(rebuilt),
-      "\n`too_large = \"export\"` is not available in this version of soilhub yet: export the selection with soil_export()."
-    )
-  }
   if (!is.null(error$partial)) {
     rebuilt$partial <- with_typed_features(soil, error, selection, with_geometry)$partial
   }

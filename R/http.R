@@ -164,8 +164,9 @@ build_request <- function(soil, method, path, body, query, timeout, token,
 }
 
 # Perform `req` up to `max_tries` times; retry on a transport failure and on
-# 429, 502, 503, 504. Returns list(response, failure, attempts).
-perform_with_retries <- function(soil, req, context, max_tries) {
+# 429, 502, 503, 504. Returns list(response, failure, attempts). `path`
+# writes the body to that file (downloads, exports.R).
+perform_with_retries <- function(soil, req, context, max_tries, path = NULL) {
   attempt <- 0L
   repeat {
     attempt <- attempt + 1L
@@ -173,7 +174,7 @@ perform_with_retries <- function(soil, req, context, max_tries) {
     response <- NULL
     failure <- NULL
     result <- tryCatch(
-      httr2::req_perform(req),
+      httr2::req_perform(req, path = path),
       httr2_failure = function(e) e,
       curl_error = function(e) e
     )

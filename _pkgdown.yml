@@ -50,6 +50,15 @@ reference:
       - soil_health_summary
       - soil_resolve_targets
       - soil_ttr_flags
+  - title: Exports
+    desc: >
+      Whole selections as files (GeoPackage, GeoJSON, CSV, TSV, Shapefile),
+      followed, downloaded and read back as typed tables.
+    contents:
+      - soil_export
+      - soil_export_status
+      - soil_export_read
+      - soil_export_from_error
   - title: Results
     contents:
       - soil_table

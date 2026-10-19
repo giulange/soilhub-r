@@ -1,5 +1,25 @@
 # soilhub (development version)
 
+* Exports (WP7): `soil_export()` submits a selection (the arguments of
+  `soil_observations()`, plus `format`, `content` and `layout`, checked
+  against `soil_capabilities()$exports`: Shapefile only with `content =
+  "features"`), polls it, downloads the zip into the export directory
+  (`soilhub.export_dir`) and unzips it; `wait = FALSE` returns the job id at
+  once. `soil_export_status()`, `soil_export_wait()` (`failed`, `cancelled`,
+  an unknown id and a timeout are `soilhub_job_error`s with `reason`),
+  `soil_export_download()` (streamed, never overwriting unless asked; an
+  expired export is a `soilhub_not_found_error` with `reason = "expired"`)
+  and `soil_export_cancel()` (needs `soil:publish`) work from the object or
+  the job id alone. `soil_export_read()` reads the tables of every format
+  back, typed from `metadata.json` exactly as the synchronous reads type
+  them (wide, long, features; JSON text cells parsed back to list columns);
+  CSV, TSV and GeoJSON need no package, GeoPackage and Shapefile need `sf`.
+  `too_large = "export"` of `soil_observations()` and `soil_features()`
+  exports a refused selection and returns the same shape, with
+  `soil_metadata(x)$via_export`; `soil_export_from_error()` is its manual
+  form. `soil_columns()`, `soil_citations()` and `soil_revised_rules()` work
+  on a downloaded export. `soil_values()` and `soil_health_scores()` accept
+  `with_geometry = "sf"`.
 * Long observations, features and geometry (WP5): `soil_observations(layout
   = "long")` reads one row per observation, typed per column family
   (`value` double, `value_raw` the source value verbatim as a list column,
