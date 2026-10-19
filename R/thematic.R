@@ -130,12 +130,17 @@ check_instant <- function(value, argument) {
 }
 
 # The geometry column of a values or health page (GeoJSON parsed as lists):
-# dropped with "none", GeoJSON text in `geometry_text` with "text".
+# dropped with "none", GeoJSON text in `geometry_text` with "text", WKT in
+# `geometry` with "sf" (turned into an sfc by thematic_as_sf()).
 thematic_geometry <- function(frame, with_geometry) {
   pos <- match("geometry", names(frame))
   if (is.na(pos)) return(frame)
   if (identical(with_geometry, "none")) {
     frame[["geometry"]] <- NULL
+    return(frame)
+  }
+  if (identical(with_geometry, "sf")) {
+    frame[[pos]] <- vapply(frame[["geometry"]], geojson_to_wkt, character(1), USE.NAMES = FALSE)
     return(frame)
   }
   text <- vapply(frame[["geometry"]], function(geometry) {
@@ -147,17 +152,19 @@ thematic_geometry <- function(frame, with_geometry) {
   frame
 }
 
-# `with_geometry` of the thematic reads; "sf" waits for the sf conversion of
-# the geometry module (design 5.5), as for soil_observations().
-check_with_geometry <- function(with_geometry) {
+# `with_geometry` of the thematic reads; "sf" needs the package sf
+# (geometry.R), checked before any request.
+check_with_geometry <- function(with_geometry, what = "This read") {
   with_geometry <- check_option(with_geometry, c("none", "sf", "text"), "with_geometry")
-  if (identical(with_geometry, "sf")) {
-    abort(soilhub_argument_error(
-      "`with_geometry = \"sf\"` is not available in this version of soilhub yet: use `with_geometry = \"text\"` (GeoJSON).",
-      "with_geometry"
-    ))
-  }
+  if (identical(with_geometry, "sf")) require_sf(what)
   with_geometry
+}
+
+# A thematic frame with the WKT `geometry` of thematic_geometry() as an sf
+# object (EPSG:4326; rows without geometry get an empty one).
+thematic_as_sf <- function(frame, with_geometry) {
+  if (!identical(with_geometry, "sf") || is.null(frame[["geometry"]])) return(frame)
+  frame_as_sf(frame, wkt_sfc(frame[["geometry"]]))
 }
 
 # Request body: NULL fields dropped, vectors sent as JSON arrays.

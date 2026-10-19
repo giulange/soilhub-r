@@ -79,8 +79,10 @@ selection).}
 \item{too_large}{What to do when the API refuses the selection as too
 large for a synchronous read: \code{"stop"} raises
 \code{soilhub_load_limit_error}, whose message names the equivalent
-\code{soil_export(..., content = "features")} call. \code{"export"} is not
-available in this version yet: it stops the same way.}
+\code{soil_export(..., content = "features")} call; \code{"export"} exports the
+features of the selection (GeoJSON), waits, downloads, reads them back
+and returns the same shape, with \code{soil_metadata(x)$via_export} the job
+id.}
 
 \item{progress}{Report the pages read (messages at verbosity 1 or more).}
 }

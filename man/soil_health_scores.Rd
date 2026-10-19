@@ -57,9 +57,10 @@ refused by the API).}
 \item{depth_top_cm, depth_bottom_cm}{Depth interval in cm: the horizons
 overlapping it.}
 
-\item{with_geometry}{\code{"none"}, or \code{"text"}: the geometry of the feature
-as GeoJSON text in \code{geometry_text}. \code{"sf"} is not available in this
-version yet.}
+\item{with_geometry}{\code{"none"}, \code{"text"} (the geometry of the feature as
+GeoJSON text in \code{geometry_text}) or \code{"sf"} (an \code{sf} object with a
+\code{geometry} column, EPSG:4326; needs the package \code{sf}, else a
+\code{soilhub_dependency_error}).}
 
 \item{include_details}{Add the list columns \code{inputs},
 \code{derived_variables}, \code{memberships}, \code{activated_rules}, \code{diagnostics},

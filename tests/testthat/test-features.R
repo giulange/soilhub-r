@@ -138,8 +138,5 @@ test_that("a refused selection names the export of the features", {
   expect_identical(e$selection, list(country = "BRA"))
   expect_match(conditionMessage(e),
                "soil_export(soil, country = \"BRA\", content = \"features\", format = \"gpkg\")", fixed = TRUE)
-  e <- expect_error(soil_features(soil, country = "BRA", with_geometry = "text", too_large = "export",
-                                  progress = FALSE),
-                    class = "soilhub_load_limit_error")
-  expect_match(conditionMessage(e), "too_large = \"export\"` is not available", fixed = TRUE)
+  # too_large = "export" is tested end to end in test-exports.R
 })

@@ -46,6 +46,7 @@ Collate:
     'selection.R'
     'observations.R'
     'features.R'
+    'exports.R'
     'thematic.R'
     'health-read.R'
     'http.R'

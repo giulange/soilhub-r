@@ -110,7 +110,8 @@ NULL
 #' **Large selections.** The API refuses a synchronous read above its limit
 #' (`limits$max_sync_observations`, 1,000,000 observations today) with
 #' `soilhub_load_limit_error`; its message prints the `soil_export()` call
-#' of the same selection. Run `soil_summary()` first to size a selection.
+#' of the same selection; `too_large = "export"` exports it and reads it
+#' back. Run `soil_summary()` first to size a selection.
 #'
 #' Rights: `soil:read`. Capabilities: `revised_view` for `view =
 #' "revised"`, `profile_type_filter` for `profile_type`,
@@ -171,8 +172,11 @@ NULL
 #' @param too_large What to do when the API refuses the selection as too
 #'   large for a synchronous read: `"stop"` raises
 #'   `soilhub_load_limit_error`, whose message names the equivalent
-#'   `soil_export()` call. `"export"` (export and read back) is not available
-#'   in this version yet: it stops the same way.
+#'   [soil_export()] call; `"export"` exports the same selection (CSV;
+#'   GeoJSON for the long layout with geometry), waits, downloads it into the
+#'   export directory, reads it back and returns the same shape as the
+#'   synchronous read, with `soil_metadata(x)$via_export` the job id (the
+#'   whole selection is exported; `offset` and `max_rows` select its rows).
 #' @param progress Report the pages read (messages at verbosity 1 or more).
 #' @param timeout Seconds allowed for each page request; `NULL` uses the
 #'   session's (300 s by default).
@@ -258,12 +262,17 @@ soil_observations <- function(soil = soil_session(), datasets = NULL,
     soil_collect(soil, "/query/observations", body, items = if (long) "observations" else "rows",
                  max_rows = max_rows, page_size = page_size, progress = progress),
     soilhub_load_limit_error = function(e) {
+      if (identical(too_large, "export") && identical(e$channel, "sync")) return(e)
       abort(observations_load_limit(soil, e, selection, too_large, with_geometry, layout))
     },
     soilhub_error = function(e) {
       abort(with_typed_partial(soil, e, selection, with_geometry, layout))
     }
   )
+  if (inherits(pages, "soilhub_load_limit_error")) {
+    # too_large = "export" (design 6.3): the same selection exported and read back
+    return(observations_via_export(soil, selection, layout, with_geometry, max_rows, offset, progress))
+  }
   observations_table(soil, pages, selection, with_geometry, layout = layout)
 }
 
@@ -387,12 +396,6 @@ observations_load_limit <- function(soil, error, selection, too_large, with_geom
     status = error$status, endpoint = error$endpoint, method = error$method,
     request_id = error$request_id, attempts = error$attempts
   )
-  if (identical(too_large, "export") && identical(rebuilt$channel, "sync")) {
-    rebuilt$message <- paste0(
-      conditionMessage(rebuilt),
-      "\n`too_large = \"export\"` is not available in this version of soilhub yet: export the selection with soil_export()."
-    )
-  }
   if (!is.null(error$partial)) {
     rebuilt$partial <- with_typed_partial(soil, error, selection, with_geometry, layout)$partial
   }

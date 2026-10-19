@@ -97,8 +97,11 @@ selection).}
 \item{too_large}{What to do when the API refuses the selection as too
 large for a synchronous read: \code{"stop"} raises
 \code{soilhub_load_limit_error}, whose message names the equivalent
-\code{soil_export()} call. \code{"export"} (export and read back) is not available
-in this version yet: it stops the same way.}
+\code{\link[=soil_export]{soil_export()}} call; \code{"export"} exports the same selection (CSV;
+GeoJSON for the long layout with geometry), waits, downloads it into the
+export directory, reads it back and returns the same shape as the
+synchronous read, with \code{soil_metadata(x)$via_export} the job id (the
+whole selection is exported; \code{offset} and \code{max_rows} select its rows).}
 
 \item{progress}{Report the pages read (messages at verbosity 1 or more).}
 
@@ -214,7 +217,8 @@ continue with \code{offset = soil_metadata(e$partial)$next_offset}.
 \strong{Large selections.} The API refuses a synchronous read above its limit
 (\code{limits$max_sync_observations}, 1,000,000 observations today) with
 \code{soilhub_load_limit_error}; its message prints the \code{soil_export()} call
-of the same selection. Run \code{soil_summary()} first to size a selection.
+of the same selection; \code{too_large = "export"} exports it and reads it
+back. Run \code{soil_summary()} first to size a selection.
 
 Rights: \code{soil:read}. Capabilities: \code{revised_view} for \code{view = "revised"}, \code{profile_type_filter} for \code{profile_type},
 \code{component_selection} for \code{components}, \code{observation_geometry} for the

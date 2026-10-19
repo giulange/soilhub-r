@@ -78,9 +78,10 @@ health_body <- function(providers, datasets, release_ids, release_codes,
 #' @param bbox `c(xmin, ymin, xmax, ymax)` in WGS84 degrees.
 #' @param depth_top_cm,depth_bottom_cm Depth interval in cm: the horizons
 #'   overlapping it.
-#' @param with_geometry `"none"`, or `"text"`: the geometry of the feature
-#'   as GeoJSON text in `geometry_text`. `"sf"` is not available in this
-#'   version yet.
+#' @param with_geometry `"none"`, `"text"` (the geometry of the feature as
+#'   GeoJSON text in `geometry_text`) or `"sf"` (an `sf` object with a
+#'   `geometry` column, EPSG:4326; needs the package `sf`, else a
+#'   `soilhub_dependency_error`).
 #' @param include_details Add the list columns `inputs`,
 #'   `derived_variables`, `memberships`, `activated_rules`, `diagnostics`,
 #'   `input_observations` (how each score was computed).
@@ -121,7 +122,7 @@ soil_health_scores <- function(soil = soil_session(), providers = NULL,
                       model_versions, run_ids, categories, score_classes,
                       statuses, source_supports, country, bbox, depth_top_cm,
                       depth_bottom_cm)
-  with_geometry <- check_with_geometry(with_geometry)
+  with_geometry <- check_with_geometry(with_geometry, "`soil_health_scores()`")
   include_details <- check_flag(include_details, "include_details")
   max_rows <- check_max_rows(max_rows)
   progress <- check_flag(progress, "progress")
@@ -135,6 +136,7 @@ soil_health_scores <- function(soil = soil_session(), providers = NULL,
   collect_typed(soil, "/query/soil-health", body, "scores", max_rows, progress, function(pages) {
     frame <- records_frame(pages$items, schema, "POST /query/soil-health")
     frame <- thematic_geometry(frame, with_geometry)
+    frame <- thematic_as_sf(frame, with_geometry)
     meta <- pages_metadata(soil, pages)
     meta$datasets <- unique(c(unlist(meta$request$datasets), stats::na.omit(frame$dataset_code)))
     if (!identical(with_geometry, "none")) meta$crs <- "EPSG:4326"

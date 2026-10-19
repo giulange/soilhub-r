@@ -260,7 +260,7 @@ soil_warnings <- function(x) {
 #' laboratory methods, the notes of the source mappings and the method
 #' facets of the multi-value cells.
 #'
-#' @param x A wide `soil_table`.
+#' @param x A wide `soil_table`, or a downloaded wide `soil_export`.
 #' @return A data frame `column`, `property_key`, `numeric`, `units` (list),
 #'   `source_codes` (list), `horizon_count`, `multi_value_cells`, `methods`
 #'   (list of named character: method code -> description), `source_notes`
@@ -275,7 +275,12 @@ soil_warnings <- function(x) {
 #' }
 #' @export
 soil_columns <- function(x) {
-  variables <- result_metadata(x)$variables
+  metadata <- result_metadata(x)
+  variables <- metadata$variables
+  # a soil_export: the `wide_columns` of its metadata.json
+  if (!is.data.frame(variables) && is.list(metadata$wide_columns)) {
+    variables <- merge_wide_variables(list(list(variables = metadata$wide_columns)))
+  }
   if (!is.data.frame(variables)) {
     abort(soilhub_argument_error(
       "`x` has no typing of variable columns: soil_columns() works on wide reads.",

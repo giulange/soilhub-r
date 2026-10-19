@@ -124,11 +124,9 @@ test_that("too_large = \"stop\": the load-limit error names the export call", {
     "or rerun with too_large = \"export\"."
   ), fixed = TRUE)
   expect_match(msg, "request id soilhub-", fixed = TRUE)
-  # too_large = "export" is not available yet: same error, with a note
-  e <- expect_error(soil_observations(soil, too_large = "export", progress = FALSE),
-                    class = "soilhub_load_limit_error")
+  e <- expect_error(soil_observations(soil, progress = FALSE), class = "soilhub_load_limit_error")
   expect_match(conditionMessage(e), "soil_export(soil, format = \"gpkg\")", fixed = TRUE)
-  expect_match(conditionMessage(e), "too_large = \"export\"` is not available", fixed = TRUE)
+  # too_large = "export" is tested end to end in test-exports.R
 })
 
 test_that("a failure after some pages keeps them as a typed partial soil_table", {

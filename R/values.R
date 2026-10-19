@@ -90,9 +90,10 @@ values_body <- function(providers, datasets, variables, domains,
 #' @param run_ids Run ids.
 #' @param statuses Value statuses: `"published"`, `"insufficient_data"`,
 #'   `"not_applicable"`.
-#' @param with_geometry `"none"`, or `"text"`: the geometry of the target's
-#'   feature as GeoJSON text in `geometry_text` (EPSG:4326). `"sf"` is not
-#'   available in this version yet.
+#' @param with_geometry `"none"`, `"text"` (the geometry of the target's
+#'   feature as GeoJSON text in `geometry_text`, EPSG:4326) or `"sf"` (an
+#'   `sf` object with a `geometry` column; needs the package `sf`, else a
+#'   `soilhub_dependency_error`).
 #' @param include_lineage Add the lineage list columns `observation_inputs`,
 #'   `value_inputs`, `release_inputs`, `asset_inputs` (what each value was
 #'   computed from).
@@ -133,7 +134,7 @@ soil_values <- function(soil = soil_session(), providers = NULL,
   body <- values_body(providers, datasets, variables, domains, measurement_kinds,
                       target_levels, country, bbox, valid_at, depth_top_cm,
                       depth_bottom_cm, product_versions, run_ids, statuses)
-  with_geometry <- check_with_geometry(with_geometry)
+  with_geometry <- check_with_geometry(with_geometry, "`soil_values()`")
   include_lineage <- check_flag(include_lineage, "include_lineage")
   max_rows <- check_max_rows(max_rows)
   progress <- check_flag(progress, "progress")
@@ -153,6 +154,7 @@ values_table <- function(soil, pages, schema, with_geometry) {
   frame <- records_frame(pages$items, schema, "POST /query/values")
   frame <- thematic_geometry(frame, with_geometry)
   frame <- with_typed_value(frame)
+  frame <- thematic_as_sf(frame, with_geometry)
   meta <- pages_metadata(soil, pages)
   meta$datasets <- unique(c(unlist(meta$request$datasets), stats::na.omit(frame$dataset_code)))
   if (!identical(with_geometry, "none")) meta$crs <- "EPSG:4326"

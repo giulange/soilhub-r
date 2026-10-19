@@ -60,9 +60,10 @@ depth interval overlaps it (values without depth included).}
 \item{statuses}{Value statuses: \code{"published"}, \code{"insufficient_data"},
 \code{"not_applicable"}.}
 
-\item{with_geometry}{\code{"none"}, or \code{"text"}: the geometry of the target's
-feature as GeoJSON text in \code{geometry_text} (EPSG:4326). \code{"sf"} is not
-available in this version yet.}
+\item{with_geometry}{\code{"none"}, \code{"text"} (the geometry of the target's
+feature as GeoJSON text in \code{geometry_text}, EPSG:4326) or \code{"sf"} (an
+\code{sf} object with a \code{geometry} column; needs the package \code{sf}, else a
+\code{soilhub_dependency_error}).}
 
 \item{include_lineage}{Add the lineage list columns \code{observation_inputs},
 \code{value_inputs}, \code{release_inputs}, \code{asset_inputs} (what each value was
