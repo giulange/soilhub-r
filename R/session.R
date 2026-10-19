@@ -37,7 +37,8 @@
 #' major version, or a server lacking a capability every session needs,
 #' stops with a `soilhub_capability_error`: no default session is
 #' registered and the session, signed out, is in `e$session` for
-#' [soil_api_info()]. A newer minor version only prints a message.
+#' [soil_api_info()]. A minor version newer than the one the client is tested
+#' against (`TESTED_API_VERSION`) only prints a message.
 #'
 #' @param api_url Base URL of the API (see [soilhub-config]).
 #' @param keycloak_url Keycloak realm URL.

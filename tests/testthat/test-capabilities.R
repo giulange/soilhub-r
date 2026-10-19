@@ -5,10 +5,18 @@
 test_that("API versions are compared with the supported range", {
   expect_identical(check_api_version("0.5.0")$status, "supported")
   expect_identical(check_api_version("0.5.7")$status, "supported")
-  newer <- check_api_version("0.6.2")
+  # up to the minor of the tested version: no message
+  tested <- parse_api_version(TESTED_API_VERSION)
+  expect_identical(check_api_version(TESTED_API_VERSION)$status, "supported")
+  expect_identical(check_api_version(sprintf("%d.%d.9", tested[1], tested[2]))$status, "supported")
+  expect_null(check_api_version(TESTED_API_VERSION)$message)
+  newer <- check_api_version(sprintf("%d.%d.2", tested[1], tested[2] + 1L))
   expect_identical(newer$status, "newer_minor")
   expect_true(newer$compatible)
-  expect_match(newer$message, "API 0.6.x is newer than this client was tested with (0.5.x)", fixed = TRUE)
+  expect_match(newer$message, sprintf(
+    "API %d.%d.x is newer than this client was tested with (%d.%d.x)",
+    tested[1], tested[2] + 1L, tested[1], tested[2]
+  ), fixed = TRUE)
   old <- check_api_version("0.4.9")
   expect_identical(old$status, "too_old")
   expect_false(old$compatible)
@@ -22,6 +30,9 @@ test_that("API versions are compared with the supported range", {
 
 test_that("the package constants are those of the design", {
   expect_identical(MIN_API_VERSION, "0.5.0")
+  # the info.version of tests/contract/openapi.json (checked by the contract suite)
+  expect_true(compare_versions(parse_api_version(TESTED_API_VERSION), parse_api_version(MIN_API_VERSION)) >= 0L)
+  expect_identical(parse_api_version(TESTED_API_VERSION)[1], SUPPORTED_API_MAJOR)
   expect_identical(SUPPORTED_API_MAJOR, 0L)
   expect_setequal(REQUIRED_CAPABILITIES, c(
     "query_canonical_observations", "wide_layout", "canonical_features",
@@ -92,12 +103,17 @@ test_that("an API older than the minimum, or of another major, is refused", {
 test_that("a newer minor API version connects with a message", {
   local_no_default_session()
   local_fake_clock()
-  newer <- fake_session_server(capabilities = capabilities_with(api_version = "0.6.1"))
+  tested <- parse_api_version(TESTED_API_VERSION)
+  newer_version <- sprintf("%d.%d.1", tested[1], tested[2] + 1L)
+  newer <- fake_session_server(capabilities = capabilities_with(api_version = newer_version))
   msgs <- testthat::capture_messages(soil <- soil_connect(
     api_url = newer$url("/api/v1"), keycloak_url = newer$url("/realms/ams"),
     client_id = "ams-r", open_browser = FALSE, verbose = 0, timeout = 30
   ))
-  expect_true(any(grepl("API 0.6.x is newer than this client was tested with (0.5.x); update soilhub when available", msgs, fixed = TRUE)))
+  expect_true(any(grepl(sprintf(
+    "API %d.%d.x is newer than this client was tested with (%d.%d.x); update soilhub when available",
+    tested[1], tested[2] + 1L, tested[1], tested[2]
+  ), msgs, fixed = TRUE)))
   expect_identical(soil$state$compatibility$status, "newer_minor")
   expect_true(soil_api_info(soil)$compatible)
   expect_identical(soil_session()$state, soil$state)

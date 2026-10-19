@@ -75,7 +75,8 @@ that discovery calls will be refused.
 major version, or a server lacking a capability every session needs,
 stops with a \code{soilhub_capability_error}: no default session is
 registered and the session, signed out, is in \code{e$session} for
-\code{\link[=soil_api_info]{soil_api_info()}}. A newer minor version only prints a message.
+\code{\link[=soil_api_info]{soil_api_info()}}. A minor version newer than the one the client is tested
+against (\code{TESTED_API_VERSION}) only prints a message.
 }
 \examples{
 \dontrun{

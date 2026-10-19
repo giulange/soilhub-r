@@ -18,7 +18,12 @@
   calls and `tests/contract/capabilities.json`; the suite replays them
   through the client and skips until they exist. `tools/check_version.R`
   checks `MIN_API_VERSION` / `SUPPORTED_API_MAJOR` against an OpenAPI
-  document.
+  document. New constant `TESTED_API_VERSION` (0.6.0, the `info.version` of
+  the snapshot, kept in step by `tools/update_contract_snapshots.R` and
+  checked by the contract suite): the "API is newer than this client was
+  tested with" message of `soil_connect()` now compares with it instead of
+  `MIN_API_VERSION` (still 0.5.0, the oldest server accepted), so API 0.6.x
+  gives no message.
 * Long observations, features and geometry (WP5): `soil_observations(layout
   = "long")` reads one row per observation, typed per column family
   (`value` double, `value_raw` the source value verbatim as a list column,
