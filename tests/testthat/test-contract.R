@@ -263,3 +263,35 @@ test_that("the exchange hook receives every request with its response", {
   expect_warning(out <- soil_request(soil, "POST", "/echo"), "soilhub.exchange_hook failed: boom")
   expect_true(out$ok)
 })
+
+test_that("streamed downloads pass through the exchange hook too", {
+  seen <- list()
+  local_opts(soilhub.exchange_hook = function(exchange) {
+    if (!is.null(exchange$download)) exchange$size <- file.size(exchange$download)
+    seen[[length(seen) + 1L]] <<- exchange
+  })
+  api <- fake_api(list(
+    list(method = "get", path = "/api/v1/files/ok/download", handler = function(req, res) {
+      res$set_type("application/zip")$send(as.raw(1:10))
+    }),
+    list(method = "get", path = "/api/v1/files/gone/download", handler = function(req, res) {
+      res$set_status(404L)$send_json(list(detail = "Export not found"), auto_unbox = TRUE)
+    })
+  ))
+  soil <- test_session(api)
+  dest <- withr::local_tempfile(fileext = ".zip")
+  soil_download(soil, "/files/ok/download", dest)
+  expect_identical(readBin(dest, "raw", 100), as.raw(1:10))
+  expect_length(seen, 1L)
+  expect_identical(seen[[1]][c("method", "path", "status")], list(method = "GET", path = "/files/ok/download", status = 200L))
+  expect_identical(seen[[1]]$query, list())
+  expect_null(seen[[1]]$body)
+  expect_null(seen[[1]]$response)
+  expect_identical(seen[[1]]$size, 10)
+
+  expect_error(soil_download(soil, "/files/gone/download", dest), class = "soilhub_not_found_error")
+  expect_length(seen, 2L)
+  expect_identical(seen[[2]]$status, 404L)
+  expect_null(seen[[2]]$download)
+  expect_match(seen[[2]]$response, "Export not found")
+})

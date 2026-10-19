@@ -29,22 +29,35 @@ replay_api <- function(manifest, .local_envir = parent.frame()) {
       entries[[length(entries) + 1L]] <- list(
         key = paste(x$method, paste0(openapi_prefix(), x$path), sub("^\\?", "", query_string(x$query)), x$body %||% ""),
         status = as.integer(x$status),
-        json = grepl("\\.json$", x$file),
-        text = if (file.exists(file)) paste(readLines(file, warn = FALSE), collapse = "\n") else ""
+        type = if (grepl("\\.json$", x$file)) "application/json" else if (grepl("\\.zip$", x$file)) "application/zip" else "text/plain",
+        body = if (!file.exists(file)) {
+          ""
+        } else if (grepl("\\.zip$", x$file)) {
+          readBin(file, "raw", file.size(file))
+        } else {
+          paste(readLines(file, warn = FALSE), collapse = "\n")
+        }
       )
     }
   }
   app <- webfakes::new_app()
   app$locals$entries <- entries
+  app$locals$served <- list()
   app$all(webfakes::new_regexp("^/"), function(req, res) {
     body <- if (is.raw(req$.body) && length(req$.body)) rawToChar(req$.body) else ""
     key <- paste(toupper(req$method), req$path, req$query_string %||% "", body)
-    for (entry in req$app$locals$entries) {
-      if (identical(entry$key, key)) {
-        res$set_status(entry$status)
-        if (entry$json) res$set_type("application/json")
-        return(res$send(entry$text))
-      }
+    # the same request recorded several times (the polls of a job) is
+    # answered in the recorded order, the last answer repeated
+    matches <- Filter(function(entry) identical(entry$key, key), req$app$locals$entries)
+    if (length(matches)) {
+      served <- req$app$locals$served
+      n <- (served[[key]] %||% 0L) + 1L
+      served[[key]] <- n
+      req$app$locals$served <- served
+      entry <- matches[[min(n, length(matches))]]
+      res$set_status(entry$status)
+      res$set_type(entry$type)
+      return(res$send(entry$body))
     }
     res$set_status(501L)$send_json(list(detail = paste("no recorded response for", key)), auto_unbox = TRUE)
   })

@@ -43,7 +43,10 @@
   checked by the contract suite): the "API is newer than this client was
   tested with" message of `soil_connect()` now compares with it instead of
   `MIN_API_VERSION` (still 0.5.0, the oldest server accepted), so API 0.6.x
-  gives no message.
+  gives no message. Streamed downloads (the export zip) pass through the
+  exchange hook too, so the contract suite sees `GET /exports/{job_id}/download`;
+  `tools/record_fixtures.R --with-export` adds one small export round trip
+  (off by default: an export is a job written under the user's name).
 * Long observations, features and geometry (WP5): `soil_observations(layout
   = "long")` reads one row per observation, typed per column family
   (`value` double, `value_raw` the source value verbatim as a list column,

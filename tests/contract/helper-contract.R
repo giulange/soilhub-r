@@ -94,11 +94,12 @@ non_api_literals <- c(
 # copied); this map only says where they apply. `test-responses.R` fails
 # when a typing table of the namespace (a `*_schema` list or a named
 # `*_types` vector) is not listed here, so a new table must be placed.
-# `at` = "METHOD path", `pointer` as in response_schema_at(); `at = NA` for a
-# table of the client's own (not an API response), with the reason.
+# `at` = "METHOD path" (several when the same model answers several
+# operations), `pointer` as in response_schema_at().
 
 response_tables <- list(
   unified_job_schema = list(at = "GET /jobs/{job_id}"),
+  export_job_schema = list(at = c("POST /exports", "GET /exports/{job_id}")),
   publication_job_schema = list(at = "GET /publication-jobs/{job_id}"),
   health_job_schema = list(at = "GET /soil-health-publication-jobs/{job_id}"),
   availability_dataset_schema = list(at = "POST /query/availability", pointer = "by_dataset[]"),

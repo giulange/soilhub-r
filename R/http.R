@@ -82,25 +82,30 @@ soil_request <- function(soil, method, path, body = NULL, query = NULL,
 # named list sent, `NULL` elements dropped), `body` (the JSON text sent, or
 # `NULL`), `upload` (the text fields of a multipart upload, or `NULL`),
 # `status` (`NA` on a transport failure) and `response` (the response body
-# as text, or `NULL`). The contract suite (tests/contract/) uses it to list
+# as text, or `NULL`); a download streamed to a file (`soil_download()`,
+# exports.R) has `download`, the path of that file while the hook runs,
+# instead of a successful `response`. The contract suite (tests/contract/) uses it to list
 # the requests the client sends, `tools/record_fixtures.R` to record the
 # responses of the API. Never set by the package; an error of the hook is a
 # warning, the request goes on.
-record_exchange <- function(method, path, query, body, response) {
+record_exchange <- function(method, path, query, body, response, download = NULL) {
   hook <- getOption("soilhub.exchange_hook")
   if (!is.function(hook)) return(invisible(NULL))
   upload <- inherits(body, "soilhub_upload")
+  status <- if (is.null(response)) NA_integer_ else httr2::resp_status(response)
+  streamed <- !is.null(download) && !is.na(status) && status >= 200L && status < 300L
   exchange <- list(
     method = method,
     path = path,
     query = Filter(Negate(is.null), query %||% list()),
     body = if (!upload && !is.null(body)) as.character(request_body_json(body)),
     upload = if (upload) lapply(body$fields, as.character),
-    status = if (is.null(response)) NA_integer_ else httr2::resp_status(response),
-    response = if (!is.null(response) && httr2::resp_has_body(response)) {
+    status = status,
+    response = if (!streamed && !is.null(response) && httr2::resp_has_body(response)) {
       tryCatch(httr2::resp_body_string(response), error = function(e) NULL)
     }
   )
+  if (streamed) exchange$download <- download
   tryCatch(hook(exchange), error = function(e) {
     warning("soilhub.exchange_hook failed: ", conditionMessage(e), call. = FALSE)
   })
