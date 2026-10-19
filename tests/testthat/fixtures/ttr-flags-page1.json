@@ -1,0 +1,69 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 3,
+  "returned_count": 2,
+  "limit": 2,
+  "offset": 0,
+  "has_more": true,
+  "warnings": [],
+  "dataset": "sotwis_estimates",
+  "source_table": "SOTERflagTTRrules",
+  "source_fields": [
+   "CLAF",
+   "PRID",
+   "Layer",
+   "Newtopdep",
+   "Newbotdep",
+   "TTRsub",
+   "TTRmain",
+   "TTRfinal",
+   "TTRexpert"
+  ],
+  "view": "raw"
+ },
+ "flags": [
+  {
+   "flag_id": 1001,
+   "feature_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000001",
+   "profile_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000002",
+   "horizon_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000011",
+   "source_record_id": "rec-tn",
+   "source_dataset_name": "SOTWIS Tunisia",
+   "source_table": "SOTERflagTTRrules",
+   "source_row_number": 1,
+   "sub_layer_number": 1,
+   "CLAF": "CMe",
+   "PRID": "TN-AB1",
+   "Layer": "D1",
+   "Newtopdep": 0.0,
+   "Newbotdep": 20.0,
+   "TTRsub": "x",
+   "TTRmain": "-",
+   "TTRfinal": "a",
+   "TTRexpert": null
+  },
+  {
+   "flag_id": 1002,
+   "feature_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000001",
+   "profile_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000002",
+   "horizon_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000012",
+   "source_record_id": "rec-tn",
+   "source_dataset_name": "SOTWIS Tunisia",
+   "source_table": "SOTERflagTTRrules",
+   "source_row_number": 2,
+   "sub_layer_number": 1,
+   "CLAF": "CMe",
+   "PRID": "TN-AB1",
+   "Layer": "D2",
+   "Newtopdep": 20.0,
+   "Newbotdep": 40.0,
+   "TTRsub": "x",
+   "TTRmain": "-",
+   "TTRfinal": "a",
+   "TTRexpert": null
+  }
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 1,
+  "returned_count": 1,
+  "limit": null,
+  "offset": null,
+  "has_more": null,
+  "warnings": [],
+  "calculation": "live",
+  "as_of": null,
+  "country_assignment": "intersects"
+ },
+ "totals": {
+  "feature_count": 430,
+  "point_count": 430,
+  "polygon_count": 0,
+  "profile_count": 430,
+  "horizon_count": 1800,
+  "original_observation_count": 6400,
+  "value_count": 12,
+  "observation_count": 6412,
+  "variable_count": 3,
+  "dataset_count": 2
+ },
+ "countries": [
+  {
+   "iso_a3": "KEN",
+   "country_name": "Kenya",
+   "feature_count": 420,
+   "profile_count": 420,
+   "horizon_count": 1760
+  },
+  {
+   "iso_a3": "TZA",
+   "country_name": "Tanzania",
+   "feature_count": 12,
+   "profile_count": 12,
+   "horizon_count": 50
+  }
+ ],
+ "datasets": [
+  {
+   "provider_code": "isric",
+   "dataset_code": "soter_profiles",
+   "feature_count": 130,
+   "profile_count": 130,
+   "horizon_count": 600
+  },
+  {
+   "provider_code": "isric",
+   "dataset_code": "wosis_points",
+   "feature_count": 300,
+   "profile_count": 300,
+   "horizon_count": 1200
+  }
+ ],
+ "variables": [
+  {
+   "variable_code": "clay",
+   "original_observation_count": 1780,
+   "value_count": 0,
+   "observation_count": 1780
+  },
+  {
+   "variable_code": "organic_carbon",
+   "original_observation_count": 540,
+   "value_count": 12,
+   "observation_count": 552
+  }
+ ]
+}

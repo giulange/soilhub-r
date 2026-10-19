@@ -1,0 +1,173 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 2,
+  "returned_count": 2,
+  "limit": 1000,
+  "offset": 0,
+  "has_more": false,
+  "warnings": [],
+  "score_count": 2,
+  "total_score_count": 2,
+  "include_geometry": false,
+  "include_details": true
+ },
+ "scores": [
+  {
+   "horizon_score_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000501",
+   "value_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000601",
+   "variable_code": "soil_health_physical",
+   "horizon_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000011",
+   "profile_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000002",
+   "component_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000003",
+   "feature_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000001",
+   "dataset_code": "sotwis_polygons",
+   "provider_code": "isric",
+   "release_id": 12,
+   "release_code": "2024-01",
+   "source_support": "polygon_estimate",
+   "geometry_kind": "MULTIPOLYGON",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        10,
+        36
+       ],
+       [
+        10.5,
+        36
+       ],
+       [
+        10.5,
+        36.5
+       ],
+       [
+        10,
+        36
+       ]
+      ]
+     ]
+    ]
+   },
+   "horizon_key": "TN-AB1/D1",
+   "horizon_name": "D1",
+   "top_depth_cm": 0.0,
+   "bottom_depth_cm": 20.0,
+   "model_version_id": 3,
+   "model_version_code": "fuzzy_v2",
+   "model_name": "Fuzzy soil health",
+   "model_checksum": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "health_run_id": 7,
+   "product_run_id": 42,
+   "category_code": "physical",
+   "category_name": "Physical",
+   "score": 72.5,
+   "score_class": "good",
+   "score_status": "scored",
+   "created_at": "2026-09-30T10:00:00+00:00",
+   "inputs": {
+    "bulk_density": 1.31
+   },
+   "derived_variables": {},
+   "memberships": {
+    "poor": 0.1,
+    "good": 0.8
+   },
+   "activated_rules": [
+    {
+     "rule": "physical_r4",
+     "strength": 0.7
+    }
+   ],
+   "diagnostics": {},
+   "input_observations": [
+    {
+     "observation_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000900",
+     "input_role": "bulk_density"
+    }
+   ]
+  },
+  {
+   "horizon_score_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000502",
+   "value_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000602",
+   "variable_code": "soil_health_chemical",
+   "horizon_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000012",
+   "profile_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000002",
+   "component_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000003",
+   "feature_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000001",
+   "dataset_code": "sotwis_polygons",
+   "provider_code": "isric",
+   "release_id": 12,
+   "release_code": "2024-01",
+   "source_support": "polygon_estimate",
+   "geometry_kind": "MULTIPOLYGON",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        10,
+        36
+       ],
+       [
+        10.5,
+        36
+       ],
+       [
+        10.5,
+        36.5
+       ],
+       [
+        10,
+        36
+       ]
+      ]
+     ]
+    ]
+   },
+   "horizon_key": "TN-AB1/D2",
+   "horizon_name": "D2",
+   "top_depth_cm": 20.0,
+   "bottom_depth_cm": 40.0,
+   "model_version_id": 3,
+   "model_version_code": "fuzzy_v2",
+   "model_name": "Fuzzy soil health",
+   "model_checksum": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "health_run_id": 7,
+   "product_run_id": 42,
+   "category_code": "chemical",
+   "category_name": "Chemical",
+   "score": null,
+   "score_class": null,
+   "score_status": "insufficient_data",
+   "created_at": "2026-09-30T10:00:00+00:00",
+   "inputs": {
+    "bulk_density": 1.31
+   },
+   "derived_variables": {},
+   "memberships": {
+    "poor": 0.1,
+    "good": 0.8
+   },
+   "activated_rules": [
+    {
+     "rule": "physical_r4",
+     "strength": 0.7
+    }
+   ],
+   "diagnostics": {},
+   "input_observations": [
+    {
+     "observation_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000900",
+     "input_role": "bulk_density"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 2,
+  "returned_count": 2,
+  "limit": null,
+  "offset": null,
+  "has_more": null,
+  "warnings": []
+ },
+ "total_score_count": 2,
+ "feature_count": 1,
+ "horizon_count": 2,
+ "by_dataset": [
+  {
+   "dataset": "sotwis_polygons",
+   "provider": "isric",
+   "score_count": 2,
+   "feature_count": 1,
+   "horizon_count": 2
+  }
+ ],
+ "by_release": [
+  {
+   "release_id": 12,
+   "release_code": "2024-01",
+   "score_count": 2
+  }
+ ],
+ "by_source_support": [
+  {
+   "source_support": "polygon_estimate",
+   "score_count": 2
+  }
+ ],
+ "by_category": [
+  {
+   "category": "chemical",
+   "variable": "soil_health_chemical",
+   "score_count": 1
+  },
+  {
+   "category": "physical",
+   "variable": "soil_health_physical",
+   "score_count": 1
+  }
+ ],
+ "by_class": [
+  {
+   "score_class": "good",
+   "score_count": 1
+  }
+ ],
+ "by_status": [
+  {
+   "score_status": "insufficient_data",
+   "score_count": 1
+  },
+  {
+   "score_status": "scored",
+   "score_count": 1
+  }
+ ]
+}

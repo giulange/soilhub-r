@@ -1,0 +1,49 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 3,
+  "returned_count": 1,
+  "limit": 2,
+  "offset": 2,
+  "has_more": false,
+  "warnings": [],
+  "dataset": "sotwis_estimates",
+  "source_table": "SOTERflagTTRrules",
+  "source_fields": [
+   "CLAF",
+   "PRID",
+   "Layer",
+   "Newtopdep",
+   "Newbotdep",
+   "TTRsub",
+   "TTRmain",
+   "TTRfinal",
+   "TTRexpert"
+  ],
+  "view": "raw"
+ },
+ "flags": [
+  {
+   "flag_id": 1003,
+   "feature_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000001",
+   "profile_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000002",
+   "horizon_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000013",
+   "source_record_id": "rec-tn",
+   "source_dataset_name": "SOTWIS Tunisia",
+   "source_table": "SOTERflagTTRrules",
+   "source_row_number": 3,
+   "sub_layer_number": 1,
+   "CLAF": "CMe",
+   "PRID": "TN-AB1",
+   "Layer": "D3",
+   "Newtopdep": 40.0,
+   "Newbotdep": 60.0,
+   "TTRsub": "x",
+   "TTRmain": "-",
+   "TTRfinal": "a",
+   "TTRexpert": null
+  }
+ ]
+}
