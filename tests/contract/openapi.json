@@ -1,0 +1,5852 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Global Soil Data Hub API",
+    "description": "Harmonized access to global soil datasets, including profile, horizon, observation, and geographic-feature data from multiple providers.",
+    "version": "0.6.0"
+  },
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Api V1 Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ready": {
+      "get": {
+        "summary": "Ready",
+        "operationId": "ready_api_v1_ready_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Ready Api V1 Ready Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/formats": {
+      "get": {
+        "summary": "Formats",
+        "operationId": "formats_api_v1_formats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "type": "object",
+                  "title": "Response Formats Api V1 Formats Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/capabilities": {
+      "get": {
+        "summary": "Capabilities",
+        "operationId": "capabilities_api_v1_capabilities_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Capabilities Api V1 Capabilities Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/datasets": {
+      "get": {
+        "summary": "Datasets",
+        "operationId": "datasets_api_v1_datasets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "items": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "type": "object",
+                  "title": "Response Datasets Api V1 Datasets Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/datasets/{dataset_name}": {
+      "get": {
+        "summary": "Dataset Detail",
+        "operationId": "dataset_detail_api_v1_datasets__dataset_name__get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "dataset_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Dataset Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Dataset Detail Api V1 Datasets  Dataset Name  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/code-lists": {
+      "get": {
+        "summary": "Code Lists",
+        "description": "Code lists kept as in the source (#69 B10: SOTWIS_codes).",
+        "operationId": "code_lists_api_v1_code_lists_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Code Lists Api V1 Code Lists Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/code-lists/{code_list}": {
+      "get": {
+        "summary": "Code List",
+        "operationId": "code_list_api_v1_code_lists__code_list__get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "code_list",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Code List"
+            }
+          },
+          {
+            "name": "attribute",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Attribute"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Code"
+            }
+          },
+          {
+            "name": "source_dataset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Code List Api V1 Code Lists  Code List  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sotwis/ttr-flags/legend": {
+      "get": {
+        "summary": "Sotwis Ttr Flag Legend",
+        "description": "Legend of the SOTERflagTTRrules codes (#69 B6).",
+        "operationId": "sotwis_ttr_flag_legend_api_v1_sotwis_ttr_flags_legend_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Sotwis Ttr Flag Legend Api V1 Sotwis Ttr Flags Legend Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/sotwis/ttr-flags": {
+      "get": {
+        "summary": "Sotwis Ttr Flags",
+        "description": "SOTERflagTTRrules rows of the sotwis_estimates profiles, codes verbatim (#69 B6, B7);\n``view=revised`` also matches ``prid`` without case where the spellings differ (R6, #68).",
+        "operationId": "sotwis_ttr_flags_api_v1_sotwis_ttr_flags_get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "source_dataset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source Dataset"
+            }
+          },
+          {
+            "name": "prid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Prid"
+            }
+          },
+          {
+            "name": "claf",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Claf"
+            }
+          },
+          {
+            "name": "layer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Layer"
+            }
+          },
+          {
+            "name": "feature_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Feature Id"
+            }
+          },
+          {
+            "name": "horizon_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Horizon Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1000,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/ViewOption"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "View"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Sotwis Ttr Flags Api V1 Sotwis Ttr Flags Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/variables": {
+      "get": {
+        "summary": "Variables",
+        "operationId": "variables_api_v1_variables_get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Code"
+            }
+          },
+          {
+            "name": "domain",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Domain"
+            }
+          },
+          {
+            "name": "measurement_kind",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Measurement Kind"
+            }
+          },
+          {
+            "name": "target_level",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Target Level"
+            }
+          },
+          {
+            "name": "dataset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Dataset"
+            }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Provider"
+            }
+          },
+          {
+            "name": "available_only",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Available Only"
+            }
+          },
+          {
+            "name": "include_unmapped",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Unmapped"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VariableDiscoveryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Variable",
+        "operationId": "create_variable_api_v1_variables_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VariableRegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VariableRegistrationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/variables/validate": {
+      "post": {
+        "summary": "Validate Variable Registration",
+        "operationId": "validate_variable_registration_api_v1_variables_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VariableRegistrationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VariableValidationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/query/summary": {
+      "post": {
+        "summary": "Query Summary",
+        "operationId": "query_summary_api_v1_query_summary_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/query/targets/resolve": {
+      "post": {
+        "summary": "Query Target Resolution",
+        "operationId": "query_target_resolution_api_v1_query_targets_resolve_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TargetResolutionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TargetResolutionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/query/features": {
+      "post": {
+        "summary": "Query Features",
+        "operationId": "query_features_api_v1_query_features_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeatureCollectionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/query/observations": {
+      "post": {
+        "summary": "Query Observations",
+        "operationId": "query_observations_api_v1_query_observations_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/query/availability": {
+      "post": {
+        "summary": "Query Availability",
+        "operationId": "query_availability_api_v1_query_availability_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailabilityResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/query/values/summary": {
+      "post": {
+        "summary": "Query Value Summary",
+        "operationId": "query_value_summary_api_v1_query_values_summary_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValueQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValueSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/query/values": {
+      "post": {
+        "summary": "Query Values",
+        "operationId": "query_values_api_v1_query_values_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValueQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValueQueryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/query/soil-health/summary": {
+      "post": {
+        "summary": "Query Soil Health Summary",
+        "operationId": "query_soil_health_summary_api_v1_query_soil_health_summary_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SoilHealthQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SoilHealthSummaryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/query/soil-health": {
+      "post": {
+        "summary": "Query Soil Health",
+        "operationId": "query_soil_health_api_v1_query_soil_health_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SoilHealthQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SoilHealthQueryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/products": {
+      "post": {
+        "summary": "Create Product",
+        "operationId": "create_product_api_v1_products_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDefinitionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/products/{product_code}/versions": {
+      "post": {
+        "summary": "Create Product Version",
+        "operationId": "create_product_version_api_v1_products__product_code__versions_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "product_code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Product Code"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductVersionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductVersionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/product-versions/{product_version_id}/runs": {
+      "post": {
+        "summary": "Create Product Run",
+        "operationId": "create_product_run_api_v1_product_versions__product_version_id__runs_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "product_version_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Product Version Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductRunRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductRunResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/publications/{run_id}/validate": {
+      "post": {
+        "summary": "Validate Value Publication",
+        "operationId": "validate_value_publication_api_v1_publications__run_id__validate_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuePublicationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicationValidationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/publications/{run_id}/values": {
+      "post": {
+        "summary": "Create Value Publication",
+        "operationId": "create_value_publication_api_v1_publications__run_id__values_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValuePublicationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValuePublicationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/publications/{run_id}/complete": {
+      "post": {
+        "summary": "Complete Publication Run",
+        "operationId": "complete_publication_run_api_v1_publications__run_id__complete_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductRunResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/publications/{run_id}/fail": {
+      "post": {
+        "summary": "Fail Publication Run",
+        "operationId": "fail_publication_run_api_v1_publications__run_id__fail_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductRunResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/publications/{run_id}/jobs": {
+      "post": {
+        "summary": "Create Bulk Publication Job",
+        "operationId": "create_bulk_publication_job_api_v1_publications__run_id__jobs_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "idempotency_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency Key"
+            }
+          },
+          {
+            "name": "input_format",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Input Format"
+            }
+          },
+          {
+            "name": "expected_checksum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Expected Checksum"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_create_bulk_publication_job_api_v1_publications__run_id__jobs_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicationJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/publication-jobs/{job_id}": {
+      "get": {
+        "summary": "Publication Job Status",
+        "operationId": "publication_job_status_api_v1_publication_jobs__job_id__get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicationJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/publications/{run_id}/soil-health/jobs": {
+      "post": {
+        "summary": "Create Bulk Soil Health Job",
+        "operationId": "create_bulk_soil_health_job_api_v1_publications__run_id__soil_health_jobs_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "idempotency_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Idempotency Key"
+            }
+          },
+          {
+            "name": "input_format",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Input Format"
+            }
+          },
+          {
+            "name": "expected_checksum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Expected Checksum"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_create_bulk_soil_health_job_api_v1_publications__run_id__soil_health_jobs_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SoilHealthPublicationJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/soil-health-publication-jobs/{job_id}": {
+      "get": {
+        "summary": "Soil Health Job Status",
+        "operationId": "soil_health_job_status_api_v1_soil_health_publication_jobs__job_id__get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SoilHealthPublicationJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/jobs/{job_id}": {
+      "get": {
+        "summary": "Unified Job Status",
+        "operationId": "unified_job_status_api_v1_jobs__job_id__get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnifiedJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/countries": {
+      "get": {
+        "summary": "Countries",
+        "operationId": "countries_api_v1_countries_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CountryListResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/countries/{code}": {
+      "get": {
+        "summary": "Country Detail",
+        "operationId": "country_detail_api_v1_countries__code__get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Code"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CountryDetailResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/countries/refresh": {
+      "post": {
+        "summary": "Refresh Countries",
+        "operationId": "refresh_countries_api_v1_countries_refresh_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "idempotency_key",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnifiedJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/query/consistency": {
+      "post": {
+        "summary": "Query Consistency",
+        "operationId": "query_consistency_api_v1_query_consistency_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsistencyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsistencyResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/jobs/{job_id}/cancel": {
+      "post": {
+        "summary": "Cancel Unified Job",
+        "operationId": "cancel_unified_job_api_v1_jobs__job_id__cancel_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnifiedJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/source-ingests": {
+      "post": {
+        "summary": "Create Source Ingest Job",
+        "operationId": "create_source_ingest_job_api_v1_source_ingests_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_create_source_ingest_job_api_v1_source_ingests_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnifiedJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/source-ingests/{job_id}/validate": {
+      "post": {
+        "summary": "Validate Source Ingest Job",
+        "operationId": "validate_source_ingest_job_api_v1_source_ingests__job_id__validate_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceIngestValidationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/source-ingests/{job_id}/promote": {
+      "post": {
+        "summary": "Promote Source Ingest Job",
+        "operationId": "promote_source_ingest_job_api_v1_source_ingests__job_id__promote_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnifiedJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/publications/{run_id}/soil-health": {
+      "post": {
+        "summary": "Create Soil Health Publication",
+        "operationId": "create_soil_health_publication_api_v1_publications__run_id__soil_health_post",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SoilHealthPublicationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SoilHealthPublicationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/exports": {
+      "post": {
+        "summary": "Create Export",
+        "description": "Exports (#48) take the parameters of the synchronous canonical requests; the load limit\nof exports (#49) is checked here, at submission.",
+        "operationId": "create_export_api_v1_exports_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/exports/{job_id}": {
+      "get": {
+        "summary": "Get Export",
+        "operationId": "get_export_api_v1_exports__job_id__get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/exports/{job_id}/download": {
+      "get": {
+        "summary": "Download Export",
+        "operationId": "download_export_api_v1_exports__job_id__download_get",
+        "security": [
+          {
+            "HTTPBearer": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AvailabilityCountry": {
+        "properties": {
+          "country_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country Code"
+          },
+          "country_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country Name"
+          },
+          "feature_count": {
+            "type": "integer",
+            "title": "Feature Count"
+          },
+          "horizon_count": {
+            "type": "integer",
+            "title": "Horizon Count"
+          },
+          "observation_count": {
+            "type": "integer",
+            "title": "Observation Count"
+          },
+          "by_dataset": {
+            "items": {
+              "$ref": "#/components/schemas/AvailabilityDataset"
+            },
+            "type": "array",
+            "title": "By Dataset"
+          }
+        },
+        "type": "object",
+        "required": [
+          "feature_count",
+          "horizon_count",
+          "observation_count",
+          "by_dataset"
+        ],
+        "title": "AvailabilityCountry"
+      },
+      "AvailabilityDataset": {
+        "properties": {
+          "dataset": {
+            "type": "string",
+            "title": "Dataset"
+          },
+          "geometry": {
+            "type": "string",
+            "title": "Geometry"
+          },
+          "country_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country Code"
+          },
+          "country_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country Name"
+          },
+          "feature_count": {
+            "type": "integer",
+            "title": "Feature Count"
+          },
+          "horizon_count": {
+            "type": "integer",
+            "title": "Horizon Count"
+          },
+          "observation_count": {
+            "type": "integer",
+            "title": "Observation Count"
+          },
+          "variables": {
+            "items": {
+              "$ref": "#/components/schemas/AvailabilityVariable"
+            },
+            "type": "array",
+            "title": "Variables"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dataset",
+          "geometry",
+          "feature_count",
+          "horizon_count",
+          "observation_count",
+          "variables"
+        ],
+        "title": "AvailabilityDataset"
+      },
+      "AvailabilityResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "by_dataset": {
+            "items": {
+              "$ref": "#/components/schemas/AvailabilityDataset"
+            },
+            "type": "array",
+            "title": "By Dataset"
+          },
+          "by_country": {
+            "items": {
+              "$ref": "#/components/schemas/AvailabilityCountry"
+            },
+            "type": "array",
+            "title": "By Country"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "by_dataset",
+          "by_country"
+        ],
+        "title": "AvailabilityResponse"
+      },
+      "AvailabilityVariable": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "Body_create_bulk_publication_job_api_v1_publications__run_id__jobs_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_create_bulk_publication_job_api_v1_publications__run_id__jobs_post"
+      },
+      "Body_create_bulk_soil_health_job_api_v1_publications__run_id__soil_health_jobs_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_create_bulk_soil_health_job_api_v1_publications__run_id__soil_health_jobs_post"
+      },
+      "Body_create_source_ingest_job_api_v1_source_ingests_post": {
+        "properties": {
+          "idempotency_key": {
+            "type": "string",
+            "title": "Idempotency Key"
+          },
+          "input_format": {
+            "type": "string",
+            "title": "Input Format"
+          },
+          "manifest": {
+            "type": "string",
+            "title": "Manifest"
+          },
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          },
+          "expected_checksum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Checksum"
+          },
+          "auto_promote": {
+            "type": "boolean",
+            "title": "Auto Promote",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "idempotency_key",
+          "input_format",
+          "manifest",
+          "file"
+        ],
+        "title": "Body_create_source_ingest_job_api_v1_source_ingests_post"
+      },
+      "ComponentSelection": {
+        "type": "string",
+        "enum": [
+          "representative",
+          "all",
+          "cumulative"
+        ],
+        "title": "ComponentSelection",
+        "description": "Which soil components of a multi-component map unit (SOTWIS, SOTER polygons) are returned."
+      },
+      "ConsistencyRequest": {
+        "properties": {
+          "providers": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Providers"
+          },
+          "datasets": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datasets"
+          },
+          "geometry": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geometry"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country"
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "variables": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variables"
+          }
+        },
+        "type": "object",
+        "title": "ConsistencyRequest"
+      },
+      "ConsistencyResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "totals": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Totals"
+          },
+          "countries": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Countries"
+          },
+          "datasets": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Datasets"
+          },
+          "variables": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Variables"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "totals",
+          "countries",
+          "datasets",
+          "variables"
+        ],
+        "title": "ConsistencyResponse"
+      },
+      "CountryDetailResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "country": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Country"
+          },
+          "datasets": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Datasets"
+          },
+          "variables": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Variables"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "country",
+          "datasets",
+          "variables"
+        ],
+        "title": "CountryDetailResponse"
+      },
+      "CountryListResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "countries": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Countries"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "countries"
+        ],
+        "title": "CountryListResponse"
+      },
+      "DeclaredVariable": {
+        "properties": {
+          "variable_code": {
+            "type": "string",
+            "title": "Variable Code"
+          },
+          "target_levels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Target Levels"
+          }
+        },
+        "type": "object",
+        "required": [
+          "variable_code",
+          "target_levels"
+        ],
+        "title": "DeclaredVariable"
+      },
+      "ExportContent": {
+        "type": "string",
+        "enum": [
+          "all",
+          "features"
+        ],
+        "title": "ExportContent",
+        "description": "What an export writes (#48): ``all`` the features and their observations (``layout``),\n``features`` the features only (the only content Shapefile accepts)."
+      },
+      "ExportJobResponse": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "summary_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary Url"
+          },
+          "download_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Download Url"
+          },
+          "progress": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Progress"
+          },
+          "file_size_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Size Bytes"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "error_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Message"
+          },
+          "observation_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observation Count"
+          },
+          "records": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Records"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "status"
+        ],
+        "title": "ExportJobResponse"
+      },
+      "ExportRequest": {
+        "properties": {
+          "datasets": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datasets"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/GeometryFilter",
+            "default": "any"
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country"
+          },
+          "variables": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variables"
+          },
+          "layer": {
+            "$ref": "#/components/schemas/LayerFilter",
+            "default": "all"
+          },
+          "canonical": {
+            "type": "boolean",
+            "title": "Canonical",
+            "default": true
+          },
+          "include_geometry": {
+            "type": "boolean",
+            "title": "Include Geometry",
+            "default": false
+          },
+          "layout": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LayoutOption"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "geometry_format": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GeometryFormat"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "components": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ComponentSelection"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "min_cumulative_percent": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Cumulative Percent"
+          },
+          "view": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ViewOption"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "profile_type": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Type"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 1000
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offset",
+            "default": 0
+          },
+          "format": {
+            "$ref": "#/components/schemas/OutputFormat"
+          },
+          "content": {
+            "$ref": "#/components/schemas/ExportContent",
+            "default": "all"
+          }
+        },
+        "type": "object",
+        "required": [
+          "format"
+        ],
+        "title": "ExportRequest",
+        "description": "POST /exports: the parameters of the synchronous canonical requests plus ``format`` and\n``content``. Exports read the canonical path (``canonical`` defaults to true) and write the\nwhole selection: ``limit`` and ``offset`` are ignored. ``layout`` (``long`` | ``wide``) shapes\nthe observations table; omitted = ``wide``."
+      },
+      "FeatureCollectionResponse": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "default": "FeatureCollection"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "features": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Features"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "features"
+        ],
+        "title": "FeatureCollectionResponse"
+      },
+      "GeometryFilter": {
+        "type": "string",
+        "enum": [
+          "point",
+          "polygon",
+          "any"
+        ],
+        "title": "GeometryFilter"
+      },
+      "GeometryFormat": {
+        "type": "string",
+        "enum": [
+          "none",
+          "wkt"
+        ],
+        "title": "GeometryFormat"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LayerFilter": {
+        "type": "string",
+        "enum": [
+          "all",
+          "first"
+        ],
+        "title": "LayerFilter"
+      },
+      "LayoutOption": {
+        "type": "string",
+        "enum": [
+          "long",
+          "wide"
+        ],
+        "title": "LayoutOption"
+      },
+      "OutputFormat": {
+        "type": "string",
+        "enum": [
+          "geojson",
+          "gpkg",
+          "csv",
+          "tsv",
+          "shp"
+        ],
+        "title": "OutputFormat"
+      },
+      "ProductDefinitionRequest": {
+        "properties": {
+          "product_code": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "title": "Product Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "target_level": {
+            "type": "string",
+            "title": "Target Level"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_code",
+          "name",
+          "target_level"
+        ],
+        "title": "ProductDefinitionRequest"
+      },
+      "ProductResponse": {
+        "properties": {
+          "product_code": {
+            "type": "string",
+            "title": "Product Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "target_level": {
+            "type": "string",
+            "title": "Target Level"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_code",
+          "name",
+          "target_level"
+        ],
+        "title": "ProductResponse"
+      },
+      "ProductRunRequest": {
+        "properties": {
+          "idempotency_key": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Idempotency Key"
+          },
+          "input_release_ids": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Input Release Ids"
+          },
+          "parameters": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Parameters"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idempotency_key"
+        ],
+        "title": "ProductRunRequest"
+      },
+      "ProductRunResponse": {
+        "properties": {
+          "run_id": {
+            "type": "integer",
+            "title": "Run Id"
+          },
+          "product_version_id": {
+            "type": "integer",
+            "title": "Product Version Id"
+          },
+          "product_code": {
+            "type": "string",
+            "title": "Product Code"
+          },
+          "version_code": {
+            "type": "string",
+            "title": "Version Code"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "idempotency_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Idempotency Key"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Started At"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          },
+          "parameters": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Parameters"
+          },
+          "diagnostics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Diagnostics"
+          },
+          "input_release_ids": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Input Release Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "run_id",
+          "product_version_id",
+          "product_code",
+          "version_code",
+          "status",
+          "started_at",
+          "parameters",
+          "diagnostics",
+          "input_release_ids"
+        ],
+        "title": "ProductRunResponse"
+      },
+      "ProductVersionRequest": {
+        "properties": {
+          "version_code": {
+            "type": "string",
+            "title": "Version Code"
+          },
+          "algorithm_checksum": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "title": "Algorithm Checksum"
+          },
+          "configuration": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Configuration"
+          },
+          "variables": {
+            "items": {
+              "$ref": "#/components/schemas/DeclaredVariable"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Variables"
+          }
+        },
+        "type": "object",
+        "required": [
+          "version_code",
+          "algorithm_checksum",
+          "variables"
+        ],
+        "title": "ProductVersionRequest"
+      },
+      "ProductVersionResponse": {
+        "properties": {
+          "product_code": {
+            "type": "string",
+            "title": "Product Code"
+          },
+          "product_name": {
+            "type": "string",
+            "title": "Product Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "product_version_id": {
+            "type": "integer",
+            "title": "Product Version Id"
+          },
+          "version_code": {
+            "type": "string",
+            "title": "Version Code"
+          },
+          "algorithm_checksum": {
+            "type": "string",
+            "title": "Algorithm Checksum"
+          },
+          "configuration": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Configuration"
+          },
+          "declared_variables": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Declared Variables"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_code",
+          "product_name",
+          "product_version_id",
+          "version_code",
+          "algorithm_checksum",
+          "configuration",
+          "declared_variables",
+          "created_at"
+        ],
+        "title": "ProductVersionResponse"
+      },
+      "PublicationJobResponse": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Job Id"
+          },
+          "run_id": {
+            "type": "integer",
+            "title": "Run Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "input_format": {
+            "type": "string",
+            "title": "Input Format"
+          },
+          "checksum_sha256": {
+            "type": "string",
+            "title": "Checksum Sha256"
+          },
+          "byte_size": {
+            "type": "integer",
+            "title": "Byte Size"
+          },
+          "staged_count": {
+            "type": "integer",
+            "title": "Staged Count",
+            "default": 0
+          },
+          "published_count": {
+            "type": "integer",
+            "title": "Published Count",
+            "default": 0
+          },
+          "rejected_count": {
+            "type": "integer",
+            "title": "Rejected Count",
+            "default": 0
+          },
+          "diagnostics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Diagnostics"
+          },
+          "publication_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "run_id",
+          "status",
+          "input_format",
+          "checksum_sha256",
+          "byte_size"
+        ],
+        "title": "PublicationJobResponse"
+      },
+      "PublicationLineage": {
+        "properties": {
+          "observations": {
+            "items": {
+              "$ref": "#/components/schemas/PublicationLineageItem"
+            },
+            "type": "array",
+            "title": "Observations"
+          },
+          "values": {
+            "items": {
+              "$ref": "#/components/schemas/PublicationLineageItem"
+            },
+            "type": "array",
+            "title": "Values"
+          },
+          "releases": {
+            "items": {
+              "$ref": "#/components/schemas/PublicationLineageItem"
+            },
+            "type": "array",
+            "title": "Releases"
+          },
+          "assets": {
+            "items": {
+              "$ref": "#/components/schemas/PublicationLineageItem"
+            },
+            "type": "array",
+            "title": "Assets"
+          }
+        },
+        "type": "object",
+        "title": "PublicationLineage"
+      },
+      "PublicationLineageItem": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Id"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Role"
+          },
+          "transformation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transformation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "role"
+        ],
+        "title": "PublicationLineageItem"
+      },
+      "PublicationValidationResponse": {
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "title": "Valid"
+          },
+          "run_id": {
+            "type": "integer",
+            "title": "Run Id"
+          },
+          "received_count": {
+            "type": "integer",
+            "title": "Received Count"
+          },
+          "errors": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Errors"
+          }
+        },
+        "type": "object",
+        "required": [
+          "valid",
+          "run_id",
+          "received_count",
+          "errors"
+        ],
+        "title": "PublicationValidationResponse"
+      },
+      "PublicationValue": {
+        "properties": {
+          "variable_code": {
+            "type": "string",
+            "title": "Variable Code"
+          },
+          "target_level": {
+            "type": "string",
+            "title": "Target Level"
+          },
+          "target_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Target Id"
+          },
+          "value_status": {
+            "type": "string",
+            "title": "Value Status",
+            "default": "published"
+          },
+          "value": {
+            "anyOf": [
+              {
+
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "release_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Release Id"
+          },
+          "quality_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quality Code"
+          },
+          "valid_time_start": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid Time Start"
+          },
+          "valid_time_end": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid Time End"
+          },
+          "depth_top_cm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Depth Top Cm"
+          },
+          "depth_bottom_cm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Depth Bottom Cm"
+          },
+          "lineage": {
+            "$ref": "#/components/schemas/PublicationLineage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "variable_code",
+          "target_level",
+          "target_id",
+          "lineage"
+        ],
+        "title": "PublicationValue"
+      },
+      "QueryRequest": {
+        "properties": {
+          "datasets": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datasets"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/GeometryFilter",
+            "default": "any"
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country"
+          },
+          "variables": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variables"
+          },
+          "layer": {
+            "$ref": "#/components/schemas/LayerFilter",
+            "default": "all"
+          },
+          "canonical": {
+            "type": "boolean",
+            "title": "Canonical",
+            "default": false
+          },
+          "include_geometry": {
+            "type": "boolean",
+            "title": "Include Geometry",
+            "default": false
+          },
+          "layout": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LayoutOption"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "geometry_format": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GeometryFormat"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "components": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ComponentSelection"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "min_cumulative_percent": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Cumulative Percent"
+          },
+          "view": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ViewOption"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "profile_type": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Type"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 1000
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offset",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "QueryRequest"
+      },
+      "RunStatusRequest": {
+        "properties": {
+          "diagnostics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Diagnostics"
+          }
+        },
+        "type": "object",
+        "title": "RunStatusRequest"
+      },
+      "SoilHealthObservationInput": {
+        "properties": {
+          "observation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Observation Id"
+          },
+          "input_role": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Input Role"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required",
+            "default": true
+          },
+          "transformation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transformation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "observation_id",
+          "input_role"
+        ],
+        "title": "SoilHealthObservationInput"
+      },
+      "SoilHealthPublicationJobResponse": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Job Id"
+          },
+          "run_id": {
+            "type": "integer",
+            "title": "Run Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "input_format": {
+            "type": "string",
+            "title": "Input Format"
+          },
+          "checksum_sha256": {
+            "type": "string",
+            "title": "Checksum Sha256"
+          },
+          "byte_size": {
+            "type": "integer",
+            "title": "Byte Size"
+          },
+          "staged_count": {
+            "type": "integer",
+            "title": "Staged Count",
+            "default": 0
+          },
+          "accepted_count": {
+            "type": "integer",
+            "title": "Accepted Count",
+            "default": 0
+          },
+          "rejected_count": {
+            "type": "integer",
+            "title": "Rejected Count",
+            "default": 0
+          },
+          "published_count": {
+            "type": "integer",
+            "title": "Published Count",
+            "default": 0
+          },
+          "publication_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Publication Ids"
+          },
+          "diagnostics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Diagnostics"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "run_id",
+          "status",
+          "input_format",
+          "checksum_sha256",
+          "byte_size"
+        ],
+        "title": "SoilHealthPublicationJobResponse"
+      },
+      "SoilHealthPublicationRequest": {
+        "properties": {
+          "idempotency_key": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Idempotency Key"
+          },
+          "scores": {
+            "items": {
+              "$ref": "#/components/schemas/SoilHealthScorePublication"
+            },
+            "type": "array",
+            "maxItems": 10000,
+            "minItems": 1,
+            "title": "Scores"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idempotency_key",
+          "scores"
+        ],
+        "title": "SoilHealthPublicationRequest"
+      },
+      "SoilHealthPublicationResponse": {
+        "properties": {
+          "publication_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Publication Id"
+          },
+          "run_id": {
+            "type": "integer",
+            "title": "Run Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "received_count": {
+            "type": "integer",
+            "title": "Received Count"
+          },
+          "published_count": {
+            "type": "integer",
+            "title": "Published Count"
+          },
+          "idempotent_replay": {
+            "type": "boolean",
+            "title": "Idempotent Replay",
+            "default": false
+          },
+          "score_count": {
+            "type": "integer",
+            "title": "Score Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "publication_id",
+          "run_id",
+          "status",
+          "received_count",
+          "published_count",
+          "score_count"
+        ],
+        "title": "SoilHealthPublicationResponse"
+      },
+      "SoilHealthQueryRequest": {
+        "properties": {
+          "providers": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Providers"
+          },
+          "datasets": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datasets"
+          },
+          "release_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Release Ids"
+          },
+          "release_codes": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Release Codes"
+          },
+          "model_versions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Versions"
+          },
+          "product_run_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Run Ids"
+          },
+          "categories": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Categories"
+          },
+          "score_classes": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score Classes"
+          },
+          "score_statuses": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score Statuses"
+          },
+          "source_supports": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Supports"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country"
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "depth_top_cm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Depth Top Cm"
+          },
+          "depth_bottom_cm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Depth Bottom Cm"
+          },
+          "include_geometry": {
+            "type": "boolean",
+            "title": "Include Geometry",
+            "default": true
+          },
+          "include_details": {
+            "type": "boolean",
+            "title": "Include Details",
+            "default": false
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 1000
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offset",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "SoilHealthQueryRequest"
+      },
+      "SoilHealthQueryResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "scores": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Scores"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "scores"
+        ],
+        "title": "SoilHealthQueryResponse"
+      },
+      "SoilHealthScorePublication": {
+        "properties": {
+          "horizon_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Horizon Id"
+          },
+          "release_id": {
+            "type": "integer",
+            "title": "Release Id"
+          },
+          "category_code": {
+            "type": "string",
+            "title": "Category Code"
+          },
+          "score_status": {
+            "type": "string",
+            "title": "Score Status"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          },
+          "score_class": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score Class"
+          },
+          "source_support": {
+            "type": "string",
+            "title": "Source Support"
+          },
+          "quality_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quality Code"
+          },
+          "observation_inputs": {
+            "items": {
+              "$ref": "#/components/schemas/SoilHealthObservationInput"
+            },
+            "type": "array",
+            "title": "Observation Inputs"
+          },
+          "value_inputs": {
+            "items": {
+              "$ref": "#/components/schemas/PublicationLineageItem"
+            },
+            "type": "array",
+            "title": "Value Inputs"
+          },
+          "release_inputs": {
+            "items": {
+              "$ref": "#/components/schemas/PublicationLineageItem"
+            },
+            "type": "array",
+            "title": "Release Inputs"
+          },
+          "asset_inputs": {
+            "items": {
+              "$ref": "#/components/schemas/PublicationLineageItem"
+            },
+            "type": "array",
+            "title": "Asset Inputs"
+          },
+          "inputs": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Inputs"
+          },
+          "derived_variables": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Derived Variables"
+          },
+          "memberships": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Memberships"
+          },
+          "activated_rules": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Activated Rules"
+          },
+          "diagnostics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Diagnostics"
+          }
+        },
+        "type": "object",
+        "required": [
+          "horizon_id",
+          "release_id",
+          "category_code",
+          "score_status",
+          "source_support"
+        ],
+        "title": "SoilHealthScorePublication"
+      },
+      "SoilHealthSummaryResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "total_score_count": {
+            "type": "integer",
+            "title": "Total Score Count"
+          },
+          "feature_count": {
+            "type": "integer",
+            "title": "Feature Count"
+          },
+          "horizon_count": {
+            "type": "integer",
+            "title": "Horizon Count"
+          },
+          "by_dataset": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "By Dataset"
+          },
+          "by_release": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "By Release"
+          },
+          "by_source_support": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "By Source Support"
+          },
+          "by_category": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "By Category"
+          },
+          "by_class": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "By Class"
+          },
+          "by_status": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "By Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "total_score_count",
+          "feature_count",
+          "horizon_count",
+          "by_dataset",
+          "by_release",
+          "by_source_support",
+          "by_category",
+          "by_class",
+          "by_status"
+        ],
+        "title": "SoilHealthSummaryResponse"
+      },
+      "SourceIngestValidationResponse": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "valid": {
+            "type": "boolean",
+            "title": "Valid"
+          },
+          "counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Counts"
+          },
+          "errors": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Errors"
+          },
+          "diagnostics_truncated": {
+            "type": "boolean",
+            "title": "Diagnostics Truncated"
+          },
+          "unmapped_property_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unmapped Property Codes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "valid",
+          "counts",
+          "errors",
+          "diagnostics_truncated",
+          "unmapped_property_codes"
+        ],
+        "title": "SourceIngestValidationResponse"
+      },
+      "SummaryResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "datasets": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Datasets"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/GeometryFilter"
+          },
+          "feature_count": {
+            "type": "integer",
+            "title": "Feature Count"
+          },
+          "feature_count_by_dataset": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feature Count By Dataset"
+          },
+          "horizon_count": {
+            "type": "integer",
+            "title": "Horizon Count"
+          },
+          "horizon_count_by_dataset": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Horizon Count By Dataset"
+          },
+          "avg_horizons_per_feature": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avg Horizons Per Feature"
+          },
+          "avg_horizons_per_feature_by_dataset": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "number"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avg Horizons Per Feature By Dataset"
+          },
+          "variables": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Variables"
+          },
+          "variables_by_dataset": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Variables By Dataset"
+          },
+          "variable_semantics_by_dataset": {
+            "additionalProperties": {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Variable Semantics By Dataset"
+          },
+          "formats": {
+            "items": {
+              "$ref": "#/components/schemas/OutputFormat"
+            },
+            "type": "array",
+            "title": "Formats"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings",
+            "default": [
+
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "datasets",
+          "geometry",
+          "feature_count",
+          "horizon_count",
+          "variables",
+          "variables_by_dataset",
+          "formats"
+        ],
+        "title": "SummaryResponse"
+      },
+      "TargetResolutionKey": {
+        "properties": {
+          "provider_code": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "title": "Provider Code"
+          },
+          "dataset_code": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "title": "Dataset Code"
+          },
+          "release_code": {
+            "type": "string",
+            "title": "Release Code"
+          },
+          "target_level": {
+            "type": "string",
+            "title": "Target Level"
+          },
+          "source_record_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Source Record Id"
+          },
+          "source_table": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Table"
+          }
+        },
+        "type": "object",
+        "required": [
+          "provider_code",
+          "dataset_code",
+          "release_code",
+          "target_level",
+          "source_record_id"
+        ],
+        "title": "TargetResolutionKey"
+      },
+      "TargetResolutionRequest": {
+        "properties": {
+          "targets": {
+            "items": {
+              "$ref": "#/components/schemas/TargetResolutionKey"
+            },
+            "type": "array",
+            "maxItems": 10000,
+            "minItems": 1,
+            "title": "Targets"
+          }
+        },
+        "type": "object",
+        "required": [
+          "targets"
+        ],
+        "title": "TargetResolutionRequest"
+      },
+      "TargetResolutionResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "targets": {
+            "items": {
+              "$ref": "#/components/schemas/TargetResolutionResult"
+            },
+            "type": "array",
+            "title": "Targets"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "targets"
+        ],
+        "title": "TargetResolutionResponse"
+      },
+      "TargetResolutionResult": {
+        "properties": {
+          "input_index": {
+            "type": "integer",
+            "title": "Input Index"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "provider_code": {
+            "type": "string",
+            "title": "Provider Code"
+          },
+          "dataset_code": {
+            "type": "string",
+            "title": "Dataset Code"
+          },
+          "release_code": {
+            "type": "string",
+            "title": "Release Code"
+          },
+          "target_level": {
+            "type": "string",
+            "title": "Target Level"
+          },
+          "source_record_id": {
+            "type": "string",
+            "title": "Source Record Id"
+          },
+          "source_table": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Table"
+          },
+          "release_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Release Status"
+          },
+          "target_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Id"
+          },
+          "feature_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Feature Id"
+          },
+          "profile_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Id"
+          },
+          "component_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Component Id"
+          },
+          "horizon_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Horizon Id"
+          },
+          "source_support": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Support"
+          },
+          "geometry_kind": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Geometry Kind"
+          },
+          "top_depth_cm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Top Depth Cm"
+          },
+          "bottom_depth_cm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bottom Depth Cm"
+          },
+          "candidate_count": {
+            "type": "integer",
+            "title": "Candidate Count",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "input_index",
+          "status",
+          "provider_code",
+          "dataset_code",
+          "release_code",
+          "target_level",
+          "source_record_id"
+        ],
+        "title": "TargetResolutionResult"
+      },
+      "UnifiedJobResponse": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "job_type": {
+            "type": "string",
+            "title": "Job Type"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "progress_percent": {
+            "type": "number",
+            "title": "Progress Percent"
+          },
+          "received_count": {
+            "type": "integer",
+            "title": "Received Count"
+          },
+          "staged_count": {
+            "type": "integer",
+            "title": "Staged Count"
+          },
+          "accepted_count": {
+            "type": "integer",
+            "title": "Accepted Count"
+          },
+          "rejected_count": {
+            "type": "integer",
+            "title": "Rejected Count"
+          },
+          "published_count": {
+            "type": "integer",
+            "title": "Published Count"
+          },
+          "checksum_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checksum Sha256"
+          },
+          "byte_size": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Byte Size"
+          },
+          "receipt_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Receipt Id"
+          },
+          "correlation_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Correlation Id"
+          },
+          "diagnostics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Diagnostics"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "retry_count": {
+            "type": "integer",
+            "title": "Retry Count"
+          },
+          "cancel_requested": {
+            "type": "boolean",
+            "title": "Cancel Requested"
+          },
+          "worker_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Worker Id"
+          },
+          "lease_expires_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lease Expires At"
+          },
+          "heartbeat_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Heartbeat At"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "job_type",
+          "status",
+          "progress_percent",
+          "received_count",
+          "staged_count",
+          "accepted_count",
+          "rejected_count",
+          "published_count",
+          "correlation_id",
+          "diagnostics",
+          "retry_count",
+          "cancel_requested",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "UnifiedJobResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "ValuePublicationRequest": {
+        "properties": {
+          "idempotency_key": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Idempotency Key"
+          },
+          "values": {
+            "items": {
+              "$ref": "#/components/schemas/PublicationValue"
+            },
+            "type": "array",
+            "maxItems": 10000,
+            "minItems": 1,
+            "title": "Values"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idempotency_key",
+          "values"
+        ],
+        "title": "ValuePublicationRequest"
+      },
+      "ValuePublicationResponse": {
+        "properties": {
+          "publication_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Publication Id"
+          },
+          "run_id": {
+            "type": "integer",
+            "title": "Run Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "received_count": {
+            "type": "integer",
+            "title": "Received Count"
+          },
+          "published_count": {
+            "type": "integer",
+            "title": "Published Count"
+          },
+          "idempotent_replay": {
+            "type": "boolean",
+            "title": "Idempotent Replay",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "publication_id",
+          "run_id",
+          "status",
+          "received_count",
+          "published_count"
+        ],
+        "title": "ValuePublicationResponse"
+      },
+      "ValueQueryRequest": {
+        "properties": {
+          "providers": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Providers"
+          },
+          "datasets": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datasets"
+          },
+          "variables": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variables"
+          },
+          "domains": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domains"
+          },
+          "measurement_kinds": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Measurement Kinds"
+          },
+          "target_levels": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Levels"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country"
+          },
+          "bbox": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bbox"
+          },
+          "valid_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid At"
+          },
+          "depth_top_cm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Depth Top Cm"
+          },
+          "depth_bottom_cm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Depth Bottom Cm"
+          },
+          "product_versions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Versions"
+          },
+          "run_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Run Ids"
+          },
+          "statuses": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statuses"
+          },
+          "include_geometry": {
+            "type": "boolean",
+            "title": "Include Geometry",
+            "default": true
+          },
+          "include_lineage": {
+            "type": "boolean",
+            "title": "Include Lineage",
+            "default": false
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Limit",
+            "default": 1000
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offset",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "ValueQueryRequest"
+      },
+      "ValueQueryResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "values": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Values"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "values"
+        ],
+        "title": "ValueQueryResponse"
+      },
+      "ValueSummaryResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "total_value_count": {
+            "type": "integer",
+            "title": "Total Value Count"
+          },
+          "feature_count": {
+            "type": "integer",
+            "title": "Feature Count"
+          },
+          "variables": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Variables"
+          },
+          "by_dataset": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "By Dataset"
+          },
+          "by_target_level": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "By Target Level"
+          },
+          "by_status": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "By Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "total_value_count",
+          "feature_count",
+          "variables",
+          "by_dataset",
+          "by_target_level",
+          "by_status"
+        ],
+        "title": "ValueSummaryResponse"
+      },
+      "VariableDiscoveryResponse": {
+        "properties": {
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata"
+          },
+          "variables": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Variables"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metadata",
+          "variables"
+        ],
+        "title": "VariableDiscoveryResponse"
+      },
+      "VariableRegistrationRequest": {
+        "properties": {
+          "idempotency_key": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Idempotency Key"
+          },
+          "variable_code": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "title": "Variable Code"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "domain_code": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "title": "Domain Code"
+          },
+          "value_type": {
+            "type": "string",
+            "title": "Value Type"
+          },
+          "measurement_kind_code": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "title": "Measurement Kind Code"
+          },
+          "allowed_target_levels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Allowed Target Levels"
+          }
+        },
+        "type": "object",
+        "required": [
+          "idempotency_key",
+          "variable_code",
+          "name",
+          "domain_code",
+          "value_type",
+          "measurement_kind_code",
+          "allowed_target_levels"
+        ],
+        "title": "VariableRegistrationRequest"
+      },
+      "VariableRegistrationResponse": {
+        "properties": {
+          "variable_id": {
+            "type": "integer",
+            "title": "Variable Id"
+          },
+          "variable_code": {
+            "type": "string",
+            "title": "Variable Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "domain_code": {
+            "type": "string",
+            "title": "Domain Code"
+          },
+          "value_type": {
+            "type": "string",
+            "title": "Value Type"
+          },
+          "measurement_kind_code": {
+            "type": "string",
+            "title": "Measurement Kind Code"
+          },
+          "allowed_target_levels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allowed Target Levels"
+          },
+          "idempotent_replay": {
+            "type": "boolean",
+            "title": "Idempotent Replay",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "variable_id",
+          "variable_code",
+          "name",
+          "domain_code",
+          "value_type",
+          "measurement_kind_code",
+          "allowed_target_levels"
+        ],
+        "title": "VariableRegistrationResponse"
+      },
+      "VariableValidationResponse": {
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "title": "Valid"
+          },
+          "variable_code": {
+            "type": "string",
+            "title": "Variable Code"
+          },
+          "errors": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Errors"
+          }
+        },
+        "type": "object",
+        "required": [
+          "valid",
+          "variable_code",
+          "errors"
+        ],
+        "title": "VariableValidationResponse"
+      },
+      "ViewOption": {
+        "type": "string",
+        "enum": [
+          "raw",
+          "revised"
+        ],
+        "title": "ViewOption",
+        "description": "Which view of the mirror a canonical data endpoint returns (#68).\n\n``raw``: the agnostic ISRIC mirror as stored (default). ``revised``: the decided rules of\n``docs/revised-view-rules.md`` applied in the response only (soil_api.revised)."
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
+
