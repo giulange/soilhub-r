@@ -33,6 +33,22 @@ reference:
   - title: Reads
     contents:
       - soil_observations
+  - title: Summaries
+    contents:
+      - soil_summary
+      - soil_availability
+      - soil_consistency
+  - title: Thematic reads
+    desc: >
+      Published derived values, soil-health scores, the resolution of source
+      identities to canonical ids and the SOTWIS taxotransfer flags.
+    contents:
+      - soil_values
+      - soil_values_summary
+      - soil_health_scores
+      - soil_health_summary
+      - soil_resolve_targets
+      - soil_ttr_flags
   - title: Results
     contents:
       - soil_table

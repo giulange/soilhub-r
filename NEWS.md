@@ -1,5 +1,27 @@
 # soilhub (development version)
 
+* Summaries and thematic reads (WP6): `soil_summary()` and
+  `soil_availability()` take the selection of `soil_observations()`
+  (validated the same way, sent as the same body without the layout fields)
+  and check the same optional capabilities; `soil_summary()` returns a
+  `soil_summary` with the counts by dataset (filled with the total when one
+  dataset is selected), the variable semantics, the revised rules and a
+  short print method, and works with `soil_metadata()`,
+  `soil_revised_rules()` and `soil_citations()`. `soil_availability()`
+  returns data frames by dataset (distinct totals), country, dataset and
+  country, and variable (with the scoped `variants`). `soil_consistency()`
+  sends its own request (no view, profile type or components) and returns
+  the distinct totals with the calculation used. Thematic reads:
+  `soil_values()` (typed `value` column, lineage on request),
+  `soil_values_summary()`, `soil_health_scores()` (details on request; the
+  arguments `run_ids` and `statuses` are the API fields `product_run_ids`
+  and `score_statuses`), `soil_health_summary()`, `soil_resolve_targets()`
+  (requests of 10,000 targets, reads `targets` of the response; `strict =
+  TRUE` stops on missing or ambiguous targets) and `soil_ttr_flags()`
+  (`GET /sotwis/ttr-flags`, paged, source columns verbatim). Geometry of
+  values and scores as GeoJSON text with `with_geometry = "text"`; `"sf"`
+  follows with the geometry module.
+
 * Wide observations (WP4): `soil_observations()` reads the canonical wide
   layout (one row per horizon) page by page, with the selection of every
   canonical read (`datasets`, `variables`, `bbox`, `country`, `geometry`,

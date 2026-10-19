@@ -7,13 +7,14 @@ paging_fields <- c("limit", "offset", "returned_count", "has_more", "request_id"
 
 #' Read every page of a paged request
 #'
-#' Sends `body` with `limit` and `offset` to `path`, from `body$offset` (0 when
+#' Sends `body` with `limit` and `offset` to `path` (as the query string with
+#' `method = "GET"`), from `body$offset` (0 when
 #' absent), adding the number of items returned to the offset, until
 #' `metadata.has_more` is `FALSE`, a page is empty, or `max_rows` items are
 #' read.
 #'
 #' @param soil The session.
-#' @param path Endpoint path (`POST`).
+#' @param path Endpoint path.
 #' @param body Request body (the selection); `limit` and `offset` are set here.
 #' @param items Name of the array of the response that holds the page items
 #'   (`"rows"`, `"observations"`, `"features"`).
@@ -21,6 +22,8 @@ paging_fields <- c("limit", "offset", "returned_count", "has_more", "request_id"
 #' @param page_size Items per page; `NULL` uses `resolve_page_size()`.
 #' @param progress Show progress (a bar when interactive and `total_count`
 #'   is known, else one message per page at verbosity >= 1).
+#' @param method `"POST"` (the selection in the JSON body) or `"GET"` (the
+#'   parameters in the query string, e.g. `GET /sotwis/ttr-flags`).
 #' @return A list of class `soilhub_pages`: `items` (all items, concatenated),
 #'   `metadata` (the first page's metadata without its paging fields, plus
 #'   `endpoint`, `request` (body without `limit`/`offset`), `request_ids`,
@@ -34,7 +37,7 @@ paging_fields <- c("limit", "offset", "returned_count", "has_more", "request_id"
 #' @keywords internal
 #' @noRd
 soil_collect <- function(soil, path, body = list(), items, max_rows = Inf,
-                         page_size = NULL, progress = TRUE) {
+                         page_size = NULL, progress = TRUE, method = "POST") {
   if (!is_string(items)) {
     abort(soilhub_argument_error("`items` must be the name of the page array.", "items"))
   }
@@ -65,7 +68,11 @@ soil_collect <- function(soil, path, body = list(), items, max_rows = Inf,
     page_body$offset <- state$offset
 
     page <- tryCatch(
-      soil_request(soil, "POST", path, body = page_body),
+      if (identical(method, "GET")) {
+        soil_request(soil, "GET", path, query = page_body)
+      } else {
+        soil_request(soil, "POST", path, body = page_body)
+      },
       soilhub_error = function(e) e
     )
     if (inherits(page, "soilhub_error")) {
@@ -74,8 +81,8 @@ soil_collect <- function(soil, path, body = list(), items, max_rows = Inf,
     }
     if (!is.list(page)) {
       abort(soilhub_api_error(
-        sprintf("The API returned no page body for POST %s.", path),
-        endpoint = path, method = "POST", code = "invalid_page"
+        sprintf("The API returned no page body for %s %s.", method, path),
+        endpoint = path, method = method, code = "invalid_page"
       ))
     }
 
@@ -85,9 +92,9 @@ soil_collect <- function(soil, path, body = list(), items, max_rows = Inf,
       error <- soilhub_api_error(
         paste0(
           "The API returned the same page twice; the read stops to avoid a loop.",
-          request_suffix(NULL, "POST", path, request_id)
+          request_suffix(NULL, method, path, request_id)
         ),
-        endpoint = path, method = "POST", request_id = request_id,
+        endpoint = path, method = method, request_id = request_id,
         code = "unchanged_page"
       )
       abort(with_partial(error, collected_result(state, request, path, start_offset, "error")))

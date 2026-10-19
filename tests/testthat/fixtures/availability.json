@@ -1,0 +1,273 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 6400,
+  "returned_count": 6400,
+  "limit": null,
+  "offset": null,
+  "has_more": null,
+  "warnings": [],
+  "datasets": [
+   "soter_profiles",
+   "wosis_points"
+  ],
+  "geometry": "any",
+  "canonical": true,
+  "feature_count": 430,
+  "feature_count_by_dataset": {
+   "soter_profiles": 130,
+   "wosis_points": 300
+  },
+  "horizon_count": 1800,
+  "horizon_count_by_dataset": {
+   "soter_profiles": 600,
+   "wosis_points": 1200
+  },
+  "observation_count": 6400,
+  "observation_count_by_dataset": {
+   "soter_profiles": 2400,
+   "wosis_points": 4000
+  },
+  "view": "raw"
+ },
+ "by_dataset": [
+  {
+   "dataset": "soter_profiles",
+   "geometry": "point",
+   "country_code": "KEN",
+   "country_name": "Kenya",
+   "feature_count": 120,
+   "horizon_count": 560,
+   "observation_count": 2200,
+   "variables": [
+    {
+     "property_code": "CLAY",
+     "canonical_property_key": "clay",
+     "canonical_name": "Clay",
+     "property_family": "particle_size",
+     "source_unit": "%",
+     "procedure_code": null,
+     "procedure_description": null,
+     "source_value_kind": "measured",
+     "mapping_status": "mapped",
+     "documentation_url": null,
+     "source_notes": null,
+     "variants": [],
+     "feature_count": 118,
+     "horizon_count": 550,
+     "observation_count": 550
+    },
+    {
+     "property_code": "TOTC",
+     "canonical_property_key": "organic_carbon",
+     "canonical_name": "Organic carbon",
+     "property_family": "carbon",
+     "source_unit": "g/kg",
+     "procedure_code": null,
+     "procedure_description": null,
+     "source_value_kind": "measured",
+     "mapping_status": "mapped",
+     "documentation_url": null,
+     "source_notes": null,
+     "variants": [
+      {
+       "source_scope": "KENSOTER",
+       "canonical_property_key": "organic_carbon",
+       "source_unit": "%",
+       "source_notes": "KENSOTER reports TOTC in percent"
+      }
+     ],
+     "feature_count": 115,
+     "horizon_count": 540,
+     "observation_count": 540
+    }
+   ]
+  },
+  {
+   "dataset": "soter_profiles",
+   "geometry": "point",
+   "country_code": "TZA",
+   "country_name": "Tanzania",
+   "feature_count": 12,
+   "horizon_count": 50,
+   "observation_count": 200,
+   "variables": [
+    {
+     "property_code": "CLAY",
+     "canonical_property_key": "clay",
+     "canonical_name": "Clay",
+     "property_family": "particle_size",
+     "source_unit": "%",
+     "procedure_code": null,
+     "procedure_description": null,
+     "source_value_kind": "measured",
+     "mapping_status": "mapped",
+     "documentation_url": null,
+     "source_notes": null,
+     "variants": [],
+     "feature_count": 12,
+     "horizon_count": 50,
+     "observation_count": 50
+    }
+   ]
+  },
+  {
+   "dataset": "wosis_points",
+   "geometry": "point",
+   "country_code": "KEN",
+   "country_name": "Kenya",
+   "feature_count": 300,
+   "horizon_count": 1200,
+   "observation_count": 4000,
+   "variables": [
+    {
+     "property_code": "CLAY",
+     "canonical_property_key": "clay",
+     "canonical_name": "Clay",
+     "property_family": "particle_size",
+     "source_unit": "g/100g",
+     "procedure_code": null,
+     "procedure_description": null,
+     "source_value_kind": "measured",
+     "mapping_status": "mapped",
+     "documentation_url": null,
+     "source_notes": null,
+     "variants": [],
+     "feature_count": 290,
+     "horizon_count": 1150,
+     "observation_count": 1180
+    }
+   ]
+  }
+ ],
+ "by_country": [
+  {
+   "country_code": "KEN",
+   "country_name": "Kenya",
+   "feature_count": 420,
+   "horizon_count": 1760,
+   "observation_count": 6200,
+   "by_dataset": [
+    {
+     "dataset": "soter_profiles",
+     "geometry": "point",
+     "country_code": "KEN",
+     "country_name": "Kenya",
+     "feature_count": 120,
+     "horizon_count": 560,
+     "observation_count": 2200,
+     "variables": [
+      {
+       "property_code": "CLAY",
+       "canonical_property_key": "clay",
+       "canonical_name": "Clay",
+       "property_family": "particle_size",
+       "source_unit": "%",
+       "procedure_code": null,
+       "procedure_description": null,
+       "source_value_kind": "measured",
+       "mapping_status": "mapped",
+       "documentation_url": null,
+       "source_notes": null,
+       "variants": [],
+       "feature_count": 118,
+       "horizon_count": 550,
+       "observation_count": 550
+      },
+      {
+       "property_code": "TOTC",
+       "canonical_property_key": "organic_carbon",
+       "canonical_name": "Organic carbon",
+       "property_family": "carbon",
+       "source_unit": "g/kg",
+       "procedure_code": null,
+       "procedure_description": null,
+       "source_value_kind": "measured",
+       "mapping_status": "mapped",
+       "documentation_url": null,
+       "source_notes": null,
+       "variants": [
+        {
+         "source_scope": "KENSOTER",
+         "canonical_property_key": "organic_carbon",
+         "source_unit": "%",
+         "source_notes": "KENSOTER reports TOTC in percent"
+        }
+       ],
+       "feature_count": 115,
+       "horizon_count": 540,
+       "observation_count": 540
+      }
+     ]
+    },
+    {
+     "dataset": "wosis_points",
+     "geometry": "point",
+     "country_code": "KEN",
+     "country_name": "Kenya",
+     "feature_count": 300,
+     "horizon_count": 1200,
+     "observation_count": 4000,
+     "variables": [
+      {
+       "property_code": "CLAY",
+       "canonical_property_key": "clay",
+       "canonical_name": "Clay",
+       "property_family": "particle_size",
+       "source_unit": "g/100g",
+       "procedure_code": null,
+       "procedure_description": null,
+       "source_value_kind": "measured",
+       "mapping_status": "mapped",
+       "documentation_url": null,
+       "source_notes": null,
+       "variants": [],
+       "feature_count": 290,
+       "horizon_count": 1150,
+       "observation_count": 1180
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "country_code": "TZA",
+   "country_name": "Tanzania",
+   "feature_count": 12,
+   "horizon_count": 50,
+   "observation_count": 200,
+   "by_dataset": [
+    {
+     "dataset": "soter_profiles",
+     "geometry": "point",
+     "country_code": "TZA",
+     "country_name": "Tanzania",
+     "feature_count": 12,
+     "horizon_count": 50,
+     "observation_count": 200,
+     "variables": [
+      {
+       "property_code": "CLAY",
+       "canonical_property_key": "clay",
+       "canonical_name": "Clay",
+       "property_family": "particle_size",
+       "source_unit": "%",
+       "procedure_code": null,
+       "procedure_description": null,
+       "source_value_kind": "measured",
+       "mapping_status": "mapped",
+       "documentation_url": null,
+       "source_notes": null,
+       "variants": [],
+       "feature_count": 12,
+       "horizon_count": 50,
+       "observation_count": 50
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

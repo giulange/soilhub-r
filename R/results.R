@@ -98,8 +98,10 @@ table_header <- function(x) {
   metadata <- soil_metadata(x)
   layout <- attr(x, "soil_layout") %||% "?"
   request <- metadata$request %||% list()
-  datasets <- unique(stats::na.omit(x$dataset))
+  datasets <- unique(stats::na.omit(x[["dataset"]] %||% x[["dataset_code"]]))
   if (!length(datasets)) datasets <- unlist(request$datasets) %||% character()
+  # values and health tables have no view nor layer
+  thematic <- layout %in% c("values", "health")
   counts <- sprintf("%s %s", format_count(nrow(x)), if (identical(layout, "wide")) "horizons" else "rows")
   if (!is.null(x$feature_id)) {
     counts <- paste0(counts, sprintf(", %s features", format_count(length(unique(stats::na.omit(x$feature_id))))))
@@ -110,15 +112,16 @@ table_header <- function(x) {
   view <- metadata$view %||% request$view %||% "raw"
   layer <- request$layer %||% "all"
   first <- sprintf(
-    "# soilhub %s table: %s | %s | view %s, layer %s",
+    "# soilhub %s table: %s | %s%s",
     layout, counts,
     if (length(datasets)) paste(datasets, collapse = ", ") else "no dataset",
-    view, layer
+    if (thematic) "" else sprintf(" | view %s, layer %s", view, layer)
   )
   warnings <- length(metadata$warnings %||% character())
   second <- sprintf(
-    "# %s API warning%s (soil_warnings), typing (soil_columns), cite with soil_citations()",
-    if (warnings) format_count(warnings) else "no", if (warnings == 1L) "" else "s"
+    "# %s API warning%s (soil_warnings), %scite with soil_citations()",
+    if (warnings) format_count(warnings) else "no", if (warnings == 1L) "" else "s",
+    if (thematic) "" else "typing (soil_columns), "
   )
   lines <- c(first, second)
   if (isFALSE(metadata$complete)) {
@@ -134,8 +137,10 @@ table_header <- function(x) {
 #' @export
 summary.soil_table <- function(object, ...) {
   metadata <- soil_metadata(object)
-  datasets <- if (!is.null(object$dataset) && nrow(object)) {
-    counts <- table(object$dataset)
+  # `[[`: `$` of a data frame would partially match `dataset_code`
+  dataset <- object[["dataset"]] %||% object[["dataset_code"]]
+  datasets <- if (!is.null(dataset) && nrow(object)) {
+    counts <- table(dataset)
     new_frame(list(dataset = names(counts), rows = as.integer(counts)), length(counts))
   } else {
     new_frame(list(dataset = character(), rows = integer()), 0L)

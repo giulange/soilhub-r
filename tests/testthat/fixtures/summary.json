@@ -1,0 +1,145 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 1520,
+  "returned_count": 1520,
+  "limit": null,
+  "offset": null,
+  "has_more": null,
+  "warnings": [],
+  "datasets": [
+   "wise_profiles",
+   "wosis_points"
+  ],
+  "geometry": "any",
+  "canonical": true,
+  "observation_count": 18734,
+  "observation_count_by_dataset": {
+   "wise_profiles": 6021,
+   "wosis_points": 12713
+  },
+  "observed_feature_count": 1490,
+  "observed_feature_count_by_dataset": {
+   "wise_profiles": 210,
+   "wosis_points": 1280
+  },
+  "view": "raw"
+ },
+ "datasets": [
+  "wise_profiles",
+  "wosis_points"
+ ],
+ "geometry": "any",
+ "feature_count": 1520,
+ "feature_count_by_dataset": {
+  "wise_profiles": 212,
+  "wosis_points": 1308
+ },
+ "horizon_count": 7412,
+ "horizon_count_by_dataset": {
+  "wise_profiles": 1104,
+  "wosis_points": 6308
+ },
+ "avg_horizons_per_feature": 4.97,
+ "avg_horizons_per_feature_by_dataset": {
+  "wise_profiles": 5.26,
+  "wosis_points": 4.93
+ },
+ "variables": [
+  "CLAY",
+  "ORGC",
+  "PHAQ"
+ ],
+ "variables_by_dataset": {
+  "wise_profiles": [
+   "CLAY",
+   "ORGC"
+  ],
+  "wosis_points": [
+   "CLAY",
+   "ORGC",
+   "PHAQ"
+  ]
+ },
+ "variable_semantics_by_dataset": {
+  "wise_profiles": [
+   {
+    "source_code": "CLAY",
+    "canonical_property_key": "clay",
+    "canonical_name": "Clay",
+    "property_family": "particle_size",
+    "source_unit": "%",
+    "procedure_code": null,
+    "procedure_description": null,
+    "source_value_kind": "measured",
+    "mapping_status": "mapped",
+    "documentation_url": null,
+    "source_notes": null
+   },
+   {
+    "source_code": "ORGC",
+    "canonical_property_key": "organic_carbon",
+    "canonical_name": "Organic carbon",
+    "property_family": "carbon",
+    "source_unit": "g/kg",
+    "procedure_code": "WB",
+    "procedure_description": "Walkley-Black",
+    "source_value_kind": "measured",
+    "mapping_status": "mapped",
+    "documentation_url": null,
+    "source_notes": null
+   }
+  ],
+  "wosis_points": [
+   {
+    "source_code": "CLAY",
+    "canonical_property_key": "clay",
+    "canonical_name": "Clay",
+    "property_family": "particle_size",
+    "source_unit": "g/100g",
+    "procedure_code": null,
+    "procedure_description": null,
+    "source_value_kind": "measured",
+    "mapping_status": "mapped",
+    "documentation_url": null,
+    "source_notes": "per dataset"
+   },
+   {
+    "source_code": "ORGC",
+    "canonical_property_key": "organic_carbon",
+    "canonical_name": "Organic carbon",
+    "property_family": "carbon",
+    "source_unit": "g/kg",
+    "procedure_code": "WB",
+    "procedure_description": "Walkley-Black",
+    "source_value_kind": "measured",
+    "mapping_status": "mapped",
+    "documentation_url": null,
+    "source_notes": null
+   },
+   {
+    "source_code": "PHAQ",
+    "canonical_property_key": "ph_water",
+    "canonical_name": "pH in water",
+    "property_family": "acidity",
+    "source_unit": null,
+    "procedure_code": null,
+    "procedure_description": null,
+    "source_value_kind": "measured",
+    "mapping_status": "mapped",
+    "documentation_url": null,
+    "source_notes": null
+   }
+  ]
+ },
+ "formats": [
+  "geojson",
+  "gpkg",
+  "csv",
+  "tsv",
+  "shp"
+ ],
+ "warnings": []
+}
