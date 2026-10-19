@@ -31,22 +31,25 @@ test_that("the fields of the typed response models exist with compatible types",
   untyped <- character()
   for (table in intersect(names(response_tables), typing_tables())) {
     entry <- response_tables[[table]]
-    at <- split_at(entry$at)
-    found <- response_schema_at(doc, at$method, at$path, entry$pointer %||% "")
-    if (!is.null(found$problem)) {
-      problems <- c(problems, paste0(found$problem, " (`", table, "`)"))
-      next
-    }
-    if (!found$typed) {
-      untyped <- c(untyped, table)
-      next
-    }
     fields <- get(table, envir = ns)
-    problems <- c(problems, contract_check_fields(
-      doc, as.list(fields), found$schema,
-      sprintf("`%s` (%s%s)", table, entry$at, if (is.null(entry$pointer)) "" else paste0(" ", entry$pointer))
-    ))
+    for (at_text in entry$at) {
+      at <- split_at(at_text)
+      found <- response_schema_at(doc, at$method, at$path, entry$pointer %||% "")
+      if (!is.null(found$problem)) {
+        problems <- c(problems, paste0(found$problem, " (`", table, "`)"))
+        next
+      }
+      if (!found$typed) {
+        untyped <- c(untyped, table)
+        next
+      }
+      problems <- c(problems, contract_check_fields(
+        doc, as.list(fields), found$schema,
+        sprintf("`%s` (%s%s)", table, at_text, if (is.null(entry$pointer)) "" else paste0(" ", entry$pointer))
+      ))
+    }
   }
+  untyped <- unique(untyped)
   if (length(untyped)) {
     message("Typing tables of untyped API responses (checked by the recorded fixtures): ",
             paste(untyped, collapse = ", "))

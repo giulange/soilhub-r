@@ -4,7 +4,13 @@
 # account that has `soil:summary` and `soil:read` (device login in the
 # browser: no secret is stored, nothing is written to the API):
 #
-#   Rscript tools/record_fixtures.R
+#   Rscript tools/record_fixtures.R                 # read calls only
+#   Rscript tools/record_fixtures.R --with-export   # plus one small export
+#
+# `--with-export` (or SOILHUB_RECORD_EXPORT=true) adds one export round trip
+# (a CSV of WoSIS in a small bbox around Vancouver: submit, poll, download
+# the zip). It is off by default: an export is a job written to the API's
+# job table under the user's name, although no soil data is changed.
 #
 # (or `source("tools/record_fixtures.R")` in an R session at the root). Needs
 # pkgload. SOILHUB_API_URL / SOILHUB_KEYCLOAK_URL select another deployment.
@@ -40,6 +46,8 @@ if (!file.exists("DESCRIPTION") || !dir.exists(file.path("tests", "contract"))) 
   stop("Run tools/record_fixtures.R from the root of the soilhub package.", call. = FALSE)
 }
 suppressMessages(pkgload::load_all(".", helpers = FALSE, quiet = TRUE))
+with_export <- "--with-export" %in% commandArgs(trailingOnly = TRUE) ||
+  identical(tolower(Sys.getenv("SOILHUB_RECORD_EXPORT")), "true")
 
 out_dir <- file.path("tests", "testthat", "fixtures", "recorded")
 capabilities_file <- file.path("tests", "contract", "capabilities.json")
@@ -47,6 +55,12 @@ capabilities_file <- file.path("tests", "contract", "capabilities.json")
 exchanges <- new.env(parent = emptyenv())
 exchanges$items <- list()
 old_hook <- options(soilhub.exchange_hook = function(exchange) {
+  if (!is.null(exchange$download)) {
+    # the streamed file exists only while the hook runs: keep a copy
+    copy <- tempfile("soilhub-download-", fileext = ".zip")
+    file.copy(exchange$download, copy)
+    exchange$download <- copy
+  }
   exchanges$items[[length(exchanges$items) + 1L]] <- exchange
 })
 
@@ -122,6 +136,16 @@ recordings <- list(
   call_of("health-scores", "soil_health_scores(soil, max_rows = 5, progress = FALSE)"),
   call_of("health-summary", "soil_health_summary(soil)")
 )
+if (with_export) {
+  recordings <- c(recordings, list(call_of(
+    "export-csv",
+    sprintf(paste0(
+      "soil_export(soil, datasets = %s, bbox = c(-123.3, 49.0, -122.9, 49.4), ",
+      "format = \"csv\", poll = 2, timeout = 600, dir = tempdir(), progress = FALSE)"
+    ), q(wosis)),
+    wosis
+  )))
+}
 
 # --- Record -----------------------------------------------------------------
 
@@ -156,12 +180,18 @@ for (recording in recordings) {
   files <- list()
   for (i in seq_along(exchanges$items)) {
     exchange <- exchanges$items[[i]]
-    response <- scrub_body(exchange$response)
-    file <- if (response$json) sprintf("%s-%d.json", recording$name, i) else sprintf("%s-%d.txt", recording$name, i)
-    if (response$json) {
-      write_json_file(response$value, file.path(out_dir, file))
+    if (!is.null(exchange$download)) {
+      # a streamed download (the export zip): kept as is
+      file <- sprintf("%s-%d.zip", recording$name, i)
+      file.copy(exchange$download, file.path(out_dir, file), overwrite = TRUE)
     } else {
-      writeLines(response$text, file.path(out_dir, file), useBytes = TRUE)
+      response <- scrub_body(exchange$response)
+      file <- if (response$json) sprintf("%s-%d.json", recording$name, i) else sprintf("%s-%d.txt", recording$name, i)
+      if (response$json) {
+        write_json_file(response$value, file.path(out_dir, file))
+      } else {
+        writeLines(response$text, file.path(out_dir, file), useBytes = TRUE)
+      }
     }
     files[[i]] <- list(
       method = exchange$method, path = exchange$path,
@@ -191,7 +221,8 @@ write_json_file(list(
 
 # --- Leak check ---------------------------------------------------------------
 
-written <- c(list.files(out_dir, full.names = TRUE), capabilities_file)
+written <- c(grep("\\.zip$", list.files(out_dir, full.names = TRUE), value = TRUE, invert = TRUE),
+             capabilities_file)
 leaks <- character()
 for (path in written) {
   found <- scrub_leaks(paste(readLines(path, warn = FALSE), collapse = "\n"), secrets)

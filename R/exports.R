@@ -822,6 +822,7 @@ soil_download <- function(soil, path, dest, progress = FALSE, right = NULL) {
     }
     break
   }
+  record_exchange("GET", path, NULL, NULL, outcome$response, download = part)
   if (is.null(outcome$response)) abort(transport_error(outcome, soil, context))
   response <- outcome$response
   context$request_id <- httr2::resp_header(response, "x-request-id") %||% context$request_id
