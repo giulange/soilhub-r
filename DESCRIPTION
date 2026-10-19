@@ -50,6 +50,7 @@ Collate:
     'publish-values.R'
     'publish-health.R'
     'publish-products.R'
+    'publish-source.R'
     'publish-variables.R'
     'rights.R'
     'session.R'

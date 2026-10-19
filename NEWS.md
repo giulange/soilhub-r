@@ -33,6 +33,20 @@
   A 409 is a `soilhub_conflict_error` that says what to do (the API has no
   GET for products, versions or runs); a job that fails or is cancelled is a
   `soilhub_job_error` with the rejected rows in `e$errors`.
+* Source ingest (WP9): `soil_publish_source()` builds a provider-neutral
+  NDJSON bundle (features from an `sf` object or a spatial file -- a WGS84
+  GeoJSON file is read without `sf` -- then profiles, components, horizons and
+  observations), checks before any request the manifest, `source_record_id`
+  (present, unique per record type), parent references, observation
+  declarations, the CRS (transformed to EPSG:4326) and the geometry types,
+  uploads it with its manifest and SHA-256 checksum (never retried),
+  validates, verifies the counts staged by the API against the records sent
+  (a difference stops before promotion), promotes and reconciles the
+  published counts; `auto_promote = TRUE` lets the server's ingest worker
+  validate and promote while the client waits; `keep_file = TRUE` keeps the
+  bundle. Unmapped property codes are a `soilhub_unmapped_properties_warning`.
+  `soil_source_validate()` and `soil_source_promote()` run the two server
+  steps separately.
 * A 403 on a session whose token does not declare its rights no longer
   reports the rights as `FALSE`.
 

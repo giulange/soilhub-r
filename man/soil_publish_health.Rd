@@ -102,8 +102,10 @@ soil_publish_health(soil, run$run_id, scores, "fuzzy-v1-india-2026-10")
 Other writing: 
 \code{\link{soil_product}()},
 \code{\link{soil_product_version}()},
+\code{\link{soil_publish_source}()},
 \code{\link{soil_publish_values}()},
 \code{\link{soil_register_variable}()},
-\code{\link{soil_run_open}()}
+\code{\link{soil_run_open}()},
+\code{\link{soil_source_validate}()}
 }
 \concept{writing}

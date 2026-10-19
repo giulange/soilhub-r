@@ -140,8 +140,11 @@ sha256_file <- function(path) {
 #' @param path The file to upload (field `file` of a `multipart/form-data`
 #'   body).
 #' @param type Its media type.
+#' @param fields A named list of text fields sent before the file in the
+#'   same form (the form fields of `POST /source-ingests`); empty for the
+#'   uploads whose parameters travel in the query string.
 #' @keywords internal
 #' @noRd
-upload_body <- function(path, type = "application/x-ndjson") {
-  structure(list(path = path, type = type), class = "soilhub_upload")
+upload_body <- function(path, type = "application/x-ndjson", fields = list()) {
+  structure(list(path = path, type = type, fields = fields), class = "soilhub_upload")
 }
