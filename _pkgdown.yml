@@ -33,6 +33,7 @@ reference:
   - title: Reads
     contents:
       - soil_observations
+      - soil_features
   - title: Results
     contents:
       - soil_table

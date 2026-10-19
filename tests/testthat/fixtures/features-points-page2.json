@@ -1,0 +1,45 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": null,
+  "returned_count": 1,
+  "limit": 1000,
+  "offset": 2,
+  "has_more": false,
+  "warnings": [],
+  "datasets": [
+   "wosis_points"
+  ],
+  "geometry": "any",
+  "canonical": true,
+  "crs": "EPSG:4326",
+  "feature_count": 1,
+  "feature_count_by_dataset": null,
+  "mixed_geometry": false
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "id": "f-3",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     38.25,
+     0.5
+    ]
+   },
+   "properties": {
+    "dataset": "wosis_points",
+    "provider_code": "isric",
+    "feature_id": "f-3",
+    "feature_key": "wosis_points:p-3",
+    "geometry_kind": "POINT",
+    "source_support": "profile",
+    "retired_in_release": "2026-10-01_isric"
+   }
+  }
+ ]
+}

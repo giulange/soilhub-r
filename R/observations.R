@@ -1,17 +1,18 @@
-#' @include selection.R results.R
+#' @include selection.R results.R typing-long.R geometry.R
 NULL
 
 # Reads of horizon-level measurements (design 4.4, 5.2, 5.4, 6.3):
 # `POST /query/observations` with `canonical = true`, paged, typed into a
-# `soil_table`. This version reads the wide layout.
+# `soil_table`, wide (one row per horizon) or long (one row per observation).
 
-#' Soil observations: one row per horizon
+#' Soil observations: one row per horizon or per observation
 #'
 #' Reads the measurements of a selection from the canonical layer of the
 #' Global Soil Data Hub (`POST /query/observations`, always `canonical =
 #' true`), page by page, and returns them as a typed table: with
 #' `layout = "wide"` (the default) **one row per horizon** and one group of
-#' columns per soil variable.
+#' columns per soil variable; with `layout = "long"` **one row per
+#' observation** (one measured value).
 #'
 #' Terms: a **feature** is where a profile or map unit is (`feature_id`); a
 #' **profile** a described soil profile (SOTER `PRID`); a **component** a
@@ -51,7 +52,40 @@ NULL
 #' `<key>_n` (integer: measurements collapsed into the cell, the first by
 #' ingestion order is kept) and, for columns with multi-value cells,
 #' `<key>_values`. `<key>` is the canonical property key (`organic_carbon`);
-#' source codes without a canonical mapping are `src_<code>`.
+#' source codes without a canonical mapping are `src_<code>`. With
+#' `with_geometry = "sf"` the result is an `sf` object whose `geometry`
+#' column replaces `geometry_text`.
+#'
+#' **Long layout** (design 5.3): one row per observation, the columns of the
+#' API's `ObservationRecord` in its order: `dataset`, `observation_id`,
+#' `feature_id`, `component_id`, `component_rank` (integer), `horizon_id`,
+#' `horizon_name`, `upper_depth_cm`, `lower_depth_cm` (double),
+#' `property_code` (the source code, `ORGC`), `value` (double: the number
+#' the API extracted from the source value), `value_raw` (list: the source
+#' value verbatim, a number, a string or a list of strings), `unit`,
+#' `provider_code`, `release_code`, `release_id` (integer),
+#' `canonical_feature_id`, `canonical_horizon_id`, `canonical_property_key`
+#' (`organic_carbon`), `source_support`, `lineage` (list), `geometry_kind`;
+#' the laboratory method (`method_code`, `method_description`,
+#' `method_tension_kpa`); the source descriptors `profile_attributes`,
+#' `horizon_attributes`, `component_attributes` (lists),
+#' `source_profile_type`, `source_record_note`; the raw markings of the cell
+#' (`value_count` integer, `methods_differ` logical, `value_spread` double,
+#' `source_method_kind` list of character, `method_facets` list), of the
+#' layer (`texture_sum`, `consistency_flags`) and of the profile
+#' (`also_in_datasets`, `possible_profile`, `superseded_by`); `value_flags`
+#' (list of character); `retired_in_release`; with `view = "revised"`
+#' `revised_markings` (named lists, `hidden_values` a data frame); with
+#' `layer = "first"` `first_layer_status` and `profile_markings`; the
+#' component columns when SOTWIS or SOTER polygons are selected. Fields the
+#' API sends only for some selections are present only then.
+#' `soil_metadata(x)$total_count` is the exact number of observations of the
+#' selection (the long layout counts it on every page).
+#'
+#' The wide and the long layout of the same selection hold the same horizons
+#' (keys `dataset`, `feature_id`, `component_id`, `horizon_id`); the wide
+#' `<key>` is the first long `value` of that property by ingestion order and
+#' `<key>_n` the number of long rows of it.
 #'
 #' **Multi-value cells.** About 6 % of the WoSIS measurements hold several
 #' values in one cell (a JSON list of 2 to 10 values); the API returns the
@@ -61,7 +95,9 @@ NULL
 #' single-value cells); `soil_metadata(x)$multi_value_rule` is `"mean"` and
 #' [soil_columns()] counts the multi-value cells. The other markings of the
 #' cell (`value_count`, `methods_differ`, `value_spread`,
-#' `source_method_kind`, `method_facets`) are in `cell_markings`.
+#' `source_method_kind`, `method_facets`) are in `cell_markings`. In the long
+#' layout the API extracts no number from such a cell: `value` receives the
+#' same mean, computed by the client, and `value_raw` keeps the listed values.
 #'
 #' **Pages.** The API returns at most `max_page_size` horizons per request
 #' (1000; see [soil_capabilities()]); the pages are read until the selection
@@ -78,7 +114,8 @@ NULL
 #'
 #' Rights: `soil:read`. Capabilities: `revised_view` for `view =
 #' "revised"`, `profile_type_filter` for `profile_type`,
-#' `component_selection` for `components`.
+#' `component_selection` for `components`, `observation_geometry` for the
+#' geometry of the long layout.
 #'
 #' @param soil A session; the default session when omitted.
 #' @param datasets Catalog dataset codes (`"wosis_points"`,
@@ -114,12 +151,18 @@ NULL
 #'   API field `components`.
 #' @param min_cumulative_percent Threshold of `components = "cumulative"`,
 #'   0 to 100 (required with it, refused without it).
-#' @param layout `"wide"` (one row per horizon). The long layout (one row
-#'   per observation) is not available in this version yet.
-#' @param with_geometry `"none"`, or `"text"`: adds `geometry_kind` and
-#'   `geometry_text` (WKT, EPSG:4326, one per feature copied to its rows;
-#'   rows without geometry get `NA` and one warning). `"sf"` is not
-#'   available in this version yet.
+#' @param layout `"wide"` (one row per horizon, the default) or `"long"`
+#'   (one row per observation). API field `layout`.
+#' @param with_geometry The geometry of each row's feature (EPSG:4326):
+#'   `"none"` (the default), `"text"` (wide: `geometry_kind` and
+#'   `geometry_text` as WKT, sent once per feature by the API; long:
+#'   `geometry_text` as GeoJSON, sent on every row) or `"sf"` (an `sf` object
+#'   with a `geometry` column; needs the package `sf`, else a
+#'   `soilhub_dependency_error`). Rows without geometry (WISE profiles
+#'   without coordinates) get `NA` (text) or an empty geometry (sf) and one
+#'   warning. For polygons prefer the wide layout: the long layout repeats
+#'   the geometry on every observation. API fields `geometry_format` (wide)
+#'   and `include_geometry` (long).
 #' @param max_rows Maximum number of rows to read (`Inf`: the whole
 #'   selection).
 #' @param offset Rows of the selection to skip (to continue a partial read).
@@ -133,12 +176,13 @@ NULL
 #' @param progress Report the pages read (messages at verbosity 1 or more).
 #' @param timeout Seconds allowed for each page request; `NULL` uses the
 #'   session's (300 s by default).
-#' @return A `soil_table` (see [soil_table]): a data frame with the
-#'   attributes `soil_metadata` (see [soil_metadata()]) and
-#'   `soil_layout = "wide"`.
+#' @return A `soil_table` (see [soil_table]): a data frame (an `sf` object
+#'   with `with_geometry = "sf"`) with the attributes `soil_metadata` (see
+#'   [soil_metadata()]) and `soil_layout` (`"wide"` or `"long"`).
 #' @family reads
-#' @seealso [soil_columns()], [soil_flags()], [soil_markings()],
-#'   [soil_revised_rules()], [soil_first_layer()], [soil_citations()]
+#' @seealso [soil_features()], [soil_columns()], [soil_flags()],
+#'   [soil_markings()], [soil_revised_rules()], [soil_first_layer()],
+#'   [soil_citations()]
 #' @examples
 #' \dontrun{
 #' soil <- soil_connect()
@@ -156,6 +200,12 @@ NULL
 #'
 #' # a refused selection names the export call
 #' tryCatch(soil_observations(soil), soilhub_load_limit_error = function(e) e)
+#'
+#' # one row per observation, with the geometry as sf
+#' z <- soil_observations(soil, datasets = "wosis_points", country = "KEN",
+#'                        variables = "organic_carbon", layout = "long",
+#'                        with_geometry = "sf", max_rows = 100)
+#' soil_metadata(z)$total_count
 #' }
 #' @export
 soil_observations <- function(soil = soil_session(), datasets = NULL,
@@ -183,40 +233,38 @@ soil_observations <- function(soil = soil_session(), datasets = NULL,
   if (!is.null(page_size)) page_size <- check_page_size(page_size)
   if (!is.null(timeout)) soil$timeout <- check_timeout(timeout)
   progress <- check_flag(progress, "progress")
-  if (identical(layout, "long")) {
-    abort(soilhub_argument_error(
-      "`layout = \"long\"` is not available in this version of soilhub yet: use `layout = \"wide\"`.",
-      "layout"
-    ))
-  }
-  if (identical(with_geometry, "sf")) {
-    abort(soilhub_argument_error(
-      "`with_geometry = \"sf\"` is not available in this version of soilhub yet: use `with_geometry = \"text\"` (WKT).",
-      "with_geometry"
-    ))
-  }
-
   what <- "`soil_observations()`"
+  if (identical(with_geometry, "sf")) require_sf(what)
   soil_require_right(soil, "soil:read", what)
   require_selection_capabilities(soil, body, what)
+  long <- identical(layout, "long")
+  if (long && !identical(with_geometry, "none")) {
+    soil_require_capability(soil, "observation_geometry", paste0(what, " with `layout = \"long\"` and geometry"))
+  }
 
   selection <- attr(body, "selection")
   attr(body, "selection") <- NULL
   body$layout <- layout
-  body$geometry_format <- if (identical(with_geometry, "text")) "wkt" else "none"
+  if (long) {
+    # The long layout sends a GeoJSON geometry on every row (include_geometry);
+    # geometry_format is a wide-layout field.
+    if (!identical(with_geometry, "none")) body$include_geometry <- TRUE
+  } else {
+    body$geometry_format <- if (identical(with_geometry, "none")) "none" else "wkt"
+  }
   body$offset <- offset
 
   pages <- tryCatch(
-    soil_collect(soil, "/query/observations", body, items = "rows",
+    soil_collect(soil, "/query/observations", body, items = if (long) "observations" else "rows",
                  max_rows = max_rows, page_size = page_size, progress = progress),
     soilhub_load_limit_error = function(e) {
-      abort(observations_load_limit(soil, e, selection, too_large, with_geometry))
+      abort(observations_load_limit(soil, e, selection, too_large, with_geometry, layout))
     },
     soilhub_error = function(e) {
-      abort(with_typed_partial(soil, e, selection, with_geometry))
+      abort(with_typed_partial(soil, e, selection, with_geometry, layout))
     }
   )
-  observations_table(soil, pages, selection, with_geometry)
+  observations_table(soil, pages, selection, with_geometry, layout = layout)
 }
 
 # `x` or, when it is the whole choice vector (the default), its first value.
@@ -237,28 +285,52 @@ check_offset <- function(offset) {
   value
 }
 
-#' Wide pages to a `soil_table`
+#' Observation pages to a `soil_table`
 #'
 #' @param soil The session (capabilities and catalog cache).
-#' @param pages A `soilhub_pages` of wide pages, complete or partial.
+#' @param pages A `soilhub_pages` of wide or long pages, complete or partial.
 #' @param selection The selection arguments (non-default), for the metadata.
-#' @param with_geometry `"none"` or `"text"`.
+#' @param with_geometry `"none"`, `"text"` or `"sf"`.
 #' @param fetch_catalog Read the catalog (once per session) for the
 #'   `datasets` of the metadata; `FALSE` uses it only when cached.
-#' @return A `soil_table` with `soil_layout = "wide"`.
+#' @param layout `"wide"` or `"long"`: the layout of the pages.
+#' @return A `soil_table` with `soil_layout = layout` (an `sf` with
+#'   `with_geometry = "sf"`).
 #' @keywords internal
 #' @noRd
 observations_table <- function(soil, pages, selection = NULL,
-                               with_geometry = "none", fetch_catalog = TRUE) {
+                               with_geometry = "none", fetch_catalog = TRUE,
+                               layout = "wide") {
+  if (identical(layout, "long")) {
+    frame <- long_layout_frame(pages, with_geometry)
+    metadata <- observations_metadata(soil, pages, NULL, selection, fetch_catalog, layout = "long")
+    if (identical(with_geometry, "sf")) {
+      frame <- frame_as_sf(frame, wkt_sfc(frame$geometry))
+    }
+    return(new_soil_table(frame, metadata, "long"))
+  }
   variables <- merge_wide_variables(pages$page_metadata)
   frame <- wide_frame(pages, variables, with_geometry)
   metadata <- observations_metadata(soil, pages, variables, selection, fetch_catalog)
+  if (identical(with_geometry, "sf")) {
+    frame <- wide_as_sf(frame)
+  }
   new_soil_table(frame, metadata, "wide")
 }
 
+# The wide frame with `geometry_text` (WKT) replaced, at its position, by the
+# sfc `geometry`.
+wide_as_sf <- function(frame) {
+  geometry <- wkt_sfc(frame$geometry_text)
+  names(frame)[names(frame) == "geometry_text"] <- "geometry"
+  frame_as_sf(frame, geometry)
+}
+
 # The metadata attribute (design 5.4): the paging metadata, the first page's
-# API metadata, and the client's additions.
-observations_metadata <- function(soil, pages, variables, selection, fetch_catalog) {
+# API metadata, and the client's additions. `total_count` is exact for the
+# long layout, NA for the wide one (the API does not count).
+observations_metadata <- function(soil, pages, variables, selection, fetch_catalog,
+                                  layout = "wide") {
   meta <- pages$metadata
   capabilities <- tryCatch(session_cached(soil, "capabilities"), error = function(e) NULL)
   names <- as.character(unlist(meta$datasets %||% meta$request$datasets))
@@ -267,7 +339,7 @@ observations_metadata <- function(soil, pages, variables, selection, fetch_catal
     api_version = if (is.list(capabilities) && is_string(capabilities$api_version)) capabilities$api_version else NA_character_,
     schema_version = scalar_chr(meta$schema_version),
     client_version = client_version(),
-    total_count = NA_real_,
+    total_count = if (identical(layout, "long")) as.numeric(meta$total_count %||% NA_real_) else NA_real_,
     warnings = as.character(meta$warnings) %||% character(),
     variables = variables,
     view = scalar_chr(meta$view %||% meta$request$view %||% "raw"),
@@ -294,10 +366,11 @@ metadata_datasets <- function(soil, names, fetch = TRUE) {
 }
 
 # A failure after some pages: the pages read become a typed soil_table.
-with_typed_partial <- function(soil, error, selection, with_geometry) {
+with_typed_partial <- function(soil, error, selection, with_geometry, layout = "wide") {
   if (inherits(error$partial, "soilhub_pages")) {
     typed <- tryCatch(
-      observations_table(soil, error$partial, selection, with_geometry, fetch_catalog = FALSE),
+      observations_table(soil, error$partial, selection, with_geometry, fetch_catalog = FALSE,
+                         layout = layout),
       error = function(e) NULL
     )
     if (!is.null(typed)) error$partial <- typed
@@ -307,7 +380,8 @@ with_typed_partial <- function(soil, error, selection, with_geometry) {
 
 # The load-limit error of a read (design 6.3): the API text, then the
 # soil_export() call of the same selection, with the R arguments given.
-observations_load_limit <- function(soil, error, selection, too_large, with_geometry) {
+observations_load_limit <- function(soil, error, selection, too_large, with_geometry,
+                                    layout = "wide") {
   rebuilt <- load_limit_error(
     error$detail, request = error$request, selection = selection,
     status = error$status, endpoint = error$endpoint, method = error$method,
@@ -320,7 +394,7 @@ observations_load_limit <- function(soil, error, selection, too_large, with_geom
     )
   }
   if (!is.null(error$partial)) {
-    rebuilt$partial <- with_typed_partial(soil, error, selection, with_geometry)$partial
+    rebuilt$partial <- with_typed_partial(soil, error, selection, with_geometry, layout)$partial
   }
   rebuilt
 }

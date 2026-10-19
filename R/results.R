@@ -9,7 +9,8 @@ NULL
 new_soil_table <- function(frame, metadata, layout) {
   attr(frame, "soil_metadata") <- metadata
   attr(frame, "soil_layout") <- layout
-  class(frame) <- c("soil_table", "data.frame")
+  # An sf frame keeps sf's class in front of data.frame (design 5.1).
+  class(frame) <- if (inherits(frame, "sf")) c("soil_table", "sf", "data.frame") else c("soil_table", "data.frame")
   frame
 }
 
@@ -30,7 +31,8 @@ new_soil_table <- function(frame, metadata, layout) {
 #'   `"health"`.
 #'
 #' Subsetting with `[` keeps the class and the attributes; [as.data.frame()]
-#' drops them. Rows are in the API's order (the stable order of the pages).
+#' drops them (and the `sf` class: the `geometry` column stays). Rows are in
+#' the API's order (the stable order of the pages).
 #'
 #' Printing shows a two-line header (counts, datasets, view and layer;
 #' warnings and the helpers to use) and the first
@@ -67,7 +69,9 @@ NULL
 as.data.frame.soil_table <- function(x, row.names = NULL, optional = FALSE, ...) {
   attr(x, "soil_metadata") <- NULL
   attr(x, "soil_layout") <- NULL
-  class(x) <- setdiff(class(x), "soil_table")
+  attr(x, "sf_column") <- NULL
+  attr(x, "agr") <- NULL
+  class(x) <- setdiff(class(x), c("soil_table", "sf"))
   if (!inherits(x, "data.frame")) class(x) <- "data.frame"
   x
 }
@@ -79,7 +83,9 @@ print.soil_table <- function(x, n = getOption("soilhub.print_rows", 10), ...) {
   frame <- as.data.frame(x)
   shown <- utils::head(frame, n)
   for (name in names(shown)) {
-    if (is.list(shown[[name]]) && !is.data.frame(shown[[name]])) {
+    if (inherits(shown[[name]], "sfc")) {
+      shown[[name]] <- format(shown[[name]])
+    } else if (is.list(shown[[name]]) && !is.data.frame(shown[[name]])) {
       shown[[name]] <- vapply(shown[[name]], function(v) if (is.null(v)) NA_character_ else "<list>", character(1))
     }
   }
@@ -100,8 +106,9 @@ table_header <- function(x) {
   request <- metadata$request %||% list()
   datasets <- unique(stats::na.omit(x$dataset))
   if (!length(datasets)) datasets <- unlist(request$datasets) %||% character()
-  counts <- sprintf("%s %s", format_count(nrow(x)), if (identical(layout, "wide")) "horizons" else "rows")
-  if (!is.null(x$feature_id)) {
+  noun <- switch(layout, wide = "horizons", long = "observations", features = "features", "rows")
+  counts <- sprintf("%s %s", format_count(nrow(x)), noun)
+  if (!is.null(x$feature_id) && !identical(layout, "features")) {
     counts <- paste0(counts, sprintf(", %s features", format_count(length(unique(stats::na.omit(x$feature_id))))))
   }
   if (is.data.frame(metadata$variables)) {
@@ -110,17 +117,21 @@ table_header <- function(x) {
   view <- metadata$view %||% request$view %||% "raw"
   layer <- request$layer %||% "all"
   first <- sprintf(
-    "# soilhub %s table: %s | %s | view %s, layer %s",
+    "# soilhub %s table: %s | %s | view %s%s",
     layout, counts,
     if (length(datasets)) paste(datasets, collapse = ", ") else "no dataset",
-    view, layer
+    view, if (identical(layout, "features")) "" else paste0(", layer ", layer)
   )
   warnings <- length(metadata$warnings %||% character())
   second <- sprintf(
-    "# %s API warning%s (soil_warnings), typing (soil_columns), cite with soil_citations()",
-    if (warnings) format_count(warnings) else "no", if (warnings == 1L) "" else "s"
+    "# %s API warning%s (soil_warnings), %scite with soil_citations()",
+    if (warnings) format_count(warnings) else "no", if (warnings == 1L) "" else "s",
+    switch(layout, wide = "typing (soil_columns), ", long = "markings (soil_markings), ", "")
   )
   lines <- c(first, second)
+  if (identical(layout, "long") && !is.null(metadata$total_count) && !is.na(metadata$total_count)) {
+    lines[1] <- paste0(lines[1], sprintf(" | %s in the selection", format_count(metadata$total_count)))
+  }
   if (isFALSE(metadata$complete)) {
     lines <- c(lines, sprintf(
       "# incomplete read: continue with offset = %s (soil_metadata(x)$next_offset)",
@@ -273,15 +284,16 @@ soil_columns <- function(x) {
 
 #' Value flags of a table
 #'
-#' The `value_flags` column of a wide read as a long data frame: one row
-#' per flag of a cell. Flags are markings computed by the API in both views
+#' The `value_flags` column of a wide or long read as a long data frame: one
+#' row per flag of a cell (of an observation in the long layout). Flags are markings computed by the API in both views
 #' (`trace_convention`, `method_label_contradicted`, `uniform_profile_value`,
 #' `extreme`, `above_unit_maximum`, `impossible_for_declared_unit`); they
 #' change no value.
 #'
 #' @param x A `soil_table` with a `value_flags` column.
 #' @return A data frame `row` (row number in `x`), `horizon_id`, `column`
-#'   (the variable column), `flag`.
+#'   (the variable column; in the long layout the `property_code` of the
+#'   row), `flag`.
 #' @family results
 #' @examples
 #' \dontrun{
@@ -292,8 +304,13 @@ soil_flags <- function(x) {
   check_table(x)
   out <- list()
   flags <- x[["value_flags"]]
+  long <- identical(attr(x, "soil_layout"), "long")
   for (i in seq_along(flags)) {
     cell <- flags[[i]]
+    if (long) {
+      for (flag in cell) out[[length(out) + 1L]] <- list(i, x$horizon_id[[i]], x$property_code[[i]], flag)
+      next
+    }
     for (column in names(cell)) {
       for (flag in cell[[column]]) out[[length(out) + 1L]] <- list(i, x$horizon_id[[i]], column, flag)
     }
@@ -317,6 +334,13 @@ soil_flags <- function(x) {
 #' A marking holding several values gives one row per value; an object
 #' (such as `method_facets`) gives one row with its JSON text.
 #'
+#' In the long layout the cell markings are columns of the row (`column` is
+#' its `property_code`), the layer and profile markings repeat on every
+#' observation of the horizon, and `revised_markings` mixes the horizon
+#' markings with those of the cell (`texture_normalized`,
+#' `guessed_elements_removed`, `value_from_estimates`, `kept_from_copy`,
+#' `values_differ`: scope `"revised_cell"`).
+#'
 #' @param x A `soil_table`.
 #' @return A data frame `row` (row number in `x`), `horizon_id`, `scope`
 #'   (`"cell"`, `"layer"`, `"profile"`, `"retired_cell"`, `"revised_horizon"`,
@@ -339,7 +363,12 @@ soil_markings <- function(x) {
       out[[length(out) + 1L]] <<- list(i, x$horizon_id[[i]], scope, column, marking, v)
     }
   }
+  long <- identical(attr(x, "soil_layout"), "long")
   for (i in seq_len(nrow(x))) {
+    if (long) {
+      long_row_markings(x, i, add)
+      next
+    }
     cells <- if (!is.null(x[["cell_markings"]])) x[["cell_markings"]][[i]] else NULL
     for (column in names(cells)) {
       for (marking in names(cells[[column]])) add(i, "cell", column, marking, cells[[column]][[marking]])
@@ -370,6 +399,45 @@ soil_markings <- function(x) {
   }
   long_frame(out, c("row", "horizon_id", "scope", "column", "marking", "value"),
              c("int", "chr", "chr", "chr", "chr", "chr"))
+}
+
+# Markings of row `i` of a long table, passed to `add(i, scope, column,
+# marking, value)`.
+long_cell_markings <- c("value_count", "methods_differ", "value_spread", "source_method_kind", "method_facets")
+long_revised_cell_markings <- c(
+  "texture_normalized", "guessed_elements_removed", "value_from_estimates",
+  "kept_from_copy", "values_differ"
+)
+long_row_markings <- function(x, i, add) {
+  property <- if (!is.null(x[["property_code"]])) x[["property_code"]][[i]] else NA_character_
+  # As the wide cell_markings of the API: value_count only above 1,
+  # methods_differ only when true.
+  for (marking in long_cell_markings) {
+    if (is.null(x[[marking]])) next
+    value <- x[[marking]][[i]]
+    if (identical(marking, "value_count") && !isTRUE(value > 1)) next
+    if (identical(marking, "methods_differ") && !isTRUE(value)) next
+    add(i, "cell", property, marking, value)
+  }
+  for (marking in c("texture_sum", "consistency_flags")) {
+    if (!is.null(x[[marking]])) add(i, "layer", NA_character_, marking, x[[marking]][[i]])
+  }
+  for (marking in c("also_in_datasets", "possible_profile", "superseded_by", "profile_markings")) {
+    if (!is.null(x[[marking]])) add(i, "profile", NA_character_, marking, x[[marking]][[i]])
+  }
+  revised <- if (!is.null(x[["revised_markings"]])) x[["revised_markings"]][[i]] else NULL
+  for (name in names(revised)) {
+    item <- revised[[name]]
+    if (identical(name, "hidden_values") && is.data.frame(item)) {
+      for (k in seq_len(nrow(item))) {
+        add(i, "hidden_value", item$property_code[[k]], item$rule[[k]], list(item$source_value[[k]]))
+      }
+    } else if (name %in% long_revised_cell_markings) {
+      add(i, "revised_cell", property, name, item)
+    } else {
+      add(i, "revised_horizon", NA_character_, name, item)
+    }
+  }
 }
 
 # The values of a marking as character: one per element of an atomic vector,

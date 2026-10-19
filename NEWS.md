@@ -1,5 +1,22 @@
 # soilhub (development version)
 
+* Long observations, features and geometry (WP5): `soil_observations(layout
+  = "long")` reads one row per observation, typed per column family
+  (`value` double, `value_raw` the source value verbatim as a list column,
+  `release_id` and `value_count` integer, `lineage`, source descriptors and
+  `method_facets` lists, marking columns, `revised_markings` with
+  `hidden_values` as a data frame); `soil_metadata(x)$total_count` is the
+  exact count of the selection. A multi-value WoSIS cell, for which the API
+  extracts no number, gets the mean of its values in `value`, as the wide
+  layout does. `soil_features()` reads the features (points and
+  (multi)polygons) with `feature_key`, `components` (data frames),
+  `profile_markings` and `retired_in_release`, and the metadata
+  `feature_count`, `feature_count_by_dataset` and `mixed_geometry`.
+  `with_geometry = "sf"` returns an `sf` `soil_table` (EPSG:4326) for the
+  wide and long layouts and the features; `"text"` gives WKT (wide) or
+  GeoJSON (long, features) without any package. `sf` stays in Suggests:
+  without it `"sf"` raises a `soilhub_dependency_error` before any request.
+  `soil_flags()` and `soil_markings()` read long tables too.
 * Wide observations (WP4): `soil_observations()` reads the canonical wide
   layout (one row per horizon) page by page, with the selection of every
   canonical read (`datasets`, `variables`, `bbox`, `country`, `geometry`,
@@ -17,8 +34,7 @@
   keeps them as a typed partial `soil_table` in `e$partial`. Result helpers:
   `soil_metadata()`, `soil_warnings()`, `soil_columns()`, `soil_flags()`,
   `soil_markings()`, `soil_revised_rules()`, `soil_first_layer()`, print and
-  summary methods. The long layout, `with_geometry = "sf"` and
-  `too_large = "export"` follow in the next work packages.
+  summary methods. `too_large = "export"` follows in a later work package.
 * Writes and jobs (WP8), gated by the rights of the session (checked
   locally when the token declares them, else decided by the API; a 403 is a
   `soilhub_permission_error` naming the right): `soil_register_variable()`

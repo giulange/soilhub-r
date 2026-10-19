@@ -81,8 +81,7 @@ test_that("argument errors come before any request", {
     list(components = "cumulative"), list(min_cumulative_percent = 10),
     list(layout = "tall"), list(with_geometry = "wkb"), list(too_large = "split"),
     list(max_rows = 0), list(offset = -1), list(offset = 1.5), list(page_size = 0),
-    list(timeout = -1), list(progress = NA),
-    list(layout = "long"), list(with_geometry = "sf")
+    list(timeout = -1), list(progress = NA)
   )
   for (args in bad) {
     call_args <- utils::modifyList(list(soil, datasets = "wosis_points"), args)

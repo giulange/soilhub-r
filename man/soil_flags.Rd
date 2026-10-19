@@ -11,11 +11,12 @@ soil_flags(x)
 }
 \value{
 A data frame \code{row} (row number in \code{x}), \code{horizon_id}, \code{column}
-(the variable column), \code{flag}.
+(the variable column; in the long layout the \code{property_code} of the
+row), \code{flag}.
 }
 \description{
-The \code{value_flags} column of a wide read as a long data frame: one row
-per flag of a cell. Flags are markings computed by the API in both views
+The \code{value_flags} column of a wide or long read as a long data frame: one
+row per flag of a cell (of an observation in the long layout). Flags are markings computed by the API in both views
 (\code{trace_convention}, \code{method_label_contradicted}, \code{uniform_profile_value},
 \code{extreme}, \code{above_unit_maximum}, \code{impossible_for_declared_unit}); they
 change no value.
