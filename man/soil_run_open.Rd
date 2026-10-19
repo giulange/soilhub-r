@@ -77,7 +77,9 @@ Other writing:
 \code{\link{soil_product}()},
 \code{\link{soil_product_version}()},
 \code{\link{soil_publish_health}()},
+\code{\link{soil_publish_source}()},
 \code{\link{soil_publish_values}()},
-\code{\link{soil_register_variable}()}
+\code{\link{soil_register_variable}()},
+\code{\link{soil_source_validate}()}
 }
 \concept{writing}

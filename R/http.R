@@ -33,7 +33,7 @@ http_transient_status <- c(429L, 502L, 503L, 504L)
 #' @param path Path below `soil$api_url`, starting with `/`.
 #' @param body A list sent as JSON (`auto_unbox = TRUE`; wrap a length-one
 #'   array in [I()]), a file upload from `upload_body()` (sent as
-#'   `multipart/form-data`, field `file`), or `NULL`.
+#'   `multipart/form-data`: its text fields, then the field `file`), or `NULL`.
 #' @param query A named list of query parameters (`NULL` elements dropped,
 #'   vectors repeated).
 #' @param timeout Total seconds allowed for the request; `NULL` uses
@@ -148,9 +148,10 @@ build_request <- function(soil, method, path, body, query, timeout, token,
   if (inherits(body, "soilhub_upload")) {
     # A multipart file upload (ndjson.R): the file, never its content, is
     # held by the request; errors carry no body.
-    req <- httr2::req_body_multipart(
-      req, file = curl::form_file(body$path, type = body$type)
-    )
+    req <- do.call(httr2::req_body_multipart, c(
+      list(req), lapply(body$fields, as.character),
+      list(file = curl::form_file(body$path, type = body$type))
+    ))
   } else if (!is.null(body)) {
     req <- httr2::req_body_raw(req, request_body_json(body), type = "application/json")
   }

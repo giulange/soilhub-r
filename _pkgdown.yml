@@ -53,6 +53,8 @@ reference:
       - soil_run_open
       - soil_publish_values
       - soil_publish_health
+      - soil_publish_source
+      - soil_source_validate
   - title: Jobs
     contents:
       - soil_job
