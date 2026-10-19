@@ -32,6 +32,13 @@ change no row and no value: they describe them.
 \details{
 A marking holding several values gives one row per value; an object
 (such as \code{method_facets}) gives one row with its JSON text.
+
+In the long layout the cell markings are columns of the row (\code{column} is
+its \code{property_code}), the layer and profile markings repeat on every
+observation of the horizon, and \code{revised_markings} mixes the horizon
+markings with those of the cell (\code{texture_normalized},
+\code{guessed_elements_removed}, \code{value_from_estimates}, \code{kept_from_copy},
+\code{values_differ}: scope \code{"revised_cell"}).
 }
 \examples{
 \dontrun{

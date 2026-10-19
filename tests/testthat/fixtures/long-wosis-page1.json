@@ -1,0 +1,706 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 17,
+  "returned_count": 10,
+  "limit": 1000,
+  "offset": 0,
+  "has_more": true,
+  "warnings": [],
+  "datasets": [
+   "wosis_points"
+  ],
+  "geometry": "any",
+  "canonical": true,
+  "include_geometry": false,
+  "observation_count": 10,
+  "observation_count_by_dataset": null
+ },
+ "observations": [
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-1",
+   "feature_id": "f-1",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-1",
+   "source_horizon_id": null,
+   "horizon_name": "Ap",
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 20.0,
+   "property_code": "CFVO",
+   "value": null,
+   "value_raw": [
+    "0.9",
+    "1.1"
+   ],
+   "unit": "cm3/100cm3",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-1",
+   "canonical_horizon_id": "h-1",
+   "canonical_property_key": "coarse_fragments",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-1:1:CFVO",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-1"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.8,
+     -1.3
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": null,
+   "method_description": null,
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "false"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": 2,
+   "methods_differ": false,
+   "value_spread": 0.2,
+   "source_method_kind": [
+    "field estimate"
+   ],
+   "method_facets": {
+    "sample_pretreatment": [
+     "sieved 2 mm"
+    ]
+   },
+   "texture_sum": 100.2,
+   "consistency_flags": [
+    "orgc_gt_totc"
+   ],
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": null,
+   "retired_in_release": null
+  },
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-2",
+   "feature_id": "f-1",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-1",
+   "source_horizon_id": null,
+   "horizon_name": "Ap",
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 20.0,
+   "property_code": "CLAY",
+   "value": 23.5,
+   "value_raw": [
+    "23.5"
+   ],
+   "unit": "%",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-1",
+   "canonical_horizon_id": "h-1",
+   "canonical_property_key": "clay",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-1:1:CLAY",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.8,
+     -1.3
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": "CLAY_PIPETTE",
+   "method_description": "Pipette method",
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "false"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": 1,
+   "methods_differ": false,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": 100.2,
+   "consistency_flags": [
+    "orgc_gt_totc"
+   ],
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": null,
+   "retired_in_release": null
+  },
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-3",
+   "feature_id": "f-1",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-1",
+   "source_horizon_id": null,
+   "horizon_name": "Ap",
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 20.0,
+   "property_code": "DENS",
+   "value": 1.3,
+   "value_raw": 1.3,
+   "unit": "g/cm3",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-1",
+   "canonical_horizon_id": "h-1",
+   "canonical_property_key": null,
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-1:1:DENS",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-3"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.8,
+     -1.3
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": null,
+   "method_description": null,
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "false"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": null,
+   "methods_differ": null,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": 100.2,
+   "consistency_flags": [
+    "orgc_gt_totc"
+   ],
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": null,
+   "retired_in_release": null
+  },
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-4",
+   "feature_id": "f-1",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-1",
+   "source_horizon_id": null,
+   "horizon_name": "Ap",
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 20.0,
+   "property_code": "ORGC",
+   "value": 12.8,
+   "value_raw": [
+    "12.8"
+   ],
+   "unit": "g/kg",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-1",
+   "canonical_horizon_id": "h-1",
+   "canonical_property_key": "organic_carbon",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-1:1:ORGC",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-4"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.8,
+     -1.3
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": "ORGC_WB",
+   "method_description": "Walkley-Black",
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "false"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": 1,
+   "methods_differ": false,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": 100.2,
+   "consistency_flags": [
+    "orgc_gt_totc"
+   ],
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": [
+    "extreme"
+   ],
+   "retired_in_release": null
+  },
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-5",
+   "feature_id": "f-1",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-1",
+   "source_horizon_id": null,
+   "horizon_name": "Ap",
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 20.0,
+   "property_code": "ORGC",
+   "value": 13.4,
+   "value_raw": [
+    "13.4"
+   ],
+   "unit": "g/kg",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-1",
+   "canonical_horizon_id": "h-1",
+   "canonical_property_key": "organic_carbon",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-1:1:ORGC",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-5"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.8,
+     -1.3
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": "ORGC_WB",
+   "method_description": "Walkley-Black",
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "false"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": 1,
+   "methods_differ": false,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": 100.2,
+   "consistency_flags": [
+    "orgc_gt_totc"
+   ],
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": null,
+   "retired_in_release": null
+  },
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-6",
+   "feature_id": "f-1",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-2",
+   "source_horizon_id": null,
+   "horizon_name": "Bw",
+   "upper_depth_cm": 20.0,
+   "lower_depth_cm": 45.5,
+   "property_code": "CFVO",
+   "value": 4.0,
+   "value_raw": [
+    "4.0"
+   ],
+   "unit": "cm3/100cm3",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-1",
+   "canonical_horizon_id": "h-2",
+   "canonical_property_key": "coarse_fragments",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-1:2:CFVO",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-6"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.8,
+     -1.3
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": null,
+   "method_description": null,
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "false"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": 1,
+   "methods_differ": false,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": null,
+   "consistency_flags": null,
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": null,
+   "retired_in_release": null
+  },
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-7",
+   "feature_id": "f-1",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-2",
+   "source_horizon_id": null,
+   "horizon_name": "Bw",
+   "upper_depth_cm": 20.0,
+   "lower_depth_cm": 45.5,
+   "property_code": "CLAY",
+   "value": 30.0,
+   "value_raw": [
+    "30"
+   ],
+   "unit": "%",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-1",
+   "canonical_horizon_id": "h-2",
+   "canonical_property_key": "clay",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-1:2:CLAY",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-7"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.8,
+     -1.3
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": "CLAY_PIPETTE",
+   "method_description": "Pipette method",
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "false"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": 1,
+   "methods_differ": false,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": null,
+   "consistency_flags": null,
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": null,
+   "retired_in_release": "2026-10-01_isric"
+  },
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-8",
+   "feature_id": "f-2",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-3",
+   "source_horizon_id": null,
+   "horizon_name": "O",
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 5.0,
+   "property_code": "CFVO",
+   "value": null,
+   "value_raw": [
+    "2",
+    "<1"
+   ],
+   "unit": "cm3/100cm3",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-2",
+   "canonical_horizon_id": "h-3",
+   "canonical_property_key": "coarse_fragments",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-2:1:CFVO",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-8"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37,
+     -1
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": null,
+   "method_description": null,
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "true"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": 2,
+   "methods_differ": true,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": 98.0,
+   "consistency_flags": null,
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": null,
+   "retired_in_release": null
+  },
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-9",
+   "feature_id": "f-2",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-3",
+   "source_horizon_id": null,
+   "horizon_name": "O",
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 5.0,
+   "property_code": "CLAY",
+   "value": 12.0,
+   "value_raw": [
+    "12"
+   ],
+   "unit": "%",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-2",
+   "canonical_horizon_id": "h-3",
+   "canonical_property_key": "clay",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-2:1:CLAY",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-9"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37,
+     -1
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": "CLAY_PIPETTE",
+   "method_description": "Pipette method",
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "true"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": 1,
+   "methods_differ": false,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": 98.0,
+   "consistency_flags": null,
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": [
+    "trace_convention"
+   ],
+   "retired_in_release": null
+  },
+  {
+   "dataset": "wosis_points",
+   "observation_id": "o-10",
+   "feature_id": "f-2",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "h-3",
+   "source_horizon_id": null,
+   "horizon_name": "O",
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 5.0,
+   "property_code": "ORGC",
+   "value": 310.5,
+   "value_raw": [
+    "310.5"
+   ],
+   "unit": "g/kg",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "wosis_2023_12",
+   "release_id": 11,
+   "canonical_feature_id": "f-2",
+   "canonical_horizon_id": "h-3",
+   "canonical_property_key": "organic_carbon",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "wosis_layers",
+    "source_record_id": "p-2:1:ORGC",
+    "release_code": "wosis_2023_12",
+    "release_id": 11,
+    "observation_id": "o-10"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37,
+     -1
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": "ORGC_WB",
+   "method_description": "Walkley-Black",
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "organic_surface": "true"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": null,
+   "value_count": 1,
+   "methods_differ": false,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": 98.0,
+   "consistency_flags": null,
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": [
+    "extreme",
+    "above_unit_maximum"
+   ],
+   "retired_in_release": null
+  }
+ ]
+}

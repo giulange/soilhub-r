@@ -1,0 +1,240 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": null,
+  "returned_count": 4,
+  "limit": 1000,
+  "offset": 0,
+  "has_more": false,
+  "warnings": [
+   "Mixed POINT and MULTIPOLYGON geometries",
+   "1 map unit(s) have component proportions not summing to 100 (totals: 95)"
+  ],
+  "datasets": [
+   "soter_profiles",
+   "sotwis_polygons"
+  ],
+  "geometry": "any",
+  "canonical": true,
+  "crs": "EPSG:4326",
+  "feature_count": 4,
+  "feature_count_by_dataset": {
+   "soter_profiles": 2,
+   "sotwis_polygons": 2
+  },
+  "mixed_geometry": true,
+  "components": "representative",
+  "min_cumulative_percent": null
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "id": "u-1",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       9,
+       33
+      ],
+      [
+       10,
+       33
+      ],
+      [
+       10,
+       34
+      ],
+      [
+       9,
+       34
+      ],
+      [
+       9,
+       33
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "dataset": "sotwis_polygons",
+    "provider_code": "isric",
+    "feature_id": "u-1",
+    "feature_key": "sotwis_polygons:TN1",
+    "geometry_kind": "POLYGON",
+    "source_support": "map_unit",
+    "components": [
+     {
+      "component_id": "c-1",
+      "component_rank": 1,
+      "proportion_percent": 60.0,
+      "soil_code": "CMe",
+      "representative_profile_id": "TN-ab1",
+      "cumulative_proportion_percent": 60.0,
+      "is_representative": true,
+      "suid": 1,
+      "newsuid": null,
+      "isoc": "TUN",
+      "soil_map_unit": "TN1",
+      "tcid": 1,
+      "scid": 1,
+      "source_attributes": {
+       "TCID": 1,
+       "LANDFORM": "plain"
+      }
+     },
+     {
+      "component_id": "c-2",
+      "component_rank": 2,
+      "proportion_percent": 35.0,
+      "soil_code": "LPe",
+      "representative_profile_id": null,
+      "cumulative_proportion_percent": 95.0,
+      "is_representative": false,
+      "suid": 1,
+      "newsuid": null,
+      "isoc": "TUN",
+      "soil_map_unit": "TN1",
+      "tcid": 1,
+      "scid": 2,
+      "source_attributes": {
+       "TCID": 1,
+       "LANDFORM": "plain"
+      }
+     }
+    ],
+    "profile_markings": null,
+    "retired_in_release": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "u-2",
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        10,
+        33
+       ],
+       [
+        11,
+        33
+       ],
+       [
+        11,
+        34
+       ],
+       [
+        10,
+        33
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        12,
+        35
+       ],
+       [
+        12.5,
+        35
+       ],
+       [
+        12.5,
+        35.5
+       ],
+       [
+        12,
+        35
+       ]
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "dataset": "sotwis_polygons",
+    "provider_code": "isric",
+    "feature_id": "u-2",
+    "feature_key": "sotwis_polygons:TN2",
+    "geometry_kind": "MULTIPOLYGON",
+    "source_support": "map_unit",
+    "components": [
+     {
+      "component_id": "c-3",
+      "component_rank": 1,
+      "proportion_percent": 100.0,
+      "soil_code": "RGc",
+      "representative_profile_id": "TN-ab1",
+      "cumulative_proportion_percent": 100.0,
+      "is_representative": true,
+      "suid": 2,
+      "newsuid": null,
+      "isoc": "TUN",
+      "soil_map_unit": "TN2",
+      "tcid": 1,
+      "scid": 1,
+      "source_attributes": {
+       "TCID": 1
+      }
+     }
+    ],
+    "profile_markings": null,
+    "retired_in_release": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "s-1",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.9,
+     -0.4
+    ]
+   },
+   "properties": {
+    "dataset": "soter_profiles",
+    "provider_code": "isric",
+    "feature_id": "s-1",
+    "feature_key": "soter_profiles:KE-syn-0042",
+    "geometry_kind": "POINT",
+    "source_support": "profile",
+    "components": null,
+    "profile_markings": [],
+    "retired_in_release": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "s-3",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.1,
+     -0.2
+    ]
+   },
+   "properties": {
+    "dataset": "soter_profiles",
+    "provider_code": "isric",
+    "feature_id": "s-3",
+    "feature_key": "soter_profiles:KE-0100",
+    "geometry_kind": "POINT",
+    "source_support": "profile",
+    "components": null,
+    "profile_markings": [
+     "no_horizons_in_source"
+    ],
+    "retired_in_release": null
+   }
+  }
+ ]
+}

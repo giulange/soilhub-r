@@ -1,0 +1,59 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": null,
+  "returned_count": 2,
+  "limit": 1000,
+  "offset": 0,
+  "has_more": false,
+  "warnings": [],
+  "datasets": [
+   "wise_profiles"
+  ],
+  "geometry": "any",
+  "canonical": true,
+  "crs": "EPSG:4326",
+  "feature_count": 2,
+  "feature_count_by_dataset": null,
+  "mixed_geometry": false
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "id": "w-1",
+   "geometry": null,
+   "properties": {
+    "dataset": "wise_profiles",
+    "provider_code": "isric",
+    "feature_id": "w-1",
+    "feature_key": "wise_profiles:KE0001",
+    "geometry_kind": null,
+    "source_support": "profile",
+    "retired_in_release": null
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "w-2",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.5,
+     -1.1
+    ]
+   },
+   "properties": {
+    "dataset": "wise_profiles",
+    "provider_code": "isric",
+    "feature_id": "w-2",
+    "feature_key": "wise_profiles:KE0002",
+    "geometry_kind": "POINT",
+    "source_support": "profile",
+    "retired_in_release": null
+   }
+  }
+ ]
+}

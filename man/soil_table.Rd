@@ -44,7 +44,8 @@ datasets (for \code{\link[=soil_citations]{soil_citations()}});
 }
 
 Subsetting with \code{[} keeps the class and the attributes; \code{\link[=as.data.frame]{as.data.frame()}}
-drops them. Rows are in the API's order (the stable order of the pages).
+drops them (and the \code{sf} class: the \code{geometry} column stays). Rows are in
+the API's order (the stable order of the pages).
 
 Printing shows a two-line header (counts, datasets, view and layer;
 warnings and the helpers to use) and the first

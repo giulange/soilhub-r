@@ -2,7 +2,7 @@
 % Please edit documentation in R/observations.R
 \name{soil_observations}
 \alias{soil_observations}
-\title{Soil observations: one row per horizon}
+\title{Soil observations: one row per horizon or per observation}
 \usage{
 soil_observations(
   soil = soil_session(),
@@ -72,13 +72,19 @@ API field \code{components}.}
 \item{min_cumulative_percent}{Threshold of \code{components = "cumulative"},
 0 to 100 (required with it, refused without it).}
 
-\item{layout}{\code{"wide"} (one row per horizon). The long layout (one row
-per observation) is not available in this version yet.}
+\item{layout}{\code{"wide"} (one row per horizon, the default) or \code{"long"}
+(one row per observation). API field \code{layout}.}
 
-\item{with_geometry}{\code{"none"}, or \code{"text"}: adds \code{geometry_kind} and
-\code{geometry_text} (WKT, EPSG:4326, one per feature copied to its rows;
-rows without geometry get \code{NA} and one warning). \code{"sf"} is not
-available in this version yet.}
+\item{with_geometry}{The geometry of each row's feature (EPSG:4326):
+\code{"none"} (the default), \code{"text"} (wide: \code{geometry_kind} and
+\code{geometry_text} as WKT, sent once per feature by the API; long:
+\code{geometry_text} as GeoJSON, sent on every row) or \code{"sf"} (an \code{sf} object
+with a \code{geometry} column; needs the package \code{sf}, else a
+\code{soilhub_dependency_error}). Rows without geometry (WISE profiles
+without coordinates) get \code{NA} (text) or an empty geometry (sf) and one
+warning. For polygons prefer the wide layout: the long layout repeats
+the geometry on every observation. API fields \code{geometry_format} (wide)
+and \code{include_geometry} (long).}
 
 \item{max_rows}{Maximum number of rows to read (\code{Inf}: the whole
 selection).}
@@ -100,15 +106,16 @@ in this version yet: it stops the same way.}
 session's (300 s by default).}
 }
 \value{
-A \code{soil_table} (see \link{soil_table}): a data frame with the
-attributes \code{soil_metadata} (see \code{\link[=soil_metadata]{soil_metadata()}}) and
-\code{soil_layout = "wide"}.
+A \code{soil_table} (see \link{soil_table}): a data frame (an \code{sf} object
+with \code{with_geometry = "sf"}) with the attributes \code{soil_metadata} (see
+\code{\link[=soil_metadata]{soil_metadata()}}) and \code{soil_layout} (\code{"wide"} or \code{"long"}).
 }
 \description{
 Reads the measurements of a selection from the canonical layer of the
 Global Soil Data Hub (\code{POST /query/observations}, always \code{canonical = true}), page by page, and returns them as a typed table: with
 \code{layout = "wide"} (the default) \strong{one row per horizon} and one group of
-columns per soil variable.
+columns per soil variable; with \code{layout = "long"} \strong{one row per
+observation} (one measured value).
 }
 \details{
 Terms: a \strong{feature} is where a profile or map unit is (\code{feature_id}); a
@@ -149,7 +156,40 @@ row's feature); then, sorted by name, one group per variable: \verb{<key>}
 \verb{<key>_n} (integer: measurements collapsed into the cell, the first by
 ingestion order is kept) and, for columns with multi-value cells,
 \verb{<key>_values}. \verb{<key>} is the canonical property key (\code{organic_carbon});
-source codes without a canonical mapping are \verb{src_<code>}.
+source codes without a canonical mapping are \verb{src_<code>}. With
+\code{with_geometry = "sf"} the result is an \code{sf} object whose \code{geometry}
+column replaces \code{geometry_text}.
+
+\strong{Long layout} (design 5.3): one row per observation, the columns of the
+API's \code{ObservationRecord} in its order: \code{dataset}, \code{observation_id},
+\code{feature_id}, \code{component_id}, \code{component_rank} (integer), \code{horizon_id},
+\code{horizon_name}, \code{upper_depth_cm}, \code{lower_depth_cm} (double),
+\code{property_code} (the source code, \code{ORGC}), \code{value} (double: the number
+the API extracted from the source value), \code{value_raw} (list: the source
+value verbatim, a number, a string or a list of strings), \code{unit},
+\code{provider_code}, \code{release_code}, \code{release_id} (integer),
+\code{canonical_feature_id}, \code{canonical_horizon_id}, \code{canonical_property_key}
+(\code{organic_carbon}), \code{source_support}, \code{lineage} (list), \code{geometry_kind};
+the laboratory method (\code{method_code}, \code{method_description},
+\code{method_tension_kpa}); the source descriptors \code{profile_attributes},
+\code{horizon_attributes}, \code{component_attributes} (lists),
+\code{source_profile_type}, \code{source_record_note}; the raw markings of the cell
+(\code{value_count} integer, \code{methods_differ} logical, \code{value_spread} double,
+\code{source_method_kind} list of character, \code{method_facets} list), of the
+layer (\code{texture_sum}, \code{consistency_flags}) and of the profile
+(\code{also_in_datasets}, \code{possible_profile}, \code{superseded_by}); \code{value_flags}
+(list of character); \code{retired_in_release}; with \code{view = "revised"}
+\code{revised_markings} (named lists, \code{hidden_values} a data frame); with
+\code{layer = "first"} \code{first_layer_status} and \code{profile_markings}; the
+component columns when SOTWIS or SOTER polygons are selected. Fields the
+API sends only for some selections are present only then.
+\code{soil_metadata(x)$total_count} is the exact number of observations of the
+selection (the long layout counts it on every page).
+
+The wide and the long layout of the same selection hold the same horizons
+(keys \code{dataset}, \code{feature_id}, \code{component_id}, \code{horizon_id}); the wide
+\verb{<key>} is the first long \code{value} of that property by ingestion order and
+\verb{<key>_n} the number of long rows of it.
 
 \strong{Multi-value cells.} About 6 \% of the WoSIS measurements hold several
 values in one cell (a JSON list of 2 to 10 values); the API returns the
@@ -159,7 +199,9 @@ value WoSIS publishes; \code{NA} when an element is not a number) and
 single-value cells); \code{soil_metadata(x)$multi_value_rule} is \code{"mean"} and
 \code{\link[=soil_columns]{soil_columns()}} counts the multi-value cells. The other markings of the
 cell (\code{value_count}, \code{methods_differ}, \code{value_spread},
-\code{source_method_kind}, \code{method_facets}) are in \code{cell_markings}.
+\code{source_method_kind}, \code{method_facets}) are in \code{cell_markings}. In the long
+layout the API extracts no number from such a cell: \code{value} receives the
+same mean, computed by the client, and \code{value_raw} keeps the listed values.
 
 \strong{Pages.} The API returns at most \code{max_page_size} horizons per request
 (1000; see \code{\link[=soil_capabilities]{soil_capabilities()}}); the pages are read until the selection
@@ -175,7 +217,8 @@ continue with \code{offset = soil_metadata(e$partial)$next_offset}.
 of the same selection. Run \code{soil_summary()} first to size a selection.
 
 Rights: \code{soil:read}. Capabilities: \code{revised_view} for \code{view = "revised"}, \code{profile_type_filter} for \code{profile_type},
-\code{component_selection} for \code{components}.
+\code{component_selection} for \code{components}, \code{observation_geometry} for the
+geometry of the long layout.
 }
 \examples{
 \dontrun{
@@ -194,10 +237,20 @@ soil_revised_rules(y)
 
 # a refused selection names the export call
 tryCatch(soil_observations(soil), soilhub_load_limit_error = function(e) e)
+
+# one row per observation, with the geometry as sf
+z <- soil_observations(soil, datasets = "wosis_points", country = "KEN",
+                       variables = "organic_carbon", layout = "long",
+                       with_geometry = "sf", max_rows = 100)
+soil_metadata(z)$total_count
 }
 }
 \seealso{
-\code{\link[=soil_columns]{soil_columns()}}, \code{\link[=soil_flags]{soil_flags()}}, \code{\link[=soil_markings]{soil_markings()}},
-\code{\link[=soil_revised_rules]{soil_revised_rules()}}, \code{\link[=soil_first_layer]{soil_first_layer()}}, \code{\link[=soil_citations]{soil_citations()}}
+\code{\link[=soil_features]{soil_features()}}, \code{\link[=soil_columns]{soil_columns()}}, \code{\link[=soil_flags]{soil_flags()}},
+\code{\link[=soil_markings]{soil_markings()}}, \code{\link[=soil_revised_rules]{soil_revised_rules()}}, \code{\link[=soil_first_layer]{soil_first_layer()}},
+\code{\link[=soil_citations]{soil_citations()}}
+
+Other reads: 
+\code{\link{soil_features}()}
 }
 \concept{reads}

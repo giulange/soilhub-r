@@ -1,4 +1,4 @@
-#' @include typing.R
+#' @include typing.R geometry.R
 NULL
 
 # Typing of the wide layout (design 5.2; decision 8 a1): the rows of the
@@ -164,8 +164,9 @@ merge_wide_variables <- function(page_metadata) {
 #'
 #' @param pages A `soilhub_pages` of wide pages (complete or partial).
 #' @param variables The merged variables (`merge_wide_variables()`).
-#' @param with_geometry `"none"` or `"text"`: `"text"` adds `geometry_text`
-#'   (the WKT of the row's feature, from the `geometries` of the pages).
+#' @param with_geometry `"none"`, `"text"` or `"sf"`: `"text"` and `"sf"` add
+#'   `geometry_text` (the WKT of the row's feature, from the `geometries` of
+#'   the pages; `observations_table()` turns it into an `sfc` for `"sf"`).
 #' @return A data frame (columns in API order: the non-variable columns, then
 #'   `geometry_text`, then the variable groups sorted by name).
 #' @keywords internal
@@ -192,8 +193,9 @@ wide_frame <- function(pages, variables = merge_wide_variables(pages$page_metada
     columns[[name]] <- if (is.null(type)) values else type_wide_values(values, type)
   }
 
-  if (identical(with_geometry, "text")) {
-    columns$geometry_text <- wide_geometry_text(pages, columns$feature_id %||% character())
+  if (with_geometry %in% c("text", "sf")) {
+    columns$geometry_text <- wide_geometry_text(pages, columns$feature_id %||% character(),
+                                                missing_geometry_text(with_geometry))
   }
 
   for (i in seq_along(var_columns)) {
@@ -301,8 +303,9 @@ type_variable_values <- function(values, numeric, multi) {
 }
 
 # geometry_text: the WKT of each row's feature (one per feature_id in the
-# `geometries` of the pages); NA with one warning for rows without one.
-wide_geometry_text <- function(pages, feature_id) {
+# `geometries` of the pages); NA with one warning for rows without one
+# (`what` says what such a row gets).
+wide_geometry_text <- function(pages, feature_id, what = "their geometry_text is NA") {
   geometries <- list()
   for (extra in pages$extras %||% list()) {
     page <- extra$geometries
@@ -313,15 +316,6 @@ wide_geometry_text <- function(pages, feature_id) {
   text <- vapply(feature_id, function(id) {
     if (is.na(id) || is.null(geometries[[id]])) NA_character_ else geometries[[id]]
   }, character(1), USE.NAMES = FALSE)
-  missing <- is.na(text)
-  if (any(missing)) {
-    soilhub_warning(sprintf(
-      paste0(
-        "%s row(s) of %s feature(s) have no geometry (for example WISE profiles without ",
-        "coordinates): their geometry_text is NA."
-      ),
-      format_count(sum(missing)), format_count(length(unique(feature_id[missing])))
-    ), "soilhub_geometry_warning")
-  }
+  warn_missing_geometry(is.na(text), feature_id, what)
   text
 }
