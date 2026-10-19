@@ -20,6 +20,30 @@
   form. `soil_columns()`, `soil_citations()` and `soil_revised_rules()` work
   on a downloaded export. `soil_values()` and `soil_health_scores()` accept
   `with_geometry = "sf"`.
+* Contract tests and fixture recording (WP10): `tests/contract/` checks the
+  client against the API's OpenAPI document (committed snapshot
+  `tests/contract/openapi.json`, API 0.6.0, or the live one): every path and
+  method the client calls, every query parameter, JSON body field and form
+  field it sends (name, type, enum value, required fields), the enums it
+  offers (`selection_values`, choices of the exported functions such as
+  `layout`), the response fields of its typing tables where the OpenAPI
+  types them, and the API version range. The client requests are not listed
+  by hand: `soil_request()` hands every request to the development option
+  `soilhub.exchange_hook`, and the suite records them from the unit tests.
+  `Rscript tests/contract/run.R [live]` runs it (not part of `R CMD check`);
+  `.github/workflows/contract.yml` runs it weekly with a diff of the live
+  `openapi.json` against the snapshot (`tools/update_contract_snapshots.R
+  --check`), without secrets. `tools/record_fixtures.R` (run by the owner
+  with a device login) records scrubbed responses of a curated set of read
+  calls and `tests/contract/capabilities.json`; the suite replays them
+  through the client and skips until they exist. `tools/check_version.R`
+  checks `MIN_API_VERSION` / `SUPPORTED_API_MAJOR` against an OpenAPI
+  document. New constant `TESTED_API_VERSION` (0.6.0, the `info.version` of
+  the snapshot, kept in step by `tools/update_contract_snapshots.R` and
+  checked by the contract suite): the "API is newer than this client was
+  tested with" message of `soil_connect()` now compares with it instead of
+  `MIN_API_VERSION` (still 0.5.0, the oldest server accepted), so API 0.6.x
+  gives no message.
 * Long observations, features and geometry (WP5): `soil_observations(layout
   = "long")` reads one row per observation, typed per column family
   (`value` double, `value_raw` the source value verbatim as a list column,

@@ -37,6 +37,7 @@ Collate:
     'catalog.R'
     'code-lists.R'
     'config.R'
+    'contract.R'
     'countries.R'
     'errors.R'
     'geometry.R'

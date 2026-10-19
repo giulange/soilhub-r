@@ -5,7 +5,7 @@
 #   - API version below MIN_API_VERSION, or of another major ->
 #     `soilhub_capability_error` (soil_connect() returns no default session;
 #     the session is attached to the error, signed out, for soil_api_info());
-#   - a newer minor -> a message (the client still works);
+#   - a minor newer than TESTED_API_VERSION -> a message (the client still works);
 #   - a required capability missing or FALSE -> `soilhub_capability_error`
 #     naming it.
 # Optional capabilities are checked by the functions that need them
@@ -15,12 +15,19 @@
 
 #' API versions and capabilities supported by this client
 #'
-#' Package constants (design 9.1): the lowest API version supported, the
-#' supported major version, the capabilities every session needs and the
-#' optional capabilities checked by the functions that use them.
+#' Package constants (design 9.1): the lowest API version supported, the API
+#' version the client is tested against, the supported major version, the
+#' capabilities every session needs and the optional capabilities checked by
+#' the functions that use them.
+#'
+#' `TESTED_API_VERSION` is the `info.version` of the committed OpenAPI
+#' snapshot (tests/contract/openapi.json): `tools/update_contract_snapshots.R`
+#' writes both, and the contract suite fails when they differ. A server of a
+#' later minor version gets the "newer than tested" message.
 #' @keywords internal
 #' @noRd
 MIN_API_VERSION <- "0.5.0"
+TESTED_API_VERSION <- "0.6.0"
 SUPPORTED_API_MAJOR <- 0L
 REQUIRED_CAPABILITIES <- c(
   "query_canonical_observations", "wide_layout", "canonical_features",
@@ -45,14 +52,16 @@ parse_api_version <- function(version) {
 #' Compare an API version with the range supported by the client
 #'
 #' @param version The `api_version` of `/capabilities`.
-#' @return A list: `status` (`"supported"`, `"newer_minor"`, `"too_old"`,
+#' @return A list: `status` (`"supported"` from `MIN_API_VERSION` to the minor
+#'   of `TESTED_API_VERSION`, `"newer_minor"` above it, `"too_old"`,
 #'   `"other_major"`, `"unknown"`), `compatible` (logical; `NA` when the
 #'   version is unknown) and `message`.
 #' @keywords internal
 #' @noRd
 check_api_version <- function(version) {
   minimum <- parse_api_version(MIN_API_VERSION)
-  tested <- sprintf("%d.%d.x", minimum[1], minimum[2])
+  tested_version <- parse_api_version(TESTED_API_VERSION)
+  tested <- sprintf("%d.%d.x", tested_version[1], tested_version[2])
   parsed <- parse_api_version(version)
   if (is.null(parsed)) {
     return(list(status = "unknown", compatible = NA, message = sprintf(
@@ -73,7 +82,7 @@ check_api_version <- function(version) {
       version, client_version(), MIN_API_VERSION, MIN_API_VERSION
     )))
   }
-  if (parsed[2] > minimum[2]) {
+  if (parsed[2] > tested_version[2]) {
     return(list(status = "newer_minor", compatible = TRUE, message = sprintf(
       "API %d.%d.x is newer than this client was tested with (%s); update soilhub when available.",
       parsed[1], parsed[2], tested
