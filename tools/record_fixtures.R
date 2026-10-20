@@ -90,7 +90,7 @@ pick <- function(pattern) {
 wosis <- pick("^wosis")
 wise <- pick("^wise")
 soter <- pick("^soter")
-sotwis <- pick("^sotwis")
+sotwis <- pick("^sotwis_polygons$")
 code_list <- tryCatch(soil_code_lists(soil)$code_list[1], error = function(e) NA_character_)
 country <- "KEN"
 
@@ -101,10 +101,10 @@ call_of <- function(name, call, needs = character(), session = "user") {
 }
 q <- function(x) deparse(x)
 # Small areas keep every selection below the synchronous load limit: WoSIS around
-# Vancouver, SOTWIS in Rwanda (the whole datasets answer 422, recorded once by
+# Vancouver, SOTWIS polygons near Tunis (the whole datasets answer 422, recorded once by
 # "unfiltered-observations").
 bb_wosis <- "bbox = c(-123.3, 49.0, -122.9, 49.4)"
-bb_sotwis <- "bbox = c(28.8, -2.9, 30.9, -1.0)"
+bb_sotwis <- "bbox = c(10.0, 36.5, 10.5, 37.0)"
 recordings <- list(
   call_of("capabilities", "soil_capabilities(soil, refresh = TRUE)"),
   call_of("api-info", "soil_api_info(soil)"),

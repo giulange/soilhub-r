@@ -11,44 +11,19 @@ articles and the reference of every function).
 
 ## Install Or Update
 
-Run this in the **RStudio / RStudio Server R console**. It discovers the latest
-stable GitHub release and installs its attached R source package, without a
-hard-coded version. No GitHub account or private repository access is required.
+Run these two lines in the **RStudio / RStudio Server R console**. No GitHub
+account is required.
 
 ```r
-dependencies <- c("httr2", "jsonlite", "curl", "openssl")
-missing <- dependencies[!vapply(dependencies, requireNamespace,
-                                quietly = TRUE, FUN.VALUE = logical(1))]
-if (length(missing)) {
-  install.packages(missing, repos = "https://cloud.r-project.org")
-}
-
-release <- httr2::request(
-  "https://api.github.com/repos/giulange/soilhub-r/releases/latest"
-) |>
-  httr2::req_user_agent("soilhub-installer") |>
-  httr2::req_timeout(60) |>
-  httr2::req_perform() |>
-  httr2::resp_body_json(simplifyVector = TRUE)
-
-assets <- release$assets
-package <- assets[grepl("^soilhub_[0-9]+[.][0-9]+[.][0-9]+[.]tar[.]gz$",
-                       assets$name), , drop = FALSE]
-if (nrow(package) != 1L) {
-  stop("Expected exactly one soilhub source package in the latest release")
-}
-message("Installing ", package$name, " from ", release$tag_name)
-
-local({
-  archive <- tempfile(fileext = ".tar.gz")
-  on.exit(unlink(archive))
-  download.file(package$browser_download_url, destfile = archive, mode = "wb")
-  install.packages(archive, repos = NULL, type = "source")
-})
+install.packages("remotes")
+remotes::install_github("giulange/soilhub-r@*release")
 ```
 
-Requires R 4.1 or later for the example's pipe syntax. If the package was already
-loaded, **restart the R session after updating**. Then check:
+The first line installs the small helper package `remotes` (only once). The second
+installs the latest released version of soilhub and the packages it needs.
+
+Requires R 4.1 or later. If the package was already loaded, **restart the R
+session after updating**. Then check:
 
 ```r
 library(soilhub)
@@ -58,13 +33,11 @@ packageVersion("soilhub")
 `sf` is optional: install it (`install.packages("sf")`) only if you need
 geometry. On Linux, dependencies such as `curl` and `openssl` (and `sf`) may
 require system libraries: ask your RStudio Server administrator if installation
-fails. Accept a personal library if the shared library is not writable. The script installs
-missing dependencies; it does not automatically upgrade every existing package.
+fails. Accept a personal library if the shared library is not writable.
 
-If GitHub's public API rate limit is reached, retry later or download the
-`soilhub_*.tar.gz` asset manually from [Releases](https://github.com/giulange/soilhub-r/releases).
-Do not install GitHub's automatic "Source code" archive: the installable package
-is the explicitly attached `soilhub_*.tar.gz` file.
+If GitHub's rate limit is reached, retry later, or download the
+`soilhub_*.tar.gz` file from [Releases](https://github.com/giulange/soilhub-r/releases)
+and install it with `install.packages("path/to/soilhub_X.Y.Z.tar.gz", repos = NULL, type = "source")`.
 
 ## Development Install
 
