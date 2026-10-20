@@ -32,8 +32,8 @@ were recorded from the Global Soil Data Hub API in October 2026.
 
 | Right | Who has it | What it allows |
 | --- | --- | --- |
-| `soil:summary` | readers (students, researchers) | catalog, counts, summaries |
-| `soil:read` | readers (students, researchers) | reading data, exports, `soil_resolve_targets()` |
+| `soil:summary` | readers | catalog, counts, summaries |
+| `soil:read` | readers | reading data, exports, `soil_resolve_targets()` |
 | `soil:publish` | publishers | runs, publishing values and scores, source datasets, jobs |
 | `soil:admin` | administrators | new variables, products and versions, country refresh |
 

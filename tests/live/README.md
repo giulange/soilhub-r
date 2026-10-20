@@ -26,7 +26,7 @@ R_PROFILE_USER=/dev/null Rscript --no-init-file tests/live/smoke.R
 ```
 
 From the source tree the scripts load the package with `pkgload::load_all()`;
-add `--installed` to use the installed soilhub instead (as a student would).
+add `--installed` to use the installed soilhub instead (as a user would).
 Away from the source tree (for example a copy of `tests/live/` on RStudio
 Server with soilhub installed) they use the installed package. `--help`
 lists the options of each script.
@@ -40,7 +40,7 @@ checks fail by construction in a fake run (see the end of this page).
 
 | # | Script | Account | Writes to the API | Time |
 | --- | --- | --- | --- | --- |
-| 1 | `smoke.R` | reader (student) | nothing | 5–15 min |
+| 1 | `smoke.R` | reader | nothing | 5–15 min |
 | 2 | `exports.R` | reader | 5 small export jobs (kept 7 days by the server) | 2–5 min |
 | 3 | `session-hours.R --forced-expiry` | reader | nothing | about 5 min, attended |
 | 4 | `session-hours.R` | reader | nothing | about 5 h 30 min, unattended |

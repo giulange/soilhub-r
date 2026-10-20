@@ -89,7 +89,7 @@ then `soil_login(soil)` is needed.
 
 ## 3. What am I allowed to do?
 
-Your account has **rights**. Most students have `soil:summary` (see what
+Your account has **rights**. Most users have `soil:summary` (see what
 exists) and `soil:read` (read the data). `soil_whoami()` shows your rights
 and the functions they allow.
 

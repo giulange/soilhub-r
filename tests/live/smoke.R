@@ -5,7 +5,7 @@
 #   Rscript tests/live/smoke.R --datasets=wosis_points,sotwis_polygons
 #   Rscript tests/live/smoke.R --fake          # dry run on local fake servers
 #
-# Sign in with a READER account (soil:summary, soil:read; a student account):
+# Sign in with a READER account (soil:summary, soil:read):
 # the last checks verify that a reader is refused writes. With a publisher
 # account they are skipped. See tests/live/README.md.
 
