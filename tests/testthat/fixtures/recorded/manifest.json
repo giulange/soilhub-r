@@ -292,7 +292,7 @@
     },
     {
       "name": "wide-sotwis",
-      "call": "soil_observations(soil, datasets = \"sotwis_components\", bbox = c(28.8, -2.9, 30.9, -1.0), components = \"all\", max_rows = 5, progress = FALSE)",
+      "call": "soil_observations(soil, datasets = \"sotwis_polygons\", bbox = c(10.0, 36.5, 10.5, 37.0), components = \"all\", max_rows = 5, progress = FALSE)",
       "session": "user",
       "outcome": "ok",
       "exchanges": [
@@ -300,7 +300,7 @@
           "method": "POST",
           "path": "/query/observations",
           "query": [],
-          "body": "{\"datasets\":[\"sotwis_components\"],\"bbox\":[28.8,-2.9,30.9,-1],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"components\":\"all\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
+          "body": "{\"datasets\":[\"sotwis_polygons\"],\"bbox\":[10,36.5,10.5,37],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"components\":\"all\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
           "status": 200,
           "file": "wide-sotwis-1.json"
         }
@@ -436,7 +436,7 @@
     },
     {
       "name": "features-polygons",
-      "call": "soil_features(soil, datasets = \"sotwis_components\", bbox = c(28.8, -2.9, 30.9, -1.0), max_rows = 3, progress = FALSE)",
+      "call": "soil_features(soil, datasets = \"sotwis_polygons\", bbox = c(10.0, 36.5, 10.5, 37.0), max_rows = 3, progress = FALSE)",
       "session": "user",
       "outcome": "ok",
       "exchanges": [
@@ -444,7 +444,7 @@
           "method": "POST",
           "path": "/query/features",
           "query": [],
-          "body": "{\"datasets\":[\"sotwis_components\"],\"bbox\":[28.8,-2.9,30.9,-1],\"geometry\":\"any\",\"view\":\"raw\",\"canonical\":true,\"limit\":3,\"offset\":0}",
+          "body": "{\"datasets\":[\"sotwis_polygons\"],\"bbox\":[10,36.5,10.5,37],\"geometry\":\"any\",\"view\":\"raw\",\"canonical\":true,\"limit\":3,\"offset\":0}",
           "status": 200,
           "file": "features-polygons-1.json"
         }
@@ -578,7 +578,7 @@
         },
         {
           "method": "GET",
-          "path": "/exports/exp_20261020_060654_541b5ec8",
+          "path": "/exports/exp_20261020_064345_9c0b4cf2",
           "query": [],
           "body": null,
           "status": 200,
@@ -586,7 +586,7 @@
         },
         {
           "method": "GET",
-          "path": "/exports/exp_20261020_060654_541b5ec8",
+          "path": "/exports/exp_20261020_064345_9c0b4cf2",
           "query": [],
           "body": null,
           "status": 200,
@@ -594,7 +594,7 @@
         },
         {
           "method": "GET",
-          "path": "/exports/exp_20261020_060654_541b5ec8/download",
+          "path": "/exports/exp_20261020_064345_9c0b4cf2/download",
           "query": [],
           "body": null,
           "status": 200,

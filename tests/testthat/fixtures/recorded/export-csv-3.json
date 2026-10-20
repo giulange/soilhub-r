@@ -1,11 +1,11 @@
 {
-  "job_id": "exp_20261020_060654_541b5ec8",
+  "job_id": "exp_20261020_064345_9c0b4cf2",
   "status": "completed",
   "summary_url": null,
-  "download_url": "/api/v1/exports/exp_20261020_060654_541b5ec8/download",
+  "download_url": "/api/v1/exports/exp_20261020_064345_9c0b4cf2/download",
   "progress": 100,
-  "file_size_bytes": 4547,
-  "expires_at": "2026-10-27T06:06:54.438121+00:00",
+  "file_size_bytes": 4546,
+  "expires_at": "2026-10-27T06:43:45.990986+00:00",
   "error_message": null,
   "observation_count": 30,
   "records": {
