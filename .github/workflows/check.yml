@@ -51,7 +51,7 @@ jobs:
         if: ${{ matrix.config.nosf }}
         with:
           dependencies: '"hard"'
-          extra-packages: any::rcmdcheck, any::testthat, any::webfakes
+          extra-packages: any::rcmdcheck, any::testthat, any::webfakes, any::knitr, any::rmarkdown
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
