@@ -2,7 +2,7 @@
   "exp": 1792332000, "iat": 1792324800, "jti": "fixture-reader",
   "iss": "https://kc.weatherprogapp.it/realms/ams", "aud": ["soil-api", "account"],
   "sub": "00000000-0000-4000-8000-000000000001", "typ": "Bearer", "azp": "ams-r",
-  "scope": "openid soil", "preferred_username": "student",
+  "scope": "openid soil", "preferred_username": "reader",
   "resource_access": {
     "soil-api": {"roles": ["soil:read", "soil:summary"]},
     "account": {"roles": ["manage-account", "view-profile"]}

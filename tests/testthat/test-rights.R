@@ -18,7 +18,7 @@ session_with_token <- function(token, capabilities = read_fixture("capabilities.
 
 test_that("the JWT payload is decoded from base64url without padding", {
   payload <- jwt_payload(fixture_jwt("jwt-reader.json"))
-  expect_identical(payload$preferred_username, "student")
+  expect_identical(payload$preferred_username, "reader")
   expect_identical(payload$resource_access$`soil-api`$roles, list("soil:read", "soil:summary"))
   expect_null(jwt_payload("opaque-token"))
   expect_null(jwt_payload("a.%%%.c"))
@@ -31,7 +31,7 @@ test_that("roles are read for the audience advertised by /capabilities", {
   audience <- capabilities$authentication$audience
   expect_identical(audience, "soil-api")
   reader <- token_identity(fixture_jwt("jwt-reader.json"), audience)
-  expect_identical(reader$username, "student")
+  expect_identical(reader$username, "reader")
   expect_identical(reader$subject, "00000000-0000-4000-8000-000000000001")
   expect_identical(reader$roles, c("soil:read", "soil:summary"))
   expect_true(reader$rights_known)
@@ -128,7 +128,7 @@ test_that("soil_whoami() reports user, rights, limits and the session lifetime",
   soil <- session_with_token(fixture_jwt("jwt-reader.json"))
   me <- soil_whoami(soil)
   expect_s3_class(me, "soil_identity")
-  expect_identical(me$username, "student")
+  expect_identical(me$username, "reader")
   expect_identical(me$roles, c("soil:read", "soil:summary"))
   expect_identical(me$can, c(summary = TRUE, read = TRUE, publish = FALSE, admin = FALSE))
   expect_identical(me$limits$max_page_size, 1000L)
@@ -138,7 +138,7 @@ test_that("soil_whoami() reports user, rights, limits and the session lifetime",
   expect_identical(me$status, "signed_in")
 
   out <- capture.output(print(me))
-  expect_identical(out[1], "<soil_identity> student")
+  expect_identical(out[1], "<soil_identity> reader")
   expect_true(any(grepl("Rights:  soil:read, soil:summary (audience soil-api)", out, fixed = TRUE)))
   expect_true(any(grepl("valid for 2h 0m", out, fixed = TRUE)))
   expect_true(any(grepl("soil:admin +no +soil_register_variable\\(\\)", out)))

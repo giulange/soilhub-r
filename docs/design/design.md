@@ -43,7 +43,7 @@ canonical data endpoints; "right" is a Keycloak client role of the audience `soi
 
 | User | Typical rights | What they do |
 | --- | --- | --- |
-| Student / reader | `soil:summary`, `soil:read` | discovery, reads, exports |
+| Reader | `soil:summary`, `soil:read` | discovery, reads, exports |
 | Publisher (owner, collaborators) | + `soil:publish` | runs, publications, source ingest, job control |
 | Administrator (owner) | + `soil:admin` | variables, products, versions, country refresh |
 
@@ -770,7 +770,7 @@ Pros: `install.packages("soilhub", repos = "https://giulange.r-universe.dev")` w
 Windows/macOS, automatic rebuild from GitHub, dependency resolution, `pak` support, a visible
 check status. Cons: builds from the repo HEAD or tags (the release discipline must be by tag);
 one more public surface to keep green; the owner's GitHub organisation registry must be maintained;
-students on RStudio Server still install source packages. Recommendation: keep GitHub Releases as
+users on RStudio Server still install source packages. Recommendation: keep GitHub Releases as
 the official channel for 0.2.0; register r-universe after 0.2.0 as a convenience channel built
 from tags only (`@branch: "release"` or tag-based), not a prerequisite.
 
@@ -782,7 +782,7 @@ from tags only (`@branch: "release"` or tag-based), not a prerequisite.
    exported function; contract tests pass against the committed snapshot and against the live
    `openapi.json` of production on release day.
 2. **#37 multi-hour session** (gate): `tests/live/session-hours.R` run by the owner on RStudio
-   Server with a student-role account: reads every 20 min for ≥ 4 h without any browser step, one
+   Server with a reader account: reads every 20 min for ≥ 4 h without any browser step, one
    idle gap of 90 min, renewals visible in the log; a forced expiry (Keycloak session revoked)
    yields `soilhub_auth_error(reason = "session_expired")` and a clean `soil_login()` recovery.
    The measured idle/max limits are written in the vignette. Reader permissions unchanged.
@@ -808,7 +808,7 @@ from tags only (`@branch: "release"` or tag-based), not a prerequisite.
    write function gets the local permission error before any request; with the pre-check disabled
    (token without `resource_access`) the API's 403 maps to the same error.
 8. **Documentation**: the six vignettes build; pkgdown site published; migration table complete;
-   README installer works on RStudio Server (student test, installed package, not source).
+   README installer works on RStudio Server (user test, installed package, not source).
 9. **Owner approval** of the version and release (section 9.3).
 
 ---
@@ -848,7 +848,7 @@ Suggested milestone grouping: M1 "core" (WP0–WP3), M2 "reads" (WP4–WP7), M3 
 | Q1 | Multi-value WoSIS cells: decision 8 says the numeric column holds "the value WoSIS publishes (the mean)". The API deliberately returns the list without aggregation. Confirm the rule the client applies to `<key>`. | (a) mean of the listed values, originals in `<key>_values`, rule recorded in metadata; (b) `NA` in `<key>` and originals in `<key>_values`; (c) first element | (a), as decided; the companion column and `multi_value_rule` keep the client honest about a derived number |
 | Q2 | Session lifetimes for #37: which Keycloak values apply to `ams-r` (access token, SSO session idle, SSO session max, client session idle/max, refresh-token rotation)? | (a) read them from the Keycloak admin console and give them to the client docs; (b) measure them with `session-hours.R` only | (a) then confirm with (b); the acceptance targets (4 h active, 90 min idle) need the numbers to be fair |
 | Q3 | Source of the OpenAPI for contract tests | (a) committed snapshot refreshed by the owner; (b) live fetch of the public `openapi.json` of production; (c) both | (c): snapshot for deterministic tests, scheduled live diff as drift alarm |
-| Q4 | Default session registry (`soil_session()` default argument) | (a) implicit default set by `soil_connect()`; (b) always explicit `soil` | (a): fewer arguments for students, explicit override for multiple sessions |
+| Q4 | Default session registry (`soil_session()` default argument) | (a) implicit default set by `soil_connect()`; (b) always explicit `soil` | (a): fewer arguments for users, explicit override for multiple sessions |
 | Q5 | Account for the write acceptance (10.6): writes need a human account with `soil:publish` and `soil:admin` | (a) the owner's personal Keycloak user gets the roles; (b) a dedicated human "publisher-test" user | (a) for production acceptance, (b) on the development API for repeatable tests |
 | Q6 | Exposure of `soil_values()`, `soil_health_scores()` and the SOTWIS raw-only tables (`soil_ttr_flags`, code lists) in the first release | (a) all in 0.2.0; (b) defer values/health reads | (a): decision 7 asks for the whole surface and they cost little |
 | Q7 | `too_large = "export"` default | (a) `"stop"` (explicit); (b) `"export"` (silent fallback) | (a): a pedologist should see the size and choose the format |
