@@ -242,8 +242,8 @@ fetch_capabilities <- function(soil) {
 #'
 #' Rights: `soil:summary`.
 #'
-#' @param soil A session; the default session when omitted.
-#' @param refresh Read the capabilities from the server again.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param refresh Read the capabilities from the server again. Client-side: not sent to the API.
 #' @return The `/capabilities` object as a named list (as parsed, nothing
 #'   renamed).
 #' @family discovery
@@ -281,7 +281,7 @@ soil_capabilities <- function(soil = soil_session(), refresh = FALSE) {
 #' Rights: none for `health` and `ready`; the capabilities are those read at
 #' the login (or read now, with `soil:summary`, when not cached).
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @return A `soil_api_info` list: `api_url`, `health` (`"ok"` or the
 #'   error), `ready` (`"ready"`, or the reason the database is not
 #'   reachable), `api_version`, `schema_version` (the

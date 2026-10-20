@@ -19,22 +19,24 @@ soil_run_complete(soil = soil_session(), run_id, diagnostics = list())
 soil_run_fail(soil = soil_session(), run_id, diagnostics = list())
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
 \item{product_version_id}{The id of the version
-(\code{\link[=soil_product_version]{soil_product_version()}}).}
+(\code{\link[=soil_product_version]{soil_product_version()}}). API path parameter \code{{product_version_id}} of
+\code{POST /product-versions/{product_version_id}/runs}.}
 
 \item{idempotency_key}{Key of the run (at most 200 characters), stable
-for one execution.}
+for one execution. API field \code{idempotency_key}.}
 
 \item{input_release_ids}{Ids of the source releases used by the
-execution (integer).}
+execution (integer). API field \code{input_release_ids}.}
 
-\item{parameters}{Parameters of the execution, a named list.}
+\item{parameters}{Parameters of the execution, a named list. API field \code{parameters}.}
 
-\item{run_id}{The id of the run.}
+\item{run_id}{The id of the run. API path parameter \code{{run_id}} of
+\code{POST /publications/{run_id}/complete} and \code{POST /publications/{run_id}/fail}.}
 
-\item{diagnostics}{Diagnostics recorded with the closing, a named list.}
+\item{diagnostics}{Diagnostics recorded with the closing, a named list. API field \code{diagnostics}.}
 }
 \value{
 The run: a list \code{run_id}, \code{product_version_id}, \code{product_code},

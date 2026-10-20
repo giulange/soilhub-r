@@ -22,7 +22,7 @@ soil_publish_source(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
 \item{manifest}{A named list describing the release: \code{provider_code},
 \code{provider_name}, \code{dataset_code}, \code{dataset_name}, \code{release_code},
@@ -35,7 +35,7 @@ soil_publish_source(
 \code{source_table_prefix} and \code{assets} (a data frame or list of records
 with \code{asset_role}, \code{source_url}, \code{checksum_sha256}, \code{media_type},
 \code{byte_size}). Property mappings are not part of the manifest: the API
-resolves them from its own mappings of the provider.}
+resolves them from its own mappings of the provider. API form field \code{manifest} (JSON text).}
 
 \item{features}{The features of the release, each with a
 \code{source_record_id} column: an \code{sf} object (needs the package \code{sf}), or
@@ -43,7 +43,8 @@ the path of a spatial file -- a GeoJSON file (\code{.geojson}, \code{.json}) is
 read without \code{sf} when in WGS84, any other format is read with
 \code{\link[sf:st_read]{sf::st_read()}}. The other columns travel as attributes of the feature
 record (\code{source_support}, ...). For a non-spatial dataset
-(\code{default_geometry_kind = "NONE"}), a plain data frame.}
+(\code{default_geometry_kind = "NONE"}), a plain data frame. Records of the NDJSON bundle sent as
+API form field \code{file}.}
 
 \item{profiles, components, horizons, observations}{Optional data frames (or
 lists of records) of the other record types, each with its
@@ -53,24 +54,26 @@ lists of records) of the other record types, each with its
 \code{bottom_depth_cm}, \code{horizon_name}; components \code{component_rank},
 \code{proportion_percent}; observations \code{property_code}, \code{value}, \code{unit},
 \code{status}, and optionally \code{method} and \code{quality}. \code{NA} fields are left
-out (an observation needs its \code{unit} declared).}
+out (an observation needs its \code{unit} declared). Records of the NDJSON bundle sent as API form
+field \code{file}.}
 
 \item{idempotency_key}{Key of this ingest (at most 200 characters), stable
-for one bundle.}
+for one bundle. API form field \code{idempotency_key}.}
 
 \item{auto_promote}{Let the server validate and promote the job (\code{TRUE}),
-or validate and promote from the client (\code{FALSE}).}
+or validate and promote from the client (\code{FALSE}). API form field \code{auto_promote}.}
 
 \item{wait}{Validate, promote and wait for the end of the job; \code{FALSE}
-returns after the upload.}
+returns after the upload. Client-side: not sent to the API.}
 
 \item{keep_file}{Keep the NDJSON bundle written for the upload: its path
 is in \code{file} (a temporary file, removed when the R session ends; copy
-it to keep it longer). By default it is deleted.}
+it to keep it longer). By default it is deleted. Client-side: not sent to the API.}
 
-\item{timeout, poll}{Seconds to wait for the job, and between two polls.}
+\item{timeout, poll}{Seconds to wait for the job, and between two polls. Client-side: not sent to
+the API.}
 
-\item{progress}{Print the progress of the job.}
+\item{progress}{Print the progress of the job. Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_source_ingest} list: \code{job_id}, \code{status}, \code{provider_code},

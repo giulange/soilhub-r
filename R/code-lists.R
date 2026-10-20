@@ -36,7 +36,7 @@ ttr_legend_schema <- list(
 #'
 #' Rights: `soil:summary`. Capability: `code_lists`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @return A data frame, one row per code list and provider: `code_list`,
 #'   `provider_code`, `row_count`, `distinct_entries`, `attributes` (list of
 #'   character), `source_datasets` (list of data frames `source_record_id`,
@@ -66,13 +66,14 @@ soil_code_lists <- function(soil = soil_session()) {
 #' Rights: `soil:summary`. Capability: `code_lists`.
 #'
 #' @param soil A session; the default session when omitted (the name may then
-#'   be given first: `soil_code_list("SOTWIS_codes")`).
-#' @param name The code list (`"SOTWIS_codes"`).
+#'   be given first: `soil_code_list("SOTWIS_codes")`). Client-side: not sent to the API.
+#' @param name The code list (`"SOTWIS_codes"`). API path parameter `{code_list}` of
+#'   `GET /code-lists/{code_list}`.
 #' @param attribute Source attributes (`ATTRIBUTE`, e.g. `"LNDF"`), `NULL`
-#'   for all.
-#' @param code Codes (`CODE`), `NULL` for all.
+#'   for all. API query parameter `attribute`.
+#' @param code Codes (`CODE`), `NULL` for all. API query parameter `code`.
 #' @param source_dataset One source dataset (record id or name), `NULL` for
-#'   all.
+#'   all. API query parameter `source_dataset`.
 #' @return A data frame: `attribute`, `code`, `description`,
 #'   `source_record_id`, `source_dataset_name`, `source_table`,
 #'   `source_row_number` (integer), `provider_code`. An unknown list raises
@@ -119,7 +120,7 @@ soil_code_list <- function(soil = soil_session(), name, attribute = NULL,
 #'
 #' Rights: `soil:summary`. Capability: `sotwis_ttr_flags`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @return A data frame: `flag_table`, `flag_columns` (list of character),
 #'   `symbol`, `symbol_kind`, `applies_to` (list of data frames
 #'   `source_record_id`, `source_dataset_name`, or `NULL`), `meaning`,

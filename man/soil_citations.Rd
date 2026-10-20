@@ -13,10 +13,10 @@ soil_licences(x, soil = soil_session())
 \item{x}{What to cite: dataset names (character), rows of
 \code{\link[=soil_datasets]{soil_datasets()}}, a \code{\link[=soil_dataset]{soil_dataset()}}, or a result carrying the catalog
 rows of its datasets in its metadata (a \code{soil_table}, \code{soil_summary} or
-\code{soil_export}).}
+\code{soil_export}). Client-side: not sent to the API.}
 
 \item{soil}{A session; the default session when omitted (needed only when
-\code{x} holds dataset names).}
+\code{x} holds dataset names). Client-side: not sent to the API.}
 }
 \value{
 \code{soil_citations()}: a data frame \code{dataset}, \code{citation_text},

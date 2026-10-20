@@ -8,11 +8,11 @@ soil_export_read(x, what = c("observations", "features", "metadata", "all"))
 }
 \arguments{
 \item{x}{A \code{soil_export} (downloaded), the path of an export zip, or the
-directory it was unzipped into.}
+directory it was unzipped into. Client-side: not sent to the API.}
 
 \item{what}{\code{"observations"} (the default; for an export of \code{content = "features"} the features), \code{"features"}, \code{"metadata"} (the parsed
 \code{metadata.json}) or \code{"all"} (a list \code{features}, \code{observations},
-\code{metadata}).}
+\code{metadata}). Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_table} (\code{soil_layout} \code{"wide"}, \code{"long"} or

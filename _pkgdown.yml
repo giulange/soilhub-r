@@ -5,8 +5,7 @@ destination: site
 template:
   bootstrap: 5
 
-# Reference groups are filled as the functions are added (design 8).
-# Planned groups: Session, Discovery, Reads, Exports, Writing, Results.
+# Reference groups (design 8): one per roxygen @family.
 reference:
   - title: Session and identity
     contents:
@@ -91,5 +90,27 @@ reference:
     contents:
       - soilhub-config
       - soilhub-errors
+  - title: Terms
+    desc: >
+      The words of the hub and of its sources (feature, profile, component,
+      horizon, observation, PRID, HONU, SUID, CLAF, first_layer_status, ...).
+    contents:
+      - soilhub-terms
+      - soilhub-package
 
-# Articles (vignettes) are added in WP11.
+articles:
+  - title: Reading soil data
+    navbar: Reading soil data
+    contents:
+      - soilhub
+      - raw-vs-revised
+      - first-layer
+      - exports
+  - title: Publishing data
+    navbar: Publishing data
+    contents:
+      - writing-data
+  - title: Upgrading
+    navbar: Upgrading
+    contents:
+      - migration-0.1

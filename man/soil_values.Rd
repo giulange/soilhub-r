@@ -27,51 +27,54 @@ soil_values(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{providers}{Provider codes of the targets (\code{"isric"}).}
+\item{providers}{Provider codes of the targets (\code{"isric"}). API field \code{providers}.}
 
-\item{datasets}{Catalog dataset codes of the targets.}
+\item{datasets}{Catalog dataset codes of the targets. API field \code{datasets}.}
 
-\item{variables}{Variable codes (see \code{\link[=soil_variables]{soil_variables()}}).}
+\item{variables}{Variable codes (see \code{\link[=soil_variables]{soil_variables()}}). API field \code{variables}.}
 
-\item{domains}{Domain codes of the variables.}
+\item{domains}{Domain codes of the variables. API field \code{domains}.}
 
 \item{measurement_kinds}{Measurement kinds of the variables (\code{"derived"},
-\code{"modelled"}, ...).}
+\code{"modelled"}, ...). API field \code{measurement_kinds}.}
 
 \item{target_levels}{\code{"feature"}, \code{"profile"}, \code{"component"},
-\code{"horizon"}.}
+\code{"horizon"}. API field \code{target_levels}.}
 
-\item{country}{Countries as ISO 3166 alpha-2 or alpha-3 codes or names.}
+\item{country}{Countries as ISO 3166 alpha-2 or alpha-3 codes or names. API field \code{country}.}
 
-\item{bbox}{\code{c(xmin, ymin, xmax, ymax)} in WGS84 degrees.}
+\item{bbox}{\code{c(xmin, ymin, xmax, ymax)} in WGS84 degrees. API field \code{bbox}.}
 
 \item{valid_at}{A date-time (POSIXct, Date or ISO 8601 text): only the
-values valid at that instant (\verb{valid_time_start <= valid_at < valid_time_end}, open ends included).}
+values valid at that instant (\verb{valid_time_start <= valid_at < valid_time_end}, open ends included). API field \code{valid_at}.}
 
 \item{depth_top_cm, depth_bottom_cm}{Depth interval in cm: the values whose
-depth interval overlaps it (values without depth included).}
+depth interval overlaps it (values without depth included). API fields \code{depth_top_cm} and
+\code{depth_bottom_cm}.}
 
-\item{product_versions}{Product version codes.}
+\item{product_versions}{Product version codes. API field \code{product_versions}.}
 
-\item{run_ids}{Run ids.}
+\item{run_ids}{Run ids. API field \code{run_ids}.}
 
 \item{statuses}{Value statuses: \code{"published"}, \code{"insufficient_data"},
-\code{"not_applicable"}.}
+\code{"not_applicable"}. API field \code{statuses}.}
 
 \item{with_geometry}{\code{"none"}, \code{"text"} (the geometry of the target's
 feature as GeoJSON text in \code{geometry_text}, EPSG:4326) or \code{"sf"} (an
 \code{sf} object with a \code{geometry} column; needs the package \code{sf}, else a
-\code{soilhub_dependency_error}).}
+\code{soilhub_dependency_error}). Client-side; sets the API field \code{include_geometry} (\code{false} for
+\code{"none"}), the form is built locally.}
 
 \item{include_lineage}{Add the lineage list columns \code{observation_inputs},
 \code{value_inputs}, \code{release_inputs}, \code{asset_inputs} (what each value was
-computed from).}
+computed from). API field \code{include_lineage}.}
 
-\item{max_rows}{Maximum number of values to read (\code{Inf}: all).}
+\item{max_rows}{Maximum number of values to read (\code{Inf}: all). Client-side; caps the API field
+\code{limit} of each page request.}
 
-\item{progress}{Report the pages read.}
+\item{progress}{Report the pages read. Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_table} (see \link{soil_table}) with \code{soil_layout = "values"}:

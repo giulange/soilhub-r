@@ -45,6 +45,7 @@
 #' # Log every request
 #' old <- options(soilhub.verbose = 2)
 #' options(old)
+#' @family configuration and errors
 #' @name soilhub-config
 NULL
 

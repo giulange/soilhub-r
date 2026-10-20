@@ -26,6 +26,7 @@ Suggests:
     testthat (>= 3.0.0),
     webfakes,
     withr
+VignetteBuilder: knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -59,9 +60,11 @@ Collate:
     'publish-products.R'
     'publish-source.R'
     'publish-variables.R'
+    'replay.R'
     'rights.R'
     'session.R'
     'soilhub-package.R'
+    'soilhub-terms.R'
     'summary.R'
     'targets.R'
     'ttr-flags.R'

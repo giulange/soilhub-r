@@ -8,7 +8,7 @@ soil_revised_rules(x)
 }
 \arguments{
 \item{x}{A \code{soil_table} read with \code{view = "revised"} (or a summary or an
-export of the revised view).}
+export of the revised view). Client-side: not sent to the API.}
 }
 \value{
 A data frame \code{id}, \code{title}, \code{issue}, \code{effect}, \code{n} (zero rows for

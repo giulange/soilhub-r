@@ -7,7 +7,7 @@
 soil_logout(soil = soil_session())
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 }
 \value{
 \code{NULL}, invisibly.
@@ -24,4 +24,11 @@ soil_logout(soil)
 }
 \seealso{
 \code{\link[=soil_connect]{soil_connect()}}, \code{\link[=soil_session]{soil_session()}}
+
+Other session: 
+\code{\link{soil_connect}()},
+\code{\link{soil_login}()},
+\code{\link{soil_session}()},
+\code{\link{soil_whoami}()}
 }
+\concept{session}

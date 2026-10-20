@@ -18,30 +18,32 @@ soil_register_variable(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
 \item{variable_code}{Code of the variable: lowercase letters, digits and
-\verb{_} (e.g. \code{"soil_health_physical_score"}).}
+\verb{_} (e.g. \code{"soil_health_physical_score"}). API field \code{variable_code}.}
 
-\item{name}{Human name.}
+\item{name}{Human name. API field \code{name}.}
 
-\item{domain_code}{Domain of the controlled vocabulary (e.g. \code{"soil"}).}
+\item{domain_code}{Domain of the controlled vocabulary (e.g. \code{"soil"}). API field \code{domain_code}.}
 
 \item{value_type}{Type of the published values: \code{"numeric"}, \code{"text"},
-\code{"boolean"} or \code{"json"}.}
+\code{"boolean"} or \code{"json"}. API field \code{value_type}.}
 
 \item{measurement_kind_code}{Measurement kind of the controlled
-vocabulary (e.g. \code{"derived"}).}
+vocabulary (e.g. \code{"derived"}). API field \code{measurement_kind_code}.}
 
 \item{allowed_target_levels}{Levels a value may be attached to, one or
-more of \code{"feature"}, \code{"profile"}, \code{"component"}, \code{"horizon"}.}
+more of \code{"feature"}, \code{"profile"}, \code{"component"}, \code{"horizon"}. API field
+\code{allowed_target_levels}.}
 
-\item{description}{Optional description.}
+\item{description}{Optional description. API field \code{description}.}
 
 \item{idempotency_key}{Key of this registration (at most 200
-characters), stable for one definition.}
+characters), stable for one definition. API field \code{idempotency_key}.}
 
-\item{validate_only}{Only validate: nothing is registered.}
+\item{validate_only}{Only validate: nothing is registered. Client-side: stops after
+\code{POST /variables/validate} and skips \code{POST /variables}; not sent to the API.}
 }
 \value{
 With \code{validate_only = TRUE}, the validation: a list \code{valid},

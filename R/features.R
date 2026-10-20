@@ -70,18 +70,20 @@ polygon_kinds <- c("POLYGON", "MULTIPOLYGON")
 #' @param with_geometry `"sf"` (the default: an `sf` object, EPSG:4326; needs
 #'   the package `sf`, else a `soilhub_dependency_error`) or `"text"` (a data
 #'   frame with `geometry_text`, the GeoJSON of each feature: no package
-#'   needed; `sf::st_read()` or `geojsonsf` read it).
+#'   needed; `sf::st_read()` or `geojsonsf` read it). Client-side: not sent to the API (features
+#'   always carry their GeoJSON geometry).
 #' @param max_rows Maximum number of features to read (`Inf`: the whole
-#'   selection).
+#'   selection). Client-side; caps the API field `limit` of each page request.
 #' @param page_size Features per request; `NULL` uses the session's, the
-#'   `soilhub.page_size` option or the server's `max_page_size`.
+#'   `soilhub.page_size` option or the server's `max_page_size`. Client-side; sets the API field
+#'   `limit` of each page request.
 #' @param too_large What to do when the API refuses the selection as too
 #'   large for a synchronous read: `"stop"` raises
 #'   `soilhub_load_limit_error`, whose message names the equivalent
 #'   `soil_export(..., content = "features")` call; `"export"` exports the
 #'   features of the selection (GeoJSON), waits, downloads, reads them back
 #'   and returns the same shape, with `soil_metadata(x)$via_export` the job
-#'   id.
+#'   id. Client-side: not sent to the API.
 #' @return A `soil_table` with `soil_layout = "features"`: an `sf` object
 #'   (`with_geometry = "sf"`) or a data frame (`"text"`).
 #' @family reads

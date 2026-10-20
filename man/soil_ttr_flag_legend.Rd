@@ -7,7 +7,7 @@
 soil_ttr_flag_legend(soil = soil_session())
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 }
 \value{
 A data frame: \code{flag_table}, \code{flag_columns} (list of character),

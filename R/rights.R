@@ -216,7 +216,7 @@ soil_require_right <- function(soil, right, what = NULL) {
 #' * `soil:admin` -- variables, products, versions, country refresh.
 #'
 #' @param soil A session from [soil_connect()]; the default session when
-#'   omitted.
+#'   omitted. Client-side: not sent to the API.
 #' @return A `soil_identity` list: `username`, `subject`, `audience`, `roles`
 #'   (character), `rights_known`, `can` (named logical: `summary`, `read`,
 #'   `publish`, `admin`; `NA` when the rights are not declared in the
@@ -226,6 +226,7 @@ soil_require_right <- function(soil, right, what = NULL) {
 #'   `session_expires_at` (expiry of the refresh token, `NA` when unknown),
 #'   `session_renewable`, `last_renewed_at`, `renewals` and `status`
 #'   (`"signed_in"` or `"expired"`).
+#' @family session
 #' @seealso [soil_connect()], [soil_session()]
 #' @examples
 #' \dontrun{

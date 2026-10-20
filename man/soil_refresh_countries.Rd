@@ -7,10 +7,11 @@
 soil_refresh_countries(soil = soil_session(), idempotency_key = NULL)
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
 \item{idempotency_key}{Optional key: a second request with the same key
-returns the job already queued instead of queuing another one.}
+returns the job already queued instead of queuing another one. API query parameter
+\code{idempotency_key}.}
 }
 \value{
 The queued \code{soil_job} (unified view).

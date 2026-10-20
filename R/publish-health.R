@@ -61,7 +61,8 @@ health_receipt_schema <- c(publication_receipt_schema, list(score_count = "dbl")
 #'   required =, transformation =)`), `value_inputs`, `release_inputs`,
 #'   `asset_inputs` (lists of `list(id =, role =)`), `inputs`,
 #'   `derived_variables`, `memberships`, `diagnostics` (named lists) and
-#'   `activated_rules` (list of named lists).
+#'   `activated_rules` (list of named lists). API field `scores`; with the NDJSON transport, the
+#'   lines of the file sent as API form field `file`.
 #' @return A `soil_publication` list as [soil_publish_values()], with
 #'   `score_count` for a synchronous publication.
 #' @family writing

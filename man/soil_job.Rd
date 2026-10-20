@@ -11,12 +11,15 @@ soil_job(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{job_id}{The job id (or the result of a submission).}
+\item{job_id}{The job id (or the result of a submission). API path parameter \code{{job_id}} of
+\code{GET /jobs/{job_id}} (also \code{GET /publication-jobs/{job_id}} and
+\code{GET /soil-health-publication-jobs/{job_id}}, by \code{detail}), \code{POST /jobs/{job_id}/cancel} and
+\code{POST /source-ingests/{job_id}/validate} or \verb{/promote}.}
 
 \item{detail}{Which view of the job: \code{"unified"}, \code{"publication"},
-\code{"soil_health"}.}
+\code{"soil_health"}. Client-side; selects the endpoint read, not sent to the API.}
 }
 \value{
 A \code{soil_job} list with the fields of the view, typed (times as

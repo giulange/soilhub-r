@@ -29,7 +29,7 @@ soil_export(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
 \item{datasets}{Catalog dataset codes (\code{"wosis_points"},
 \code{"wise_profiles"}, \code{"soter_profiles"}, \code{"soter_polygons"},
@@ -72,7 +72,7 @@ polygons): \code{NULL} (the API default, \code{"representative"}),
 API field \code{components}.}
 
 \item{min_cumulative_percent}{Threshold of \code{components = "cumulative"},
-0 to 100 (required with it, refused without it).}
+0 to 100 (required with it, refused without it). API field \code{min_cumulative_percent}.}
 
 \item{format}{File format: \code{"gpkg"} (GeoPackage, the default), \code{"geojson"},
 \code{"csv"}, \code{"tsv"}, or \code{"shp"} (Shapefile: only with \code{content = "features"}). The formats are those of \code{soil_capabilities()$exports}. API
@@ -85,25 +85,26 @@ field \code{format}.}
 horizon) or \code{"long"} (one row per observation); not sent with \code{content = "features"}. API field \code{layout}.}
 
 \item{wait}{Wait for the export to end (\code{TRUE}), or return at once with
-its \code{job_id} (\code{FALSE}).}
+its \code{job_id} (\code{FALSE}). Client-side: not sent to the API.}
 
 \item{timeout}{Seconds to wait for the export (default one hour); the
-export continues on the server after a timeout.}
+export continues on the server after a timeout. Client-side: not sent to the API.}
 
-\item{poll}{Seconds between two polls of the export (at least 2).}
+\item{poll}{Seconds between two polls of the export (at least 2). Client-side: not sent to the
+API.}
 
 \item{download}{Download the zip once the export is completed (needs
-\code{wait = TRUE}).}
+\code{wait = TRUE}). Client-side: not sent to the API.}
 
 \item{dir}{Directory of the downloads; \code{NULL} uses the option
 \code{soilhub.export_dir}, the environment variable \code{SOILHUB_EXPORT_DIR}, else
-\code{file.path(tempdir(), "soilhub-exports")}.}
+\code{file.path(tempdir(), "soilhub-exports")}. Client-side: not sent to the API.}
 
-\item{unzip}{Unzip the download into \verb{<dir>/<job_id>/}.}
+\item{unzip}{Unzip the download into \verb{<dir>/<job_id>/}. Client-side: not sent to the API.}
 
 \item{progress}{Show the progress of the export (fraction written) and of
 the download: progress bars in an interactive session, else one message
-per change of status.}
+per change of status. Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_export} (a list): \code{job_id}, \code{status} (\code{queued},

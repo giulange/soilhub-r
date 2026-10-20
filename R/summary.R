@@ -420,13 +420,13 @@ print.soil_availability <- function(x, ...) {
 #'
 #' Rights: `soil:summary`. Capability: `unified_consistency`.
 #'
-#' @param soil A session; the default session when omitted.
-#' @param providers Provider codes (`"isric"`), `NULL` for all.
-#' @param datasets Catalog dataset codes, `NULL` for all.
-#' @param geometry `NULL` (all), or `"point"` and/or `"polygon"`.
-#' @param country Countries as ISO 3166 alpha-2 or alpha-3 codes.
-#' @param bbox `c(xmin, ymin, xmax, ymax)` in WGS84 degrees.
-#' @param variables Canonical variable codes or source codes.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param providers Provider codes (`"isric"`), `NULL` for all. API field `providers`.
+#' @param datasets Catalog dataset codes, `NULL` for all. API field `datasets`.
+#' @param geometry `NULL` (all), or `"point"` and/or `"polygon"`. API field `geometry`.
+#' @param country Countries as ISO 3166 alpha-2 or alpha-3 codes. API field `country`.
+#' @param bbox `c(xmin, ymin, xmax, ymax)` in WGS84 degrees. API field `bbox`.
+#' @param variables Canonical variable codes or source codes. API field `variables`.
 #' @return A `soil_consistency` list: `totals` (named list: `feature_count`,
 #'   `point_count`, `polygon_count`, `profile_count`, `horizon_count`,
 #'   `original_observation_count`, `value_count`, `observation_count`,

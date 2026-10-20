@@ -54,6 +54,7 @@
 #'   }
 #' )
 #' }
+#' @family configuration and errors
 #' @name soilhub-errors
 #' @aliases soilhub_error soilhub_argument_error soilhub_dependency_error
 #'   soilhub_auth_error soilhub_permission_error soilhub_api_error

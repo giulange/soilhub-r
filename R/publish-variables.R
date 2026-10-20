@@ -29,21 +29,23 @@ variable_registration_schema <- list(
 #'
 #' Rights: `soil:admin`. Capability: `variable_registration`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @param variable_code Code of the variable: lowercase letters, digits and
-#'   `_` (e.g. `"soil_health_physical_score"`).
-#' @param name Human name.
-#' @param domain_code Domain of the controlled vocabulary (e.g. `"soil"`).
+#'   `_` (e.g. `"soil_health_physical_score"`). API field `variable_code`.
+#' @param name Human name. API field `name`.
+#' @param domain_code Domain of the controlled vocabulary (e.g. `"soil"`). API field `domain_code`.
 #' @param value_type Type of the published values: `"numeric"`, `"text"`,
-#'   `"boolean"` or `"json"`.
+#'   `"boolean"` or `"json"`. API field `value_type`.
 #' @param measurement_kind_code Measurement kind of the controlled
-#'   vocabulary (e.g. `"derived"`).
+#'   vocabulary (e.g. `"derived"`). API field `measurement_kind_code`.
 #' @param allowed_target_levels Levels a value may be attached to, one or
-#'   more of `"feature"`, `"profile"`, `"component"`, `"horizon"`.
-#' @param description Optional description.
+#'   more of `"feature"`, `"profile"`, `"component"`, `"horizon"`. API field
+#'   `allowed_target_levels`.
+#' @param description Optional description. API field `description`.
 #' @param idempotency_key Key of this registration (at most 200
-#'   characters), stable for one definition.
-#' @param validate_only Only validate: nothing is registered.
+#'   characters), stable for one definition. API field `idempotency_key`.
+#' @param validate_only Only validate: nothing is registered. Client-side: stops after
+#'   `POST /variables/validate` and skips `POST /variables`; not sent to the API.
 #' @return With `validate_only = TRUE`, the validation: a list `valid`,
 #'   `variable_code`, `errors` (data frame). Otherwise the registered
 #'   variable: a list `variable_id`, `variable_code`, `name`, `description`,

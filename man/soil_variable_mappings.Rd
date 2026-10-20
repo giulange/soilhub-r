@@ -8,11 +8,13 @@ soil_variable_mappings(soil = soil_session(), ...)
 }
 \arguments{
 \item{soil}{A session (the default session when omitted), or the result
-of \code{\link[=soil_variables]{soil_variables()}}, whose mappings are then listed without a request.}
+of \code{\link[=soil_variables]{soil_variables()}}, whose mappings are then listed without a request. Client-side: not sent
+to the API.}
 
 \item{...}{The filters of \code{\link[=soil_variables]{soil_variables()}} (\code{code}, \code{domain},
 \code{measurement_kind}, \code{target_level}, \code{dataset}, \code{provider},
-\code{available_only}) when \code{soil} is a session.}
+\code{available_only}) when \code{soil} is a session. API query parameters of \code{GET /variables}, as for
+\code{\link[=soil_variables]{soil_variables()}}.}
 }
 \value{
 A data frame, one row per (variable, dataset, mapping):

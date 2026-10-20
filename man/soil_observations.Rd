@@ -27,7 +27,7 @@ soil_observations(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
 \item{datasets}{Catalog dataset codes (\code{"wosis_points"},
 \code{"wise_profiles"}, \code{"soter_profiles"}, \code{"soter_polygons"},
@@ -70,7 +70,7 @@ polygons): \code{NULL} (the API default, \code{"representative"}),
 API field \code{components}.}
 
 \item{min_cumulative_percent}{Threshold of \code{components = "cumulative"},
-0 to 100 (required with it, refused without it).}
+0 to 100 (required with it, refused without it). API field \code{min_cumulative_percent}.}
 
 \item{layout}{\code{"wide"} (one row per horizon, the default) or \code{"long"}
 (one row per observation). API field \code{layout}.}
@@ -87,12 +87,14 @@ the geometry on every observation. API fields \code{geometry_format} (wide)
 and \code{include_geometry} (long).}
 
 \item{max_rows}{Maximum number of rows to read (\code{Inf}: the whole
-selection).}
+selection). Client-side; caps the API field \code{limit} of each page request.}
 
-\item{offset}{Rows of the selection to skip (to continue a partial read).}
+\item{offset}{Rows of the selection to skip (to continue a partial read). API field \code{offset} (of
+the first page request).}
 
 \item{page_size}{Rows per request; \code{NULL} uses the session's, the
-\code{soilhub.page_size} option or the server's \code{max_page_size}.}
+\code{soilhub.page_size} option or the server's \code{max_page_size}. Client-side; sets the API field
+\code{limit} of each page request.}
 
 \item{too_large}{What to do when the API refuses the selection as too
 large for a synchronous read: \code{"stop"} raises
@@ -101,12 +103,14 @@ large for a synchronous read: \code{"stop"} raises
 GeoJSON for the long layout with geometry), waits, downloads it into the
 export directory, reads it back and returns the same shape as the
 synchronous read, with \code{soil_metadata(x)$via_export} the job id (the
-whole selection is exported; \code{offset} and \code{max_rows} select its rows).}
+whole selection is exported; \code{offset} and \code{max_rows} select its rows). Client-side: not sent to
+the API.}
 
-\item{progress}{Report the pages read (messages at verbosity 1 or more).}
+\item{progress}{Report the pages read (messages at verbosity 1 or more). Client-side: not sent to
+the API.}
 
 \item{timeout}{Seconds allowed for each page request; \code{NULL} uses the
-session's (300 s by default).}
+session's (300 s by default). Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_table} (see \link{soil_table}): a data frame (an \code{sf} object

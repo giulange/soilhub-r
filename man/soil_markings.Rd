@@ -7,7 +7,7 @@
 soil_markings(x)
 }
 \arguments{
-\item{x}{A \code{soil_table}.}
+\item{x}{A \code{soil_table}. Client-side: not sent to the API.}
 }
 \value{
 A data frame \code{row} (row number in \code{x}), \code{horizon_id}, \code{scope}

@@ -40,10 +40,10 @@ new_soil_table <- function(frame, metadata, layout) {
 #' [summary()] shows the typing of the variable columns, the rows per
 #' dataset and, with `view = "revised"`, the rules applied with their counts.
 #'
-#' @param x,object A `soil_table`.
-#' @param ... As for a data frame (`[`); unused otherwise.
-#' @param row.names,optional Unused (the row names are kept).
-#' @param n Rows to print.
+#' @param x,object A `soil_table`. Client-side: not sent to the API.
+#' @param ... As for a data frame (`[`); unused otherwise. Client-side: not sent to the API.
+#' @param row.names,optional Unused (the row names are kept). Client-side: not sent to the API.
+#' @param n Rows to print. Client-side: not sent to the API.
 #' @name soil_table
 #' @family results
 NULL
@@ -228,7 +228,7 @@ result_metadata <- function(x) {
 #' collapsed duplicate measurements, component ties, component proportions
 #' not summing to 100.
 #'
-#' @param x A `soil_table` (or a summary or export result).
+#' @param x A `soil_table` (or a summary or export result). Client-side: not sent to the API.
 #' @return `soil_metadata()`: a list. `soil_warnings()`: a character vector.
 #' @family results
 #' @examples
@@ -260,7 +260,8 @@ soil_warnings <- function(x) {
 #' laboratory methods, the notes of the source mappings and the method
 #' facets of the multi-value cells.
 #'
-#' @param x A wide `soil_table`, or a downloaded wide `soil_export`.
+#' @param x A wide `soil_table`, or a downloaded wide `soil_export`. Client-side: not sent to the
+#'   API.
 #' @return A data frame `column`, `property_key`, `numeric`, `units` (list),
 #'   `source_codes` (list), `horizon_count`, `multi_value_cells`, `methods`
 #'   (list of named character: method code -> description), `source_notes`
@@ -298,7 +299,7 @@ soil_columns <- function(x) {
 #' `extreme`, `above_unit_maximum`, `impossible_for_declared_unit`); they
 #' change no value.
 #'
-#' @param x A `soil_table` with a `value_flags` column.
+#' @param x A `soil_table` with a `value_flags` column. Client-side: not sent to the API.
 #' @return A data frame `row` (row number in `x`), `horizon_id`, `column`
 #'   (the variable column; in the long layout the `property_code` of the
 #'   row), `flag`.
@@ -349,7 +350,7 @@ soil_flags <- function(x) {
 #' `guessed_elements_removed`, `value_from_estimates`, `kept_from_copy`,
 #' `values_differ`: scope `"revised_cell"`).
 #'
-#' @param x A `soil_table`.
+#' @param x A `soil_table`. Client-side: not sent to the API.
 #' @return A data frame `row` (row number in `x`), `horizon_id`, `scope`
 #'   (`"cell"`, `"layer"`, `"profile"`, `"retired_cell"`, `"revised_horizon"`,
 #'   `"revised_cell"`, `"hidden_value"`), `column` (the variable column, or
@@ -469,7 +470,7 @@ marking_values <- function(value) {
 #' `values_changed`, `values_flagged:<flag>`, ...).
 #'
 #' @param x A `soil_table` read with `view = "revised"` (or a summary or an
-#'   export of the revised view).
+#'   export of the revised view). Client-side: not sent to the API.
 #' @return A data frame `id`, `title`, `issue`, `effect`, `n` (zero rows for
 #'   the raw view). Its attribute `pairs` holds the spellings linked by R6
 #'   (SOTWIS PRID linked without case), when listed; `pending` and
@@ -519,7 +520,7 @@ soil_revised_rules <- function(x) {
 #' `numbering_gap`). This returns the vocabulary the API reported for the
 #' read.
 #'
-#' @param x A `soil_table` read with `layer = "first"`.
+#' @param x A `soil_table` read with `layer = "first"`. Client-side: not sent to the API.
 #' @return A list `view`, `statuses` (character), `profile_markings`
 #'   (character); `NULL` when `x` was not read with `layer = "first"`.
 #' @family results

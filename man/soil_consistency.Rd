@@ -15,19 +15,19 @@ soil_consistency(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{providers}{Provider codes (\code{"isric"}), \code{NULL} for all.}
+\item{providers}{Provider codes (\code{"isric"}), \code{NULL} for all. API field \code{providers}.}
 
-\item{datasets}{Catalog dataset codes, \code{NULL} for all.}
+\item{datasets}{Catalog dataset codes, \code{NULL} for all. API field \code{datasets}.}
 
-\item{geometry}{\code{NULL} (all), or \code{"point"} and/or \code{"polygon"}.}
+\item{geometry}{\code{NULL} (all), or \code{"point"} and/or \code{"polygon"}. API field \code{geometry}.}
 
-\item{country}{Countries as ISO 3166 alpha-2 or alpha-3 codes.}
+\item{country}{Countries as ISO 3166 alpha-2 or alpha-3 codes. API field \code{country}.}
 
-\item{bbox}{\code{c(xmin, ymin, xmax, ymax)} in WGS84 degrees.}
+\item{bbox}{\code{c(xmin, ymin, xmax, ymax)} in WGS84 degrees. API field \code{bbox}.}
 
-\item{variables}{Canonical variable codes or source codes.}
+\item{variables}{Canonical variable codes or source codes. API field \code{variables}.}
 }
 \value{
 A \code{soil_consistency} list: \code{totals} (named list: \code{feature_count},

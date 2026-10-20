@@ -17,27 +17,29 @@ soil_variables(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{code}{Variable codes (\code{variable_code}, e.g. \code{"organic_carbon"}).}
+\item{code}{Variable codes (\code{variable_code}, e.g. \code{"organic_carbon"}). API query parameter
+\code{code}.}
 
-\item{domain}{Domains (\code{domain_code}, e.g. \code{"soil"}).}
+\item{domain}{Domains (\code{domain_code}, e.g. \code{"soil"}). API query parameter \code{domain}.}
 
 \item{measurement_kind}{Measurement kinds (\code{measurement_kind_code}, e.g.
-\code{"observed"}).}
+\code{"observed"}). API query parameter \code{measurement_kind}.}
 
 \item{target_level}{Target levels allowed for the variable (\code{"horizon"},
-\code{"profile"}, \code{"feature"}, ...).}
+\code{"profile"}, \code{"feature"}, ...). API query parameter \code{target_level}.}
 
 \item{dataset}{Datasets where the variable has values or a source mapping
-(e.g. \code{"wosis_points"}); the mappings are limited to them too.}
+(e.g. \code{"wosis_points"}); the mappings are limited to them too. API query parameter \code{dataset}.}
 
-\item{provider}{Providers (e.g. \code{"isric"}), as \code{dataset}.}
+\item{provider}{Providers (e.g. \code{"isric"}), as \code{dataset}. API query parameter \code{provider}.}
 
-\item{available_only}{Only variables with at least one value.}
+\item{available_only}{Only variables with at least one value. API query parameter
+\code{available_only}.}
 
 \item{include_unmapped}{Also list the source codes that map to no
-variable, in \code{soil_metadata(x)$unmapped_source_codes}.}
+variable, in \code{soil_metadata(x)$unmapped_source_codes}. API query parameter \code{include_unmapped}.}
 }
 \value{
 A data frame, one row per variable: \code{variable_code}, \code{name},

@@ -19,7 +19,7 @@ soil_availability(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
 \item{datasets}{Catalog dataset codes (\code{"wosis_points"},
 \code{"wise_profiles"}, \code{"soter_profiles"}, \code{"soter_polygons"},
@@ -62,7 +62,7 @@ polygons): \code{NULL} (the API default, \code{"representative"}),
 API field \code{components}.}
 
 \item{min_cumulative_percent}{Threshold of \code{components = "cumulative"},
-0 to 100 (required with it, refused without it).}
+0 to 100 (required with it, refused without it). API field \code{min_cumulative_percent}.}
 }
 \value{
 A \code{soil_availability} list of data frames:

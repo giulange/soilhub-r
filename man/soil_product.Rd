@@ -13,16 +13,18 @@ soil_product(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{product_code}{Code of the product: lowercase letters, digits, \verb{_}.}
+\item{product_code}{Code of the product: lowercase letters, digits, \verb{_}. API field \code{product_code}
+of \code{POST /products}; for \code{\link[=soil_product_version]{soil_product_version()}}, API path parameter \code{{product_code}} of
+\code{POST /products/{product_code}/versions}.}
 
-\item{name}{Human name.}
+\item{name}{Human name. API field \code{name} of \code{POST /products}.}
 
 \item{target_level}{The canonical level of its results: \code{"feature"},
-\code{"profile"}, \code{"component"} or \code{"horizon"}.}
+\code{"profile"}, \code{"component"} or \code{"horizon"}. API field \code{target_level} of \code{POST /products}.}
 
-\item{description}{Optional description.}
+\item{description}{Optional description. API field \code{description} of \code{POST /products}.}
 }
 \value{
 The product: a list \code{product_code}, \code{name}, \code{description},

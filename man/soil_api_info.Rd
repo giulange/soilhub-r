@@ -7,7 +7,7 @@
 soil_api_info(soil = soil_session())
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_api_info} list: \code{api_url}, \code{health} (\code{"ok"} or the

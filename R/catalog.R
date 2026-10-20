@@ -61,7 +61,7 @@ datasets_frame <- function(records, context = "GET /datasets") {
 #'
 #' Rights: `soil:summary`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @return A data frame, one row per dataset: `name`, `title`,
 #'   `provider_code`, `description`, `support_type`, `geometry_class`,
 #'   `release_code`, `release_status`, the counts `feature_count`,
@@ -117,8 +117,9 @@ session_catalog <- function(soil) {
 #' Rights: `soil:summary`.
 #'
 #' @param soil A session; the default session when omitted (the dataset name
-#'   may then be given first: `soil_dataset("wise_profiles")`).
-#' @param name The dataset name (e.g. `"soter_profiles"`).
+#'   may then be given first: `soil_dataset("wise_profiles")`). Client-side: not sent to the API.
+#' @param name The dataset name (e.g. `"soter_profiles"`). API path parameter `{dataset_name}` of
+#'   `GET /datasets/{dataset_name}`.
 #' @return A `soil_dataset` list with the fields of [soil_datasets()].
 #'   An unknown name raises `soilhub_not_found_error`.
 #' @family discovery
@@ -209,9 +210,9 @@ print.soil_dataset <- function(x, ...) {
 #' @param x What to cite: dataset names (character), rows of
 #'   [soil_datasets()], a [soil_dataset()], or a result carrying the catalog
 #'   rows of its datasets in its metadata (a `soil_table`, `soil_summary` or
-#'   `soil_export`).
+#'   `soil_export`). Client-side: not sent to the API.
 #' @param soil A session; the default session when omitted (needed only when
-#'   `x` holds dataset names).
+#'   `x` holds dataset names). Client-side: not sent to the API.
 #' @return `soil_citations()`: a data frame `dataset`, `citation_text`,
 #'   `citation_source_url`, `citation_retrieved_on` (Date), `citation_note`,
 #'   `level`, `label`, `note_key`, `source_record_id`,
@@ -381,7 +382,7 @@ terms_frame <- function(rows, kind) {
 #'
 #' Rights: `soil:summary`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @return A character vector.
 #' @family discovery
 #' @examples

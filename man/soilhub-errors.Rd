@@ -71,3 +71,8 @@ x <- tryCatch(
 )
 }
 }
+\seealso{
+Other configuration and errors: 
+\code{\link{soilhub-config}}
+}
+\concept{configuration and errors}

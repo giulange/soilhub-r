@@ -17,13 +17,13 @@
 \method{summary}{soil_table}(object, ...)
 }
 \arguments{
-\item{x, object}{A \code{soil_table}.}
+\item{x, object}{A \code{soil_table}. Client-side: not sent to the API.}
 
-\item{...}{As for a data frame (\code{[}); unused otherwise.}
+\item{...}{As for a data frame (\code{[}); unused otherwise. Client-side: not sent to the API.}
 
-\item{row.names, optional}{Unused (the row names are kept).}
+\item{row.names, optional}{Unused (the row names are kept). Client-side: not sent to the API.}
 
-\item{n}{Rows to print.}
+\item{n}{Rows to print. Client-side: not sent to the API.}
 }
 \description{
 Reads such as \code{\link[=soil_observations]{soil_observations()}} return a \code{soil_table}: a

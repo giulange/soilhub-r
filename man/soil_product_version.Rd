@@ -14,22 +14,25 @@ soil_product_version(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{product_code}{Code of the product: lowercase letters, digits, \verb{_}.}
+\item{product_code}{Code of the product: lowercase letters, digits, \verb{_}. API field \code{product_code}
+of \code{POST /products}; for \code{\link[=soil_product_version]{soil_product_version()}}, API path parameter \code{{product_code}} of
+\code{POST /products/{product_code}/versions}.}
 
-\item{version_code}{Code of the version (e.g. \code{"v1.0.0"}).}
+\item{version_code}{Code of the version (e.g. \code{"v1.0.0"}). API field \code{version_code}.}
 
 \item{algorithm_checksum}{SHA-256 of the algorithm: 64 lowercase
-hexadecimal characters (e.g. \code{openssl::sha256(file("model.R"))}).}
+hexadecimal characters (e.g. \code{openssl::sha256(file("model.R"))}). API field
+\code{algorithm_checksum}.}
 
 \item{variables}{The variables published by the version: a data frame
 with \code{variable_code} and \code{target_levels} (a character column, one level
 per row, or a list column of character vectors), or a list of
-\code{list(variable_code =, target_levels =)}.}
+\code{list(variable_code =, target_levels =)}. API field \code{variables}.}
 
 \item{configuration}{The configuration of the model, a named list (a
-JSON object).}
+JSON object). API field \code{configuration}.}
 }
 \value{
 The version: a list \code{product_code}, \code{product_name},

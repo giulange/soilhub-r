@@ -118,7 +118,7 @@ NULL
 #' `component_selection` for `components`, `observation_geometry` for the
 #' geometry of the long layout.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @param datasets Catalog dataset codes (`"wosis_points"`,
 #'   `"wise_profiles"`, `"soter_profiles"`, `"soter_polygons"`,
 #'   `"sotwis_polygons"`, `"sotwis_components"`, `"sotwis_estimates"`, see
@@ -151,7 +151,7 @@ NULL
 #'   `"cumulative"` (by decreasing proportion until `min_cumulative_percent`).
 #'   API field `components`.
 #' @param min_cumulative_percent Threshold of `components = "cumulative"`,
-#'   0 to 100 (required with it, refused without it).
+#'   0 to 100 (required with it, refused without it). API field `min_cumulative_percent`.
 #' @param layout `"wide"` (one row per horizon, the default) or `"long"`
 #'   (one row per observation). API field `layout`.
 #' @param with_geometry The geometry of each row's feature (EPSG:4326):
@@ -165,10 +165,12 @@ NULL
 #'   the geometry on every observation. API fields `geometry_format` (wide)
 #'   and `include_geometry` (long).
 #' @param max_rows Maximum number of rows to read (`Inf`: the whole
-#'   selection).
-#' @param offset Rows of the selection to skip (to continue a partial read).
+#'   selection). Client-side; caps the API field `limit` of each page request.
+#' @param offset Rows of the selection to skip (to continue a partial read). API field `offset` (of
+#'   the first page request).
 #' @param page_size Rows per request; `NULL` uses the session's, the
-#'   `soilhub.page_size` option or the server's `max_page_size`.
+#'   `soilhub.page_size` option or the server's `max_page_size`. Client-side; sets the API field
+#'   `limit` of each page request.
 #' @param too_large What to do when the API refuses the selection as too
 #'   large for a synchronous read: `"stop"` raises
 #'   `soilhub_load_limit_error`, whose message names the equivalent
@@ -176,10 +178,12 @@ NULL
 #'   GeoJSON for the long layout with geometry), waits, downloads it into the
 #'   export directory, reads it back and returns the same shape as the
 #'   synchronous read, with `soil_metadata(x)$via_export` the job id (the
-#'   whole selection is exported; `offset` and `max_rows` select its rows).
-#' @param progress Report the pages read (messages at verbosity 1 or more).
+#'   whole selection is exported; `offset` and `max_rows` select its rows). Client-side: not sent to
+#'   the API.
+#' @param progress Report the pages read (messages at verbosity 1 or more). Client-side: not sent to
+#'   the API.
 #' @param timeout Seconds allowed for each page request; `NULL` uses the
-#'   session's (300 s by default).
+#'   session's (300 s by default). Client-side: not sent to the API.
 #' @return A `soil_table` (see [soil_table]): a data frame (an `sf` object
 #'   with `with_geometry = "sf"`) with the attributes `soil_metadata` (see
 #'   [soil_metadata()]) and `soil_layout` (`"wide"` or `"long"`).

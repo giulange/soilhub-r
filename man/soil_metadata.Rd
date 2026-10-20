@@ -10,7 +10,7 @@ soil_metadata(x)
 soil_warnings(x)
 }
 \arguments{
-\item{x}{A \code{soil_table} (or a summary or export result).}
+\item{x}{A \code{soil_table} (or a summary or export result). Client-side: not sent to the API.}
 }
 \value{
 \code{soil_metadata()}: a list. \code{soil_warnings()}: a character vector.

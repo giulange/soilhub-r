@@ -70,35 +70,38 @@ values_body <- function(providers, datasets, variables, domains,
 #' Rights: `soil:read`. Capabilities: `query_generic_values`;
 #' `country_filtering` for `country`.
 #'
-#' @param soil A session; the default session when omitted.
-#' @param providers Provider codes of the targets (`"isric"`).
-#' @param datasets Catalog dataset codes of the targets.
-#' @param variables Variable codes (see [soil_variables()]).
-#' @param domains Domain codes of the variables.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param providers Provider codes of the targets (`"isric"`). API field `providers`.
+#' @param datasets Catalog dataset codes of the targets. API field `datasets`.
+#' @param variables Variable codes (see [soil_variables()]). API field `variables`.
+#' @param domains Domain codes of the variables. API field `domains`.
 #' @param measurement_kinds Measurement kinds of the variables (`"derived"`,
-#'   `"modelled"`, ...).
+#'   `"modelled"`, ...). API field `measurement_kinds`.
 #' @param target_levels `"feature"`, `"profile"`, `"component"`,
-#'   `"horizon"`.
-#' @param country Countries as ISO 3166 alpha-2 or alpha-3 codes or names.
-#' @param bbox `c(xmin, ymin, xmax, ymax)` in WGS84 degrees.
+#'   `"horizon"`. API field `target_levels`.
+#' @param country Countries as ISO 3166 alpha-2 or alpha-3 codes or names. API field `country`.
+#' @param bbox `c(xmin, ymin, xmax, ymax)` in WGS84 degrees. API field `bbox`.
 #' @param valid_at A date-time (POSIXct, Date or ISO 8601 text): only the
 #'   values valid at that instant (`valid_time_start <= valid_at <
-#'   valid_time_end`, open ends included).
+#'   valid_time_end`, open ends included). API field `valid_at`.
 #' @param depth_top_cm,depth_bottom_cm Depth interval in cm: the values whose
-#'   depth interval overlaps it (values without depth included).
-#' @param product_versions Product version codes.
-#' @param run_ids Run ids.
+#'   depth interval overlaps it (values without depth included). API fields `depth_top_cm` and
+#'   `depth_bottom_cm`.
+#' @param product_versions Product version codes. API field `product_versions`.
+#' @param run_ids Run ids. API field `run_ids`.
 #' @param statuses Value statuses: `"published"`, `"insufficient_data"`,
-#'   `"not_applicable"`.
+#'   `"not_applicable"`. API field `statuses`.
 #' @param with_geometry `"none"`, `"text"` (the geometry of the target's
 #'   feature as GeoJSON text in `geometry_text`, EPSG:4326) or `"sf"` (an
 #'   `sf` object with a `geometry` column; needs the package `sf`, else a
-#'   `soilhub_dependency_error`).
+#'   `soilhub_dependency_error`). Client-side; sets the API field `include_geometry` (`false` for
+#'   `"none"`), the form is built locally.
 #' @param include_lineage Add the lineage list columns `observation_inputs`,
 #'   `value_inputs`, `release_inputs`, `asset_inputs` (what each value was
-#'   computed from).
-#' @param max_rows Maximum number of values to read (`Inf`: all).
-#' @param progress Report the pages read.
+#'   computed from). API field `include_lineage`.
+#' @param max_rows Maximum number of values to read (`Inf`: all). Client-side; caps the API field
+#'   `limit` of each page request.
+#' @param progress Report the pages read. Client-side: not sent to the API.
 #' @return A `soil_table` (see [soil_table]) with `soil_layout = "values"`:
 #'   `value_id`, `variable_code`, `variable_name`, `domain_code`,
 #'   `value_type`, `measurement_kind_code`, `target_level`, `feature_id`,

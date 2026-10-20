@@ -113,7 +113,7 @@ source_code_pattern <- "^[a-z0-9_]+$"
 #'
 #' Rights: `soil:publish`. Capability: `source_ingest`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @param manifest A named list describing the release: `provider_code`,
 #'   `provider_name`, `dataset_code`, `dataset_name`, `release_code`,
 #'   `support_type` (`"observed_point_profile"`, `"polygon_estimate"`,
@@ -125,14 +125,15 @@ source_code_pattern <- "^[a-z0-9_]+$"
 #'   `source_table_prefix` and `assets` (a data frame or list of records
 #'   with `asset_role`, `source_url`, `checksum_sha256`, `media_type`,
 #'   `byte_size`). Property mappings are not part of the manifest: the API
-#'   resolves them from its own mappings of the provider.
+#'   resolves them from its own mappings of the provider. API form field `manifest` (JSON text).
 #' @param features The features of the release, each with a
 #'   `source_record_id` column: an `sf` object (needs the package `sf`), or
 #'   the path of a spatial file -- a GeoJSON file (`.geojson`, `.json`) is
 #'   read without `sf` when in WGS84, any other format is read with
 #'   [sf::st_read()]. The other columns travel as attributes of the feature
 #'   record (`source_support`, ...). For a non-spatial dataset
-#'   (`default_geometry_kind = "NONE"`), a plain data frame.
+#'   (`default_geometry_kind = "NONE"`), a plain data frame. Records of the NDJSON bundle sent as
+#'   API form field `file`.
 #' @param profiles,components,horizons,observations Optional data frames (or
 #'   lists of records) of the other record types, each with its
 #'   `source_record_id` and the `source_record_id` of its parent
@@ -141,18 +142,20 @@ source_code_pattern <- "^[a-z0-9_]+$"
 #'   `bottom_depth_cm`, `horizon_name`; components `component_rank`,
 #'   `proportion_percent`; observations `property_code`, `value`, `unit`,
 #'   `status`, and optionally `method` and `quality`. `NA` fields are left
-#'   out (an observation needs its `unit` declared).
+#'   out (an observation needs its `unit` declared). Records of the NDJSON bundle sent as API form
+#'   field `file`.
 #' @param idempotency_key Key of this ingest (at most 200 characters), stable
-#'   for one bundle.
+#'   for one bundle. API form field `idempotency_key`.
 #' @param auto_promote Let the server validate and promote the job (`TRUE`),
-#'   or validate and promote from the client (`FALSE`).
+#'   or validate and promote from the client (`FALSE`). API form field `auto_promote`.
 #' @param wait Validate, promote and wait for the end of the job; `FALSE`
-#'   returns after the upload.
+#'   returns after the upload. Client-side: not sent to the API.
 #' @param keep_file Keep the NDJSON bundle written for the upload: its path
 #'   is in `file` (a temporary file, removed when the R session ends; copy
-#'   it to keep it longer). By default it is deleted.
-#' @param timeout,poll Seconds to wait for the job, and between two polls.
-#' @param progress Print the progress of the job.
+#'   it to keep it longer). By default it is deleted. Client-side: not sent to the API.
+#' @param timeout,poll Seconds to wait for the job, and between two polls. Client-side: not sent to
+#'   the API.
+#' @param progress Print the progress of the job. Client-side: not sent to the API.
 #' @return A `soil_source_ingest` list: `job_id`, `status`, `provider_code`,
 #'   `dataset_code`, `release_code`, `auto_promote`, `record_count` (records
 #'   sent), `record_counts` (sent, by record type), `staged_counts` (staged

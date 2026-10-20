@@ -8,7 +8,7 @@ soil_whoami(soil = soil_session())
 }
 \arguments{
 \item{soil}{A session from \code{\link[=soil_connect]{soil_connect()}}; the default session when
-omitted.}
+omitted. Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_identity} list: \code{username}, \code{subject}, \code{audience}, \code{roles}
@@ -56,4 +56,11 @@ me$token_expires_at
 }
 \seealso{
 \code{\link[=soil_connect]{soil_connect()}}, \code{\link[=soil_session]{soil_session()}}
+
+Other session: 
+\code{\link{soil_connect}()},
+\code{\link{soil_login}()},
+\code{\link{soil_logout}()},
+\code{\link{soil_session}()}
 }
+\concept{session}

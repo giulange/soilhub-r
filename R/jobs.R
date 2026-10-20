@@ -92,10 +92,13 @@ check_job_id <- function(job_id) {
 #'
 #' Rights: `soil:publish`.
 #'
-#' @param soil A session; the default session when omitted.
-#' @param job_id The job id (or the result of a submission).
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param job_id The job id (or the result of a submission). API path parameter `{job_id}` of
+#'   `GET /jobs/{job_id}` (also `GET /publication-jobs/{job_id}` and
+#'   `GET /soil-health-publication-jobs/{job_id}`, by `detail`), `POST /jobs/{job_id}/cancel` and
+#'   `POST /source-ingests/{job_id}/validate` or `/promote`.
 #' @param detail Which view of the job: `"unified"`, `"publication"`,
-#'   `"soil_health"`.
+#'   `"soil_health"`. Client-side; selects the endpoint read, not sent to the API.
 #' @return A `soil_job` list with the fields of the view, typed (times as
 #'   `POSIXct`, counts as numbers, `diagnostics` and `error` as lists).
 #' @family jobs
@@ -136,10 +139,11 @@ fetch_job <- function(soil, job_id, detail = "unified") {
 #' Rights: `soil:publish`.
 #'
 #' @inheritParams soil_job
-#' @param timeout Seconds to wait before giving up (default one hour).
-#' @param poll Seconds between two polls.
+#' @param timeout Seconds to wait before giving up (default one hour). Client-side: not sent to the
+#'   API.
+#' @param poll Seconds between two polls. Client-side: not sent to the API.
 #' @param progress Print a line each time the status or the progress
-#'   changes.
+#'   changes. Client-side: not sent to the API.
 #' @return The completed `soil_job` (unified view).
 #' @family jobs
 #' @examples
@@ -245,9 +249,10 @@ soil_job_cancel <- function(soil = soil_session(), job_id) {
 #'
 #' Rights: `soil:admin`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @param idempotency_key Optional key: a second request with the same key
-#'   returns the job already queued instead of queuing another one.
+#'   returns the job already queued instead of queuing another one. API query parameter
+#'   `idempotency_key`.
 #' @return The queued `soil_job` (unified view).
 #' @family jobs
 #' @examples

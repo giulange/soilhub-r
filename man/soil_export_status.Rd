@@ -29,24 +29,27 @@ soil_export_download(
 soil_export_cancel(soil = soil_session(), x)
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{x}{A \code{soil_export} or a job id (\code{"exp_<stamp>_<hex>"}).}
+\item{x}{A \code{soil_export} or a job id (\code{"exp_<stamp>_<hex>"}). API path parameter \code{{job_id}} of
+\code{GET /exports/{job_id}}, \code{GET /exports/{job_id}/download} and \code{POST /jobs/{job_id}/cancel}.}
 
-\item{timeout}{Seconds to wait before giving up (default one hour).}
+\item{timeout}{Seconds to wait before giving up (default one hour). Client-side: not sent to the
+API.}
 
-\item{poll}{Seconds between two polls (at least 2).}
+\item{poll}{Seconds between two polls (at least 2). Client-side: not sent to the API.}
 
 \item{progress}{Show the progress (a bar in an interactive session, else
-one message per change).}
+one message per change). Client-side: not sent to the API.}
 
 \item{dir}{Directory of the download; \code{NULL} uses the option
 \code{soilhub.export_dir}, the environment variable \code{SOILHUB_EXPORT_DIR}, else
-\code{file.path(tempdir(), "soilhub-exports")}.}
+\code{file.path(tempdir(), "soilhub-exports")}. Client-side: not sent to the API.}
 
-\item{unzip}{Unzip the download into \verb{<dir>/<job_id>/}.}
+\item{unzip}{Unzip the download into \verb{<dir>/<job_id>/}. Client-side: not sent to the API.}
 
-\item{overwrite}{Replace an existing zip or directory of the same export.}
+\item{overwrite}{Replace an existing zip or directory of the same export. Client-side: not sent
+to the API.}
 }
 \value{
 \code{soil_export_status()}, \code{soil_export_wait()},

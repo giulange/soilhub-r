@@ -40,20 +40,24 @@
 #' [soil_api_info()]. A minor version newer than the one the client is tested
 #' against (`TESTED_API_VERSION`) only prints a message.
 #'
-#' @param api_url Base URL of the API (see [soilhub-config]).
-#' @param keycloak_url Keycloak realm URL.
-#' @param client_id OIDC public client (`ams-r`).
-#' @param login Sign in now (`TRUE`) or later with [soil_login()].
-#' @param open_browser Open the verification address in the browser.
-#' @param timeout Total seconds allowed for each request.
-#' @param verbose Verbosity: 0, 1 or 2 (see [soilhub-config]).
+#' @param api_url Base URL of the API (see [soilhub-config]). Client-side: the base URL of every
+#'   request, not sent to the API.
+#' @param keycloak_url Keycloak realm URL. Client-side: used for the sign-in, not sent to the API.
+#' @param client_id OIDC public client (`ams-r`). Client-side: used for the sign-in, not sent to the
+#'   API.
+#' @param login Sign in now (`TRUE`) or later with [soil_login()]. Client-side: not sent to the API.
+#' @param open_browser Open the verification address in the browser. Client-side: not sent to the
+#'   API.
+#' @param timeout Total seconds allowed for each request. Client-side: not sent to the API.
+#' @param verbose Verbosity: 0, 1 or 2 (see [soilhub-config]). Client-side: not sent to the API.
 #' @param set_default Register the session as the default session
-#'   ([soil_session()]).
+#'   ([soil_session()]). Client-side: not sent to the API.
 #' @return A `soil_session`: a list with `api_url`, `keycloak_url`,
 #'   `client_id`, `timeout`, `verbose`, `dir`, `page_size`, `open_browser`,
 #'   `created_at` and `state`, an environment holding the tokens and their
 #'   expiry, the identity read from the token and the cached capabilities.
 #'   Several sessions can be used side by side by passing them explicitly.
+#' @family session
 #' @seealso [soil_login()], [soil_whoami()], [soil_session()],
 #'   [soil_logout()]
 #' @examples
@@ -141,9 +145,11 @@ check_session <- function(soil) {
 #' `force = TRUE`, which always opens a new browser login (for instance to
 #' sign in as another user).
 #'
-#' @param soil A session; the default session when omitted.
-#' @param force Open a new browser login even if the session is valid.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param force Open a new browser login even if the session is valid. Client-side: not sent to the
+#'   API.
 #' @return `soil`, invisibly.
+#' @family session
 #' @seealso [soil_connect()], [soil_logout()]
 #' @examples
 #' \dontrun{
@@ -234,8 +240,9 @@ display_user <- function(identity) {
 #' and, if it is the default session, unregisters it. The session object can
 #' be signed in again with [soil_login()].
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @return `NULL`, invisibly.
+#' @family session
 #' @seealso [soil_connect()], [soil_session()]
 #' @examples
 #' \dontrun{
@@ -271,10 +278,11 @@ is_default_session <- function(soil) {
 #' explicitly as the first argument.
 #'
 #' @param soil A session to make the default, or `NULL` to get the current
-#'   default.
+#'   default. Client-side: not sent to the API.
 #' @return The default session (`soil`, invisibly, when setting). Without a
 #'   default session, an error of class `soilhub_auth_error` with
 #'   `reason = "no_session"`.
+#' @family session
 #' @seealso [soil_connect()]
 #' @examples
 #' \dontrun{

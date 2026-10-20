@@ -7,7 +7,7 @@
 soil_first_layer(x)
 }
 \arguments{
-\item{x}{A \code{soil_table} read with \code{layer = "first"}.}
+\item{x}{A \code{soil_table} read with \code{layer = "first"}. Client-side: not sent to the API.}
 }
 \value{
 A list \code{view}, \code{statuses} (character), \code{profile_markings}

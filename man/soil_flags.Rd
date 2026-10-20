@@ -7,7 +7,7 @@
 soil_flags(x)
 }
 \arguments{
-\item{x}{A \code{soil_table} with a \code{value_flags} column.}
+\item{x}{A \code{soil_table} with a \code{value_flags} column. Client-side: not sent to the API.}
 }
 \value{
 A data frame \code{row} (row number in \code{x}), \code{horizon_id}, \code{column}

@@ -8,10 +8,10 @@ soil_country(soil = soil_session(), code)
 }
 \arguments{
 \item{soil}{A session; the default session when omitted (the code may
-then be given first: \code{soil_country("KEN")}).}
+then be given first: \code{soil_country("KEN")}). Client-side: not sent to the API.}
 
 \item{code}{ISO 3166-1 alpha-2 or alpha-3 code (\code{"KE"}, \code{"KEN"}), any
-case.}
+case. API path parameter \code{{code}} of \code{GET /countries/{code}}.}
 }
 \value{
 A list: \code{country} (one-row data frame: \code{iso_a2}, \code{iso_a3},

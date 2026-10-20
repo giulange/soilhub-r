@@ -8,7 +8,7 @@ soil_session(soil = NULL)
 }
 \arguments{
 \item{soil}{A session to make the default, or \code{NULL} to get the current
-default.}
+default. Client-side: not sent to the API.}
 }
 \value{
 The default session (\code{soil}, invisibly, when setting). Without a
@@ -35,4 +35,11 @@ soil_session(b)                          # b becomes the default
 }
 \seealso{
 \code{\link[=soil_connect]{soil_connect()}}
+
+Other session: 
+\code{\link{soil_connect}()},
+\code{\link{soil_login}()},
+\code{\link{soil_logout}()},
+\code{\link{soil_whoami}()}
 }
+\concept{session}
