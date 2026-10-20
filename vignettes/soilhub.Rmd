@@ -77,9 +77,15 @@ What happens, step by step:
 3. Approve the request. Back in R, `soil_connect()` finishes by itself.
 
 The object `soil` is your **session**: every function takes it as its first
-argument. The session renews itself in the background, so you can keep
-working for hours. If it expires (for example after a long pause), sign in
-again with `soil_login(soil)`.
+argument. The session renews itself when needed, so you can keep working
+for hours. If it expires (for example after a long pause), sign in again
+with `soil_login(soil)`.
+
+How long a session lasts is decided by the Keycloak server. Measured on
+18 October 2026: the access token is valid for 2 hours and is renewed
+automatically at your next call; a pause of 95 minutes without any call
+did not end the session; a session lasts at most 9 hours from the sign-in,
+then `soil_login(soil)` is needed.
 
 ## 3. What am I allowed to do?
 
