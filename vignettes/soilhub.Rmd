@@ -39,14 +39,8 @@ data come live from the hub, so some numbers may differ.
 
 ## 1. Install and load the package
 
-The installation command is in the
-[README](https://github.com/giulange/soilhub-r#readme) of the package. You
-run it once. The package `sf` is optional: install it only if you want maps
-and geometries.
-
-```{r, eval = FALSE}
-install.packages("sf")   # optional, only for geometries
-```
+If soilhub is not installed yet, follow the [installation page](installation.html):
+two lines in the R console, once.
 
 Every time you start R, load the package:
 

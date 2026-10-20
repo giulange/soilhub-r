@@ -102,6 +102,7 @@ articles:
   - title: Reading soil data
     navbar: Reading soil data
     contents:
+      - installation
       - soilhub
       - raw-vs-revised
       - first-layer
