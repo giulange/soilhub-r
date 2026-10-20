@@ -212,9 +212,12 @@ sotwis[, c("component_rank", "proportion_percent", "horizon_name",
 These five rows are the horizons of the first component, from 0 to 80 cm.
 We stopped at 5 rows, so the other components of the unit are not shown:
 raise `max_rows` to read them. The first horizon, D1, is listed twice with
-the same values: the hub keeps the source as ISRIC published it.
+the same values: the SOTWIS files of ISRIC carry a summary copy of the first
+layer, and the hub keeps the source as ISRIC published it. With
+`view = "revised"` the copy is hidden (rule R5, see the article on the raw and
+revised views).
 
-A few measured values of those horizons:
+A few values of those horizons (SOTWIS values are estimates, not measurements):
 
 ```{r}
 sotwis[, c("horizon_name", "clay_content", "organic_carbon", "ph_h2o")]
