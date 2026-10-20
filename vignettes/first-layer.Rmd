@@ -171,6 +171,67 @@ The argument `components` chooses which components you get:
 - `"cumulative"`: the largest components until their shares add up to
   `min_cumulative_percent`.
 
+### A SOTWIS example near Tunis
+
+SOTWIS map units have several soil components. We look at three SOTWIS map
+units in a box near Tunis (Tunisia). First, the box:
+
+```{r}
+tunis <- c(10.0, 36.5, 10.5, 37.0)
+```
+
+`soil_features()` lists the map units without reading their horizons:
+
+```{r}
+units <- soil_features(soil, datasets = "sotwis_polygons", bbox = tunis,
+                       max_rows = 3, progress = FALSE)
+nrow(units)
+```
+
+Each of the three rows is one SOTWIS map unit (a polygon). The column
+`components` holds, for each unit, a small table with its soil components;
+here is the one of the first unit:
+
+```{r}
+units$components[[1]][, c("soil_code", "component_rank", "proportion_percent",
+                          "is_representative")]
+```
+
+The first unit has a Gleysol (`GLe`) component covering 55 % of the unit; it
+is the largest (`component_rank` 1) and represents the unit. Its horizons
+are read with `soil_observations()`, asking for all the components
+(`components = "all"`):
+
+```{r}
+sotwis <- soil_observations(soil, datasets = "sotwis_polygons", bbox = tunis,
+                            components = "all", max_rows = 5, progress = FALSE)
+sotwis[, c("component_rank", "proportion_percent", "horizon_name",
+           "upper_depth_cm", "lower_depth_cm")]
+```
+
+These five rows are the horizons of the first component, from 0 to 80 cm.
+We stopped at 5 rows, so the other components of the unit are not shown:
+raise `max_rows` to read them. The first horizon, D1, is listed twice with
+the same values: the SOTWIS files of ISRIC carry a summary copy of the first
+layer, and the hub keeps the source as ISRIC published it. With
+`view = "revised"` the copy is hidden (rule R5, see the article on the raw and
+revised views).
+
+A few values of those horizons (SOTWIS values are estimates, not measurements):
+
+```{r}
+sotwis[, c("horizon_name", "clay_content", "organic_carbon", "ph_h2o")]
+```
+
+For a soil scientist: a SOTWIS polygon is a map unit made of several soil
+components, each with a share of the area in percent, and the layers of a
+component are **estimated** values for the representative soil, not
+measurements of a profile at a site (`source_support` is
+`"polygon_estimate"`). Here clay is 30 to 34 %, organic carbon decreases
+with depth (from 10 to 3 g/kg) and the pH rises from 5.9 to 6.4.
+
+### Other components
+
 For example, all the components of the SOTWIS map units of Kenya, or the
 largest ones covering at least 80 % of each unit (these calls are not run
 here):
