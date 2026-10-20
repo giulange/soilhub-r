@@ -100,6 +100,11 @@ call_of <- function(name, call, needs = character(), session = "user") {
   list(name = name, call = call, needs = needs, session = session)
 }
 q <- function(x) deparse(x)
+# Small areas keep every selection below the synchronous load limit: WoSIS around
+# Vancouver, SOTWIS in Rwanda (the whole datasets answer 422, recorded once by
+# "unfiltered-observations").
+bb_wosis <- "bbox = c(-123.3, 49.0, -122.9, 49.4)"
+bb_sotwis <- "bbox = c(28.8, -2.9, 30.9, -1.0)"
 recordings <- list(
   call_of("capabilities", "soil_capabilities(soil, refresh = TRUE)"),
   call_of("api-info", "soil_api_info(soil)"),
@@ -115,19 +120,19 @@ recordings <- list(
   call_of("code-list", sprintf("soil_code_list(soil, %s)", q(code_list)), code_list),
   call_of("ttr-flag-legend", "soil_ttr_flag_legend(soil)"),
   call_of("ttr-flags", "soil_ttr_flags(soil, max_rows = 5)"),
-  call_of("wide-wosis", sprintf("soil_observations(soil, datasets = %s, max_rows = 5, progress = FALSE)", q(wosis)), wosis),
+  call_of("wide-wosis", sprintf("soil_observations(soil, datasets = %s, %s, max_rows = 5, progress = FALSE)", q(wosis), bb_wosis), wosis),
   call_of("wide-wise", sprintf("soil_observations(soil, datasets = %s, max_rows = 5, progress = FALSE)", q(wise)), wise),
   call_of("wide-soter", sprintf("soil_observations(soil, datasets = %s, max_rows = 5, progress = FALSE)", q(soter)), soter),
-  call_of("wide-sotwis", sprintf("soil_observations(soil, datasets = %s, components = \"all\", max_rows = 5, progress = FALSE)", q(sotwis)), sotwis),
-  call_of("wide-revised", sprintf("soil_observations(soil, datasets = %s, view = \"revised\", max_rows = 5, progress = FALSE)", q(wosis)), wosis),
-  call_of("wide-first-layer", sprintf("soil_observations(soil, datasets = %s, layer = \"first\", max_rows = 5, progress = FALSE)", q(wosis)), wosis),
-  call_of("wide-geometry", sprintf("soil_observations(soil, datasets = %s, with_geometry = \"text\", max_rows = 5, progress = FALSE)", q(wosis)), wosis),
-  call_of("long-wosis", sprintf("soil_observations(soil, datasets = %s, layout = \"long\", max_rows = 5, progress = FALSE)", q(wosis)), wosis),
+  call_of("wide-sotwis", sprintf("soil_observations(soil, datasets = %s, %s, components = \"all\", max_rows = 5, progress = FALSE)", q(sotwis), bb_sotwis), sotwis),
+  call_of("wide-revised", sprintf("soil_observations(soil, datasets = %s, %s, view = \"revised\", max_rows = 5, progress = FALSE)", q(wosis), bb_wosis), wosis),
+  call_of("wide-first-layer", sprintf("soil_observations(soil, datasets = %s, %s, layer = \"first\", max_rows = 5, progress = FALSE)", q(wosis), bb_wosis), wosis),
+  call_of("wide-geometry", sprintf("soil_observations(soil, datasets = %s, %s, with_geometry = \"text\", max_rows = 5, progress = FALSE)", q(wosis), bb_wosis), wosis),
+  call_of("long-wosis", sprintf("soil_observations(soil, datasets = %s, %s, layout = \"long\", max_rows = 5, progress = FALSE)", q(wosis), bb_wosis), wosis),
   call_of("long-soter-revised", sprintf("soil_observations(soil, datasets = %s, layout = \"long\", view = \"revised\", max_rows = 5, progress = FALSE)", q(soter)), soter),
   call_of("unknown-dataset", "soil_observations(soil, datasets = \"no_such_dataset\", max_rows = 5, progress = FALSE)"),
   call_of("unfiltered-observations", "soil_observations(soil, max_rows = 5, progress = FALSE)"),
-  call_of("features-points", sprintf("soil_features(soil, datasets = %s, max_rows = 3, progress = FALSE)", q(wosis)), wosis),
-  call_of("features-polygons", sprintf("soil_features(soil, datasets = %s, max_rows = 3, progress = FALSE)", q(sotwis)), sotwis),
+  call_of("features-points", sprintf("soil_features(soil, datasets = %s, %s, max_rows = 3, progress = FALSE)", q(wosis), bb_wosis), wosis),
+  call_of("features-polygons", sprintf("soil_features(soil, datasets = %s, %s, max_rows = 3, progress = FALSE)", q(sotwis), bb_sotwis), sotwis),
   call_of("summary", sprintf("soil_summary(soil, datasets = %s, country = %s)", q(wosis), q(country)), wosis),
   call_of("availability", sprintf("soil_availability(soil, datasets = %s, country = %s)", q(wosis), q(country)), wosis),
   call_of("consistency", sprintf("soil_consistency(soil, country = %s)", q(country))),
