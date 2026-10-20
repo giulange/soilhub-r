@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {
+      "datasets": [
+        "sotwis_components"
+      ],
+      "geometry": "any",
+      "bbox": [
+        28.8,
+        -2.9,
+        30.9,
+        -1
+      ],
+      "layer": "all",
+      "canonical": true,
+      "include_geometry": false,
+      "view": "raw",
+      "limit": 3,
+      "offset": 0
+    },
+    "total_count": null,
+    "returned_count": 0,
+    "limit": 3,
+    "offset": 0,
+    "has_more": false,
+    "warnings": [],
+    "datasets": [
+      "sotwis_components"
+    ],
+    "geometry": "any",
+    "canonical": true,
+    "crs": "EPSG:4326",
+    "feature_count": 0,
+    "feature_count_by_dataset": null,
+    "mixed_geometry": false,
+    "view": "raw"
+  },
+  "features": []
+}

@@ -1,0 +1,25 @@
+{
+  "job_id": "exp_20261020_060654_541b5ec8",
+  "status": "completed",
+  "summary_url": null,
+  "download_url": "/api/v1/exports/exp_20261020_060654_541b5ec8/download",
+  "progress": 100,
+  "file_size_bytes": 4547,
+  "expires_at": "2026-10-27T06:06:54.438121+00:00",
+  "error_message": null,
+  "observation_count": 30,
+  "records": {
+    "features": 4,
+    "observations": 30,
+    "observation_rows": 12,
+    "features_by_dataset": {
+      "wosis_points": 4
+    },
+    "observations_by_dataset": {
+      "wosis_points": 30
+    },
+    "observation_rows_by_dataset": {
+      "wosis_points": 12
+    }
+  }
+}

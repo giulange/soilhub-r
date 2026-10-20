@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {
+      "datasets": [
+        "sotwis_components"
+      ],
+      "geometry": "any",
+      "bbox": [
+        28.8,
+        -2.9,
+        30.9,
+        -1
+      ],
+      "layer": "all",
+      "canonical": true,
+      "include_geometry": false,
+      "layout": "wide",
+      "geometry_format": "none",
+      "components": "all",
+      "view": "raw",
+      "limit": 5,
+      "offset": 0
+    },
+    "total_count": null,
+    "returned_count": 0,
+    "limit": 5,
+    "offset": 0,
+    "has_more": false,
+    "warnings": [],
+    "datasets": [
+      "sotwis_components"
+    ],
+    "geometry": "any",
+    "canonical": true,
+    "layout": "wide",
+    "geometry_format": "none",
+    "crs": "EPSG:4326",
+    "variables": [],
+    "view": "raw"
+  },
+  "geometries": null,
+  "rows": []
+}

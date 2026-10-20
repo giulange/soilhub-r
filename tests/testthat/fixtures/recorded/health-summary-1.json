@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {
+      "include_geometry": true,
+      "include_details": false,
+      "limit": 1000,
+      "offset": 0
+    },
+    "total_count": 0,
+    "returned_count": 0,
+    "limit": null,
+    "offset": null,
+    "has_more": null,
+    "warnings": []
+  },
+  "total_score_count": 0,
+  "feature_count": 0,
+  "horizon_count": 0,
+  "by_dataset": [],
+  "by_release": [],
+  "by_source_support": [],
+  "by_category": [],
+  "by_class": [],
+  "by_status": []
+}

@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {
+      "include_geometry": false,
+      "include_details": false,
+      "limit": 5,
+      "offset": 0
+    },
+    "total_count": 0,
+    "returned_count": 0,
+    "limit": 5,
+    "offset": 0,
+    "has_more": false,
+    "warnings": [],
+    "score_count": 0,
+    "total_score_count": 0,
+    "include_geometry": false,
+    "include_details": false
+  },
+  "scores": []
+}

@@ -1,0 +1,504 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {
+      "datasets": [
+        "wosis_points"
+      ],
+      "geometry": "any",
+      "bbox": [
+        -123.3,
+        49,
+        -122.9,
+        49.4
+      ],
+      "layer": "all",
+      "canonical": true,
+      "include_geometry": false,
+      "layout": "wide",
+      "geometry_format": "none",
+      "view": "revised",
+      "limit": 5,
+      "offset": 0
+    },
+    "total_count": null,
+    "returned_count": 5,
+    "limit": 5,
+    "offset": 0,
+    "has_more": true,
+    "warnings": [],
+    "datasets": [
+      "wosis_points"
+    ],
+    "geometry": "any",
+    "canonical": true,
+    "layout": "wide",
+    "geometry_format": "none",
+    "crs": "EPSG:4326",
+    "variables": [
+      {
+        "column": "cec_ph7",
+        "property_key": "cec_ph7",
+        "numeric": true,
+        "units": [
+          "cmol(c)/kg"
+        ],
+        "source_codes": [
+          "cecph7"
+        ],
+        "horizon_count": 3,
+        "multi_value_cells": 0,
+        "methods": {},
+        "source_notes": [
+          {
+            "dataset": "wosis_points",
+            "source_code": "cecph7",
+            "source_notes": "Method not recorded at source for 49 of 311,784 values (0.02%). 4 cells equal 140 cmol(c)/kg and none is above: compatible with a ceiling of the WoSIS plausibility check (E24 p.4740, limits not published), undocumented."
+          }
+        ],
+        "method_facets": {
+          "reported pH": [
+            "buffered at 7.0"
+          ],
+          "sample pretreatment": [
+            "sieved over 2 mm sieve"
+          ]
+        }
+      },
+      {
+        "column": "organic_carbon",
+        "property_key": "organic_carbon",
+        "numeric": true,
+        "units": [
+          "g/kg"
+        ],
+        "source_codes": [
+          "orgc"
+        ],
+        "horizon_count": 5,
+        "multi_value_cells": 0,
+        "methods": {},
+        "source_notes": [
+          {
+            "dataset": "wosis_points",
+            "source_code": "orgc",
+            "source_notes": "210 cells exceed 600 g/kg (maximum 795; of which CA-CanSIS 114, US-NCSS 30, AU-CSIRO 16, WD-WISE 15, WD-ISCN 14); published as in the source. Method not recorded at source for 24,638 of 528,276 values (4.7%)."
+          }
+        ],
+        "method_facets": {
+          "sample pretreatment": [
+            "sieved over 2 mm sieve"
+          ]
+        }
+      },
+      {
+        "column": "ph_cacl2",
+        "property_key": "ph_cacl2",
+        "numeric": true,
+        "units": [],
+        "source_codes": [
+          "phca"
+        ],
+        "horizon_count": 5,
+        "multi_value_cells": 0,
+        "methods": {},
+        "source_notes": [],
+        "method_facets": {
+          "ratio": [
+            "1:2"
+          ],
+          "sample pretreatment": [
+            "sieved over 2 mm sieve"
+          ]
+        }
+      },
+      {
+        "column": "total_nitrogen_kjeldahl",
+        "property_key": "total_nitrogen_kjeldahl",
+        "numeric": true,
+        "units": [
+          "g/kg"
+        ],
+        "source_codes": [
+          "nitkjd"
+        ],
+        "horizon_count": 3,
+        "multi_value_cells": 0,
+        "methods": {},
+        "source_notes": [
+          {
+            "dataset": "wosis_points",
+            "source_code": "nitkjd",
+            "source_notes": "40 cells exceed 50 g/kg (maximum 84); published as in the source."
+          }
+        ],
+        "method_facets": {
+          "sample pretreatment": [
+            "sieved over 2 mm sieve"
+          ]
+        }
+      }
+    ],
+    "view": "revised",
+    "revised": {
+      "rules": [
+        {
+          "id": "R17",
+          "title": "WoSIS BDFIFM elements 'guessed value, expert field estimate' excluded (the cell disappears when none remains)",
+          "issue": "#70",
+          "counts": {
+            "values_hidden": 1
+          }
+        }
+      ],
+      "scope": "counts over the selection (every page): rows and values of the selected units, all layers; with layer=first, R2/R3/R14 count units (first_layer_units)",
+      "pending": [],
+      "unchanged": [
+        {
+          "id": "R1",
+          "note": "WoSIS horizons tied at 0: all candidates (tie), as raw"
+        },
+        {
+          "id": "R13",
+          "note": "SOTER synthetic/virtual profiles: included, as raw"
+        }
+      ]
+    }
+  },
+  "geometries": null,
+  "rows": [
+    {
+      "dataset": "wosis_points",
+      "provider_code": "isric",
+      "feature_id": "38ed7f8d-35b2-4afd-b4a8-08fc5e8f4f81",
+      "profile_id": "ae791860-d86e-4bfa-88e4-bb968189fb3a",
+      "component_id": "9930bea8-240a-49c5-9b08-f3912af54cdd",
+      "component_rank": 1,
+      "horizon_id": "2e3b631a-65b8-481e-bcac-cf1b38c335f9",
+      "horizon_name": "F",
+      "upper_depth_cm": 0,
+      "lower_depth_cm": 1,
+      "source_support": "observed_point_profile",
+      "release_code": "legacy_materialized",
+      "horizon_attr_organic_surface": "true",
+      "texture_sum": null,
+      "consistency_flags": null,
+      "cell_markings": {
+        "cec_ph7": {
+          "method_facets": {
+            "reported pH": [
+              "buffered at 7.0"
+            ],
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "organic_carbon": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "ph_cacl2": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "total_nitrogen_kjeldahl": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        }
+      },
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "revised_markings": null,
+      "cec_ph7": 26.6,
+      "cec_ph7_units": "cmol(c)/kg",
+      "cec_ph7_method": null,
+      "cec_ph7_n": 1,
+      "organic_carbon": 410,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": null,
+      "organic_carbon_n": 1,
+      "ph_cacl2": 3.9,
+      "ph_cacl2_units": null,
+      "ph_cacl2_method": null,
+      "ph_cacl2_n": 1,
+      "total_nitrogen_kjeldahl": 18.9,
+      "total_nitrogen_kjeldahl_units": "g/kg",
+      "total_nitrogen_kjeldahl_method": null,
+      "total_nitrogen_kjeldahl_n": 1
+    },
+    {
+      "dataset": "wosis_points",
+      "provider_code": "isric",
+      "feature_id": "38ed7f8d-35b2-4afd-b4a8-08fc5e8f4f81",
+      "profile_id": "ae791860-d86e-4bfa-88e4-bb968189fb3a",
+      "component_id": "9930bea8-240a-49c5-9b08-f3912af54cdd",
+      "component_rank": 1,
+      "horizon_id": "85d22214-fb28-4897-af80-b5c66ddd2a75",
+      "horizon_name": "Ae",
+      "upper_depth_cm": 1,
+      "lower_depth_cm": 2,
+      "source_support": "observed_point_profile",
+      "release_code": "legacy_materialized",
+      "horizon_attr_organic_surface": "false",
+      "texture_sum": null,
+      "consistency_flags": null,
+      "cell_markings": {
+        "cec_ph7": {
+          "method_facets": {
+            "reported pH": [
+              "buffered at 7.0"
+            ],
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "organic_carbon": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "ph_cacl2": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "total_nitrogen_kjeldahl": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        }
+      },
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "revised_markings": null,
+      "cec_ph7": 10.7,
+      "cec_ph7_units": "cmol(c)/kg",
+      "cec_ph7_method": null,
+      "cec_ph7_n": 1,
+      "organic_carbon": 80,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": null,
+      "organic_carbon_n": 1,
+      "ph_cacl2": 3.5,
+      "ph_cacl2_units": null,
+      "ph_cacl2_method": null,
+      "ph_cacl2_n": 1,
+      "total_nitrogen_kjeldahl": 3,
+      "total_nitrogen_kjeldahl_units": "g/kg",
+      "total_nitrogen_kjeldahl_method": null,
+      "total_nitrogen_kjeldahl_n": 1
+    },
+    {
+      "dataset": "wosis_points",
+      "provider_code": "isric",
+      "feature_id": "38ed7f8d-35b2-4afd-b4a8-08fc5e8f4f81",
+      "profile_id": "ae791860-d86e-4bfa-88e4-bb968189fb3a",
+      "component_id": "9930bea8-240a-49c5-9b08-f3912af54cdd",
+      "component_rank": 1,
+      "horizon_id": "58bc5694-8433-409d-a2e6-b1e3e3d397a2",
+      "horizon_name": "Bf",
+      "upper_depth_cm": 2,
+      "lower_depth_cm": 17,
+      "source_support": "observed_point_profile",
+      "release_code": "legacy_materialized",
+      "horizon_attr_organic_surface": "false",
+      "texture_sum": null,
+      "consistency_flags": null,
+      "cell_markings": {
+        "cec_ph7": {
+          "method_facets": {
+            "reported pH": [
+              "buffered at 7.0"
+            ],
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "organic_carbon": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "ph_cacl2": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "total_nitrogen_kjeldahl": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        }
+      },
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "revised_markings": null,
+      "cec_ph7": 9,
+      "cec_ph7_units": "cmol(c)/kg",
+      "cec_ph7_method": null,
+      "cec_ph7_n": 1,
+      "organic_carbon": 80,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": null,
+      "organic_carbon_n": 1,
+      "ph_cacl2": 4.2,
+      "ph_cacl2_units": null,
+      "ph_cacl2_method": null,
+      "ph_cacl2_n": 1,
+      "total_nitrogen_kjeldahl": 2,
+      "total_nitrogen_kjeldahl_units": "g/kg",
+      "total_nitrogen_kjeldahl_method": null,
+      "total_nitrogen_kjeldahl_n": 1
+    },
+    {
+      "dataset": "wosis_points",
+      "provider_code": "isric",
+      "feature_id": "623b5139-52b0-40cc-9750-933440e50d57",
+      "profile_id": "68270d7d-f014-4f8d-956d-6cbbd15b605d",
+      "component_id": "a03fed7b-5647-4266-ab38-4301c8505a06",
+      "component_rank": 1,
+      "horizon_id": "43763a16-03f3-4ee1-9892-a6bd646c5fc7",
+      "horizon_name": "F",
+      "upper_depth_cm": 0,
+      "lower_depth_cm": 1,
+      "source_support": "observed_point_profile",
+      "release_code": "legacy_materialized",
+      "horizon_attr_organic_surface": "true",
+      "texture_sum": null,
+      "consistency_flags": null,
+      "cell_markings": {
+        "organic_carbon": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "ph_cacl2": {
+          "method_facets": {
+            "ratio": [
+              "1:2"
+            ],
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        }
+      },
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "revised_markings": {
+        "hidden_values": [
+          {
+            "rule": "R17",
+            "source_value": [
+              "1.60"
+            ],
+            "property_code": "bdfifm"
+          }
+        ]
+      },
+      "cec_ph7": null,
+      "cec_ph7_units": null,
+      "cec_ph7_method": null,
+      "cec_ph7_n": null,
+      "organic_carbon": 412,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": null,
+      "organic_carbon_n": 1,
+      "ph_cacl2": 3.9,
+      "ph_cacl2_units": null,
+      "ph_cacl2_method": null,
+      "ph_cacl2_n": 1,
+      "total_nitrogen_kjeldahl": null,
+      "total_nitrogen_kjeldahl_units": null,
+      "total_nitrogen_kjeldahl_method": null,
+      "total_nitrogen_kjeldahl_n": null
+    },
+    {
+      "dataset": "wosis_points",
+      "provider_code": "isric",
+      "feature_id": "623b5139-52b0-40cc-9750-933440e50d57",
+      "profile_id": "68270d7d-f014-4f8d-956d-6cbbd15b605d",
+      "component_id": "a03fed7b-5647-4266-ab38-4301c8505a06",
+      "component_rank": 1,
+      "horizon_id": "b42803f3-bad8-48df-9ec9-352c735b627b",
+      "horizon_name": "Ae",
+      "upper_depth_cm": 1,
+      "lower_depth_cm": 2,
+      "source_support": "observed_point_profile",
+      "release_code": "legacy_materialized",
+      "horizon_attr_organic_surface": "false",
+      "texture_sum": null,
+      "consistency_flags": null,
+      "cell_markings": {
+        "organic_carbon": {
+          "method_facets": {
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        },
+        "ph_cacl2": {
+          "method_facets": {
+            "ratio": [
+              "1:2"
+            ],
+            "sample pretreatment": [
+              "sieved over 2 mm sieve"
+            ]
+          }
+        }
+      },
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "revised_markings": null,
+      "cec_ph7": null,
+      "cec_ph7_units": null,
+      "cec_ph7_method": null,
+      "cec_ph7_n": null,
+      "organic_carbon": 83.7,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": null,
+      "organic_carbon_n": 1,
+      "ph_cacl2": 3.5,
+      "ph_cacl2_units": null,
+      "ph_cacl2_method": null,
+      "ph_cacl2_n": 1,
+      "total_nitrogen_kjeldahl": null,
+      "total_nitrogen_kjeldahl_units": null,
+      "total_nitrogen_kjeldahl_method": null,
+      "total_nitrogen_kjeldahl_n": null
+    }
+  ]
+}

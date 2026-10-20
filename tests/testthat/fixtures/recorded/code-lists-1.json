@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {},
+    "total_count": 1,
+    "returned_count": 1,
+    "limit": null,
+    "offset": null,
+    "has_more": null,
+    "warnings": []
+  },
+  "code_lists": [
+    {
+      "code_list": "SOTWIS_codes",
+      "provider_code": "isric",
+      "row_count": 1527,
+      "distinct_entries": 509,
+      "attributes": [
+        "CLAF",
+        "CLAF_m",
+        "DRAI",
+        "ISOC",
+        "LITH",
+        "LNDF",
+        "PHAS"
+      ],
+      "source_datasets": [
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    }
+  ]
+}

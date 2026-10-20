@@ -1,0 +1,986 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {},
+    "total_count": 1,
+    "returned_count": 1,
+    "limit": null,
+    "offset": null,
+    "has_more": null,
+    "warnings": [],
+    "country_assignment": "intersects",
+    "as_of": "2026-10-11T18:34:56.268898Z"
+  },
+  "country": {
+    "iso_a2": "KE",
+    "iso_a3": "KEN",
+    "name": "Kenya",
+    "dataset_count": 5,
+    "feature_count": 7612,
+    "point_count": 2980,
+    "polygon_count": 4632,
+    "profile_count": 7604,
+    "horizon_count": 9473,
+    "original_observation_count": 86139,
+    "value_count": 0,
+    "observation_count": 86139,
+    "variable_count": 88,
+    "source_signature": "23c3704a0fd53793bcb4c33731315495",
+    "aggregation_version": "1",
+    "refresh_job_id": "35e59b9d-9308-45d7-aa17-b0bfd28d13ec",
+    "refreshed_at": "2026-10-11T18:34:56.268898Z"
+  },
+  "datasets": [
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_polygons",
+      "dataset_name": "SOTER polygons and profiles",
+      "country_id": 137,
+      "dataset_id": 3,
+      "feature_count": 616,
+      "point_count": 0,
+      "polygon_count": 616,
+      "profile_count": 608,
+      "horizon_count": 0,
+      "original_observation_count": 0,
+      "value_count": 0,
+      "observation_count": 0,
+      "variable_count": 0,
+      "source_signature": "dc84f19d9459fdb27ec4d4f9e6b7ab39",
+      "aggregation_version": "1",
+      "refresh_job_id": "f96785ca-7ba5-43bf-9e31-a04e566d1584",
+      "refreshed_at": "2026-10-11T18:34:56.268898Z"
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "dataset_name": "SOTER reference profiles",
+      "country_id": 137,
+      "dataset_id": 39,
+      "feature_count": 371,
+      "point_count": 371,
+      "polygon_count": 0,
+      "profile_count": 371,
+      "horizon_count": 1563,
+      "original_observation_count": 22381,
+      "value_count": 0,
+      "observation_count": 22381,
+      "variable_count": 48,
+      "source_signature": "4e0cf3c264e10b1c8773d93894d88555",
+      "aggregation_version": "1",
+      "refresh_job_id": "f96785ca-7ba5-43bf-9e31-a04e566d1584",
+      "refreshed_at": "2026-10-11T18:34:56.268898Z"
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "sotwis_polygons",
+      "dataset_name": "SOTWIS polygon estimates",
+      "country_id": 137,
+      "dataset_id": 2,
+      "feature_count": 4016,
+      "point_count": 0,
+      "polygon_count": 4016,
+      "profile_count": 4016,
+      "horizon_count": 0,
+      "original_observation_count": 0,
+      "value_count": 0,
+      "observation_count": 0,
+      "variable_count": 0,
+      "source_signature": "558ac7a8fb64ce61d2df59c1b25f29b0",
+      "aggregation_version": "1",
+      "refresh_job_id": "f96785ca-7ba5-43bf-9e31-a04e566d1584",
+      "refreshed_at": "2026-10-11T18:34:56.268898Z"
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "dataset_name": "WISE global profiles",
+      "country_id": 137,
+      "dataset_id": 4,
+      "feature_count": 291,
+      "point_count": 291,
+      "polygon_count": 0,
+      "profile_count": 291,
+      "horizon_count": 1247,
+      "original_observation_count": 17329,
+      "value_count": 0,
+      "observation_count": 17329,
+      "variable_count": 24,
+      "source_signature": "b2f8ac646bd947431d082ab755d75113",
+      "aggregation_version": "1",
+      "refresh_job_id": "f96785ca-7ba5-43bf-9e31-a04e566d1584",
+      "refreshed_at": "2026-10-11T18:34:56.268898Z"
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "dataset_name": "WoSIS point profiles",
+      "country_id": 137,
+      "dataset_id": 1,
+      "feature_count": 2318,
+      "point_count": 2318,
+      "polygon_count": 0,
+      "profile_count": 2318,
+      "horizon_count": 6663,
+      "original_observation_count": 46429,
+      "value_count": 0,
+      "observation_count": 46429,
+      "variable_count": 34,
+      "source_signature": "1261ee9a4b641dde90300c05ac88d441",
+      "aggregation_version": "1",
+      "refresh_job_id": "ac1a0bd5-a005-481a-ae4a-dc14ab9d5bb0",
+      "refreshed_at": "2026-08-14T15:38:09.520455Z"
+    }
+  ],
+  "variables": [
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "aluminium_dithionite_extractable",
+      "original_observation_count": 35,
+      "value_count": 0,
+      "observation_count": 35
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "aluminium_pyrophosphate_extractable",
+      "original_observation_count": 18,
+      "value_count": 0,
+      "observation_count": 18
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "available_phosphorus",
+      "original_observation_count": 46,
+      "value_count": 0,
+      "observation_count": 46
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "bulk_density",
+      "original_observation_count": 1073,
+      "value_count": 0,
+      "observation_count": 1073
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "cec_soil",
+      "original_observation_count": 1435,
+      "value_count": 0,
+      "observation_count": 1435
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "clay_content",
+      "original_observation_count": 1439,
+      "value_count": 0,
+      "observation_count": 1439
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "coarse_sand_content",
+      "original_observation_count": 349,
+      "value_count": 0,
+      "observation_count": 349
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "electrical_conductivity",
+      "original_observation_count": 339,
+      "value_count": 0,
+      "observation_count": 339
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "electrical_conductivity_saturated_paste",
+      "original_observation_count": 883,
+      "value_count": 0,
+      "observation_count": 883
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "exchangeable_acidity",
+      "original_observation_count": 267,
+      "value_count": 0,
+      "observation_count": 267
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "exchangeable_aluminium",
+      "original_observation_count": 231,
+      "value_count": 0,
+      "observation_count": 231
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "exchangeable_calcium",
+      "original_observation_count": 1400,
+      "value_count": 0,
+      "observation_count": 1400
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "exchangeable_magnesium",
+      "original_observation_count": 1406,
+      "value_count": 0,
+      "observation_count": 1406
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "exchangeable_potassium",
+      "original_observation_count": 1417,
+      "value_count": 0,
+      "observation_count": 1417
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "exchangeable_sodium",
+      "original_observation_count": 1379,
+      "value_count": 0,
+      "observation_count": 1379
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "field_capacity",
+      "original_observation_count": 4,
+      "value_count": 0,
+      "observation_count": 4
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "fine_sand_content",
+      "original_observation_count": 347,
+      "value_count": 0,
+      "observation_count": 347
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "gypsum_content",
+      "original_observation_count": 413,
+      "value_count": 0,
+      "observation_count": 413
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "iron_dithionite_extractable",
+      "original_observation_count": 35,
+      "value_count": 0,
+      "observation_count": 35
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "iron_pyrophosphate_extractable",
+      "original_observation_count": 18,
+      "value_count": 0,
+      "observation_count": 18
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "medium_sand_content",
+      "original_observation_count": 349,
+      "value_count": 0,
+      "observation_count": 349
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "moisture_content_mct1",
+      "original_observation_count": 189,
+      "value_count": 0,
+      "observation_count": 189
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "moisture_content_mct2",
+      "original_observation_count": 124,
+      "value_count": 0,
+      "observation_count": 124
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "moisture_content_mct3",
+      "original_observation_count": 121,
+      "value_count": 0,
+      "observation_count": 121
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "moisture_content_mct4",
+      "original_observation_count": 120,
+      "value_count": 0,
+      "observation_count": 120
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "moisture_content_mct5",
+      "original_observation_count": 199,
+      "value_count": 0,
+      "observation_count": 199
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "organic_carbon",
+      "original_observation_count": 1232,
+      "value_count": 0,
+      "observation_count": 1232
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "p2o5_content",
+      "original_observation_count": 14,
+      "value_count": 0,
+      "observation_count": 14
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "permanent_wilting_point",
+      "original_observation_count": 4,
+      "value_count": 0,
+      "observation_count": 4
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "ph_h2o",
+      "original_observation_count": 1446,
+      "value_count": 0,
+      "observation_count": 1446
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "ph_kcl",
+      "original_observation_count": 1380,
+      "value_count": 0,
+      "observation_count": 1380
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "phosphate_retention",
+      "original_observation_count": 14,
+      "value_count": 0,
+      "observation_count": 14
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "sand_content",
+      "original_observation_count": 1440,
+      "value_count": 0,
+      "observation_count": 1440
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "silt_content",
+      "original_observation_count": 1440,
+      "value_count": 0,
+      "observation_count": 1440
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "soluble_bicarbonate",
+      "original_observation_count": 4,
+      "value_count": 0,
+      "observation_count": 4
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "soluble_calcium",
+      "original_observation_count": 1,
+      "value_count": 0,
+      "observation_count": 1
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "soluble_carbonate",
+      "original_observation_count": 1,
+      "value_count": 0,
+      "observation_count": 1
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "soluble_chloride",
+      "original_observation_count": 4,
+      "value_count": 0,
+      "observation_count": 4
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "soluble_magnesium",
+      "original_observation_count": 1,
+      "value_count": 0,
+      "observation_count": 1
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "soluble_potassium",
+      "original_observation_count": 1,
+      "value_count": 0,
+      "observation_count": 1
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "soluble_sodium",
+      "original_observation_count": 8,
+      "value_count": 0,
+      "observation_count": 8
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "soluble_sulphate",
+      "original_observation_count": 1,
+      "value_count": 0,
+      "observation_count": 1
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "total_carbonate_equivalent",
+      "original_observation_count": 469,
+      "value_count": 0,
+      "observation_count": 469
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "total_nitrogen",
+      "original_observation_count": 299,
+      "value_count": 0,
+      "observation_count": 299
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "total_phosphorus",
+      "original_observation_count": 17,
+      "value_count": 0,
+      "observation_count": 17
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "total_porosity",
+      "original_observation_count": 241,
+      "value_count": 0,
+      "observation_count": 241
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "very_coarse_sand_content",
+      "original_observation_count": 349,
+      "value_count": 0,
+      "observation_count": 349
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "variable_code": "very_fine_sand_content",
+      "original_observation_count": 379,
+      "value_count": 0,
+      "observation_count": 379
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "base_saturation_cecsoil",
+      "original_observation_count": 844,
+      "value_count": 0,
+      "observation_count": 844
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "bulk_density",
+      "original_observation_count": 205,
+      "value_count": 0,
+      "observation_count": 205
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "calcium_carbonate_content",
+      "original_observation_count": 720,
+      "value_count": 0,
+      "observation_count": 720
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "cec_soil",
+      "original_observation_count": 1113,
+      "value_count": 0,
+      "observation_count": 1113
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "clay_content",
+      "original_observation_count": 1139,
+      "value_count": 0,
+      "observation_count": 1139
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "coarse_fragments_volumetric",
+      "original_observation_count": 14,
+      "value_count": 0,
+      "observation_count": 14
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "electrical_conductivity",
+      "original_observation_count": 846,
+      "value_count": 0,
+      "observation_count": 846
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "exchangeable_acidity",
+      "original_observation_count": 627,
+      "value_count": 0,
+      "observation_count": 627
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "exchangeable_aluminium",
+      "original_observation_count": 570,
+      "value_count": 0,
+      "observation_count": 570
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "exchangeable_calcium",
+      "original_observation_count": 1129,
+      "value_count": 0,
+      "observation_count": 1129
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "exchangeable_magnesium",
+      "original_observation_count": 1128,
+      "value_count": 0,
+      "observation_count": 1128
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "exchangeable_potassium",
+      "original_observation_count": 1076,
+      "value_count": 0,
+      "observation_count": 1076
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "exchangeable_sodium",
+      "original_observation_count": 932,
+      "value_count": 0,
+      "observation_count": 932
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "gypsum_content",
+      "original_observation_count": 701,
+      "value_count": 0,
+      "observation_count": 701
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "organic_carbon",
+      "original_observation_count": 1015,
+      "value_count": 0,
+      "observation_count": 1015
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "ph_cacl2",
+      "original_observation_count": 150,
+      "value_count": 0,
+      "observation_count": 150
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "ph_h2o",
+      "original_observation_count": 1145,
+      "value_count": 0,
+      "observation_count": 1145
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "ph_kcl",
+      "original_observation_count": 1125,
+      "value_count": 0,
+      "observation_count": 1125
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "sand_content",
+      "original_observation_count": 1139,
+      "value_count": 0,
+      "observation_count": 1139
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "silt_content",
+      "original_observation_count": 1139,
+      "value_count": 0,
+      "observation_count": 1139
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "total_nitrogen",
+      "original_observation_count": 291,
+      "value_count": 0,
+      "observation_count": 291
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "water_content_volumetric_10kpa",
+      "original_observation_count": 26,
+      "value_count": 0,
+      "observation_count": 26
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "water_content_volumetric_1500kpa",
+      "original_observation_count": 129,
+      "value_count": 0,
+      "observation_count": 129
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "variable_code": "water_content_volumetric_33kpa",
+      "original_observation_count": 126,
+      "value_count": 0,
+      "observation_count": 126
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "bdfi33l",
+      "original_observation_count": 57,
+      "value_count": 0,
+      "observation_count": 57
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "bdfiod",
+      "original_observation_count": 1252,
+      "value_count": 0,
+      "observation_count": 1252
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "bdwsod",
+      "original_observation_count": 22,
+      "value_count": 0,
+      "observation_count": 22
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "cecph7",
+      "original_observation_count": 1988,
+      "value_count": 0,
+      "observation_count": 1988
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "cfgr",
+      "original_observation_count": 172,
+      "value_count": 0,
+      "observation_count": 172
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "cfvo",
+      "original_observation_count": 1549,
+      "value_count": 0,
+      "observation_count": 1549
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "clay",
+      "original_observation_count": 5002,
+      "value_count": 0,
+      "observation_count": 5002
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "ecec",
+      "original_observation_count": 1383,
+      "value_count": 0,
+      "observation_count": 1383
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "elco20",
+      "original_observation_count": 2,
+      "value_count": 0,
+      "observation_count": 2
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "elco25",
+      "original_observation_count": 368,
+      "value_count": 0,
+      "observation_count": 368
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "elcosp",
+      "original_observation_count": 1388,
+      "value_count": 0,
+      "observation_count": 1388
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "nitkjd",
+      "original_observation_count": 2485,
+      "value_count": 0,
+      "observation_count": 2485
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "organic_carbon",
+      "original_observation_count": 5502,
+      "value_count": 0,
+      "observation_count": 5502
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "orgm",
+      "original_observation_count": 106,
+      "value_count": 0,
+      "observation_count": 106
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "ph_aq",
+      "original_observation_count": 5052,
+      "value_count": 0,
+      "observation_count": 5052
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "phca",
+      "original_observation_count": 568,
+      "value_count": 0,
+      "observation_count": 568
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "phetb1",
+      "original_observation_count": 63,
+      "value_count": 0,
+      "observation_count": 63
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "phetol",
+      "original_observation_count": 2,
+      "value_count": 0,
+      "observation_count": 2
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "phkc",
+      "original_observation_count": 4606,
+      "value_count": 0,
+      "observation_count": 4606
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "phnf",
+      "original_observation_count": 104,
+      "value_count": 0,
+      "observation_count": 104
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "phprtn",
+      "original_observation_count": 168,
+      "value_count": 0,
+      "observation_count": 168
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "phptot",
+      "original_observation_count": 15,
+      "value_count": 0,
+      "observation_count": 15
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "sand",
+      "original_observation_count": 5004,
+      "value_count": 0,
+      "observation_count": 5004
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "silt",
+      "original_observation_count": 5398,
+      "value_count": 0,
+      "observation_count": 5398
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "tceq",
+      "original_observation_count": 2059,
+      "value_count": 0,
+      "observation_count": 2059
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "wg0010",
+      "original_observation_count": 15,
+      "value_count": 0,
+      "observation_count": 15
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "wg0033",
+      "original_observation_count": 57,
+      "value_count": 0,
+      "observation_count": 57
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "wg0200",
+      "original_observation_count": 17,
+      "value_count": 0,
+      "observation_count": 17
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "wg1500",
+      "original_observation_count": 209,
+      "value_count": 0,
+      "observation_count": 209
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "wv0010",
+      "original_observation_count": 397,
+      "value_count": 0,
+      "observation_count": 397
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "wv0033",
+      "original_observation_count": 593,
+      "value_count": 0,
+      "observation_count": 593
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "wv0100",
+      "original_observation_count": 3,
+      "value_count": 0,
+      "observation_count": 3
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "wv0500",
+      "original_observation_count": 102,
+      "value_count": 0,
+      "observation_count": 102
+    },
+    {
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "variable_code": "wv1500",
+      "original_observation_count": 721,
+      "value_count": 0,
+      "observation_count": 721
+    }
+  ]
+}

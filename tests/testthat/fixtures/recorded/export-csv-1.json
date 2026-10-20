@@ -1,0 +1,12 @@
+{
+  "job_id": "exp_20261020_060654_541b5ec8",
+  "status": "queued",
+  "summary_url": "/api/v1/exports/exp_20261020_060654_541b5ec8",
+  "download_url": null,
+  "progress": null,
+  "file_size_bytes": null,
+  "expires_at": null,
+  "error_message": null,
+  "observation_count": 30,
+  "records": null
+}
