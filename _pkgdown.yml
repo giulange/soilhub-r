@@ -115,3 +115,7 @@ articles:
     navbar: Upgrading
     contents:
       - migration-0.1
+
+authors:
+  Giuliano Langella:
+    href: https://giulange.github.io/
