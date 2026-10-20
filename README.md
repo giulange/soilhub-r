@@ -50,4 +50,7 @@ soil_citations(x)   # what to cite for the data in x
 soil_licences(x)    # under which terms
 ```
 
+What to cite (the data and the hub) and what the licences allow: see the
+[How to cite](https://giulange.github.io/soilhub-r/articles/how-to-cite.html) page.
+
 Design documents of the package are in [docs/design/](docs/design/).

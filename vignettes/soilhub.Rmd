@@ -265,7 +265,9 @@ citations <- soil_citations(x)
 citations$citation_text
 ```
 
-`soil_licences(x)` gives the terms of use in the same way.
+`soil_licences(x)` gives the terms of use in the same way. The page
+[How to cite](how-to-cite.html) explains what to cite (the data and the hub)
+and what the licences allow.
 
 ## 11. Sign out
 
