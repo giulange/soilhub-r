@@ -831,7 +831,7 @@ Order follows dependencies; each package includes its unit tests and roxygen doc
 | WP9 | Source ingest | `publish-source.R` (bundle from sf, manifest, upload, validate, promote, wait) | WP8 | fixture round trip; `source_record_id` and CRS checks; `keep_file` | ✅ in `develop` |
 | WP10 | Fixture recording and contract tests | `tools/record_fixtures.R` (scrubbing), `tools/update_contract_snapshots.R`, `tests/contract/` (7.2), `contract.yml` | WP0 (runs alongside WP3–WP9, fixtures recorded by the owner once) | snapshots committed; contract suite green against the snapshot and the live `openapi.json` | ✅ in `develop` (risposte vere registrate il 2026-10-20) |
 | WP11 | Documentation and site | six vignettes (8), `?soilhub-terms`, pkgdown groups, README, `migration-0.1` | WP7, WP8 | vignettes build without network; site published from a preview branch | ✅ in `develop` |
-| WP12 | Live acceptance (owner) | `tests/live/smoke.R`, `session-hours.R`, `write-acceptance.R`; runs on RStudio Server and the owner's Mac; logs attached to the issue | WP7, WP8, WP9 | criteria 10.2–10.7 ticked with logs | 🔵 script di collaudo in preparazione |
+| WP12 | Live acceptance (owner) | `tests/live/smoke.R`, `session-hours.R`, `write-acceptance.R`; runs on RStudio Server and the owner's Mac; logs attached to the issue | WP7, WP8, WP9 | criteria 10.2–10.7 ticked with logs | 🔵 script in `develop` (tests/live); collaudo dal vivo da eseguire con il proprietario |
 | WP13 | Release 0.2.0 | version, `NEWS.md`, tarball, GitHub release, site, close #37/#38/#42 references, retire `docs/r-*.md` in the API repo | WP10–WP12 | owner approval; installer test from a clean R | ⏳ da fare |
 
 Suggested milestone grouping: M1 "core" (WP0–WP3), M2 "reads" (WP4–WP7), M3 "writes"
