@@ -7,9 +7,12 @@
 soil_job_cancel(soil = soil_session(), job_id)
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{job_id}{The job id (or the result of a submission).}
+\item{job_id}{The job id (or the result of a submission). API path parameter \code{{job_id}} of
+\code{GET /jobs/{job_id}} (also \code{GET /publication-jobs/{job_id}} and
+\code{GET /soil-health-publication-jobs/{job_id}}, by \code{detail}), \code{POST /jobs/{job_id}/cancel} and
+\code{POST /source-ingests/{job_id}/validate} or \verb{/promote}.}
 }
 \value{
 The \code{soil_job} after the request (unified view): \code{status}

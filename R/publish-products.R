@@ -46,12 +46,14 @@ run_schema <- list(
 #'
 #' Rights: `soil:admin`.
 #'
-#' @param soil A session; the default session when omitted.
-#' @param product_code Code of the product: lowercase letters, digits, `_`.
-#' @param name Human name.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param product_code Code of the product: lowercase letters, digits, `_`. API field `product_code`
+#'   of `POST /products`; for [soil_product_version()], API path parameter `{product_code}` of
+#'   `POST /products/{product_code}/versions`.
+#' @param name Human name. API field `name` of `POST /products`.
 #' @param target_level The canonical level of its results: `"feature"`,
-#'   `"profile"`, `"component"` or `"horizon"`.
-#' @param description Optional description.
+#'   `"profile"`, `"component"` or `"horizon"`. API field `target_level` of `POST /products`.
+#' @param description Optional description. API field `description` of `POST /products`.
 #' @return The product: a list `product_code`, `name`, `description`,
 #'   `target_level`.
 #' @family writing
@@ -102,15 +104,16 @@ soil_product <- function(soil = soil_session(), product_code, name, target_level
 #' Rights: `soil:admin`.
 #'
 #' @inheritParams soil_product
-#' @param version_code Code of the version (e.g. `"v1.0.0"`).
+#' @param version_code Code of the version (e.g. `"v1.0.0"`). API field `version_code`.
 #' @param algorithm_checksum SHA-256 of the algorithm: 64 lowercase
-#'   hexadecimal characters (e.g. `openssl::sha256(file("model.R"))`).
+#'   hexadecimal characters (e.g. `openssl::sha256(file("model.R"))`). API field
+#'   `algorithm_checksum`.
 #' @param variables The variables published by the version: a data frame
 #'   with `variable_code` and `target_levels` (a character column, one level
 #'   per row, or a list column of character vectors), or a list of
-#'   `list(variable_code =, target_levels =)`.
+#'   `list(variable_code =, target_levels =)`. API field `variables`.
 #' @param configuration The configuration of the model, a named list (a
-#'   JSON object).
+#'   JSON object). API field `configuration`.
 #' @return The version: a list `product_code`, `product_name`,
 #'   `description`, `product_version_id` (the id to open runs),
 #'   `version_code`, `algorithm_checksum`, `configuration` (list),
@@ -223,16 +226,18 @@ declared_variables <- function(variables) {
 #'
 #' Rights: `soil:publish`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @param product_version_id The id of the version
-#'   ([soil_product_version()]).
+#'   ([soil_product_version()]). API path parameter `{product_version_id}` of
+#'   `POST /product-versions/{product_version_id}/runs`.
 #' @param idempotency_key Key of the run (at most 200 characters), stable
-#'   for one execution.
+#'   for one execution. API field `idempotency_key`.
 #' @param input_release_ids Ids of the source releases used by the
-#'   execution (integer).
-#' @param parameters Parameters of the execution, a named list.
-#' @param run_id The id of the run.
-#' @param diagnostics Diagnostics recorded with the closing, a named list.
+#'   execution (integer). API field `input_release_ids`.
+#' @param parameters Parameters of the execution, a named list. API field `parameters`.
+#' @param run_id The id of the run. API path parameter `{run_id}` of
+#'   `POST /publications/{run_id}/complete` and `POST /publications/{run_id}/fail`.
+#' @param diagnostics Diagnostics recorded with the closing, a named list. API field `diagnostics`.
 #' @return The run: a list `run_id`, `product_version_id`, `product_code`,
 #'   `version_code`, `status` (`running`, `completed`, `failed`),
 #'   `idempotency_key`, `started_at`, `completed_at`, `parameters`,

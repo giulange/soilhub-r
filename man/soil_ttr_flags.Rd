@@ -17,21 +17,24 @@ soil_ttr_flags(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{source_dataset}{One SOTWIS source dataset (record id or name).}
+\item{source_dataset}{One SOTWIS source dataset (record id or name). API query parameter
+\code{source_dataset}.}
 
-\item{prid}{One profile id (\code{PRID}).}
+\item{prid}{One profile id (\code{PRID}). API query parameter \code{prid}.}
 
-\item{claf}{One soil unit code (\code{CLAF}).}
+\item{claf}{One soil unit code (\code{CLAF}). API query parameter \code{claf}.}
 
-\item{layer}{One layer (\code{Layer}, e.g. \code{"D1"}).}
+\item{layer}{One layer (\code{Layer}, e.g. \code{"D1"}). API query parameter \code{layer}.}
 
-\item{feature_id, horizon_id}{One canonical feature or horizon id (UUID).}
+\item{feature_id, horizon_id}{One canonical feature or horizon id (UUID). API query parameters
+\code{feature_id} and \code{horizon_id}.}
 
-\item{view}{\code{"raw"} (sent explicitly) or \code{"revised"}.}
+\item{view}{\code{"raw"} (sent explicitly) or \code{"revised"}. API query parameter \code{view}.}
 
-\item{max_rows}{Maximum number of rows to read (\code{Inf}: all).}
+\item{max_rows}{Maximum number of rows to read (\code{Inf}: all). Client-side; caps the API query
+parameter \code{limit} of each page request.}
 }
 \value{
 A data frame: \code{flag_id}, \code{feature_id}, \code{profile_id},

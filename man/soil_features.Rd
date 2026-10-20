@@ -23,7 +23,7 @@ soil_features(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
 \item{datasets}{Catalog dataset codes (\code{"wosis_points"},
 \code{"wise_profiles"}, \code{"soter_profiles"}, \code{"soter_polygons"},
@@ -63,18 +63,20 @@ polygons): \code{NULL} (the API default, \code{"representative"}),
 API field \code{components}.}
 
 \item{min_cumulative_percent}{Threshold of \code{components = "cumulative"},
-0 to 100 (required with it, refused without it).}
+0 to 100 (required with it, refused without it). API field \code{min_cumulative_percent}.}
 
 \item{with_geometry}{\code{"sf"} (the default: an \code{sf} object, EPSG:4326; needs
 the package \code{sf}, else a \code{soilhub_dependency_error}) or \code{"text"} (a data
 frame with \code{geometry_text}, the GeoJSON of each feature: no package
-needed; \code{sf::st_read()} or \code{geojsonsf} read it).}
+needed; \code{sf::st_read()} or \code{geojsonsf} read it). Client-side: not sent to the API (features
+always carry their GeoJSON geometry).}
 
 \item{max_rows}{Maximum number of features to read (\code{Inf}: the whole
-selection).}
+selection). Client-side; caps the API field \code{limit} of each page request.}
 
 \item{page_size}{Features per request; \code{NULL} uses the session's, the
-\code{soilhub.page_size} option or the server's \code{max_page_size}.}
+\code{soilhub.page_size} option or the server's \code{max_page_size}. Client-side; sets the API field
+\code{limit} of each page request.}
 
 \item{too_large}{What to do when the API refuses the selection as too
 large for a synchronous read: \code{"stop"} raises
@@ -82,9 +84,10 @@ large for a synchronous read: \code{"stop"} raises
 \code{soil_export(..., content = "features")} call; \code{"export"} exports the
 features of the selection (GeoJSON), waits, downloads, reads them back
 and returns the same shape, with \code{soil_metadata(x)$via_export} the job
-id.}
+id. Client-side: not sent to the API.}
 
-\item{progress}{Report the pages read (messages at verbosity 1 or more).}
+\item{progress}{Report the pages read (messages at verbosity 1 or more). Client-side: not sent to
+the API.}
 }
 \value{
 A \code{soil_table} with \code{soil_layout = "features"}: an \code{sf} object

@@ -7,9 +7,9 @@
 soil_capabilities(soil = soil_session(), refresh = FALSE)
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{refresh}{Read the capabilities from the server again.}
+\item{refresh}{Read the capabilities from the server again. Client-side: not sent to the API.}
 }
 \value{
 The \verb{/capabilities} object as a named list (as parsed, nothing

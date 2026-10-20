@@ -36,15 +36,15 @@ target_result_schema <- list(
 #'
 #' Rights: `soil:read`. Capability: `target_resolution`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @param targets A data frame with the columns `provider_code`,
 #'   `dataset_code` (lower-case codes), `release_code`, `target_level`
 #'   (`"feature"`, `"profile"`, `"component"`, `"horizon"`),
 #'   `source_record_id` and optionally `source_table`, without `NA` (except
-#'   in `source_table`).
+#'   in `source_table`). API field `targets`.
 #' @param strict Stop with `soilhub_argument_error` (argument `targets`) when
 #'   a target is `missing` or `ambiguous`; the full resolution is in the
-#'   error's `resolution` field.
+#'   error's `resolution` field. Client-side: not sent to the API.
 #' @return A data frame, one row per row of `targets` and in the same order:
 #'   `input_index` (0-based position in `targets`), `status`,
 #'   `provider_code`, `dataset_code`, `release_code`, `target_level`,

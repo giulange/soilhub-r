@@ -49,3 +49,8 @@ options(old)
 old <- options(soilhub.verbose = 2)
 options(old)
 }
+\seealso{
+Other configuration and errors: 
+\code{\link{soilhub-errors}}
+}
+\concept{configuration and errors}

@@ -7,15 +7,16 @@
 soil_export_from_error(soil = soil_session(), error, format = "gpkg", ...)
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{error}{The \code{soilhub_load_limit_error} of a read (\code{channel = "sync"}).}
+\item{error}{The \code{soilhub_load_limit_error} of a read (\code{channel = "sync"}). Client-side: not sent to the API.}
 
-\item{format}{The export format (see \code{\link[=soil_export]{soil_export()}}).}
+\item{format}{The export format (see \code{\link[=soil_export]{soil_export()}}). API field \code{format}.}
 
 \item{...}{Other arguments of \code{\link[=soil_export]{soil_export()}} (\code{content}, \code{layout},
 \code{wait}, \code{timeout}, \code{dir}, ...; a selection argument given here replaces
-the error's).}
+the error's). Each is sent, or not, as described for \code{\link[=soil_export]{soil_export()}} (API fields of
+\code{POST /exports}, or client-side).}
 }
 \value{
 A \code{soil_export} (see \code{\link[=soil_export]{soil_export()}}).

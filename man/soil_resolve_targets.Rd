@@ -7,17 +7,17 @@
 soil_resolve_targets(soil = soil_session(), targets, strict = TRUE)
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
 \item{targets}{A data frame with the columns \code{provider_code},
 \code{dataset_code} (lower-case codes), \code{release_code}, \code{target_level}
 (\code{"feature"}, \code{"profile"}, \code{"component"}, \code{"horizon"}),
 \code{source_record_id} and optionally \code{source_table}, without \code{NA} (except
-in \code{source_table}).}
+in \code{source_table}). API field \code{targets}.}
 
 \item{strict}{Stop with \code{soilhub_argument_error} (argument \code{targets}) when
 a target is \code{missing} or \code{ambiguous}; the full resolution is in the
-error's \code{resolution} field.}
+error's \code{resolution} field. Client-side: not sent to the API.}
 }
 \value{
 A data frame, one row per row of \code{targets} and in the same order:

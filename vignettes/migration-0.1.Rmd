@@ -1,0 +1,59 @@
+---
+title: "From soilhub 0.1.x to 0.2.0"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{From soilhub 0.1.x to 0.2.0}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+soilhub 0.2.0 is a redesign: the functions have new names and arguments. If
+you used 0.1.x, the table below gives the new function for each old one.
+
+The main changes in a few lines:
+
+- **Sign-in in the browser only**: `soil_connect()` signs you in with the
+  device flow (a web address and a code) and renews the session by itself;
+  there is no more login with a client secret, and no token is saved on disk.
+- **One configuration**: one Keycloak realm URL (`keycloak_url`) instead of
+  separate token and device URLs.
+- **Always the canonical data**: there is no `canonical` argument; new
+  arguments `view` (`"raw"`, `"revised"`), `layer`, `profile_type`,
+  `components`.
+- **No filter means `NULL`**: the value `"ALL"` is refused; leave the argument
+  out (or set it to `NULL`).
+- **Typed tables**: wide tables (one row per horizon) with numeric columns,
+  units and markings as ordinary columns; see
+  `vignette("soilhub", package = "soilhub")`.
+- **Exports** for large selections: `soil_export()`.
+
+| 0.1.x | 0.2.0 | Change |
+| --- | --- | --- |
+| `soil_connect(api_url, token_url, client_id, client_secret, ...)` | removed | machine login left the package |
+| `soil_connect_device(api_url, token_url, device_url)` + `soil_login()` | `soil_connect(api_url, keycloak_url)` (signs in) | one realm URL; `soil_login()` kept to sign in again |
+| `soil_check_api()` | `soil_api_info()` | adds versions and compatibility |
+| `soil_capabilities()` | same | cached in the session |
+| `soil_datasets(dataset = )` | `soil_datasets()`, `soil_dataset(name)` | provenance, citations, notes |
+| `soil_variables(code, domains, measurement_kinds, ..., "ALL")` | `soil_variables(code, domain, ..., NULL)`, `soil_variable_mappings()` | `NULL` instead of `"ALL"`; singular API names |
+| `soil_countries(country)` | `soil_countries()`, `soil_country(code)` | |
+| `soil_consistency()` | same | `NULL` filters |
+| `soil_get_observations(layout, geometry_format, include_geometry, canonical)` | `soil_observations(layout, with_geometry)` | always canonical; `view`, `profile_type`, `components`; typed markings |
+| `soil_get_data()` | `soil_observations(with_geometry = "sf")` | |
+| `soil_get_features()` | `soil_features()` | canonical ids (join with observations by `feature_id`) |
+| `soil_get_values()` | `soil_values()` | |
+| `soil_get_health()` | `soil_health_scores()` | |
+| `soil_get_target_ids()` | `soil_resolve_targets()` | reads `targets` (0.1.3 read `results`: a bug) |
+| `soil_get_all_pages()` | internal | paging is automatic |
+| `soil_register_variable()` | same | capability-gated, `validate_only` |
+| `soil_publish_derived(values, product, version, run)` | `soil_product()`, `soil_product_version()`, `soil_run_open()`, `soil_publish_values(run_id, values)` | explicit steps; run completion added (`soil_run_complete()`) |
+| `soil_publish_health()` | `soil_publish_health(run_id, scores)` | |
+| `soil_publish_entities()` | `soil_publish_source()` | |
+| `soil_publication_status()`, `soil_cancel_job()` | `soil_job()`, `soil_job_wait()`, `soil_job_cancel()` | |
+| `soil_check_dependencies()`, `soil_install_dependencies()` | removed | package installation handles dependencies |
+| argument `max_records` | argument `max_rows` | counts the rows of the returned table |
+| filter value `"ALL"` | `NULL` | `"ALL"` raises an error naming `NULL` |
+
+The old environment variables `SOIL_API_URL`, `KEYCLOAK_TOKEN_URL` and
+`KEYCLOAK_DEVICE_URL` are still read, with a message, when the new ones
+(`SOILHUB_API_URL`, `SOILHUB_KEYCLOAK_URL`) are not set: see
+`?soilhub-config`.

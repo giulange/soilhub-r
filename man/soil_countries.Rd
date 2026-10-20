@@ -7,7 +7,7 @@
 soil_countries(soil = soil_session())
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 }
 \value{
 A data frame, one row per country: \code{iso_a2}, \code{iso_a3}, \code{name},

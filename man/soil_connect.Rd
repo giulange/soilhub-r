@@ -16,22 +16,25 @@ soil_connect(
 )
 }
 \arguments{
-\item{api_url}{Base URL of the API (see \link{soilhub-config}).}
+\item{api_url}{Base URL of the API (see \link{soilhub-config}). Client-side: the base URL of every
+request, not sent to the API.}
 
-\item{keycloak_url}{Keycloak realm URL.}
+\item{keycloak_url}{Keycloak realm URL. Client-side: used for the sign-in, not sent to the API.}
 
-\item{client_id}{OIDC public client (\code{ams-r}).}
+\item{client_id}{OIDC public client (\code{ams-r}). Client-side: used for the sign-in, not sent to the
+API.}
 
-\item{login}{Sign in now (\code{TRUE}) or later with \code{\link[=soil_login]{soil_login()}}.}
+\item{login}{Sign in now (\code{TRUE}) or later with \code{\link[=soil_login]{soil_login()}}. Client-side: not sent to the API.}
 
-\item{open_browser}{Open the verification address in the browser.}
+\item{open_browser}{Open the verification address in the browser. Client-side: not sent to the
+API.}
 
-\item{timeout}{Total seconds allowed for each request.}
+\item{timeout}{Total seconds allowed for each request. Client-side: not sent to the API.}
 
-\item{verbose}{Verbosity: 0, 1 or 2 (see \link{soilhub-config}).}
+\item{verbose}{Verbosity: 0, 1 or 2 (see \link{soilhub-config}). Client-side: not sent to the API.}
 
 \item{set_default}{Register the session as the default session
-(\code{\link[=soil_session]{soil_session()}}).}
+(\code{\link[=soil_session]{soil_session()}}). Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_session}: a list with \code{api_url}, \code{keycloak_url},
@@ -92,4 +95,11 @@ soil_login(soil)
 \seealso{
 \code{\link[=soil_login]{soil_login()}}, \code{\link[=soil_whoami]{soil_whoami()}}, \code{\link[=soil_session]{soil_session()}},
 \code{\link[=soil_logout]{soil_logout()}}
+
+Other session: 
+\code{\link{soil_login}()},
+\code{\link{soil_logout}()},
+\code{\link{soil_session}()},
+\code{\link{soil_whoami}()}
 }
+\concept{session}

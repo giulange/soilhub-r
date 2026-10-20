@@ -1,11 +1,13 @@
 # soilhub
 
-R client for the Global Soil Data Hub API: discover, read and export
-harmonised soil profile data, and (with the appropriate rights) publish derived
-values. The package is **under development** (version 0.2.0 redesign): so far
-it provides the session functions (`soil_connect()`, `soil_whoami()`); the data
-functions follow. The 0.1.x client is documented in
-[docs/legacy/TUTORIAL-0.1.md](docs/legacy/TUTORIAL-0.1.md).
+R client for the [Global Soil Data Hub](https://soilhub.weatherprogapp.it/docs)
+API: discover, read and export harmonised soil profile data (WoSIS, WISE,
+SOTER, SOTWIS), and, with the appropriate rights, publish derived values.
+Outputs are ordinary R data frames (or `sf` objects when you ask for
+geometries), with the original terms of the sources.
+
+Documentation: <https://giulange.github.io/soilhub-r> (getting started,
+articles and the reference of every function).
 
 ## Install Or Update
 
@@ -56,8 +58,7 @@ packageVersion("soilhub")
 `sf` is optional: install it (`install.packages("sf")`) only if you need
 geometry. On Linux, dependencies such as `curl` and `openssl` (and `sf`) may
 require system libraries: ask your RStudio Server administrator if installation
-fails. Accept
-a personal library if the shared library is not writable. The script installs
+fails. Accept a personal library if the shared library is not writable. The script installs
 missing dependencies; it does not automatically upgrade every existing package.
 
 If GitHub's public API rate limit is reached, retry later or download the
@@ -74,7 +75,32 @@ package):
 remotes::install_github("giulange/soilhub-r", ref = "develop")
 ```
 
-Design documents of the redesign are in [docs/design/](docs/design/).
+## First Use
 
-API documentation: [Global Soil Data Hub](https://soilhub.weatherprogapp.it/docs).
-The client is MIT licensed; provider data retain their original licenses.
+```r
+library(soilhub)
+soil <- soil_connect()     # opens the sign-in in your browser (a web address and a code)
+soil_datasets(soil)        # the datasets of the hub
+x <- soil_observations(soil, datasets = "wosis_points", country = "KEN", max_rows = 100)
+```
+
+`x` has one row per horizon and one group of columns per soil property. The
+guide `vignette("soilhub", package = "soilhub")` explains each step; the
+other articles cover the raw and revised views, the first layer, exports and
+publishing.
+
+Users of the 0.1.x client: see `vignette("migration-0.1", package = "soilhub")`
+(the old tutorial is in [docs/legacy/TUTORIAL-0.1.md](docs/legacy/TUTORIAL-0.1.md)).
+
+## Licences And Citation
+
+The client is MIT licensed. The soil data keep the licences of their
+providers (ISRIC and the data providers of each profile): before using or
+publishing results, check them and cite the data with
+
+```r
+soil_citations(x)   # what to cite for the data in x
+soil_licences(x)    # under which terms
+```
+
+Design documents of the package are in [docs/design/](docs/design/).

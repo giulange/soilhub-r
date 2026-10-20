@@ -7,7 +7,7 @@
 soil_formats(soil = soil_session())
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 }
 \value{
 A character vector.

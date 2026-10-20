@@ -53,8 +53,10 @@ publication_receipt_schema <- list(
 #' Rights: `soil:publish`. Capabilities: `publish_generic_values`
 #' (synchronous), `generic_bulk_publication` (job).
 #'
-#' @param soil A session; the default session when omitted.
-#' @param run_id The id of an open run.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param run_id The id of an open run. API path parameter `{run_id}` of
+#'   `POST /publications/{run_id}/values`, `/validate` and `/jobs` (for [soil_publish_health()]:
+#'   `/soil-health` and `/soil-health/jobs`).
 #' @param values A data frame (list columns for nested fields) or a list of
 #'   records with `variable_code`, `target_level`, `target_id` (UUID),
 #'   `value` (typed as the variable: number, text, logical, or a list for
@@ -64,15 +66,20 @@ publication_receipt_schema <- list(
 #'   `depth_bottom_cm` (optional) and `lineage`: a list with one or more of
 #'   `observations`, `values`, `releases`, `assets`, each a list of
 #'   `list(id =, role =, transformation =)` (or a data frame), at least one
-#'   item in all. `NA` fields are left out.
+#'   item in all. `NA` fields are left out. API field `values`; with the NDJSON transport, the lines
+#'   of the file sent as API form field `file`.
 #' @param idempotency_key Key of this publication (at most 200 characters),
-#'   stable for one content.
-#' @param validate Validate on the server before publishing.
+#'   stable for one content. API field `idempotency_key` of a synchronous publication; API query
+#'   parameter `idempotency_key` of an NDJSON upload.
+#' @param validate Validate on the server before publishing. Client-side: decides whether
+#'   `POST /publications/{run_id}/validate` is called first; not sent to the API.
 #' @param transport `"auto"` (synchronous up to 10,000 records, else
-#'   NDJSON), `"sync"` or `"ndjson"`.
-#' @param wait For a job: wait for it to end (see [soil_job_wait()]).
-#' @param timeout,poll Seconds to wait for a job, and between two polls.
-#' @param progress Print the progress of the job.
+#'   NDJSON), `"sync"` or `"ndjson"`. Client-side: not sent to the API.
+#' @param wait For a job: wait for it to end (see [soil_job_wait()]). Client-side: not sent to the
+#'   API.
+#' @param timeout,poll Seconds to wait for a job, and between two polls. Client-side: not sent to
+#'   the API.
+#' @param progress Print the progress of the job. Client-side: not sent to the API.
 #' @return A `soil_publication` list: `transport`, `run_id`, `status`,
 #'   `record_count` (records sent), `received_count`, `published_count`,
 #'   `publication_id` (the receipt), `idempotent_replay`, `validation` (the

@@ -27,48 +27,51 @@ soil_health_scores(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{providers}{Provider codes.}
+\item{providers}{Provider codes. API field \code{providers}.}
 
-\item{datasets}{Catalog dataset codes.}
+\item{datasets}{Catalog dataset codes. API field \code{datasets}.}
 
-\item{release_ids, release_codes}{Releases of the scored horizons.}
+\item{release_ids, release_codes}{Releases of the scored horizons. API fields \code{release_ids} and
+\code{release_codes}.}
 
 \item{model_versions}{Soil-health model version codes (an unknown code is
-refused by the API).}
+refused by the API). API field \code{model_versions}.}
 
 \item{run_ids}{Product run ids (API field \code{product_run_ids}).}
 
-\item{categories}{Category codes (\code{"physical"}, \code{"chemical"}, ...).}
+\item{categories}{Category codes (\code{"physical"}, \code{"chemical"}, ...). API field \code{categories}.}
 
-\item{score_classes}{Score classes.}
+\item{score_classes}{Score classes. API field \code{score_classes}.}
 
 \item{statuses}{Score statuses: \code{"scored"}, \code{"insufficient_data"},
 \code{"not_applicable"} (API field \code{score_statuses}).}
 
 \item{source_supports}{Source supports (\code{"point_observation"},
-\code{"polygon_estimate"}, ...).}
+\code{"polygon_estimate"}, ...). API field \code{source_supports}.}
 
-\item{country}{Countries as ISO 3166 alpha-2 or alpha-3 codes or names.}
+\item{country}{Countries as ISO 3166 alpha-2 or alpha-3 codes or names. API field \code{country}.}
 
-\item{bbox}{\code{c(xmin, ymin, xmax, ymax)} in WGS84 degrees.}
+\item{bbox}{\code{c(xmin, ymin, xmax, ymax)} in WGS84 degrees. API field \code{bbox}.}
 
 \item{depth_top_cm, depth_bottom_cm}{Depth interval in cm: the horizons
-overlapping it.}
+overlapping it. API fields \code{depth_top_cm} and \code{depth_bottom_cm}.}
 
 \item{with_geometry}{\code{"none"}, \code{"text"} (the geometry of the feature as
 GeoJSON text in \code{geometry_text}) or \code{"sf"} (an \code{sf} object with a
 \code{geometry} column, EPSG:4326; needs the package \code{sf}, else a
-\code{soilhub_dependency_error}).}
+\code{soilhub_dependency_error}). Client-side; sets the API field \code{include_geometry} (\code{false} for
+\code{"none"}), the form is built locally.}
 
 \item{include_details}{Add the list columns \code{inputs},
 \code{derived_variables}, \code{memberships}, \code{activated_rules}, \code{diagnostics},
-\code{input_observations} (how each score was computed).}
+\code{input_observations} (how each score was computed). API field \code{include_details}.}
 
-\item{max_rows}{Maximum number of scores to read (\code{Inf}: all).}
+\item{max_rows}{Maximum number of scores to read (\code{Inf}: all). Client-side; caps the API field
+\code{limit} of each page request.}
 
-\item{progress}{Report the pages read.}
+\item{progress}{Report the pages read. Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_table} (see \link{soil_table}) with \code{soil_layout = "health"}:

@@ -51,19 +51,21 @@ unmapped_schema <- list(
 #'
 #' Rights: `soil:summary`.
 #'
-#' @param soil A session; the default session when omitted.
-#' @param code Variable codes (`variable_code`, e.g. `"organic_carbon"`).
-#' @param domain Domains (`domain_code`, e.g. `"soil"`).
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param code Variable codes (`variable_code`, e.g. `"organic_carbon"`). API query parameter
+#'   `code`.
+#' @param domain Domains (`domain_code`, e.g. `"soil"`). API query parameter `domain`.
 #' @param measurement_kind Measurement kinds (`measurement_kind_code`, e.g.
-#'   `"observed"`).
+#'   `"observed"`). API query parameter `measurement_kind`.
 #' @param target_level Target levels allowed for the variable (`"horizon"`,
-#'   `"profile"`, `"feature"`, ...).
+#'   `"profile"`, `"feature"`, ...). API query parameter `target_level`.
 #' @param dataset Datasets where the variable has values or a source mapping
-#'   (e.g. `"wosis_points"`); the mappings are limited to them too.
-#' @param provider Providers (e.g. `"isric"`), as `dataset`.
-#' @param available_only Only variables with at least one value.
+#'   (e.g. `"wosis_points"`); the mappings are limited to them too. API query parameter `dataset`.
+#' @param provider Providers (e.g. `"isric"`), as `dataset`. API query parameter `provider`.
+#' @param available_only Only variables with at least one value. API query parameter
+#'   `available_only`.
 #' @param include_unmapped Also list the source codes that map to no
-#'   variable, in `soil_metadata(x)$unmapped_source_codes`.
+#'   variable, in `soil_metadata(x)$unmapped_source_codes`. API query parameter `include_unmapped`.
 #' @return A data frame, one row per variable: `variable_code`, `name`,
 #'   `description`, `domain_code`, `value_type`, `measurement_kind_code`,
 #'   `allowed_target_levels` (list), `property_family`,
@@ -132,10 +134,12 @@ soil_variables <- function(soil = soil_session(), code = NULL, domain = NULL,
 #' Rights: `soil:summary`.
 #'
 #' @param soil A session (the default session when omitted), or the result
-#'   of [soil_variables()], whose mappings are then listed without a request.
+#'   of [soil_variables()], whose mappings are then listed without a request. Client-side: not sent
+#'   to the API.
 #' @param ... The filters of [soil_variables()] (`code`, `domain`,
 #'   `measurement_kind`, `target_level`, `dataset`, `provider`,
-#'   `available_only`) when `soil` is a session.
+#'   `available_only`) when `soil` is a session. API query parameters of `GET /variables`, as for
+#'   [soil_variables()].
 #' @return A data frame, one row per (variable, dataset, mapping):
 #'   `variable_code`, `provider_code`, `dataset_code`, `source_code`,
 #'   `source_official_code`, `source_label`, `source_unit`,

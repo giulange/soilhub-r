@@ -45,7 +45,7 @@ country_variable_schema <- list(
 #'
 #' Rights: `soil:summary`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @return A data frame, one row per country: `iso_a2`, `iso_a3`, `name`,
 #'   the counts `dataset_count`, `feature_count`, `point_count`,
 #'   `polygon_count`, `profile_count`, `horizon_count`,
@@ -81,9 +81,9 @@ soil_countries <- function(soil = soil_session()) {
 #' Rights: `soil:summary`.
 #'
 #' @param soil A session; the default session when omitted (the code may
-#'   then be given first: `soil_country("KEN")`).
+#'   then be given first: `soil_country("KEN")`). Client-side: not sent to the API.
 #' @param code ISO 3166-1 alpha-2 or alpha-3 code (`"KE"`, `"KEN"`), any
-#'   case.
+#'   case. API path parameter `{code}` of `GET /countries/{code}`.
 #' @return A list: `country` (one-row data frame: `iso_a2`, `iso_a3`,
 #'   `name`, the counts of [soil_countries()], `source_signature`,
 #'   `aggregation_version`, `refresh_job_id`, `refreshed_at`), `datasets`

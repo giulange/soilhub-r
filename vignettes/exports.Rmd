@@ -1,0 +1,196 @@
+---
+title: "Large selections and exports"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Large selections and exports}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+options(width = 90)
+# The evaluated examples run against a local replay of responses recorded from
+# the production API (tests/testthat/fixtures/recorded, tools/record_fixtures.R):
+# no network and no login at build time; the outputs are real API outputs,
+# including the export (submitted, followed, downloaded and read back).
+soil <- soilhub:::replay_session()
+```
+
+```{r}
+library(soilhub)
+```
+
+`soil_observations()` reads data directly into R. For very large selections
+(a whole dataset, a continent) the hub prepares a **file** instead: an
+**export**. This guide shows how to size a selection, what happens when it
+is too large, and how to export, download and read the files. It assumes
+you have signed in as shown in `vignette("soilhub", package = "soilhub")`.
+The outputs were recorded from the Global Soil Data Hub API in October 2026.
+
+## The limits of the server
+
+The server says how much it accepts in its capabilities:
+
+```{r}
+limits <- soil_capabilities(soil)$limits
+limits$max_sync_observations
+limits$max_export_observations
+```
+
+- a direct read (`soil_observations()`) may hold up to 1,000,000
+  observations (measured values);
+- an export may hold up to 10,000,000.
+
+## Size the selection first
+
+`soil_summary()` counts a selection without transferring it. For WoSIS in
+Kenya:
+
+```{r}
+kenya <- soil_summary(soil, datasets = "wosis_points", country = "KEN")
+kenya$observation_count
+```
+
+About 46,000 observations: well below the limit, so a direct read works. A
+rule of thumb: below about 200,000 observations read directly; above, use an
+export (it is also the way to get files for a GIS).
+
+## When a selection is too large
+
+If you ask for too much, the server refuses and the package stops with an
+error that explains what to do. Here we ask for every dataset of the hub,
+with no filter. We use `tryCatch()` to keep the error in a variable instead
+of stopping:
+
+```{r}
+result <- tryCatch(
+  soil_observations(soil, max_rows = 5),
+  error = function(e) e
+)
+class(result)[1]
+```
+
+The error is a `soilhub_load_limit_error`. Its message says why and gives
+the way out:
+
+```{r}
+cat(conditionMessage(result))
+```
+
+The selection holds more than a million observations. You can narrow it
+(an area with `bbox` or `country`, fewer `datasets` or `variables`) or
+export it.
+
+## Export a selection
+
+`soil_export()` sends the selection to the server, waits while the file is
+written, downloads it and unzips it in a folder (`dir`). Here: WoSIS around
+Vancouver (Canada) as CSV, checked every 2 seconds, saved in a temporary
+folder (use your own folder, for example `dir = "exports"`).
+
+```{r}
+vancouver <- c(-123.3, 49.0, -122.9, 49.4)
+e <- soil_export(soil, datasets = "wosis_points", bbox = vancouver,
+                 format = "csv", poll = 2, dir = tempdir())
+```
+
+```{r}
+e
+```
+
+The export is `completed`. It holds 4 features (profile sites) and 12
+horizon rows, with 30 observations, in three files: the places
+(`features.csv`), the measurements (`observations.csv`) and a description
+(`metadata.json`). The **job id** (`exp_...`) identifies the export; the
+file stays on the server for a week (`Expires`).
+
+## Read the files back
+
+`soil_export_read()` reads the measurements into a table, with the same
+columns as `soil_observations()`:
+
+```{r}
+horizons <- soil_export_read(e)
+nrow(horizons)
+```
+
+```{r}
+horizons[, c("horizon_name", "upper_depth_cm", "lower_depth_cm", "organic_carbon")]
+```
+
+Unlike the direct read of the other guides (limited to 5 rows), the export
+holds **every** horizon of the selection: 12 horizons of 3 profiles.
+
+The places are read with `what = "features"`:
+
+```{r}
+places <- soil_export_read(e, what = "features")
+nrow(places)
+```
+
+Four places but only three profiles with horizons: one site has no
+measurements (see `vignette("first-layer", package = "soilhub")`).
+
+As for any read, `soil_citations()` tells you what to cite:
+
+```{r}
+soil_citations(horizons)$citation_text
+```
+
+## Export now, download later
+
+A large export can take minutes. With `wait = FALSE` the function returns
+at once; keep the job id, it is the only way to find the export again
+(these calls are not run here).
+
+```{r, eval = FALSE}
+e <- soil_export(soil, datasets = "wosis_points", country = "BRA",
+                 format = "gpkg", wait = FALSE)
+e$job_id
+#> [1] "exp_20261020_..."
+```
+
+Later, even in another R session:
+
+```{r, eval = FALSE}
+e <- soil_export_wait(soil, "exp_20261020_...")
+e <- soil_export_download(soil, e, dir = "exports")
+horizons <- soil_export_read(e)
+```
+
+## Files for a GIS
+
+The formats are `"csv"`, `"tsv"`, `"geojson"`, `"gpkg"` (GeoPackage) and
+`"shp"` (Shapefile, only for the places: `content = "features"`). The
+GeoPackage and Shapefile need the package `sf` to be read in R, and open
+directly in QGIS or ArcGIS (these calls are not run here):
+
+```{r, eval = FALSE}
+gpkg <- soil_export(soil, datasets = "wosis_points", country = "KEN",
+                    format = "gpkg", dir = "exports")
+
+shp <- soil_export(soil, datasets = "wosis_points", country = "KEN",
+                   format = "shp", content = "features", dir = "exports")
+```
+
+## Let the package switch to an export
+
+With `too_large = "export"` a read that the server refuses as too large is
+exported, downloaded and read back for you, with the same result as a direct
+read (this call is not run here):
+
+```{r, eval = FALSE}
+x <- soil_observations(soil, datasets = "wosis_points", too_large = "export")
+```
+
+If you already have the error, `soil_export_from_error()` exports the same
+selection:
+
+```{r, eval = FALSE}
+e <- soil_export_from_error(soil, result, format = "gpkg", dir = "exports")
+```
+
+```{r teardown, include = FALSE}
+soilhub:::replay_stop(soil)
+```

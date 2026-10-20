@@ -30,14 +30,17 @@ ttr_flags_schema <- list(
 #' Rights: `soil:read`. Capabilities: `sotwis_ttr_flags`; `revised_view` for
 #' `view = "revised"`.
 #'
-#' @param soil A session; the default session when omitted.
-#' @param source_dataset One SOTWIS source dataset (record id or name).
-#' @param prid One profile id (`PRID`).
-#' @param claf One soil unit code (`CLAF`).
-#' @param layer One layer (`Layer`, e.g. `"D1"`).
-#' @param feature_id,horizon_id One canonical feature or horizon id (UUID).
-#' @param view `"raw"` (sent explicitly) or `"revised"`.
-#' @param max_rows Maximum number of rows to read (`Inf`: all).
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param source_dataset One SOTWIS source dataset (record id or name). API query parameter
+#'   `source_dataset`.
+#' @param prid One profile id (`PRID`). API query parameter `prid`.
+#' @param claf One soil unit code (`CLAF`). API query parameter `claf`.
+#' @param layer One layer (`Layer`, e.g. `"D1"`). API query parameter `layer`.
+#' @param feature_id,horizon_id One canonical feature or horizon id (UUID). API query parameters
+#'   `feature_id` and `horizon_id`.
+#' @param view `"raw"` (sent explicitly) or `"revised"`. API query parameter `view`.
+#' @param max_rows Maximum number of rows to read (`Inf`: all). Client-side; caps the API query
+#'   parameter `limit` of each page request.
 #' @return A data frame: `flag_id`, `feature_id`, `profile_id`,
 #'   `horizon_id`, `source_record_id`, `source_dataset_name`,
 #'   `source_table`, `source_row_number`, `sub_layer_number` (integer), then

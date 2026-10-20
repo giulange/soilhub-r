@@ -8,9 +8,10 @@ soil_dataset(soil = soil_session(), name)
 }
 \arguments{
 \item{soil}{A session; the default session when omitted (the dataset name
-may then be given first: \code{soil_dataset("wise_profiles")}).}
+may then be given first: \code{soil_dataset("wise_profiles")}). Client-side: not sent to the API.}
 
-\item{name}{The dataset name (e.g. \code{"soter_profiles"}).}
+\item{name}{The dataset name (e.g. \code{"soter_profiles"}). API path parameter \code{{dataset_name}} of
+\code{GET /datasets/{dataset_name}}.}
 }
 \value{
 A \code{soil_dataset} list with the fields of \code{\link[=soil_datasets]{soil_datasets()}}.

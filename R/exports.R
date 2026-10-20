@@ -93,19 +93,20 @@ shapefile_names <- function() {
 #'   horizon) or `"long"` (one row per observation); not sent with `content =
 #'   "features"`. API field `layout`.
 #' @param wait Wait for the export to end (`TRUE`), or return at once with
-#'   its `job_id` (`FALSE`).
+#'   its `job_id` (`FALSE`). Client-side: not sent to the API.
 #' @param timeout Seconds to wait for the export (default one hour); the
-#'   export continues on the server after a timeout.
-#' @param poll Seconds between two polls of the export (at least 2).
+#'   export continues on the server after a timeout. Client-side: not sent to the API.
+#' @param poll Seconds between two polls of the export (at least 2). Client-side: not sent to the
+#'   API.
 #' @param download Download the zip once the export is completed (needs
-#'   `wait = TRUE`).
+#'   `wait = TRUE`). Client-side: not sent to the API.
 #' @param dir Directory of the downloads; `NULL` uses the option
 #'   `soilhub.export_dir`, the environment variable `SOILHUB_EXPORT_DIR`, else
-#'   `file.path(tempdir(), "soilhub-exports")`.
-#' @param unzip Unzip the download into `<dir>/<job_id>/`.
+#'   `file.path(tempdir(), "soilhub-exports")`. Client-side: not sent to the API.
+#' @param unzip Unzip the download into `<dir>/<job_id>/`. Client-side: not sent to the API.
 #' @param progress Show the progress of the export (fraction written) and of
 #'   the download: progress bars in an interactive session, else one message
-#'   per change of status.
+#'   per change of status. Client-side: not sent to the API.
 #' @return A `soil_export` (a list): `job_id`, `status` (`queued`,
 #'   `running`, `completed`, `failed`, `cancelled`), `progress` (percent),
 #'   `observation_count` (the observations of the selection, counted at
@@ -246,17 +247,20 @@ soil_export <- function(soil = soil_session(), datasets = NULL, variables = NULL
 #' API controls every job through the unified job registry, which needs that
 #' right).
 #'
-#' @param soil A session; the default session when omitted.
-#' @param x A `soil_export` or a job id (`"exp_<stamp>_<hex>"`).
-#' @param timeout Seconds to wait before giving up (default one hour).
-#' @param poll Seconds between two polls (at least 2).
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param x A `soil_export` or a job id (`"exp_<stamp>_<hex>"`). API path parameter `{job_id}` of
+#'   `GET /exports/{job_id}`, `GET /exports/{job_id}/download` and `POST /jobs/{job_id}/cancel`.
+#' @param timeout Seconds to wait before giving up (default one hour). Client-side: not sent to the
+#'   API.
+#' @param poll Seconds between two polls (at least 2). Client-side: not sent to the API.
 #' @param progress Show the progress (a bar in an interactive session, else
-#'   one message per change).
+#'   one message per change). Client-side: not sent to the API.
 #' @param dir Directory of the download; `NULL` uses the option
 #'   `soilhub.export_dir`, the environment variable `SOILHUB_EXPORT_DIR`, else
-#'   `file.path(tempdir(), "soilhub-exports")`.
-#' @param unzip Unzip the download into `<dir>/<job_id>/`.
-#' @param overwrite Replace an existing zip or directory of the same export.
+#'   `file.path(tempdir(), "soilhub-exports")`. Client-side: not sent to the API.
+#' @param unzip Unzip the download into `<dir>/<job_id>/`. Client-side: not sent to the API.
+#' @param overwrite Replace an existing zip or directory of the same export. Client-side: not sent
+#'   to the API.
 #' @return `soil_export_status()`, `soil_export_wait()`,
 #'   `soil_export_download()`: the updated `soil_export` (see
 #'   [soil_export()]). `soil_export_cancel()`: the job after the request (a
@@ -341,13 +345,14 @@ soil_export_cancel <- function(soil = soil_session(), x) {
 #'
 #' Rights: `soil:read`.
 #'
-#' @param soil A session; the default session when omitted.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
 #' @param error The `soilhub_load_limit_error` of a read (`channel =
-#'   "sync"`).
-#' @param format The export format (see [soil_export()]).
+#'   "sync"`). Client-side: not sent to the API.
+#' @param format The export format (see [soil_export()]). API field `format`.
 #' @param ... Other arguments of [soil_export()] (`content`, `layout`,
 #'   `wait`, `timeout`, `dir`, ...; a selection argument given here replaces
-#'   the error's).
+#'   the error's). Each is sent, or not, as described for [soil_export()] (API fields of
+#'   `POST /exports`, or client-side).
 #' @return A `soil_export` (see [soil_export()]).
 #' @family exports
 #' @examples
@@ -424,11 +429,11 @@ soil_export_from_error <- function(soil = soil_session(), error, format = "gpkg"
 #' No network, no right needed.
 #'
 #' @param x A `soil_export` (downloaded), the path of an export zip, or the
-#'   directory it was unzipped into.
+#'   directory it was unzipped into. Client-side: not sent to the API.
 #' @param what `"observations"` (the default; for an export of `content =
 #'   "features"` the features), `"features"`, `"metadata"` (the parsed
 #'   `metadata.json`) or `"all"` (a list `features`, `observations`,
-#'   `metadata`).
+#'   `metadata`). Client-side: not sent to the API.
 #' @return A `soil_table` (`soil_layout` `"wide"`, `"long"` or
 #'   `"features"`; an `sf` object for the features when `sf` is installed),
 #'   the metadata list, or a list of them.

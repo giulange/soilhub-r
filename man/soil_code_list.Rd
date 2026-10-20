@@ -14,17 +14,18 @@ soil_code_list(
 }
 \arguments{
 \item{soil}{A session; the default session when omitted (the name may then
-be given first: \code{soil_code_list("SOTWIS_codes")}).}
+be given first: \code{soil_code_list("SOTWIS_codes")}). Client-side: not sent to the API.}
 
-\item{name}{The code list (\code{"SOTWIS_codes"}).}
+\item{name}{The code list (\code{"SOTWIS_codes"}). API path parameter \code{{code_list}} of
+\code{GET /code-lists/{code_list}}.}
 
 \item{attribute}{Source attributes (\code{ATTRIBUTE}, e.g. \code{"LNDF"}), \code{NULL}
-for all.}
+for all. API query parameter \code{attribute}.}
 
-\item{code}{Codes (\code{CODE}), \code{NULL} for all.}
+\item{code}{Codes (\code{CODE}), \code{NULL} for all. API query parameter \code{code}.}
 
 \item{source_dataset}{One source dataset (record id or name), \code{NULL} for
-all.}
+all. API query parameter \code{source_dataset}.}
 }
 \value{
 A data frame: \code{attribute}, \code{code}, \code{description},

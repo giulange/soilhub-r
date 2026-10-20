@@ -7,7 +7,8 @@
 soil_columns(x)
 }
 \arguments{
-\item{x}{A wide \code{soil_table}, or a downloaded wide \code{soil_export}.}
+\item{x}{A wide \code{soil_table}, or a downloaded wide \code{soil_export}. Client-side: not sent to the
+API.}
 }
 \value{
 A data frame \code{column}, \code{property_key}, \code{numeric}, \code{units} (list),

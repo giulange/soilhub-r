@@ -18,9 +18,11 @@ soil_publish_values(
 )
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{run_id}{The id of an open run.}
+\item{run_id}{The id of an open run. API path parameter \code{{run_id}} of
+\code{POST /publications/{run_id}/values}, \verb{/validate} and \verb{/jobs} (for \code{\link[=soil_publish_health]{soil_publish_health()}}:
+\verb{/soil-health} and \verb{/soil-health/jobs}).}
 
 \item{values}{A data frame (list columns for nested fields) or a list of
 records with \code{variable_code}, \code{target_level}, \code{target_id} (UUID),
@@ -31,21 +33,26 @@ records with \code{variable_code}, \code{target_level}, \code{target_id} (UUID),
 \code{depth_bottom_cm} (optional) and \code{lineage}: a list with one or more of
 \code{observations}, \code{values}, \code{releases}, \code{assets}, each a list of
 \code{list(id =, role =, transformation =)} (or a data frame), at least one
-item in all. \code{NA} fields are left out.}
+item in all. \code{NA} fields are left out. API field \code{values}; with the NDJSON transport, the lines
+of the file sent as API form field \code{file}.}
 
 \item{idempotency_key}{Key of this publication (at most 200 characters),
-stable for one content.}
+stable for one content. API field \code{idempotency_key} of a synchronous publication; API query
+parameter \code{idempotency_key} of an NDJSON upload.}
 
-\item{validate}{Validate on the server before publishing.}
+\item{validate}{Validate on the server before publishing. Client-side: decides whether
+\code{POST /publications/{run_id}/validate} is called first; not sent to the API.}
 
 \item{transport}{\code{"auto"} (synchronous up to 10,000 records, else
-NDJSON), \code{"sync"} or \code{"ndjson"}.}
+NDJSON), \code{"sync"} or \code{"ndjson"}. Client-side: not sent to the API.}
 
-\item{wait}{For a job: wait for it to end (see \code{\link[=soil_job_wait]{soil_job_wait()}}).}
+\item{wait}{For a job: wait for it to end (see \code{\link[=soil_job_wait]{soil_job_wait()}}). Client-side: not sent to the
+API.}
 
-\item{timeout, poll}{Seconds to wait for a job, and between two polls.}
+\item{timeout, poll}{Seconds to wait for a job, and between two polls. Client-side: not sent to
+the API.}
 
-\item{progress}{Print the progress of the job.}
+\item{progress}{Print the progress of the job. Client-side: not sent to the API.}
 }
 \value{
 A \code{soil_publication} list: \code{transport}, \code{run_id}, \code{status},

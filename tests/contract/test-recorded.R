@@ -19,49 +19,11 @@ recorded_manifest <- function() {
 }
 
 # A local server answering the recorded requests (method, path, query, body);
-# an unrecorded request gets HTTP 501 naming it.
+# an unrecorded request gets HTTP 501 naming it. The app is the package's
+# internal replay_app() (R/replay.R), shared with the vignettes.
 replay_api <- function(manifest, .local_envir = parent.frame()) {
   testthat::skip_if_not_installed("webfakes")
-  entries <- list()
-  for (call in manifest$calls) {
-    for (x in call$exchanges) {
-      file <- file.path(recorded_dir(), x$file)
-      entries[[length(entries) + 1L]] <- list(
-        key = paste(x$method, paste0(openapi_prefix(), x$path), sub("^\\?", "", query_string(x$query)), x$body %||% ""),
-        status = as.integer(x$status),
-        type = if (grepl("\\.json$", x$file)) "application/json" else if (grepl("\\.zip$", x$file)) "application/zip" else "text/plain",
-        body = if (!file.exists(file)) {
-          ""
-        } else if (grepl("\\.zip$", x$file)) {
-          readBin(file, "raw", file.size(file))
-        } else {
-          paste(readLines(file, warn = FALSE), collapse = "\n")
-        }
-      )
-    }
-  }
-  app <- webfakes::new_app()
-  app$locals$entries <- entries
-  app$locals$served <- list()
-  app$all(webfakes::new_regexp("^/"), function(req, res) {
-    body <- if (is.raw(req$.body) && length(req$.body)) rawToChar(req$.body) else ""
-    key <- paste(toupper(req$method), req$path, req$query_string %||% "", body)
-    # the same request recorded several times (the polls of a job) is
-    # answered in the recorded order, the last answer repeated
-    matches <- Filter(function(entry) identical(entry$key, key), req$app$locals$entries)
-    if (length(matches)) {
-      served <- req$app$locals$served
-      n <- (served[[key]] %||% 0L) + 1L
-      served[[key]] <- n
-      req$app$locals$served <- served
-      entry <- matches[[min(n, length(matches))]]
-      res$set_status(entry$status)
-      res$set_type(entry$type)
-      return(res$send(entry$body))
-    }
-    res$set_status(501L)$send_json(list(detail = paste("no recorded response for", key)), auto_unbox = TRUE)
-  })
-  webfakes::local_app_process(app, .local_envir = .local_envir)
+  webfakes::local_app_process(replay_app(recorded_dir()), .local_envir = .local_envir)
 }
 
 local({

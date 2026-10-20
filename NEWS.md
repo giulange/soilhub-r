@@ -1,5 +1,23 @@
 # soilhub (development version)
 
+* Documentation and site (WP11): six vignettes written for users with basic
+  R, one small step per chunk with what it does and what the result means
+  for a soil scientist: getting started (`soilhub`), `raw-vs-revised`,
+  `first-layer`, `exports`, `writing-data` (with the right each step needs)
+  and `migration-0.1` (the 0.1.x to 0.2.0 function table). Their examples are
+  evaluated when the vignettes are built, without network or login, against
+  a local replay of the responses recorded from the production API
+  (`tests/testthat/fixtures/recorded`; internal `replay_session()`, also used
+  by the contract suite), so the outputs shown are real; sign-in, writes and
+  large exports are shown but not run. New help page `?soilhub-terms`
+  (feature, profile, component, horizon, observation, `PRID`, `HONU`, `SUID`,
+  `TCID`, `SCID`, `CLAF`, `source_support`, `first_layer_status`, views,
+  markings, rights). Every argument of the reference names the API field it
+  fills (or says it is client-side); the session functions and the
+  configuration and error topics have their `@family`. `_pkgdown.yml` lists
+  the articles and every reference topic; README: install, first use,
+  licences and `soil_citations()`.
+
 * Exports (WP7): `soil_export()` submits a selection (the arguments of
   `soil_observations()`, plus `format`, `content` and `layout`, checked
   against `soil_capabilities()$exports`: Shapefile only with `content =

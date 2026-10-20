@@ -7,9 +7,10 @@
 soil_login(soil = soil_session(), force = FALSE)
 }
 \arguments{
-\item{soil}{A session; the default session when omitted.}
+\item{soil}{A session; the default session when omitted. Client-side: not sent to the API.}
 
-\item{force}{Open a new browser login even if the session is valid.}
+\item{force}{Open a new browser login even if the session is valid. Client-side: not sent to the
+API.}
 }
 \value{
 \code{soil}, invisibly.
@@ -35,4 +36,11 @@ soil_login(soil)
 }
 \seealso{
 \code{\link[=soil_connect]{soil_connect()}}, \code{\link[=soil_logout]{soil_logout()}}
+
+Other session: 
+\code{\link{soil_connect}()},
+\code{\link{soil_logout}()},
+\code{\link{soil_session}()},
+\code{\link{soil_whoami}()}
 }
+\concept{session}

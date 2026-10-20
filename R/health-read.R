@@ -61,32 +61,35 @@ health_body <- function(providers, datasets, release_ids, release_codes,
 #' Rights: `soil:read`. Capabilities: `query_soil_health`;
 #' `country_filtering` for `country`.
 #'
-#' @param soil A session; the default session when omitted.
-#' @param providers Provider codes.
-#' @param datasets Catalog dataset codes.
-#' @param release_ids,release_codes Releases of the scored horizons.
+#' @param soil A session; the default session when omitted. Client-side: not sent to the API.
+#' @param providers Provider codes. API field `providers`.
+#' @param datasets Catalog dataset codes. API field `datasets`.
+#' @param release_ids,release_codes Releases of the scored horizons. API fields `release_ids` and
+#'   `release_codes`.
 #' @param model_versions Soil-health model version codes (an unknown code is
-#'   refused by the API).
+#'   refused by the API). API field `model_versions`.
 #' @param run_ids Product run ids (API field `product_run_ids`).
-#' @param categories Category codes (`"physical"`, `"chemical"`, ...).
-#' @param score_classes Score classes.
+#' @param categories Category codes (`"physical"`, `"chemical"`, ...). API field `categories`.
+#' @param score_classes Score classes. API field `score_classes`.
 #' @param statuses Score statuses: `"scored"`, `"insufficient_data"`,
 #'   `"not_applicable"` (API field `score_statuses`).
 #' @param source_supports Source supports (`"point_observation"`,
-#'   `"polygon_estimate"`, ...).
-#' @param country Countries as ISO 3166 alpha-2 or alpha-3 codes or names.
-#' @param bbox `c(xmin, ymin, xmax, ymax)` in WGS84 degrees.
+#'   `"polygon_estimate"`, ...). API field `source_supports`.
+#' @param country Countries as ISO 3166 alpha-2 or alpha-3 codes or names. API field `country`.
+#' @param bbox `c(xmin, ymin, xmax, ymax)` in WGS84 degrees. API field `bbox`.
 #' @param depth_top_cm,depth_bottom_cm Depth interval in cm: the horizons
-#'   overlapping it.
+#'   overlapping it. API fields `depth_top_cm` and `depth_bottom_cm`.
 #' @param with_geometry `"none"`, `"text"` (the geometry of the feature as
 #'   GeoJSON text in `geometry_text`) or `"sf"` (an `sf` object with a
 #'   `geometry` column, EPSG:4326; needs the package `sf`, else a
-#'   `soilhub_dependency_error`).
+#'   `soilhub_dependency_error`). Client-side; sets the API field `include_geometry` (`false` for
+#'   `"none"`), the form is built locally.
 #' @param include_details Add the list columns `inputs`,
 #'   `derived_variables`, `memberships`, `activated_rules`, `diagnostics`,
-#'   `input_observations` (how each score was computed).
-#' @param max_rows Maximum number of scores to read (`Inf`: all).
-#' @param progress Report the pages read.
+#'   `input_observations` (how each score was computed). API field `include_details`.
+#' @param max_rows Maximum number of scores to read (`Inf`: all). Client-side; caps the API field
+#'   `limit` of each page request.
+#' @param progress Report the pages read. Client-side: not sent to the API.
 #' @return A `soil_table` (see [soil_table]) with `soil_layout = "health"`:
 #'   `horizon_score_id`, `value_id`, `variable_code`, `horizon_id`,
 #'   `profile_id`, `component_id`, `feature_id`, `dataset_code`,
