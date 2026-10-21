@@ -180,11 +180,13 @@ units in a box near Tunis (Tunisia). First, the box:
 tunis <- c(10.0, 36.5, 10.5, 37.0)
 ```
 
-`soil_features()` lists the map units without reading their horizons:
+`soil_features()` lists the map units without reading their horizons (here
+with the shapes as text; `with_geometry = "sf"`, the default, returns them
+as an `sf` object for maps if the package `sf` is installed):
 
 ```{r}
 units <- soil_features(soil, datasets = "sotwis_polygons", bbox = tunis,
-                       max_rows = 3, progress = FALSE)
+                       with_geometry = "text", max_rows = 3, progress = FALSE)
 nrow(units)
 ```
 
