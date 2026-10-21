@@ -1,6 +1,6 @@
 Package: soilhub
 Title: R Client for the Global Soil Data Hub API
-Version: 0.1.9000
+Version: 0.2.0
 Authors@R: 
     person("Giuliano", "Langella", , "giuliano.langella@gmail.com", role = c("aut", "cre"))
 Description: Discover, read and export harmonised soil profile data (WoSIS,

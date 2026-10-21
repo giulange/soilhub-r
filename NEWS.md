@@ -1,4 +1,24 @@
-# soilhub (development version)
+# soilhub 0.2.0
+
+First release of the redesigned client: one library for every user of the
+Global Soil Data Hub API, with what each user may do decided by the rights of
+the account. It follows the API 0.6.0 (reads raw and revised, first layer,
+profile types, components, summaries, exports, catalog with provenance,
+citations and licences) and replaces the 0.1.x client.
+
+Tested: R CMD check on Linux, macOS and Windows (R 4.1 and current, with and
+without `sf`); contract tests against the API's OpenAPI and recorded responses
+of production; live acceptance on production with a read-only account (reads
+of the 7 datasets, exports in 4 formats, session expiry and recovery).
+
+Known limitation: the write functions (`soil_register_variable()`,
+`soil_publish_values()`, `soil_publish_health()`, `soil_publish_source()`,
+runs and jobs) are tested against a simulated API only; the live write
+acceptance with a publisher account is scheduled after this release
+(giulange/soilhub-r#14).
+
+## Changes in this release
+
 
 * Documentation and site (WP11): six vignettes written for users with basic
   R, one small step per chunk with what it does and what the result means
