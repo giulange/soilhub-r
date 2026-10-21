@@ -112,10 +112,6 @@ articles:
     navbar: Publishing data
     contents:
       - writing-data
-  - title: Upgrading
-    navbar: Upgrading
-    contents:
-      - migration-0.1
 
 authors:
   Giuliano Langella:
@@ -146,7 +142,3 @@ navbar:
         - text: Publishing data
         - text: Publishing data (special rights)
           href: articles/writing-data.html
-        - text: -------
-        - text: Upgrading
-        - text: From soilhub 0.1.x to 0.2.0
-          href: articles/migration-0.1.html

@@ -36,8 +36,7 @@ guide `vignette("soilhub", package = "soilhub")` explains each step; the
 other articles cover the raw and revised views, the first layer, exports and
 publishing.
 
-Users of the 0.1.x client: see `vignette("migration-0.1", package = "soilhub")`
-(the old tutorial is in [docs/legacy/TUTORIAL-0.1.md](docs/legacy/TUTORIAL-0.1.md)).
+The old 0.1.x tutorial is kept in [docs/legacy/TUTORIAL-0.1.md](docs/legacy/TUTORIAL-0.1.md).
 
 ## Licences And Citation
 

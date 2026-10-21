@@ -3,8 +3,7 @@
 * Documentation and site (WP11): six vignettes written for users with basic
   R, one small step per chunk with what it does and what the result means
   for a soil scientist: getting started (`soilhub`), `raw-vs-revised`,
-  `first-layer`, `exports`, `writing-data` (with the right each step needs)
-  and `migration-0.1` (the 0.1.x to 0.2.0 function table). Their examples are
+  `first-layer`, `exports`, and `writing-data` (with the right each step needs). Their examples are
   evaluated when the vignettes are built, without network or login, against
   a local replay of the responses recorded from the production API
   (`tests/testthat/fixtures/recorded`; internal `replay_session()`, also used

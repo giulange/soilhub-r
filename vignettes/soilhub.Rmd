@@ -287,8 +287,6 @@ soil_logout(soil)
   for GIS.
 - `vignette("writing-data", package = "soilhub")`: publishing derived values
   (special rights needed).
-- `vignette("migration-0.1", package = "soilhub")`: for users of the old
-  0.1.x client.
 
 ```{r teardown, include = FALSE}
 soilhub:::replay_stop(soil)
