@@ -371,8 +371,9 @@ live_fake_start <- function(kinds, zips = list()) {
 # ---------------------------------------------------------------------------
 # Tables: description and comparisons.
 
-live_key <- function(x) {
+live_key <- function(x, component = TRUE) {
   column <- function(name) if (is.null(x[[name]])) rep(NA_character_, nrow(x)) else as.character(x[[name]])
+  if (!component) return(paste(column("dataset"), column("feature_id"), column("horizon_id"), sep = "|"))
   paste(column("dataset"), column("feature_id"), column("component_id"), column("horizon_id"), sep = "|")
 }
 
@@ -413,8 +414,12 @@ live_same_number <- function(a, b) {
 # of long rows. Returns list(ok, compared, detail, mismatches).
 live_equivalence <- function(wide, long) {
   if (!nrow(wide) || !nrow(long)) return(list(ok = FALSE, compared = 0L, detail = "an empty read", mismatches = character()))
-  wide_keys <- live_key(wide)
-  long_keys <- live_key(long)
+  # The API fills component_id on long rows only for datasets with map-unit
+  # components (SOTER/SOTWIS polygons); for profile datasets it is null on
+  # long rows and set on wide rows: there the key is dataset|feature|horizon.
+  with_component <- !is.null(long$component_id) && any(!is.na(long$component_id))
+  wide_keys <- live_key(wide, with_component)
+  long_keys <- live_key(long, with_component)
   wide_complete <- isTRUE(soil_metadata(wide)$complete)
   long_complete <- isTRUE(soil_metadata(long)$complete)
   out <- character()
