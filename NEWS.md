@@ -9,7 +9,8 @@ citations and licences) and replaces the 0.1.x client.
 Tested: R CMD check on Linux, macOS and Windows (R 4.1 and current, with and
 without `sf`); contract tests against the API's OpenAPI and recorded responses
 of production; live acceptance on production with a read-only account (reads
-of the 7 datasets, exports in 4 formats, session expiry and recovery).
+of the 7 datasets, exports in 4 formats, session expiry and recovery, a
+session of 4 hours of reads plus 90 minutes idle without a new sign-in).
 
 Known limitation: the write functions (`soil_register_variable()`,
 `soil_publish_values()`, `soil_publish_health()`, `soil_publish_source()`,
