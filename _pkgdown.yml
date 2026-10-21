@@ -120,3 +120,33 @@ articles:
 authors:
   Giuliano Langella:
     href: https://giulange.github.io/
+
+navbar:
+  components:
+    articles:
+      text: Articles
+      menu:
+        - text: All articles
+          href: articles/index.html
+        - text: -------
+        - text: Reading soil data
+        - text: Installing soilhub
+          href: articles/installation.html
+        - text: Getting started with soilhub
+          href: articles/soilhub.html
+        - text: Raw and revised data
+          href: articles/raw-vs-revised.html
+        - text: The first layer and soil map components
+          href: articles/first-layer.html
+        - text: Large selections and exports
+          href: articles/exports.html
+        - text: How to cite
+          href: articles/how-to-cite.html
+        - text: -------
+        - text: Publishing data
+        - text: Publishing data (special rights)
+          href: articles/writing-data.html
+        - text: -------
+        - text: Upgrading
+        - text: From soilhub 0.1.x to 0.2.0
+          href: articles/migration-0.1.html
