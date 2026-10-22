@@ -1,0 +1,600 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {
+      "country": [
+        "KEN"
+      ]
+    },
+    "total_count": 1,
+    "returned_count": 1,
+    "limit": null,
+    "offset": null,
+    "has_more": null,
+    "warnings": [],
+    "calculation": "summary",
+    "as_of": "2026-08-14T15:38:09.520455Z",
+    "country_assignment": "intersects"
+  },
+  "totals": {
+    "feature_count": 7612,
+    "point_count": 2980,
+    "polygon_count": 4632,
+    "profile_count": 7604,
+    "horizon_count": 9473,
+    "original_observation_count": 86139,
+    "value_count": 0,
+    "observation_count": 86139,
+    "variable_count": 88,
+    "dataset_count": 5,
+    "variables": [
+      "aluminium_dithionite_extractable",
+      "aluminium_pyrophosphate_extractable",
+      "available_phosphorus",
+      "base_saturation_cecsoil",
+      "bdfi33l",
+      "bdfiod",
+      "bdwsod",
+      "bulk_density",
+      "calcium_carbonate_content",
+      "cecph7",
+      "cec_soil",
+      "cfgr",
+      "cfvo",
+      "clay",
+      "clay_content",
+      "coarse_fragments_volumetric",
+      "coarse_sand_content",
+      "ecec",
+      "elco20",
+      "elco25",
+      "elcosp",
+      "electrical_conductivity",
+      "electrical_conductivity_saturated_paste",
+      "exchangeable_acidity",
+      "exchangeable_aluminium",
+      "exchangeable_calcium",
+      "exchangeable_magnesium",
+      "exchangeable_potassium",
+      "exchangeable_sodium",
+      "field_capacity",
+      "fine_sand_content",
+      "gypsum_content",
+      "iron_dithionite_extractable",
+      "iron_pyrophosphate_extractable",
+      "medium_sand_content",
+      "moisture_content_mct1",
+      "moisture_content_mct2",
+      "moisture_content_mct3",
+      "moisture_content_mct4",
+      "moisture_content_mct5",
+      "nitkjd",
+      "organic_carbon",
+      "orgm",
+      "p2o5_content",
+      "permanent_wilting_point",
+      "ph_aq",
+      "phca",
+      "ph_cacl2",
+      "phetb1",
+      "phetol",
+      "ph_h2o",
+      "phkc",
+      "ph_kcl",
+      "phnf",
+      "phosphate_retention",
+      "phprtn",
+      "phptot",
+      "sand",
+      "sand_content",
+      "silt",
+      "silt_content",
+      "soluble_bicarbonate",
+      "soluble_calcium",
+      "soluble_carbonate",
+      "soluble_chloride",
+      "soluble_magnesium",
+      "soluble_potassium",
+      "soluble_sodium",
+      "soluble_sulphate",
+      "tceq",
+      "total_carbonate_equivalent",
+      "total_nitrogen",
+      "total_phosphorus",
+      "total_porosity",
+      "very_coarse_sand_content",
+      "very_fine_sand_content",
+      "water_content_volumetric_10kpa",
+      "water_content_volumetric_1500kpa",
+      "water_content_volumetric_33kpa",
+      "wg0010",
+      "wg0033",
+      "wg0200",
+      "wg1500",
+      "wv0010",
+      "wv0033",
+      "wv0100",
+      "wv0500",
+      "wv1500"
+    ]
+  },
+  "countries": [
+    {
+      "iso_a3": "KEN",
+      "feature_count": 7612,
+      "point_count": 2980,
+      "polygon_count": 4632,
+      "profile_count": 7604,
+      "horizon_count": 9473,
+      "original_observation_count": 86139,
+      "value_count": 0,
+      "observation_count": 86139,
+      "variable_count": 88,
+      "dataset_count": 5,
+      "variables": [
+        "aluminium_dithionite_extractable",
+        "aluminium_pyrophosphate_extractable",
+        "available_phosphorus",
+        "base_saturation_cecsoil",
+        "bdfi33l",
+        "bdfiod",
+        "bdwsod",
+        "bulk_density",
+        "calcium_carbonate_content",
+        "cecph7",
+        "cec_soil",
+        "cfgr",
+        "cfvo",
+        "clay",
+        "clay_content",
+        "coarse_fragments_volumetric",
+        "coarse_sand_content",
+        "ecec",
+        "elco20",
+        "elco25",
+        "elcosp",
+        "electrical_conductivity",
+        "electrical_conductivity_saturated_paste",
+        "exchangeable_acidity",
+        "exchangeable_aluminium",
+        "exchangeable_calcium",
+        "exchangeable_magnesium",
+        "exchangeable_potassium",
+        "exchangeable_sodium",
+        "field_capacity",
+        "fine_sand_content",
+        "gypsum_content",
+        "iron_dithionite_extractable",
+        "iron_pyrophosphate_extractable",
+        "medium_sand_content",
+        "moisture_content_mct1",
+        "moisture_content_mct2",
+        "moisture_content_mct3",
+        "moisture_content_mct4",
+        "moisture_content_mct5",
+        "nitkjd",
+        "organic_carbon",
+        "orgm",
+        "p2o5_content",
+        "permanent_wilting_point",
+        "ph_aq",
+        "phca",
+        "ph_cacl2",
+        "phetb1",
+        "phetol",
+        "ph_h2o",
+        "phkc",
+        "ph_kcl",
+        "phnf",
+        "phosphate_retention",
+        "phprtn",
+        "phptot",
+        "sand",
+        "sand_content",
+        "silt",
+        "silt_content",
+        "soluble_bicarbonate",
+        "soluble_calcium",
+        "soluble_carbonate",
+        "soluble_chloride",
+        "soluble_magnesium",
+        "soluble_potassium",
+        "soluble_sodium",
+        "soluble_sulphate",
+        "tceq",
+        "total_carbonate_equivalent",
+        "total_nitrogen",
+        "total_phosphorus",
+        "total_porosity",
+        "very_coarse_sand_content",
+        "very_fine_sand_content",
+        "water_content_volumetric_10kpa",
+        "water_content_volumetric_1500kpa",
+        "water_content_volumetric_33kpa",
+        "wg0010",
+        "wg0033",
+        "wg0200",
+        "wg1500",
+        "wv0010",
+        "wv0033",
+        "wv0100",
+        "wv0500",
+        "wv1500"
+      ]
+    }
+  ],
+  "datasets": [
+    {
+      "iso_a3": "KEN",
+      "country_name": "Kenya",
+      "provider_code": "isric",
+      "dataset_code": "soter_polygons",
+      "country_id": 137,
+      "dataset_id": 3,
+      "feature_count": 616,
+      "point_count": 0,
+      "polygon_count": 616,
+      "profile_count": 608,
+      "horizon_count": 0,
+      "original_observation_count": 0,
+      "value_count": 0,
+      "observation_count": 0,
+      "variable_count": 0,
+      "source_signature": "dc84f19d9459fdb27ec4d4f9e6b7ab39",
+      "aggregation_version": "1",
+      "refresh_job_id": "f96785ca-7ba5-43bf-9e31-a04e566d1584",
+      "refreshed_at": "2026-10-11T18:34:56.268898Z"
+    },
+    {
+      "iso_a3": "KEN",
+      "country_name": "Kenya",
+      "provider_code": "isric",
+      "dataset_code": "soter_profiles",
+      "country_id": 137,
+      "dataset_id": 39,
+      "feature_count": 371,
+      "point_count": 371,
+      "polygon_count": 0,
+      "profile_count": 371,
+      "horizon_count": 1563,
+      "original_observation_count": 22381,
+      "value_count": 0,
+      "observation_count": 22381,
+      "variable_count": 48,
+      "source_signature": "4e0cf3c264e10b1c8773d93894d88555",
+      "aggregation_version": "1",
+      "refresh_job_id": "f96785ca-7ba5-43bf-9e31-a04e566d1584",
+      "refreshed_at": "2026-10-11T18:34:56.268898Z"
+    },
+    {
+      "iso_a3": "KEN",
+      "country_name": "Kenya",
+      "provider_code": "isric",
+      "dataset_code": "sotwis_polygons",
+      "country_id": 137,
+      "dataset_id": 2,
+      "feature_count": 4016,
+      "point_count": 0,
+      "polygon_count": 4016,
+      "profile_count": 4016,
+      "horizon_count": 0,
+      "original_observation_count": 0,
+      "value_count": 0,
+      "observation_count": 0,
+      "variable_count": 0,
+      "source_signature": "558ac7a8fb64ce61d2df59c1b25f29b0",
+      "aggregation_version": "1",
+      "refresh_job_id": "f96785ca-7ba5-43bf-9e31-a04e566d1584",
+      "refreshed_at": "2026-10-11T18:34:56.268898Z"
+    },
+    {
+      "iso_a3": "KEN",
+      "country_name": "Kenya",
+      "provider_code": "isric",
+      "dataset_code": "wise_profiles",
+      "country_id": 137,
+      "dataset_id": 4,
+      "feature_count": 291,
+      "point_count": 291,
+      "polygon_count": 0,
+      "profile_count": 291,
+      "horizon_count": 1247,
+      "original_observation_count": 17329,
+      "value_count": 0,
+      "observation_count": 17329,
+      "variable_count": 24,
+      "source_signature": "b2f8ac646bd947431d082ab755d75113",
+      "aggregation_version": "1",
+      "refresh_job_id": "f96785ca-7ba5-43bf-9e31-a04e566d1584",
+      "refreshed_at": "2026-10-11T18:34:56.268898Z"
+    },
+    {
+      "iso_a3": "KEN",
+      "country_name": "Kenya",
+      "provider_code": "isric",
+      "dataset_code": "wosis_points",
+      "country_id": 137,
+      "dataset_id": 1,
+      "feature_count": 2318,
+      "point_count": 2318,
+      "polygon_count": 0,
+      "profile_count": 2318,
+      "horizon_count": 6663,
+      "original_observation_count": 46429,
+      "value_count": 0,
+      "observation_count": 46429,
+      "variable_count": 34,
+      "source_signature": "1261ee9a4b641dde90300c05ac88d441",
+      "aggregation_version": "1",
+      "refresh_job_id": "ac1a0bd5-a005-481a-ae4a-dc14ab9d5bb0",
+      "refreshed_at": "2026-08-14T15:38:09.520455Z"
+    }
+  ],
+  "variables": [
+    {
+      "variable_code": "aluminium_dithionite_extractable"
+    },
+    {
+      "variable_code": "aluminium_pyrophosphate_extractable"
+    },
+    {
+      "variable_code": "available_phosphorus"
+    },
+    {
+      "variable_code": "base_saturation_cecsoil"
+    },
+    {
+      "variable_code": "bdfi33l"
+    },
+    {
+      "variable_code": "bdfiod"
+    },
+    {
+      "variable_code": "bdwsod"
+    },
+    {
+      "variable_code": "bulk_density"
+    },
+    {
+      "variable_code": "calcium_carbonate_content"
+    },
+    {
+      "variable_code": "cecph7"
+    },
+    {
+      "variable_code": "cec_soil"
+    },
+    {
+      "variable_code": "cfgr"
+    },
+    {
+      "variable_code": "cfvo"
+    },
+    {
+      "variable_code": "clay"
+    },
+    {
+      "variable_code": "clay_content"
+    },
+    {
+      "variable_code": "coarse_fragments_volumetric"
+    },
+    {
+      "variable_code": "coarse_sand_content"
+    },
+    {
+      "variable_code": "ecec"
+    },
+    {
+      "variable_code": "elco20"
+    },
+    {
+      "variable_code": "elco25"
+    },
+    {
+      "variable_code": "elcosp"
+    },
+    {
+      "variable_code": "electrical_conductivity"
+    },
+    {
+      "variable_code": "electrical_conductivity_saturated_paste"
+    },
+    {
+      "variable_code": "exchangeable_acidity"
+    },
+    {
+      "variable_code": "exchangeable_aluminium"
+    },
+    {
+      "variable_code": "exchangeable_calcium"
+    },
+    {
+      "variable_code": "exchangeable_magnesium"
+    },
+    {
+      "variable_code": "exchangeable_potassium"
+    },
+    {
+      "variable_code": "exchangeable_sodium"
+    },
+    {
+      "variable_code": "field_capacity"
+    },
+    {
+      "variable_code": "fine_sand_content"
+    },
+    {
+      "variable_code": "gypsum_content"
+    },
+    {
+      "variable_code": "iron_dithionite_extractable"
+    },
+    {
+      "variable_code": "iron_pyrophosphate_extractable"
+    },
+    {
+      "variable_code": "medium_sand_content"
+    },
+    {
+      "variable_code": "moisture_content_mct1"
+    },
+    {
+      "variable_code": "moisture_content_mct2"
+    },
+    {
+      "variable_code": "moisture_content_mct3"
+    },
+    {
+      "variable_code": "moisture_content_mct4"
+    },
+    {
+      "variable_code": "moisture_content_mct5"
+    },
+    {
+      "variable_code": "nitkjd"
+    },
+    {
+      "variable_code": "organic_carbon"
+    },
+    {
+      "variable_code": "orgm"
+    },
+    {
+      "variable_code": "p2o5_content"
+    },
+    {
+      "variable_code": "permanent_wilting_point"
+    },
+    {
+      "variable_code": "ph_aq"
+    },
+    {
+      "variable_code": "phca"
+    },
+    {
+      "variable_code": "ph_cacl2"
+    },
+    {
+      "variable_code": "phetb1"
+    },
+    {
+      "variable_code": "phetol"
+    },
+    {
+      "variable_code": "ph_h2o"
+    },
+    {
+      "variable_code": "phkc"
+    },
+    {
+      "variable_code": "ph_kcl"
+    },
+    {
+      "variable_code": "phnf"
+    },
+    {
+      "variable_code": "phosphate_retention"
+    },
+    {
+      "variable_code": "phprtn"
+    },
+    {
+      "variable_code": "phptot"
+    },
+    {
+      "variable_code": "sand"
+    },
+    {
+      "variable_code": "sand_content"
+    },
+    {
+      "variable_code": "silt"
+    },
+    {
+      "variable_code": "silt_content"
+    },
+    {
+      "variable_code": "soluble_bicarbonate"
+    },
+    {
+      "variable_code": "soluble_calcium"
+    },
+    {
+      "variable_code": "soluble_carbonate"
+    },
+    {
+      "variable_code": "soluble_chloride"
+    },
+    {
+      "variable_code": "soluble_magnesium"
+    },
+    {
+      "variable_code": "soluble_potassium"
+    },
+    {
+      "variable_code": "soluble_sodium"
+    },
+    {
+      "variable_code": "soluble_sulphate"
+    },
+    {
+      "variable_code": "tceq"
+    },
+    {
+      "variable_code": "total_carbonate_equivalent"
+    },
+    {
+      "variable_code": "total_nitrogen"
+    },
+    {
+      "variable_code": "total_phosphorus"
+    },
+    {
+      "variable_code": "total_porosity"
+    },
+    {
+      "variable_code": "very_coarse_sand_content"
+    },
+    {
+      "variable_code": "very_fine_sand_content"
+    },
+    {
+      "variable_code": "water_content_volumetric_10kpa"
+    },
+    {
+      "variable_code": "water_content_volumetric_1500kpa"
+    },
+    {
+      "variable_code": "water_content_volumetric_33kpa"
+    },
+    {
+      "variable_code": "wg0010"
+    },
+    {
+      "variable_code": "wg0033"
+    },
+    {
+      "variable_code": "wg0200"
+    },
+    {
+      "variable_code": "wg1500"
+    },
+    {
+      "variable_code": "wv0010"
+    },
+    {
+      "variable_code": "wv0033"
+    },
+    {
+      "variable_code": "wv0100"
+    },
+    {
+      "variable_code": "wv0500"
+    },
+    {
+      "variable_code": "wv1500"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {
+      "datasets": [
+        "wosis_points"
+      ],
+      "geometry": "any",
+      "bbox": [
+        -123.3,
+        49,
+        -122.9,
+        49.4
+      ],
+      "layer": "all",
+      "canonical": true,
+      "include_geometry": false,
+      "view": "raw",
+      "limit": 3,
+      "offset": 0
+    },
+    "total_count": null,
+    "returned_count": 3,
+    "limit": 3,
+    "offset": 0,
+    "has_more": true,
+    "warnings": [],
+    "datasets": [
+      "wosis_points"
+    ],
+    "geometry": "any",
+    "canonical": true,
+    "crs": "EPSG:4326",
+    "feature_count": 3,
+    "feature_count_by_dataset": null,
+    "mixed_geometry": false,
+    "view": "raw"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "14f7a6b1-13c0-4c75-a7fb-dbc370ae5d44",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.152777778,
+          49.088888889
+        ]
+      },
+      "properties": {
+        "dataset": "wosis_points",
+        "provider_code": "isric",
+        "feature_id": "14f7a6b1-13c0-4c75-a7fb-dbc370ae5d44",
+        "feature_key": "1115496",
+        "geometry_kind": "POINT",
+        "source_support": "observed_point_profile",
+        "retired_in_release": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "38ed7f8d-35b2-4afd-b4a8-08fc5e8f4f81",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123,
+          49.38
+        ]
+      },
+      "properties": {
+        "dataset": "wosis_points",
+        "provider_code": "isric",
+        "feature_id": "38ed7f8d-35b2-4afd-b4a8-08fc5e8f4f81",
+        "feature_key": "867294",
+        "geometry_kind": "POINT",
+        "source_support": "observed_point_profile",
+        "retired_in_release": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "623b5139-52b0-40cc-9750-933440e50d57",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123,
+          49.38
+        ]
+      },
+      "properties": {
+        "dataset": "wosis_points",
+        "provider_code": "isric",
+        "feature_id": "623b5139-52b0-40cc-9750-933440e50d57",
+        "feature_key": "866588",
+        "geometry_kind": "POINT",
+        "source_support": "observed_point_profile",
+        "retired_in_release": null
+      }
+    }
+  ]
+}

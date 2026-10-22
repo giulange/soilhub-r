@@ -1,0 +1,73 @@
+Package: soilhub
+Title: R Client for the Global Soil Data Hub API
+Version: 0.2.0
+Authors@R: 
+    person("Giuliano", "Langella", , "giuliano.langella@gmail.com", role = c("aut", "cre"))
+Description: Discover, read and export harmonised soil profile data (WoSIS,
+    WISE, SOTER, SOTWIS) from the Global Soil Data Hub API, and publish
+    derived values with the appropriate rights.
+License: MIT + file LICENSE
+URL: https://github.com/giulange/soilhub-r,
+    https://giulange.github.io/soilhub-r
+BugReports: https://github.com/giulange/soilhub-r/issues
+Depends: 
+    R (>= 4.1)
+Imports: 
+    curl,
+    httr2 (>= 1.0.0),
+    jsonlite (>= 1.8),
+    openssl,
+    stats,
+    utils
+Suggests: 
+    knitr,
+    rmarkdown,
+    sf (>= 1.0),
+    testthat (>= 3.0.0),
+    webfakes,
+    withr
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Collate: 
+    'auth-device.R'
+    'capabilities.R'
+    'typing.R'
+    'catalog.R'
+    'code-lists.R'
+    'config.R'
+    'contract.R'
+    'countries.R'
+    'errors.R'
+    'geometry.R'
+    'typing-wide.R'
+    'typing-long.R'
+    'results.R'
+    'selection.R'
+    'observations.R'
+    'features.R'
+    'exports.R'
+    'thematic.R'
+    'health-read.R'
+    'http.R'
+    'jobs.R'
+    'ndjson.R'
+    'paging.R'
+    'publish-values.R'
+    'publish-health.R'
+    'publish-products.R'
+    'publish-source.R'
+    'publish-variables.R'
+    'replay.R'
+    'rights.R'
+    'session.R'
+    'soilhub-package.R'
+    'soilhub-terms.R'
+    'summary.R'
+    'targets.R'
+    'ttr-flags.R'
+    'utils.R'
+    'values.R'
+    'variables.R'

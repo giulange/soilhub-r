@@ -1,0 +1,64 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 1,
+  "returned_count": 1,
+  "limit": null,
+  "offset": null,
+  "has_more": null,
+  "warnings": [],
+  "calculation": "summary",
+  "summary_scope": "global",
+  "as_of": "2026-10-19T03:15:00+00:00"
+ },
+ "totals": {
+  "feature_count": 250000,
+  "point_count": 240000,
+  "polygon_count": 10000,
+  "profile_count": 260000,
+  "horizon_count": 1200000,
+  "original_observation_count": 9000000,
+  "value_count": 12,
+  "observation_count": 9000012,
+  "variable_count": 2,
+  "dataset_count": 1,
+  "variables": [
+   "clay",
+   "organic_carbon"
+  ]
+ },
+ "countries": [],
+ "datasets": [
+  {
+   "provider_code": "isric",
+   "dataset_code": "wosis_points",
+   "dataset_id": 4,
+   "provider_id": 1,
+   "feature_count": 250000,
+   "point_count": 240000,
+   "polygon_count": 10000,
+   "profile_count": 260000,
+   "horizon_count": 1200000,
+   "original_observation_count": 9000000,
+   "value_count": 12,
+   "observation_count": 9000012,
+   "refreshed_at": "2026-10-19T03:15:00+00:00"
+  }
+ ],
+ "variables": [
+  {
+   "variable_code": "clay",
+   "original_observation_count": 5000000,
+   "value_count": 0,
+   "observation_count": 5000000
+  },
+  {
+   "variable_code": "organic_carbon",
+   "original_observation_count": 4000000,
+   "value_count": 12,
+   "observation_count": 4000012
+  }
+ ]
+}

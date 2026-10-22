@@ -1,0 +1,46 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 4,
+  "returned_count": 4,
+  "limit": null,
+  "offset": null,
+  "has_more": null,
+  "warnings": []
+ },
+ "total_value_count": 4,
+ "feature_count": 1,
+ "variables": [
+  {
+   "code": "soc_stock_0_30",
+   "domain": "soil"
+  },
+  {
+   "code": "soil_quality_note",
+   "domain": "soil"
+  },
+  {
+   "code": "texture_fractions",
+   "domain": "soil"
+  }
+ ],
+ "by_dataset": [
+  {
+   "dataset": "wosis_points",
+   "provider": "isric",
+   "value_count": 4,
+   "feature_count": 1,
+   "variable_count": 3
+  }
+ ],
+ "by_target_level": {
+  "horizon": 3,
+  "profile": 1
+ },
+ "by_status": {
+  "published": 3,
+  "insufficient_data": 1
+ }
+}

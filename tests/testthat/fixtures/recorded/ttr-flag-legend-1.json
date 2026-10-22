@@ -1,0 +1,1010 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {},
+    "total_count": 52,
+    "returned_count": 52,
+    "limit": null,
+    "offset": null,
+    "has_more": null,
+    "warnings": [],
+    "source_table": "SOTERflagTTRrules"
+  },
+  "legend": [
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "TTRsub",
+      "symbol_kind": "column",
+      "meaning": "Taxotransfer rules derived from the data of the same FAO soil unit",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, p.12",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "TTRmain",
+      "symbol_kind": "column",
+      "meaning": "Taxotransfer rules derived from the data of the major soil group, used where the soil unit set was too small",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, p.12",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "TTRfinal",
+      "symbol_kind": "column",
+      "meaning": "Flags of the expert rules applied after the taxotransfer rules",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2004/03 pp.27-28, 2004/04 pp.23-24, 2005/04 p.21",
+      "note": "Column name of Brazil, SOVEUR v2, Jordan, Kenya, Latin America and the Caribbean, Southern Africa, Indo-Gangetic Plains (decision B7 of #69: kept as in the source).",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "3ad5e3a0-5d5d-408c-b8bd-5b20858d551b",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_brazil"
+        },
+        {
+          "source_record_id": "f9f23e4f-903a-4dfe-bfc4-0e6bf362b09a",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_and_eastern_europe_versi_f9f23e4f"
+        },
+        {
+          "source_record_id": "943d57ef-1eaf-4528-8508-9c81c1c2fcd3",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_jordan"
+        },
+        {
+          "source_record_id": "4648929a-8031-49cc-9d56-9f3aeff2f8d9",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_kenya"
+        },
+        {
+          "source_record_id": "3a9ed87d-affc-4f72-aa6e-72db4fefec40",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_latin_america_and_the_caribbean"
+        },
+        {
+          "source_record_id": "6eb4dafe-a184-44e3-9ed1-d2f73020725d",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_southern_africa"
+        },
+        {
+          "source_record_id": "6eba341b-79d7-4b40-bc19-14a9066f1386",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_the_indo_gangetic_plains_of_indi"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "TTRexpert",
+      "symbol_kind": "column",
+      "meaning": "Flags of the expert rules applied after the taxotransfer rules",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2008/05 p.27, 2010/01 p.27, 2010/07b p.21",
+      "note": "Column name of Central Africa, Senegal and The Gambia, Tunisia, Upper Tana (decision B7 of #69: kept as in the source); Report 2007/02 (p.22) calls the Central Africa column TTRfinal.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "348a9bcc-ca7d-4fe9-ad34-42fed0d0bf52",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_africa"
+        },
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "lower case",
+      "symbol_kind": "case",
+      "meaning": "The substitution used the median for the soil unit and the textural class",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, p.12",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "upper case",
+      "symbol_kind": "case",
+      "meaning": "The substitution used the whole set of the soil unit, irrespective of texture",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, p.12",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "1",
+      "symbol_kind": "digit",
+      "meaning": "Sample size in WISE after outlier rejection: more than 30",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 3, p.12",
+      "note": "The digit follows the letter of the attribute.",
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "2",
+      "symbol_kind": "digit",
+      "meaning": "Sample size in WISE after outlier rejection: 15 to 29",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 3, p.12",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "3",
+      "symbol_kind": "digit",
+      "meaning": "Sample size in WISE after outlier rejection: 5 to 14",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 3, p.12",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "4",
+      "symbol_kind": "digit",
+      "meaning": "Sample size in WISE after outlier rejection: 1 to 4",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 3, p.12",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "-",
+      "symbol_kind": "digit",
+      "meaning": "Sample size in WISE: none",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 3, p.12",
+      "note": "Also found as the whole value of a cell; that use is not explained.",
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "1",
+      "symbol_kind": "digit",
+      "meaning": "Expert rule 1: ALSA in relation to pH",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2005/04 and 2005/02, Table 4, p.11",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "2",
+      "symbol_kind": "digit",
+      "meaning": "Expert rule 2: BSAT in relation to pH",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2005/04 and 2005/02, Table 4, p.11",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "3",
+      "symbol_kind": "digit",
+      "meaning": "Expert rule 3: ELCO in relation to pH",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2005/04 and 2005/02, Table 4, p.11",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "4",
+      "symbol_kind": "digit",
+      "meaning": "Expert rule 4: GYPS in relation to pH",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2005/04 and 2005/02, Table 4, p.11",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "5",
+      "symbol_kind": "digit",
+      "meaning": "Expert rule 5: CaCO3 (TCEQ) in relation to pH",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2005/04 and 2005/02, Table 4, p.11",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "6",
+      "symbol_kind": "digit",
+      "meaning": "Expert rule 6: CEC of the clay fraction",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2005/04 and 2005/02, Table 4, p.11",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "7",
+      "symbol_kind": "digit",
+      "meaning": "Expert rule 7: Histosols",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2005/04 and 2005/02, Table 4, p.11",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "8",
+      "symbol_kind": "digit",
+      "meaning": "Expert rule 8: CEC of the clay fraction of low-activity-clay soils",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2005/04 and 2005/02, Table 4, p.11",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "9",
+      "symbol_kind": "digit",
+      "meaning": "Expert rule 9: ECEC",
+      "documented": true,
+      "source_reference": "ISRIC Reports 2005/04 and 2005/02, Table 4, p.11",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "a-f",
+      "symbol_kind": "subdivision",
+      "meaning": "Letter after the digit: subdivision of the expert rule (for example 6a, 6b)",
+      "documented": true,
+      "source_reference": "ISRIC Report 2005/04, p.11",
+      "note": "Reports 2008/05, 2010/01 and 2010/07b give no code table for this column.",
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "g-n",
+      "symbol_kind": "subdivision",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Letters beyond the subdivisions of the 2005 code tables; not explained by any report read.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "0",
+      "symbol_kind": "digit",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Not in the code tables of Reports 2005/04 and 2005/02; Report 2007/02 (Table 4, p.11) names a rule XR0-Text for Central Africa without explaining it.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "f9f23e4f-903a-4dfe-bfc4-0e6bf362b09a",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_and_eastern_europe_versi_f9f23e4f"
+        },
+        {
+          "source_record_id": "3a9ed87d-affc-4f72-aa6e-72db4fefec40",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_latin_america_and_the_caribbean"
+        },
+        {
+          "source_record_id": "348a9bcc-ca7d-4fe9-ad34-42fed0d0bf52",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_africa"
+        },
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "X",
+      "symbol_kind": "symbol",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Central Africa; not explained by any report read.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "348a9bcc-ca7d-4fe9-ad34-42fed0d0bf52",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_africa"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "$",
+      "symbol_kind": "symbol",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Not explained by any report read.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "@",
+      "symbol_kind": "symbol",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Not explained by any report read.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "¥",
+      "symbol_kind": "symbol",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Not explained by any report read.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRfinal",
+        "TTRexpert"
+      ],
+      "symbol": "-",
+      "symbol_kind": "symbol",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "The whole value of the cell; not explained by any report read.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "348a9bcc-ca7d-4fe9-ad34-42fed0d0bf52",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_africa"
+        },
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "A",
+      "symbol_kind": "letter",
+      "meaning": "ALSA: exchangeable aluminium as % of ECEC estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "B",
+      "symbol_kind": "letter",
+      "meaning": "BSAT: base saturation as % of CECsoil estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "C",
+      "symbol_kind": "letter",
+      "meaning": "BULK: bulk density estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "D",
+      "symbol_kind": "letter",
+      "meaning": "CECc: CEC of the clay fraction estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "E",
+      "symbol_kind": "letter",
+      "meaning": "CECS: CEC of the fine earth estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "F",
+      "symbol_kind": "letter",
+      "meaning": "CFRAG: coarse fragments estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "G",
+      "symbol_kind": "letter",
+      "meaning": "CLPC: clay estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "H",
+      "symbol_kind": "letter",
+      "meaning": "ECEC: effective CEC estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "I",
+      "symbol_kind": "letter",
+      "meaning": "ELCO: electrical conductivity estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "J",
+      "symbol_kind": "letter",
+      "meaning": "ESP: exchangeable sodium percentage estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "K",
+      "symbol_kind": "letter",
+      "meaning": "GYPS: gypsum content estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "L",
+      "symbol_kind": "letter",
+      "meaning": "PHAQ: pH in water estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "M",
+      "symbol_kind": "letter",
+      "meaning": "SDTO: sand estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "N",
+      "symbol_kind": "letter",
+      "meaning": "STPC: silt estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "O",
+      "symbol_kind": "letter",
+      "meaning": "TAWC: available water capacity estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "P",
+      "symbol_kind": "letter",
+      "meaning": "TCEQ: total carbonate equivalent estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "Q",
+      "symbol_kind": "letter",
+      "meaning": "TOTC: organic carbon estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "R",
+      "symbol_kind": "letter",
+      "meaning": "TOTN: total nitrogen estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": null,
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "Y",
+      "symbol_kind": "letter",
+      "meaning": "PSCL: texture class estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28",
+      "note": "Derived from the sand, silt and clay obtained by the taxotransfer rules; the letter does not occur in the data.",
+      "provider_code": "isric",
+      "applies_to": null
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "Z",
+      "symbol_kind": "letter",
+      "meaning": "CNrt: C/N ratio estimated by a taxotransfer rule",
+      "documented": true,
+      "source_reference": "ISRIC Report 2007/02, p.23",
+      "note": "Central Africa only.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "348a9bcc-ca7d-4fe9-ad34-42fed0d0bf52",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_africa"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "Z",
+      "symbol_kind": "letter",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Senegal and The Gambia, Tunisia, Upper Tana: not in Table 5 of their reports.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "U",
+      "symbol_kind": "letter",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Not in Table 5 of any report read.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "348a9bcc-ca7d-4fe9-ad34-42fed0d0bf52",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_africa"
+        },
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "V",
+      "symbol_kind": "letter",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Not in Table 5 of any report read.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "348a9bcc-ca7d-4fe9-ad34-42fed0d0bf52",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_africa"
+        },
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    },
+    {
+      "flag_table": "SOTERflagTTRrules",
+      "flag_columns": [
+        "TTRsub",
+        "TTRmain"
+      ],
+      "symbol": "W",
+      "symbol_kind": "letter",
+      "meaning": null,
+      "documented": false,
+      "source_reference": null,
+      "note": "Not in Table 5 of any report read.",
+      "provider_code": "isric",
+      "applies_to": [
+        {
+          "source_record_id": "348a9bcc-ca7d-4fe9-ad34-42fed0d0bf52",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_central_africa"
+        },
+        {
+          "source_record_id": "a6320590-0899-4b60-bf4d-f80282bbb72c",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_senegal_and_the_gambia"
+        },
+        {
+          "source_record_id": "ec96be43-c10a-4580-8b6f-4db46ec29bbd",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_tunisia"
+        },
+        {
+          "source_record_id": "e2af1672-ab22-4fdf-909f-81fb586268dc",
+          "source_dataset_name": "soter_based_soil_parameter_estimates_sotwis_for_upper_tana_river_catchment_kenya"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 3,
+  "returned_count": 3,
+  "limit": 1000,
+  "offset": 0,
+  "has_more": false,
+  "warnings": [],
+  "datasets": [
+   "soter_profiles"
+  ],
+  "geometry": "any",
+  "canonical": true,
+  "include_geometry": false,
+  "observation_count": 3,
+  "observation_count_by_dataset": null,
+  "view": "revised",
+  "revised": {
+   "rules": [
+    {
+     "id": "R8",
+     "title": "SOTER profile repeated in a national or more specific dataset: when the original (ZA, AR/CU, UT) is in the selection, the values of the copy (SAF, LAC, KE) that the original holds with the same value are hidden; values only in the copy stay (kept_from_copy), differing values stay on both (values_differ)",
+     "issue": "#54",
+     "counts": {
+      "values_kept_from_copy": 1
+     }
+    },
+    {
+     "id": "R12",
+     "title": "values impossible for the declared unit excluded; extremes flagged extreme; WoSIS PHPRTN above 100 flagged above_unit_maximum",
+     "issue": "#54, #70, #71",
+     "counts": {
+      "values_flagged:extreme": 1,
+      "values_hidden": 1
+     }
+    }
+   ],
+   "scope": "counts over the selection (every page): rows and values of the selected units, all layers; with layer=first, R2/R3/R14 count units (first_layer_units)",
+   "pending": [],
+   "unchanged": [
+    {
+     "id": "R1",
+     "note": "WoSIS horizons tied at 0: all candidates (tie), as raw"
+    },
+    {
+     "id": "R13",
+     "note": "SOTER synthetic/virtual profiles: included, as raw"
+    }
+   ]
+  }
+ },
+ "observations": [
+  {
+   "dataset": "soter_profiles",
+   "observation_id": "so-1",
+   "feature_id": "s-1",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "sh-1",
+   "source_horizon_id": null,
+   "horizon_name": null,
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 18.0,
+   "property_code": "MCT2",
+   "value": 31.2,
+   "value_raw": 31.2,
+   "unit": "%",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "kensoter_2004",
+   "release_id": 21,
+   "canonical_feature_id": "s-1",
+   "canonical_horizon_id": "sh-1",
+   "canonical_property_key": "water_content_10kpa",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "soter_horizons",
+    "source_record_id": "KE-syn-0042:1:MCT2",
+    "release_code": "kensoter_2004",
+    "release_id": 21,
+    "observation_id": "so-1"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.9,
+     -0.4
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": "MCT",
+   "method_description": "Moisture content at tension",
+   "method_tension_kpa": 10.0,
+   "profile_attributes": {
+    "prid": "KE-syn-0042",
+    "drai": "W"
+   },
+   "horizon_attributes": {
+    "honu": 1,
+    "hdes": "Ah"
+   },
+   "component_attributes": null,
+   "source_profile_type": "synthetic",
+   "source_record_note": null,
+   "value_count": null,
+   "methods_differ": null,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": null,
+   "consistency_flags": null,
+   "also_in_datasets": [
+    "SOTERSAF"
+   ],
+   "possible_profile": "KE-0042",
+   "superseded_by": null,
+   "value_flags": null,
+   "retired_in_release": null,
+   "revised_markings": {
+    "kept_from_copy": "SOTERSAF",
+    "hidden_values": [
+     {
+      "property_code": "CLPC",
+      "rule": "R12",
+      "source_value": 140
+     }
+    ]
+   }
+  },
+  {
+   "dataset": "soter_profiles",
+   "observation_id": "so-2",
+   "feature_id": "s-1",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "sh-1",
+   "source_horizon_id": null,
+   "horizon_name": null,
+   "upper_depth_cm": 0.0,
+   "lower_depth_cm": 18.0,
+   "property_code": "PHAQ",
+   "value": 6.4,
+   "value_raw": 6.4,
+   "unit": "pH",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "kensoter_2004",
+   "release_id": 21,
+   "canonical_feature_id": "s-1",
+   "canonical_horizon_id": "sh-1",
+   "canonical_property_key": "ph_water",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "soter_horizons",
+    "source_record_id": "KE-syn-0042:1:PHAQ",
+    "release_code": "kensoter_2004",
+    "release_id": 21,
+    "observation_id": "so-2"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.9,
+     -0.4
+    ]
+   },
+   "geometry_kind": "POINT",
+   "method_code": "PH_H2O",
+   "method_description": "pH in water 1:2.5",
+   "method_tension_kpa": null,
+   "profile_attributes": {
+    "prid": "KE-syn-0042",
+    "drai": "W"
+   },
+   "horizon_attributes": {
+    "honu": 1,
+    "hdes": "Ah"
+   },
+   "component_attributes": null,
+   "source_profile_type": "synthetic",
+   "source_record_note": null,
+   "value_count": null,
+   "methods_differ": null,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": null,
+   "consistency_flags": null,
+   "also_in_datasets": [
+    "SOTERSAF"
+   ],
+   "possible_profile": "KE-0042",
+   "superseded_by": null,
+   "value_flags": [
+    "extreme"
+   ],
+   "retired_in_release": null,
+   "revised_markings": {
+    "hidden_values": [
+     {
+      "property_code": "CLPC",
+      "rule": "R12",
+      "source_value": 140
+     }
+    ]
+   }
+  },
+  {
+   "dataset": "soter_profiles",
+   "observation_id": "so-3",
+   "feature_id": "s-2",
+   "source_code": null,
+   "component_id": null,
+   "component_rank": null,
+   "representative_profile_id": null,
+   "horizon_id": "sh-2",
+   "source_horizon_id": null,
+   "horizon_name": "Bt",
+   "upper_depth_cm": 18.0,
+   "lower_depth_cm": 60.0,
+   "property_code": "TOTC",
+   "value": 12.0,
+   "value_raw": "12",
+   "unit": "g/kg",
+   "source_table": null,
+   "source_observation_id": null,
+   "provider_code": "isric",
+   "release_code": "kensoter_2004",
+   "release_id": 21,
+   "canonical_feature_id": "s-2",
+   "canonical_horizon_id": "sh-2",
+   "canonical_property_key": "total_carbon",
+   "source_support": "profile",
+   "lineage": {
+    "source_table": "soter_horizons",
+    "source_record_id": "KE-0099:2:TOTC",
+    "release_code": "kensoter_2004",
+    "release_id": 21,
+    "observation_id": "so-3"
+   },
+   "geometry": null,
+   "geometry_kind": null,
+   "method_code": null,
+   "method_description": null,
+   "method_tension_kpa": null,
+   "profile_attributes": null,
+   "horizon_attributes": {
+    "honu": 2,
+    "hdes": "Bt"
+   },
+   "component_attributes": null,
+   "source_profile_type": null,
+   "source_record_note": "profile row absent in the source",
+   "value_count": null,
+   "methods_differ": null,
+   "value_spread": null,
+   "source_method_kind": null,
+   "method_facets": null,
+   "texture_sum": null,
+   "consistency_flags": null,
+   "also_in_datasets": null,
+   "possible_profile": null,
+   "superseded_by": null,
+   "value_flags": null,
+   "retired_in_release": null,
+   "revised_markings": null
+  }
+ ]
+}

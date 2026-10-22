@@ -1,0 +1,8 @@
+{
+  "metadata": {"schema_version": "1.0", "request_id": null, "filters": {}, "total_count": 3, "returned_count": 3, "limit": null, "offset": null, "has_more": null, "warnings": [], "source_table": "SOTERflagTTRrules"},
+  "legend": [
+    {"flag_table": "SOTERflagTTRrules", "flag_columns": ["TTRsub", "TTRmain"], "symbol": "A", "symbol_kind": "letter", "meaning": "ALSA: exchangeable aluminium as % of ECEC estimated by a taxotransfer rule", "documented": true, "source_reference": "ISRIC Report 2008/05, Table 5, pp.27-28", "note": null, "provider_code": "isric", "applies_to": null},
+    {"flag_table": "SOTERflagTTRrules", "flag_columns": ["TTRsub", "TTRmain"], "symbol": "Z", "symbol_kind": "letter", "meaning": "CNrt estimated (Central Africa)", "documented": true, "source_reference": "ISRIC Report 2007/02", "note": null, "provider_code": "isric", "applies_to": [{"source_record_id": "348a9bcc-ca7d-4fe9-ad34-42fed0d0bf52", "source_dataset_name": "sotwis_central_africa"}]},
+    {"flag_table": "SOTERflagTTRrules", "flag_columns": ["TTRsub", "TTRmain"], "symbol": "X", "symbol_kind": "letter", "meaning": null, "documented": false, "source_reference": null, "note": "Not documented in the reports read.", "provider_code": "isric", "applies_to": null}
+  ]
+}

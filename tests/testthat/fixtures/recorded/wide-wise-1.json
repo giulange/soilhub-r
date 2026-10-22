@@ -1,0 +1,1012 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {
+      "datasets": [
+        "wise_profiles"
+      ],
+      "geometry": "any",
+      "layer": "all",
+      "canonical": true,
+      "include_geometry": false,
+      "layout": "wide",
+      "geometry_format": "none",
+      "view": "raw",
+      "limit": 5,
+      "offset": 0
+    },
+    "total_count": null,
+    "returned_count": 5,
+    "limit": 5,
+    "offset": 0,
+    "has_more": true,
+    "warnings": [],
+    "datasets": [
+      "wise_profiles"
+    ],
+    "geometry": "any",
+    "canonical": true,
+    "layout": "wide",
+    "geometry_format": "none",
+    "crs": "EPSG:4326",
+    "variables": [
+      {
+        "column": "base_saturation_cecsoil",
+        "property_key": "base_saturation_cecsoil",
+        "numeric": true,
+        "units": [
+          "% of CEC"
+        ],
+        "source_codes": [
+          "bsat"
+        ],
+        "horizon_count": 2,
+        "multi_value_cells": 0,
+        "methods": {
+          "BS99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "bsat",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Derived by ISRIC: sum of exchangeable Ca, Mg, K and Na divided by CECSOIL, times 100; values above 100 were set to 100 (Report p. 38)."
+          }
+        ]
+      },
+      {
+        "column": "bulk_density",
+        "property_key": "bulk_density",
+        "numeric": true,
+        "units": [
+          "g/cm³"
+        ],
+        "source_codes": [
+          "bulkdens"
+        ],
+        "horizon_count": 3,
+        "multi_value_cells": 0,
+        "methods": {
+          "BD99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "bulkdens",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer."
+          }
+        ]
+      },
+      {
+        "column": "calcium_carbonate_content",
+        "property_key": "calcium_carbonate_content",
+        "numeric": true,
+        "units": [
+          "g/kg"
+        ],
+        "source_codes": [
+          "caco3"
+        ],
+        "horizon_count": 4,
+        "multi_value_cells": 0,
+        "methods": {
+          "CA99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "caco3",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Unit g/kg follows ISRIC Report 2008/02, Appendix 1 (p. 24); Appendix 2 (p. 37) states '% by weight'. Chosen by the hub on 2026-10-10: 34,005 of 34,007 CACO3 values and all 26,424 GYPSUM values lie within 0-1000 g/kg, while 3,221 and 150 exceed 100 %. Zero values may be ambiguous: ISRIC Report p. 15 states that some older sources did not distinguish 0 from missing. Sources used different conventions for trace levels. Two values lie outside 0-1000 (3500 in OM0014 horizon 4, -1 in BG0022 horizon 1); published as in the source."
+          }
+        ]
+      },
+      {
+        "column": "cec_soil",
+        "property_key": "cec_soil",
+        "numeric": true,
+        "units": [
+          "cmol(c)/kg"
+        ],
+        "source_codes": [
+          "cecsoil"
+        ],
+        "horizon_count": 5,
+        "multi_value_cells": 0,
+        "methods": {
+          "CS99": "Other methods (buffered at pH of about 7)"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "cecsoil",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer."
+          }
+        ]
+      },
+      {
+        "column": "clay_content",
+        "property_key": "clay_content",
+        "numeric": true,
+        "units": [
+          "% w/w"
+        ],
+        "source_codes": [
+          "clay"
+        ],
+        "horizon_count": 3,
+        "multi_value_cells": 0,
+        "methods": {
+          "TE99": "Other methods (c< 0.002 <si< 0.05 <sa< 2mm)"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "clay",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Weight % of the fine earth, integers; size limits are laboratory-specific (see the method). 728 horizons sum to 98-101 instead of 100; one horizon has SAND and SILT without CLAY."
+          }
+        ]
+      },
+      {
+        "column": "electrical_conductivity",
+        "property_key": "electrical_conductivity",
+        "numeric": true,
+        "units": [
+          "dS/m"
+        ],
+        "source_codes": [
+          "ece"
+        ],
+        "horizon_count": 4,
+        "multi_value_cells": 0,
+        "methods": {
+          "EL99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "ece",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Zero values may be ambiguous: ISRIC Report p. 15 states that some older sources did not distinguish 0 from missing. Sources used different conventions for trace levels. Soil:water ratio is laboratory-specific (see the method)."
+          }
+        ]
+      },
+      {
+        "column": "exchangeable_acidity",
+        "property_key": "exchangeable_acidity",
+        "numeric": true,
+        "units": [
+          "cmol(c)/kg"
+        ],
+        "source_codes": [
+          "exacid"
+        ],
+        "horizon_count": 1,
+        "multi_value_cells": 0,
+        "methods": {
+          "EA99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "exacid",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Zero values may be ambiguous: ISRIC Report p. 15 states that some older sources did not distinguish 0 from missing. Sources used different conventions for trace levels."
+          }
+        ]
+      },
+      {
+        "column": "exchangeable_aluminium",
+        "property_key": "exchangeable_aluminium",
+        "numeric": true,
+        "units": [
+          "cmol(c)/kg"
+        ],
+        "source_codes": [
+          "exalum"
+        ],
+        "horizon_count": 1,
+        "multi_value_cells": 0,
+        "methods": {
+          "EA99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "exalum",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Zero values may be ambiguous: ISRIC Report p. 15 states that some older sources did not distinguish 0 from missing. Sources used different conventions for trace levels. Determined separately in the KCl percolate used for exchangeable acidity (Report p. 38); the method shown is the EXACID method."
+          }
+        ]
+      },
+      {
+        "column": "exchangeable_calcium",
+        "property_key": "exchangeable_calcium",
+        "numeric": true,
+        "units": [
+          "cmol(c)/kg"
+        ],
+        "source_codes": [
+          "exca"
+        ],
+        "horizon_count": 2,
+        "multi_value_cells": 0,
+        "methods": {
+          "BS99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "exca",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Sources used different conventions for trace levels."
+          }
+        ]
+      },
+      {
+        "column": "exchangeable_magnesium",
+        "property_key": "exchangeable_magnesium",
+        "numeric": true,
+        "units": [
+          "cmol(c)/kg"
+        ],
+        "source_codes": [
+          "exmg"
+        ],
+        "horizon_count": 2,
+        "multi_value_cells": 0,
+        "methods": {
+          "BS99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "exmg",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Sources used different conventions for trace levels."
+          }
+        ]
+      },
+      {
+        "column": "exchangeable_potassium",
+        "property_key": "exchangeable_potassium",
+        "numeric": true,
+        "units": [
+          "cmol(c)/kg"
+        ],
+        "source_codes": [
+          "exk"
+        ],
+        "horizon_count": 2,
+        "multi_value_cells": 0,
+        "methods": {
+          "BS99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "exk",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Sources used different conventions for trace levels."
+          }
+        ]
+      },
+      {
+        "column": "exchangeable_sodium",
+        "property_key": "exchangeable_sodium",
+        "numeric": true,
+        "units": [
+          "cmol(c)/kg"
+        ],
+        "source_codes": [
+          "exna"
+        ],
+        "horizon_count": 2,
+        "multi_value_cells": 0,
+        "methods": {
+          "BS99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "exna",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Sources used different conventions for trace levels."
+          }
+        ]
+      },
+      {
+        "column": "gypsum_content",
+        "property_key": "gypsum_content",
+        "numeric": true,
+        "units": [
+          "g/kg"
+        ],
+        "source_codes": [
+          "gypsum"
+        ],
+        "horizon_count": 4,
+        "multi_value_cells": 0,
+        "methods": {
+          "GY99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "gypsum",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Unit g/kg follows ISRIC Report 2008/02, Appendix 1 (p. 24); Appendix 2 (p. 37) states '% by weight'. Chosen by the hub on 2026-10-10: 34,005 of 34,007 CACO3 values and all 26,424 GYPSUM values lie within 0-1000 g/kg, while 3,221 and 150 exceed 100 %. Zero values may be ambiguous: ISRIC Report p. 15 states that some older sources did not distinguish 0 from missing. Sources used different conventions for trace levels."
+          }
+        ]
+      },
+      {
+        "column": "organic_carbon",
+        "property_key": "organic_carbon",
+        "numeric": true,
+        "units": [
+          "g/kg"
+        ],
+        "source_codes": [
+          "orgc"
+        ],
+        "horizon_count": 5,
+        "multi_value_cells": 0,
+        "methods": {
+          "OC99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "orgc",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer."
+          }
+        ]
+      },
+      {
+        "column": "ph_h2o",
+        "property_key": "ph_h2o",
+        "numeric": true,
+        "units": [],
+        "source_codes": [
+          "phh2o"
+        ],
+        "horizon_count": 5,
+        "multi_value_cells": 0,
+        "methods": {
+          "PH99": "Unspecified methods"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "phh2o",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer."
+          }
+        ]
+      },
+      {
+        "column": "sand_content",
+        "property_key": "sand_content",
+        "numeric": true,
+        "units": [
+          "% w/w"
+        ],
+        "source_codes": [
+          "sand"
+        ],
+        "horizon_count": 3,
+        "multi_value_cells": 0,
+        "methods": {
+          "TE99": "Other methods (c< 0.002 <si< 0.05 <sa< 2mm)"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "sand",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Weight % of the fine earth, integers; size limits are laboratory-specific (see the method). 728 horizons sum to 98-101 instead of 100; one horizon has SAND and SILT without CLAY."
+          }
+        ]
+      },
+      {
+        "column": "silt_content",
+        "property_key": "silt_content",
+        "numeric": true,
+        "units": [
+          "% w/w"
+        ],
+        "source_codes": [
+          "silt"
+        ],
+        "horizon_count": 3,
+        "multi_value_cells": 0,
+        "methods": {
+          "TE99": "Other methods (c< 0.002 <si< 0.05 <sa< 2mm)"
+        },
+        "source_notes": [
+          {
+            "dataset": "wise_profiles",
+            "source_code": "silt",
+            "source_notes": "Values as stored in WISE 3.1, represented at 7 significant digits (binary storage tails removed); the extracted value is kept unchanged in the raw layer. Weight % of the fine earth, integers; size limits are laboratory-specific (see the method). 728 horizons sum to 98-101 instead of 100; one horizon has SAND and SILT without CLAY."
+          }
+        ]
+      }
+    ],
+    "view": "raw"
+  },
+  "geometries": null,
+  "rows": [
+    {
+      "dataset": "wise_profiles",
+      "provider_code": "isric",
+      "feature_id": "0004d5a3-6a9b-40a5-896d-a54f948af82c",
+      "profile_id": "5f8b2148-da78-4144-94cc-df98f6ec334d",
+      "component_id": "ea24e7c2-3286-4eeb-a0ba-d543da3fb40b",
+      "component_rank": 1,
+      "horizon_id": "c53e753a-72bb-4821-abb1-52f9374c7916",
+      "horizon_name": "Ap",
+      "upper_depth_cm": 0,
+      "lower_depth_cm": 15,
+      "source_support": "observed_point_profile",
+      "release_code": null,
+      "profile_attr_altit": "1075",
+      "profile_attr_country": "Colombia",
+      "profile_attr_datemon": "7",
+      "profile_attr_dateyr": "1995",
+      "profile_attr_descr": "2",
+      "profile_attr_drain": "M",
+      "profile_attr_fao_74": "Lo",
+      "profile_attr_fao_90": "LVh",
+      "profile_attr_hornum": "3",
+      "profile_attr_iso": "CO",
+      "profile_attr_koppen": null,
+      "profile_attr_lab_id": "XX03",
+      "profile_attr_landus": null,
+      "profile_attr_lform": null,
+      "profile_attr_local": null,
+      "profile_attr_locat": null,
+      "profile_attr_lonlat_acc": "S",
+      "profile_attr_parmat": null,
+      "profile_attr_pha_74": null,
+      "profile_attr_pha_90": null,
+      "profile_attr_pitref": "COp08",
+      "profile_attr_posit": null,
+      "profile_attr_slope": null,
+      "profile_attr_soldep": "150",
+      "profile_attr_source_id": "SOTERLAC2",
+      "profile_attr_uscl": null,
+      "profile_attr_usyr": null,
+      "profile_attr_wrb2006": "LV",
+      "horizon_attr_dcolor": null,
+      "horizon_attr_mcolor": "10YR2/1",
+      "value_flags": {
+        "electrical_conductivity": [
+          "uniform_profile_value"
+        ]
+      },
+      "retired_in_release": null,
+      "retired_cells": null,
+      "base_saturation_cecsoil": null,
+      "base_saturation_cecsoil_units": null,
+      "base_saturation_cecsoil_method": null,
+      "base_saturation_cecsoil_n": null,
+      "bulk_density": 1.5,
+      "bulk_density_units": "g/cm³",
+      "bulk_density_method": "BD99",
+      "bulk_density_n": 1,
+      "calcium_carbonate_content": 0,
+      "calcium_carbonate_content_units": "g/kg",
+      "calcium_carbonate_content_method": "CA99",
+      "calcium_carbonate_content_n": 1,
+      "cec_soil": 6.3,
+      "cec_soil_units": "cmol(c)/kg",
+      "cec_soil_method": "CS99",
+      "cec_soil_n": 1,
+      "clay_content": 14,
+      "clay_content_units": "% w/w",
+      "clay_content_method": "TE99",
+      "clay_content_n": 1,
+      "electrical_conductivity": 0.1,
+      "electrical_conductivity_units": "dS/m",
+      "electrical_conductivity_method": "EL99",
+      "electrical_conductivity_n": 1,
+      "exchangeable_acidity": null,
+      "exchangeable_acidity_units": null,
+      "exchangeable_acidity_method": null,
+      "exchangeable_acidity_n": null,
+      "exchangeable_aluminium": null,
+      "exchangeable_aluminium_units": null,
+      "exchangeable_aluminium_method": null,
+      "exchangeable_aluminium_n": null,
+      "exchangeable_calcium": null,
+      "exchangeable_calcium_units": null,
+      "exchangeable_calcium_method": null,
+      "exchangeable_calcium_n": null,
+      "exchangeable_magnesium": null,
+      "exchangeable_magnesium_units": null,
+      "exchangeable_magnesium_method": null,
+      "exchangeable_magnesium_n": null,
+      "exchangeable_potassium": null,
+      "exchangeable_potassium_units": null,
+      "exchangeable_potassium_method": null,
+      "exchangeable_potassium_n": null,
+      "exchangeable_sodium": null,
+      "exchangeable_sodium_units": null,
+      "exchangeable_sodium_method": null,
+      "exchangeable_sodium_n": null,
+      "gypsum_content": 0,
+      "gypsum_content_units": "g/kg",
+      "gypsum_content_method": "GY99",
+      "gypsum_content_n": 1,
+      "organic_carbon": 9,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": "OC99",
+      "organic_carbon_n": 1,
+      "ph_h2o": 5.9,
+      "ph_h2o_units": null,
+      "ph_h2o_method": "PH99",
+      "ph_h2o_n": 1,
+      "sand_content": 72,
+      "sand_content_units": "% w/w",
+      "sand_content_method": "TE99",
+      "sand_content_n": 1,
+      "silt_content": 14,
+      "silt_content_units": "% w/w",
+      "silt_content_method": "TE99",
+      "silt_content_n": 1
+    },
+    {
+      "dataset": "wise_profiles",
+      "provider_code": "isric",
+      "feature_id": "0004d5a3-6a9b-40a5-896d-a54f948af82c",
+      "profile_id": "5f8b2148-da78-4144-94cc-df98f6ec334d",
+      "component_id": "ea24e7c2-3286-4eeb-a0ba-d543da3fb40b",
+      "component_rank": 1,
+      "horizon_id": "984785ed-051d-42a6-afba-d87074223f94",
+      "horizon_name": "Bt",
+      "upper_depth_cm": 15,
+      "lower_depth_cm": 81,
+      "source_support": "observed_point_profile",
+      "release_code": null,
+      "profile_attr_altit": "1075",
+      "profile_attr_country": "Colombia",
+      "profile_attr_datemon": "7",
+      "profile_attr_dateyr": "1995",
+      "profile_attr_descr": "2",
+      "profile_attr_drain": "M",
+      "profile_attr_fao_74": "Lo",
+      "profile_attr_fao_90": "LVh",
+      "profile_attr_hornum": "3",
+      "profile_attr_iso": "CO",
+      "profile_attr_koppen": null,
+      "profile_attr_lab_id": "XX03",
+      "profile_attr_landus": null,
+      "profile_attr_lform": null,
+      "profile_attr_local": null,
+      "profile_attr_locat": null,
+      "profile_attr_lonlat_acc": "S",
+      "profile_attr_parmat": null,
+      "profile_attr_pha_74": null,
+      "profile_attr_pha_90": null,
+      "profile_attr_pitref": "COp08",
+      "profile_attr_posit": null,
+      "profile_attr_slope": null,
+      "profile_attr_soldep": "150",
+      "profile_attr_source_id": "SOTERLAC2",
+      "profile_attr_uscl": null,
+      "profile_attr_usyr": null,
+      "profile_attr_wrb2006": "LV",
+      "horizon_attr_dcolor": null,
+      "horizon_attr_mcolor": "10YR5/1",
+      "value_flags": {
+        "electrical_conductivity": [
+          "uniform_profile_value"
+        ]
+      },
+      "retired_in_release": null,
+      "retired_cells": null,
+      "base_saturation_cecsoil": null,
+      "base_saturation_cecsoil_units": null,
+      "base_saturation_cecsoil_method": null,
+      "base_saturation_cecsoil_n": null,
+      "bulk_density": 1.1,
+      "bulk_density_units": "g/cm³",
+      "bulk_density_method": "BD99",
+      "bulk_density_n": 1,
+      "calcium_carbonate_content": 0,
+      "calcium_carbonate_content_units": "g/kg",
+      "calcium_carbonate_content_method": "CA99",
+      "calcium_carbonate_content_n": 1,
+      "cec_soil": 18.9,
+      "cec_soil_units": "cmol(c)/kg",
+      "cec_soil_method": "CS99",
+      "cec_soil_n": 1,
+      "clay_content": 46,
+      "clay_content_units": "% w/w",
+      "clay_content_method": "TE99",
+      "clay_content_n": 1,
+      "electrical_conductivity": 0.1,
+      "electrical_conductivity_units": "dS/m",
+      "electrical_conductivity_method": "EL99",
+      "electrical_conductivity_n": 1,
+      "exchangeable_acidity": null,
+      "exchangeable_acidity_units": null,
+      "exchangeable_acidity_method": null,
+      "exchangeable_acidity_n": null,
+      "exchangeable_aluminium": null,
+      "exchangeable_aluminium_units": null,
+      "exchangeable_aluminium_method": null,
+      "exchangeable_aluminium_n": null,
+      "exchangeable_calcium": null,
+      "exchangeable_calcium_units": null,
+      "exchangeable_calcium_method": null,
+      "exchangeable_calcium_n": null,
+      "exchangeable_magnesium": null,
+      "exchangeable_magnesium_units": null,
+      "exchangeable_magnesium_method": null,
+      "exchangeable_magnesium_n": null,
+      "exchangeable_potassium": null,
+      "exchangeable_potassium_units": null,
+      "exchangeable_potassium_method": null,
+      "exchangeable_potassium_n": null,
+      "exchangeable_sodium": null,
+      "exchangeable_sodium_units": null,
+      "exchangeable_sodium_method": null,
+      "exchangeable_sodium_n": null,
+      "gypsum_content": 0,
+      "gypsum_content_units": "g/kg",
+      "gypsum_content_method": "GY99",
+      "gypsum_content_n": 1,
+      "organic_carbon": 4,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": "OC99",
+      "organic_carbon_n": 1,
+      "ph_h2o": 6.3,
+      "ph_h2o_units": null,
+      "ph_h2o_method": "PH99",
+      "ph_h2o_n": 1,
+      "sand_content": 44,
+      "sand_content_units": "% w/w",
+      "sand_content_method": "TE99",
+      "sand_content_n": 1,
+      "silt_content": 10,
+      "silt_content_units": "% w/w",
+      "silt_content_method": "TE99",
+      "silt_content_n": 1
+    },
+    {
+      "dataset": "wise_profiles",
+      "provider_code": "isric",
+      "feature_id": "0004d5a3-6a9b-40a5-896d-a54f948af82c",
+      "profile_id": "5f8b2148-da78-4144-94cc-df98f6ec334d",
+      "component_id": "ea24e7c2-3286-4eeb-a0ba-d543da3fb40b",
+      "component_rank": 1,
+      "horizon_id": "2f178f65-e9bf-4b17-83fc-05b1ea6a52ce",
+      "horizon_name": "BC",
+      "upper_depth_cm": 81,
+      "lower_depth_cm": 150,
+      "source_support": "observed_point_profile",
+      "release_code": null,
+      "profile_attr_altit": "1075",
+      "profile_attr_country": "Colombia",
+      "profile_attr_datemon": "7",
+      "profile_attr_dateyr": "1995",
+      "profile_attr_descr": "2",
+      "profile_attr_drain": "M",
+      "profile_attr_fao_74": "Lo",
+      "profile_attr_fao_90": "LVh",
+      "profile_attr_hornum": "3",
+      "profile_attr_iso": "CO",
+      "profile_attr_koppen": null,
+      "profile_attr_lab_id": "XX03",
+      "profile_attr_landus": null,
+      "profile_attr_lform": null,
+      "profile_attr_local": null,
+      "profile_attr_locat": null,
+      "profile_attr_lonlat_acc": "S",
+      "profile_attr_parmat": null,
+      "profile_attr_pha_74": null,
+      "profile_attr_pha_90": null,
+      "profile_attr_pitref": "COp08",
+      "profile_attr_posit": null,
+      "profile_attr_slope": null,
+      "profile_attr_soldep": "150",
+      "profile_attr_source_id": "SOTERLAC2",
+      "profile_attr_uscl": null,
+      "profile_attr_usyr": null,
+      "profile_attr_wrb2006": "LV",
+      "horizon_attr_dcolor": null,
+      "horizon_attr_mcolor": "10YR5/8",
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "base_saturation_cecsoil": null,
+      "base_saturation_cecsoil_units": null,
+      "base_saturation_cecsoil_method": null,
+      "base_saturation_cecsoil_n": null,
+      "bulk_density": 1.3,
+      "bulk_density_units": "g/cm³",
+      "bulk_density_method": "BD99",
+      "bulk_density_n": 1,
+      "calcium_carbonate_content": null,
+      "calcium_carbonate_content_units": null,
+      "calcium_carbonate_content_method": null,
+      "calcium_carbonate_content_n": null,
+      "cec_soil": 14.9,
+      "cec_soil_units": "cmol(c)/kg",
+      "cec_soil_method": "CS99",
+      "cec_soil_n": 1,
+      "clay_content": 36,
+      "clay_content_units": "% w/w",
+      "clay_content_method": "TE99",
+      "clay_content_n": 1,
+      "electrical_conductivity": null,
+      "electrical_conductivity_units": null,
+      "electrical_conductivity_method": null,
+      "electrical_conductivity_n": null,
+      "exchangeable_acidity": 0.1,
+      "exchangeable_acidity_units": "cmol(c)/kg",
+      "exchangeable_acidity_method": "EA99",
+      "exchangeable_acidity_n": 1,
+      "exchangeable_aluminium": 0.1,
+      "exchangeable_aluminium_units": "cmol(c)/kg",
+      "exchangeable_aluminium_method": "EA99",
+      "exchangeable_aluminium_n": 1,
+      "exchangeable_calcium": null,
+      "exchangeable_calcium_units": null,
+      "exchangeable_calcium_method": null,
+      "exchangeable_calcium_n": null,
+      "exchangeable_magnesium": null,
+      "exchangeable_magnesium_units": null,
+      "exchangeable_magnesium_method": null,
+      "exchangeable_magnesium_n": null,
+      "exchangeable_potassium": null,
+      "exchangeable_potassium_units": null,
+      "exchangeable_potassium_method": null,
+      "exchangeable_potassium_n": null,
+      "exchangeable_sodium": null,
+      "exchangeable_sodium_units": null,
+      "exchangeable_sodium_method": null,
+      "exchangeable_sodium_n": null,
+      "gypsum_content": null,
+      "gypsum_content_units": null,
+      "gypsum_content_method": null,
+      "gypsum_content_n": null,
+      "organic_carbon": 1,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": "OC99",
+      "organic_carbon_n": 1,
+      "ph_h2o": 7,
+      "ph_h2o_units": null,
+      "ph_h2o_method": "PH99",
+      "ph_h2o_n": 1,
+      "sand_content": 50,
+      "sand_content_units": "% w/w",
+      "sand_content_method": "TE99",
+      "sand_content_n": 1,
+      "silt_content": 14,
+      "silt_content_units": "% w/w",
+      "silt_content_method": "TE99",
+      "silt_content_n": 1
+    },
+    {
+      "dataset": "wise_profiles",
+      "provider_code": "isric",
+      "feature_id": "000b7a92-c2b5-4e32-9bf4-0209c22737ae",
+      "profile_id": "a3eae629-207c-481e-ad9b-95f444aa8f8d",
+      "component_id": "81fd38c9-f256-4071-8f69-c0ca0f935618",
+      "component_rank": 1,
+      "horizon_id": "139d0892-1ba7-43c6-b44b-d2e2f8d08a6c",
+      "horizon_name": "",
+      "upper_depth_cm": 0,
+      "lower_depth_cm": 8,
+      "source_support": "non_spatial_profile",
+      "release_code": null,
+      "profile_attr_altit": null,
+      "profile_attr_country": "Ghana",
+      "profile_attr_datemon": null,
+      "profile_attr_dateyr": null,
+      "profile_attr_descr": "2",
+      "profile_attr_drain": "I",
+      "profile_attr_fao_74": "Ag",
+      "profile_attr_fao_90": "ACg",
+      "profile_attr_hornum": "6",
+      "profile_attr_iso": "GH",
+      "profile_attr_koppen": null,
+      "profile_attr_lab_id": "XX05",
+      "profile_attr_landus": null,
+      "profile_attr_lform": null,
+      "profile_attr_local": null,
+      "profile_attr_locat": null,
+      "profile_attr_lonlat_acc": "-",
+      "profile_attr_parmat": null,
+      "profile_attr_pha_74": null,
+      "profile_attr_pha_90": null,
+      "profile_attr_pitref": "GH~PR0303",
+      "profile_attr_posit": null,
+      "profile_attr_slope": null,
+      "profile_attr_soldep": "140",
+      "profile_attr_source_id": "FAO/SDBgh",
+      "profile_attr_uscl": null,
+      "profile_attr_usyr": null,
+      "profile_attr_wrb2006": "AC",
+      "horizon_attr_dcolor": null,
+      "horizon_attr_mcolor": null,
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "base_saturation_cecsoil": 24,
+      "base_saturation_cecsoil_units": "% of CEC",
+      "base_saturation_cecsoil_method": "BS99",
+      "base_saturation_cecsoil_n": 1,
+      "bulk_density": null,
+      "bulk_density_units": null,
+      "bulk_density_method": null,
+      "bulk_density_n": null,
+      "calcium_carbonate_content": 0,
+      "calcium_carbonate_content_units": "g/kg",
+      "calcium_carbonate_content_method": "CA99",
+      "calcium_carbonate_content_n": 1,
+      "cec_soil": 7.8,
+      "cec_soil_units": "cmol(c)/kg",
+      "cec_soil_method": "CS99",
+      "cec_soil_n": 1,
+      "clay_content": null,
+      "clay_content_units": null,
+      "clay_content_method": null,
+      "clay_content_n": null,
+      "electrical_conductivity": 0,
+      "electrical_conductivity_units": "dS/m",
+      "electrical_conductivity_method": "EL99",
+      "electrical_conductivity_n": 1,
+      "exchangeable_acidity": null,
+      "exchangeable_acidity_units": null,
+      "exchangeable_acidity_method": null,
+      "exchangeable_acidity_n": null,
+      "exchangeable_aluminium": null,
+      "exchangeable_aluminium_units": null,
+      "exchangeable_aluminium_method": null,
+      "exchangeable_aluminium_n": null,
+      "exchangeable_calcium": 1,
+      "exchangeable_calcium_units": "cmol(c)/kg",
+      "exchangeable_calcium_method": "BS99",
+      "exchangeable_calcium_n": 1,
+      "exchangeable_magnesium": 0.6,
+      "exchangeable_magnesium_units": "cmol(c)/kg",
+      "exchangeable_magnesium_method": "BS99",
+      "exchangeable_magnesium_n": 1,
+      "exchangeable_potassium": 0.2,
+      "exchangeable_potassium_units": "cmol(c)/kg",
+      "exchangeable_potassium_method": "BS99",
+      "exchangeable_potassium_n": 1,
+      "exchangeable_sodium": 0.1,
+      "exchangeable_sodium_units": "cmol(c)/kg",
+      "exchangeable_sodium_method": "BS99",
+      "exchangeable_sodium_n": 1,
+      "gypsum_content": 0,
+      "gypsum_content_units": "g/kg",
+      "gypsum_content_method": "GY99",
+      "gypsum_content_n": 1,
+      "organic_carbon": 17.8,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": "OC99",
+      "organic_carbon_n": 1,
+      "ph_h2o": 4.9,
+      "ph_h2o_units": null,
+      "ph_h2o_method": "PH99",
+      "ph_h2o_n": 1,
+      "sand_content": null,
+      "sand_content_units": null,
+      "sand_content_method": null,
+      "sand_content_n": null,
+      "silt_content": null,
+      "silt_content_units": null,
+      "silt_content_method": null,
+      "silt_content_n": null
+    },
+    {
+      "dataset": "wise_profiles",
+      "provider_code": "isric",
+      "feature_id": "000b7a92-c2b5-4e32-9bf4-0209c22737ae",
+      "profile_id": "a3eae629-207c-481e-ad9b-95f444aa8f8d",
+      "component_id": "81fd38c9-f256-4071-8f69-c0ca0f935618",
+      "component_rank": 1,
+      "horizon_id": "a68e47f7-0469-4128-80e8-072122898b8e",
+      "horizon_name": "",
+      "upper_depth_cm": 8,
+      "lower_depth_cm": 28,
+      "source_support": "non_spatial_profile",
+      "release_code": null,
+      "profile_attr_altit": null,
+      "profile_attr_country": "Ghana",
+      "profile_attr_datemon": null,
+      "profile_attr_dateyr": null,
+      "profile_attr_descr": "2",
+      "profile_attr_drain": "I",
+      "profile_attr_fao_74": "Ag",
+      "profile_attr_fao_90": "ACg",
+      "profile_attr_hornum": "6",
+      "profile_attr_iso": "GH",
+      "profile_attr_koppen": null,
+      "profile_attr_lab_id": "XX05",
+      "profile_attr_landus": null,
+      "profile_attr_lform": null,
+      "profile_attr_local": null,
+      "profile_attr_locat": null,
+      "profile_attr_lonlat_acc": "-",
+      "profile_attr_parmat": null,
+      "profile_attr_pha_74": null,
+      "profile_attr_pha_90": null,
+      "profile_attr_pitref": "GH~PR0303",
+      "profile_attr_posit": null,
+      "profile_attr_slope": null,
+      "profile_attr_soldep": "140",
+      "profile_attr_source_id": "FAO/SDBgh",
+      "profile_attr_uscl": null,
+      "profile_attr_usyr": null,
+      "profile_attr_wrb2006": "AC",
+      "horizon_attr_dcolor": null,
+      "horizon_attr_mcolor": null,
+      "value_flags": null,
+      "retired_in_release": null,
+      "retired_cells": null,
+      "base_saturation_cecsoil": 17,
+      "base_saturation_cecsoil_units": "% of CEC",
+      "base_saturation_cecsoil_method": "BS99",
+      "base_saturation_cecsoil_n": 1,
+      "bulk_density": null,
+      "bulk_density_units": null,
+      "bulk_density_method": null,
+      "bulk_density_n": null,
+      "calcium_carbonate_content": 0,
+      "calcium_carbonate_content_units": "g/kg",
+      "calcium_carbonate_content_method": "CA99",
+      "calcium_carbonate_content_n": 1,
+      "cec_soil": 5.8,
+      "cec_soil_units": "cmol(c)/kg",
+      "cec_soil_method": "CS99",
+      "cec_soil_n": 1,
+      "clay_content": null,
+      "clay_content_units": null,
+      "clay_content_method": null,
+      "clay_content_n": null,
+      "electrical_conductivity": 0,
+      "electrical_conductivity_units": "dS/m",
+      "electrical_conductivity_method": "EL99",
+      "electrical_conductivity_n": 1,
+      "exchangeable_acidity": null,
+      "exchangeable_acidity_units": null,
+      "exchangeable_acidity_method": null,
+      "exchangeable_acidity_n": null,
+      "exchangeable_aluminium": null,
+      "exchangeable_aluminium_units": null,
+      "exchangeable_aluminium_method": null,
+      "exchangeable_aluminium_n": null,
+      "exchangeable_calcium": 0.6,
+      "exchangeable_calcium_units": "cmol(c)/kg",
+      "exchangeable_calcium_method": "BS99",
+      "exchangeable_calcium_n": 1,
+      "exchangeable_magnesium": 0.2,
+      "exchangeable_magnesium_units": "cmol(c)/kg",
+      "exchangeable_magnesium_method": "BS99",
+      "exchangeable_magnesium_n": 1,
+      "exchangeable_potassium": 0.1,
+      "exchangeable_potassium_units": "cmol(c)/kg",
+      "exchangeable_potassium_method": "BS99",
+      "exchangeable_potassium_n": 1,
+      "exchangeable_sodium": 0.1,
+      "exchangeable_sodium_units": "cmol(c)/kg",
+      "exchangeable_sodium_method": "BS99",
+      "exchangeable_sodium_n": 1,
+      "gypsum_content": 0,
+      "gypsum_content_units": "g/kg",
+      "gypsum_content_method": "GY99",
+      "gypsum_content_n": 1,
+      "organic_carbon": 7.6,
+      "organic_carbon_units": "g/kg",
+      "organic_carbon_method": "OC99",
+      "organic_carbon_n": 1,
+      "ph_h2o": 4.4,
+      "ph_h2o_units": null,
+      "ph_h2o_method": "PH99",
+      "ph_h2o_n": 1,
+      "sand_content": null,
+      "sand_content_units": null,
+      "sand_content_method": null,
+      "sand_content_n": null,
+      "silt_content": null,
+      "silt_content_units": null,
+      "silt_content_method": null,
+      "silt_content_n": null
+    }
+  ]
+}

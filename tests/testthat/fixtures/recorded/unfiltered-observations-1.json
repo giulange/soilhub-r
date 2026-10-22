@@ -1,0 +1,11 @@
+{
+  "detail": {
+    "code": "load_limit_exceeded",
+    "message": "The selection holds more than 1,000,000 observations, above the limit of synchronous requests (1,000,000): narrow the selection (bbox, country, datasets, variables, layer, profile_type) or request an export (POST /exports).",
+    "channel": "sync",
+    "max_observations": 1000000,
+    "observation_count": 1000001,
+    "observation_count_exact": false,
+    "exports_url": "/api/v1/exports"
+  }
+}

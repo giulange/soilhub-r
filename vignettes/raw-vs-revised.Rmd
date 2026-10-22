@@ -1,0 +1,194 @@
+---
+title: "Raw and revised data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Raw and revised data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+options(width = 90)
+# The evaluated examples run against a local replay of responses recorded from
+# the production API (tests/testthat/fixtures/recorded, tools/record_fixtures.R):
+# no network and no login at build time; the outputs are real API outputs.
+soil <- soilhub:::replay_session()
+```
+
+```{r}
+library(soilhub)
+```
+
+This guide explains the two **views** of the data: `view = "raw"` and
+`view = "revised"`. It assumes you have signed in as shown in
+`vignette("soilhub", package = "soilhub")` (`soil <- soil_connect()`).
+The outputs were recorded from the Global Soil Data Hub API in October 2026.
+
+## The principle
+
+The hub is a **mirror** of the ISRIC databases (WoSIS, WISE, SOTER,
+SOTWIS): the values, units and codes are kept **as ISRIC published them**,
+including their known defects (an impossible value, a duplicated layer, an
+estimate stored as a measurement). This is the **raw** view, the default.
+
+Some defects are documented and have a clear rule. The **revised** view
+applies those rules on the server: it hides or flags values and rows, and
+tells you, in the answer, which rules it applied and how many values each
+one touched. Nothing is changed in the database, and the R package never
+corrects a value by itself: it only shows what the server did.
+
+## A raw read
+
+We read the first five horizons of WoSIS around Vancouver (Canada), in the
+raw view (the default).
+
+```{r}
+vancouver <- c(-123.3, 49.0, -122.9, 49.4)
+raw <- soil_observations(soil, datasets = "wosis_points", bbox = vancouver, max_rows = 5)
+```
+
+We look at the depths and at the bulk density of the field-moist fine earth:
+
+```{r}
+raw[, c("horizon_name", "upper_depth_cm", "lower_depth_cm", "bulk_density_fine_earth_field_moist")]
+```
+
+Only the fourth horizon (an organic F layer) has a bulk density: 1.6 kg/dm³.
+
+## The same read, revised
+
+The same selection with `view = "revised"`:
+
+```{r}
+revised <- soil_observations(soil, datasets = "wosis_points", bbox = vancouver,
+                             view = "revised", max_rows = 5)
+```
+
+Is the bulk density column still there?
+
+```{r}
+"bulk_density_fine_earth_field_moist" %in% names(revised)
+```
+
+No: in the revised view the value 1.6 is hidden, and since no other horizon
+of these five has a value, the whole column disappears.
+
+## Which rules were applied?
+
+`soil_revised_rules()` lists the rules applied to your selection:
+
+```{r}
+soil_revised_rules(revised)
+```
+
+How to read it:
+
+- `id` is the number of the rule (R17);
+- `title` says what the rule does: WoSIS bulk densities recorded as a
+  "guessed value, expert field estimate" are not measurements, so they are
+  excluded;
+- `issue` is the issue of the API project where the rule was discussed;
+- `effect` is what it did (`values_hidden`: values removed from the answer);
+- `n` is how many values it touched.
+
+## Where exactly? The markings
+
+The package collects every marking of the rows in one long table, with
+`soil_markings()`. We keep only the markings of the revised view
+(`scope` equal to `"hidden_value"`):
+
+```{r}
+marks <- soil_markings(revised)
+marks[marks$scope == "hidden_value", ]
+```
+
+Row 4 of the table, column `bdfifm` (the WoSIS code of this bulk density):
+the value `1.60` was hidden by rule R17. The original value stays visible
+here, so you always know what was removed.
+
+The raw view already carried the reason. In the markings of the raw table,
+the cell has `source_method_kind` "guessed value, expert field estimate", as
+recorded by WoSIS:
+
+```{r}
+raw_marks <- soil_markings(raw)
+raw_marks[raw_marks$marking == "source_method_kind", ]
+```
+
+The other markings (`method_facets`) describe the laboratory method of each
+value, for example "sieved over 2 mm sieve" or "buffered at 7.0" for the
+cation exchange capacity.
+
+## Value flags
+
+Some rules do not hide a value but **flag** it (for example an extreme
+value). The flags are in the column `value_flags`, and `soil_flags()` lists
+them in a long table:
+
+```{r}
+soil_flags(revised)
+```
+
+None of these five horizons has a flag: the table is empty.
+
+## Retired rows
+
+When ISRIC removes a profile or a value from a new release, the hub keeps
+it and says so: the column `retired_in_release` holds the release in which
+the row left the source (`NA` when it is still current).
+
+```{r}
+raw$retired_in_release
+```
+
+All five horizons are current.
+
+## Counts are over the whole selection
+
+The counts `n` of `soil_revised_rules()` are computed over your **whole
+selection**, not only over the rows you read. Here we read five
+observations of the SOTER polygons in the long layout (one row per measured
+value) and the revised view:
+
+```{r}
+soter <- soil_observations(soil, datasets = "soter_polygons", layout = "long",
+                           view = "revised", max_rows = 5)
+soter[, c("horizon_name", "property_code", "value", "unit")]
+```
+
+```{r}
+soil_revised_rules(soter)
+```
+
+Three rules acted on the SOTER polygons (R12 appears twice, once per
+effect): for example R12 flagged 92 extreme values and hid 2 impossible
+values in the whole dataset, although our five rows show none of them. The
+header line also says how big the selection is: 364,051 observations.
+
+## The list of rules
+
+The rules the server knows are listed in its capabilities. This loop prints
+the number and the title of each one:
+
+```{r}
+rules <- soil_capabilities(soil)$views$revised_rules
+for (rule in rules) {
+  cat(rule$id, ":", rule$title, "\n")
+}
+```
+
+The full documentation of each rule is in the
+[API documentation](https://soilhub.weatherprogapp.it/docs).
+
+## In short
+
+- Use `view = "raw"` (the default) to work with the data exactly as ISRIC
+  published them.
+- Use `view = "revised"` to let the server apply the documented rules.
+- Always look at `soil_revised_rules()` and, if needed, `soil_markings()`
+  to know what changed.
+
+```{r teardown, include = FALSE}
+soilhub:::replay_stop(soil)
+```

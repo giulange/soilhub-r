@@ -1,0 +1,77 @@
+{
+  "api_version": "0.5.0",
+  "response_schema_version": "1.0",
+  "authentication": {"enabled": true, "type": "oidc-bearer", "audience": "soil-api"},
+  "limits": {
+    "max_page_size": 1000,
+    "max_sync_observations": 1000000,
+    "max_export_observations": 10000000,
+    "max_publication_bytes": 104857600
+  },
+  "formats": {"query": ["geojson", "gpkg", "csv", "tsv", "shp"], "bulk_publication": ["ndjson", "parquet"]},
+  "exports": {
+    "content": ["all", "features"],
+    "default_content": "all",
+    "layouts": ["wide", "long"],
+    "default_layout": "wide",
+    "formats": {"all": ["gpkg", "geojson", "csv", "tsv"], "features": ["gpkg", "geojson", "csv", "tsv", "shp"]},
+    "archive": "zip"
+  },
+  "geometries": ["point", "polygon"],
+  "filters": ["provider", "dataset", "geometry", "bbox", "country", "variable", "domain", "measurement_kind",
+              "target_level", "depth", "time", "product_version", "run", "status"],
+  "capabilities": {
+    "query_original_observations": true,
+    "query_canonical_observations": true,
+    "query_generic_values": true,
+    "query_soil_health": true,
+    "publish_generic_values": true,
+    "publish_soil_health_sync": true,
+    "variable_registration": true,
+    "country_filtering": true,
+    "target_resolution": true,
+    "generic_bulk_publication": true,
+    "unified_jobs": true,
+    "source_ingest": true,
+    "bulk_soil_health": true,
+    "country_inventory": true,
+    "unified_consistency": true,
+    "observation_geometry": true,
+    "wide_layout": true,
+    "canonical_features": true,
+    "component_selection": true,
+    "canonical_summary": true,
+    "soter_model": true,
+    "sotwis_model": true,
+    "observation_methods": true,
+    "source_attributes": true,
+    "source_notes": true,
+    "soter_complete_mirror": true,
+    "first_layer_status": true,
+    "raw_markings": true,
+    "sotwis_estimates": true,
+    "sotwis_ttr_flags": true,
+    "code_lists": true,
+    "dataset_notes": true,
+    "revised_view": true,
+    "profile_type_filter": true,
+    "complete_exports": true,
+    "load_limits": true
+  },
+  "profile_types": {"values": ["synthetic", "virtual", "none"], "source_terms": ["synthetic", "virtual"],
+                    "no_type": "none", "exclude_prefix": "!"},
+  "views": {
+    "default": "raw",
+    "values": ["raw", "revised"],
+    "revised_rules": [
+      {"id": "R2", "title": "layer=first: a first horizon starting within 5 cm counts as surface (surface_within_5cm); beyond 5 cm no first horizon (WoSIS, WISE)", "issue": "#51"},
+      {"id": "R6", "title": "SOTWIS PRID linked without case between summary and estimates (and the TTR flags of /sotwis/ttr-flags) where no estimate profile has the same spelling; pairs listed", "issue": "#69"}
+    ],
+    "pending": [],
+    "unchanged": [
+      {"id": "R1", "note": "WoSIS horizons tied at 0: all candidates (tie), as raw"},
+      {"id": "R13", "note": "SOTER synthetic/virtual profiles: included, as raw"}
+    ],
+    "value_flags": ["trace_convention", "method_label_contradicted", "uniform_profile_value"]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "schema_version": "1.0",
+    "request_id": "scrubbed-request-id",
+    "filters": {
+      "include_geometry": true,
+      "include_lineage": false,
+      "limit": 1000,
+      "offset": 0
+    },
+    "total_count": 4,
+    "returned_count": 4,
+    "limit": null,
+    "offset": null,
+    "has_more": null,
+    "warnings": []
+  },
+  "total_value_count": 4,
+  "feature_count": 2,
+  "variables": [
+    {
+      "code": "ph_aq",
+      "domain": "soil"
+    }
+  ],
+  "by_dataset": [
+    {
+      "dataset": "hurl_profiles",
+      "provider": "hurl_source",
+      "value_count": 1,
+      "feature_count": 1,
+      "variable_count": 1
+    },
+    {
+      "dataset": "soter_profiles",
+      "provider": "isric",
+      "value_count": 3,
+      "feature_count": 1,
+      "variable_count": 1
+    }
+  ],
+  "by_target_level": {
+    "horizon": 4
+  },
+  "by_status": {
+    "published": 4
+  }
+}

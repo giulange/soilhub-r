@@ -1,0 +1,606 @@
+{
+  "recorded_on": "2026-10-20",
+  "api_url": "https://soilhub.weatherprogapp.it/api/v1",
+  "api_version": "0.6.0",
+  "soilhub_version": "0.1.9000",
+  "calls": [
+    {
+      "name": "capabilities",
+      "call": "soil_capabilities(soil, refresh = TRUE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/capabilities",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "capabilities-1.json"
+        }
+      ]
+    },
+    {
+      "name": "api-info",
+      "call": "soil_api_info(soil)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/health",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "api-info-1.json"
+        },
+        {
+          "method": "GET",
+          "path": "/ready",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "api-info-2.json"
+        }
+      ]
+    },
+    {
+      "name": "unauthorized",
+      "call": "soil_capabilities(soil, refresh = TRUE)",
+      "session": "anonymous",
+      "outcome": "soilhub_auth_error",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/capabilities",
+          "query": [],
+          "body": null,
+          "status": 401,
+          "file": "unauthorized-1.json"
+        }
+      ]
+    },
+    {
+      "name": "datasets",
+      "call": "soil_datasets(soil)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/datasets",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "datasets-1.json"
+        }
+      ]
+    },
+    {
+      "name": "dataset",
+      "call": "soil_dataset(soil, \"wosis_points\")",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/datasets/wosis_points",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "dataset-1.json"
+        }
+      ]
+    },
+    {
+      "name": "dataset-not-found",
+      "call": "soil_dataset(soil, \"no_such_dataset\")",
+      "session": "user",
+      "outcome": "soilhub_not_found_error",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/datasets/no_such_dataset",
+          "query": [],
+          "body": null,
+          "status": 404,
+          "file": "dataset-not-found-1.json"
+        }
+      ]
+    },
+    {
+      "name": "formats",
+      "call": "soil_formats(soil)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/formats",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "formats-1.json"
+        }
+      ]
+    },
+    {
+      "name": "variables",
+      "call": "soil_variables(soil, dataset = \"wosis_points\")",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/variables",
+          "query": {
+            "dataset": "wosis_points"
+          },
+          "body": null,
+          "status": 200,
+          "file": "variables-1.json"
+        }
+      ]
+    },
+    {
+      "name": "countries",
+      "call": "soil_countries(soil)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/countries",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "countries-1.json"
+        }
+      ]
+    },
+    {
+      "name": "country",
+      "call": "soil_country(soil, \"KEN\")",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/countries/KEN",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "country-1.json"
+        }
+      ]
+    },
+    {
+      "name": "code-lists",
+      "call": "soil_code_lists(soil)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/code-lists",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "code-lists-1.json"
+        }
+      ]
+    },
+    {
+      "name": "code-list",
+      "call": "soil_code_list(soil, \"SOTWIS_codes\")",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/code-lists/SOTWIS_codes",
+          "query": {},
+          "body": null,
+          "status": 200,
+          "file": "code-list-1.json"
+        }
+      ]
+    },
+    {
+      "name": "ttr-flag-legend",
+      "call": "soil_ttr_flag_legend(soil)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/sotwis/ttr-flags/legend",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "ttr-flag-legend-1.json"
+        }
+      ]
+    },
+    {
+      "name": "ttr-flags",
+      "call": "soil_ttr_flags(soil, max_rows = 5)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "GET",
+          "path": "/sotwis/ttr-flags",
+          "query": {
+            "view": "raw",
+            "limit": "5",
+            "offset": "0"
+          },
+          "body": null,
+          "status": 200,
+          "file": "ttr-flags-1.json"
+        }
+      ]
+    },
+    {
+      "name": "wide-wosis",
+      "call": "soil_observations(soil, datasets = \"wosis_points\", bbox = c(-123.3, 49.0, -122.9, 49.4), max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"wosis_points\"],\"bbox\":[-123.3,49,-122.9,49.4],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
+          "status": 200,
+          "file": "wide-wosis-1.json"
+        }
+      ]
+    },
+    {
+      "name": "wide-wise",
+      "call": "soil_observations(soil, datasets = \"wise_profiles\", max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"wise_profiles\"],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
+          "status": 200,
+          "file": "wide-wise-1.json"
+        }
+      ]
+    },
+    {
+      "name": "wide-soter",
+      "call": "soil_observations(soil, datasets = \"soter_polygons\", max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"soter_polygons\"],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
+          "status": 200,
+          "file": "wide-soter-1.json"
+        }
+      ]
+    },
+    {
+      "name": "wide-sotwis",
+      "call": "soil_observations(soil, datasets = \"sotwis_polygons\", bbox = c(10.0, 36.5, 10.5, 37.0), components = \"all\", max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"sotwis_polygons\"],\"bbox\":[10,36.5,10.5,37],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"components\":\"all\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
+          "status": 200,
+          "file": "wide-sotwis-1.json"
+        }
+      ]
+    },
+    {
+      "name": "wide-revised",
+      "call": "soil_observations(soil, datasets = \"wosis_points\", bbox = c(-123.3, 49.0, -122.9, 49.4), view = \"revised\", max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"wosis_points\"],\"bbox\":[-123.3,49,-122.9,49.4],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"revised\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
+          "status": 200,
+          "file": "wide-revised-1.json"
+        }
+      ]
+    },
+    {
+      "name": "wide-first-layer",
+      "call": "soil_observations(soil, datasets = \"wosis_points\", bbox = c(-123.3, 49.0, -122.9, 49.4), layer = \"first\", max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"wosis_points\"],\"bbox\":[-123.3,49,-122.9,49.4],\"geometry\":\"any\",\"layer\":\"first\",\"view\":\"raw\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
+          "status": 200,
+          "file": "wide-first-layer-1.json"
+        }
+      ]
+    },
+    {
+      "name": "wide-geometry",
+      "call": "soil_observations(soil, datasets = \"wosis_points\", bbox = c(-123.3, 49.0, -122.9, 49.4), with_geometry = \"text\", max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"wosis_points\"],\"bbox\":[-123.3,49,-122.9,49.4],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"wkt\",\"offset\":0,\"limit\":5}",
+          "status": 200,
+          "file": "wide-geometry-1.json"
+        }
+      ]
+    },
+    {
+      "name": "long-wosis",
+      "call": "soil_observations(soil, datasets = \"wosis_points\", bbox = c(-123.3, 49.0, -122.9, 49.4), layout = \"long\", max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"wosis_points\"],\"bbox\":[-123.3,49,-122.9,49.4],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true,\"layout\":\"long\",\"offset\":0,\"limit\":5}",
+          "status": 200,
+          "file": "long-wosis-1.json"
+        }
+      ]
+    },
+    {
+      "name": "long-soter-revised",
+      "call": "soil_observations(soil, datasets = \"soter_polygons\", layout = \"long\", view = \"revised\", max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"soter_polygons\"],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"revised\",\"canonical\":true,\"layout\":\"long\",\"offset\":0,\"limit\":5}",
+          "status": 200,
+          "file": "long-soter-revised-1.json"
+        }
+      ]
+    },
+    {
+      "name": "unknown-dataset",
+      "call": "soil_observations(soil, datasets = \"no_such_dataset\", max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "soilhub_validation_error",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"datasets\":[\"no_such_dataset\"],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
+          "status": 422,
+          "file": "unknown-dataset-1.json"
+        }
+      ]
+    },
+    {
+      "name": "unfiltered-observations",
+      "call": "soil_observations(soil, max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "soilhub_load_limit_error",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/observations",
+          "query": [],
+          "body": "{\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true,\"layout\":\"wide\",\"geometry_format\":\"none\",\"offset\":0,\"limit\":5}",
+          "status": 422,
+          "file": "unfiltered-observations-1.json"
+        }
+      ]
+    },
+    {
+      "name": "features-points",
+      "call": "soil_features(soil, datasets = \"wosis_points\", bbox = c(-123.3, 49.0, -122.9, 49.4), max_rows = 3, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/features",
+          "query": [],
+          "body": "{\"datasets\":[\"wosis_points\"],\"bbox\":[-123.3,49,-122.9,49.4],\"geometry\":\"any\",\"view\":\"raw\",\"canonical\":true,\"limit\":3,\"offset\":0}",
+          "status": 200,
+          "file": "features-points-1.json"
+        }
+      ]
+    },
+    {
+      "name": "features-polygons",
+      "call": "soil_features(soil, datasets = \"sotwis_polygons\", bbox = c(10.0, 36.5, 10.5, 37.0), max_rows = 3, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/features",
+          "query": [],
+          "body": "{\"datasets\":[\"sotwis_polygons\"],\"bbox\":[10,36.5,10.5,37],\"geometry\":\"any\",\"view\":\"raw\",\"canonical\":true,\"limit\":3,\"offset\":0}",
+          "status": 200,
+          "file": "features-polygons-1.json"
+        }
+      ]
+    },
+    {
+      "name": "summary",
+      "call": "soil_summary(soil, datasets = \"wosis_points\", country = \"KEN\")",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/summary",
+          "query": [],
+          "body": "{\"datasets\":[\"wosis_points\"],\"country\":[\"KEN\"],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true}",
+          "status": 200,
+          "file": "summary-1.json"
+        }
+      ]
+    },
+    {
+      "name": "availability",
+      "call": "soil_availability(soil, datasets = \"wosis_points\", country = \"KEN\")",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/availability",
+          "query": [],
+          "body": "{\"datasets\":[\"wosis_points\"],\"country\":[\"KEN\"],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true}",
+          "status": 200,
+          "file": "availability-1.json"
+        }
+      ]
+    },
+    {
+      "name": "consistency",
+      "call": "soil_consistency(soil, country = \"KEN\")",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/consistency",
+          "query": [],
+          "body": "{\"country\":[\"KEN\"]}",
+          "status": 200,
+          "file": "consistency-1.json"
+        }
+      ]
+    },
+    {
+      "name": "values",
+      "call": "soil_values(soil, max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/values",
+          "query": [],
+          "body": "{\"include_geometry\":false,\"include_lineage\":false,\"limit\":5,\"offset\":0}",
+          "status": 200,
+          "file": "values-1.json"
+        }
+      ]
+    },
+    {
+      "name": "values-summary",
+      "call": "soil_values_summary(soil)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/values/summary",
+          "query": [],
+          "body": "{}",
+          "status": 200,
+          "file": "values-summary-1.json"
+        }
+      ]
+    },
+    {
+      "name": "health-scores",
+      "call": "soil_health_scores(soil, max_rows = 5, progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/soil-health",
+          "query": [],
+          "body": "{\"include_geometry\":false,\"include_details\":false,\"limit\":5,\"offset\":0}",
+          "status": 200,
+          "file": "health-scores-1.json"
+        }
+      ]
+    },
+    {
+      "name": "health-summary",
+      "call": "soil_health_summary(soil)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/query/soil-health/summary",
+          "query": [],
+          "body": "{}",
+          "status": 200,
+          "file": "health-summary-1.json"
+        }
+      ]
+    },
+    {
+      "name": "export-csv",
+      "call": "soil_export(soil, datasets = \"wosis_points\", bbox = c(-123.3, 49.0, -122.9, 49.4), format = \"csv\", poll = 2, timeout = 600, dir = tempdir(), progress = FALSE)",
+      "session": "user",
+      "outcome": "ok",
+      "exchanges": [
+        {
+          "method": "POST",
+          "path": "/exports",
+          "query": [],
+          "body": "{\"datasets\":[\"wosis_points\"],\"bbox\":[-123.3,49,-122.9,49.4],\"geometry\":\"any\",\"layer\":\"all\",\"view\":\"raw\",\"canonical\":true,\"format\":\"csv\",\"content\":\"all\",\"layout\":\"wide\"}",
+          "status": 200,
+          "file": "export-csv-1.json"
+        },
+        {
+          "method": "GET",
+          "path": "/exports/exp_20261020_064345_9c0b4cf2",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "export-csv-2.json"
+        },
+        {
+          "method": "GET",
+          "path": "/exports/exp_20261020_064345_9c0b4cf2",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "export-csv-3.json"
+        },
+        {
+          "method": "GET",
+          "path": "/exports/exp_20261020_064345_9c0b4cf2/download",
+          "query": [],
+          "body": null,
+          "status": 200,
+          "file": "export-csv-4.zip"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 310,
+  "returned_count": 310,
+  "limit": null,
+  "offset": null,
+  "has_more": null,
+  "warnings": [
+   "Mixed POINT and MULTIPOLYGON geometries"
+  ],
+  "datasets": [
+   "sotwis_polygons"
+  ],
+  "geometry": "any",
+  "canonical": true,
+  "observation_count": 5120,
+  "observation_count_by_dataset": null,
+  "observed_feature_count": 305,
+  "observed_feature_count_by_dataset": null,
+  "components": "representative",
+  "min_cumulative_percent": null,
+  "view": "revised",
+  "revised": {
+   "rules": [
+    {
+     "id": "R6",
+     "title": "SOTWIS PRID linked without case",
+     "issue": "#69",
+     "counts": {},
+     "pairs": [
+      {
+       "source_dataset_name": "SOTWIS Tunisia",
+       "source_record_id": "rec-tn",
+       "CLAF": "CMe",
+       "summary_prid": "TN-ab1",
+       "estimate_prid": "TN-AB1",
+       "summary_profiles": 2
+      }
+     ]
+    },
+    {
+     "id": "R12",
+     "title": "values impossible for the declared unit excluded",
+     "issue": "#54",
+     "counts": {
+      "values_flagged:extreme": 4,
+      "values_hidden": 2
+     }
+    }
+   ],
+   "scope": "counts over the selection (every page)",
+   "pending": [],
+   "unchanged": [
+    {
+     "id": "R1",
+     "note": "as raw"
+    }
+   ]
+  }
+ },
+ "datasets": [
+  "sotwis_polygons"
+ ],
+ "geometry": "any",
+ "feature_count": 310,
+ "feature_count_by_dataset": null,
+ "horizon_count": 1525,
+ "horizon_count_by_dataset": null,
+ "avg_horizons_per_feature": 5.0,
+ "avg_horizons_per_feature_by_dataset": null,
+ "variables": [
+  "TOTC"
+ ],
+ "variables_by_dataset": {
+  "sotwis_polygons": [
+   "TOTC"
+  ]
+ },
+ "variable_semantics_by_dataset": {
+  "sotwis_polygons": [
+   {
+    "source_code": "TOTC",
+    "canonical_property_key": "organic_carbon",
+    "canonical_name": "Organic carbon",
+    "property_family": "carbon",
+    "source_unit": "g/kg",
+    "procedure_code": null,
+    "procedure_description": null,
+    "source_value_kind": "estimated",
+    "mapping_status": "mapped",
+    "documentation_url": null,
+    "source_notes": null
+   }
+  ]
+ },
+ "formats": [
+  "geojson",
+  "gpkg",
+  "csv",
+  "tsv",
+  "shp"
+ ],
+ "warnings": [
+  "Mixed POINT and MULTIPOLYGON geometries"
+ ]
+}

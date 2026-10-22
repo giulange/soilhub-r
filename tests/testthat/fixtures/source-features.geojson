@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "name": "campania_sites",
+  "features": [
+    {"type": "Feature", "properties": {"source_record_id": "P1", "site_name": "Portici"},
+     "geometry": {"type": "Point", "coordinates": [14.3712, 40.8031]}},
+    {"type": "Feature", "properties": {"source_record_id": "P2", "site_name": "Eboli", "note": null},
+     "geometry": {"type": "Polygon", "coordinates": [[[14.96, 40.55], [14.98, 40.55], [14.98, 40.57], [14.96, 40.55]]]}}
+  ]
+}

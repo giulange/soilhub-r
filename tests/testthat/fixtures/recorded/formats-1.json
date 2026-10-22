@@ -1,0 +1,9 @@
+{
+  "formats": [
+    "geojson",
+    "gpkg",
+    "csv",
+    "tsv",
+    "shp"
+  ]
+}

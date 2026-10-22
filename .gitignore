@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+*.Rcheck/
+soilhub_*.tar.gz
+/doc/
+/Meta/
+/pkgdown/
+tests/live/logs/
+/site/

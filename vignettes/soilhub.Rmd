@@ -1,0 +1,293 @@
+---
+title: "Getting started with soilhub"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with soilhub}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+options(width = 90)
+# The evaluated examples run against a local replay of responses recorded from
+# the production API (tests/testthat/fixtures/recorded, tools/record_fixtures.R):
+# the vignette builds without network and without a login, and the outputs
+# shown are real outputs of the API.
+soil <- soilhub:::replay_session()
+```
+
+This guide shows the first steps with **soilhub**, the R package of the
+Global Soil Data Hub. With it you can see which soil datasets the hub holds
+(WoSIS, WISE, SOTER, SOTWIS), how many profiles and measurements they have in
+your area, and read the measurements into R as an ordinary data frame.
+
+A few words used everywhere in the package (the help page `?soilhub-terms`
+has the full list):
+
+- a **feature** is a place: a soil profile site (a point) or a map unit (a
+  polygon);
+- a **profile** is the soil described at that place;
+- a **horizon** is one layer of a profile, with an upper and a lower depth;
+- an **observation** is one measured value (for example the organic carbon
+  of one horizon).
+
+**About the outputs shown here.** The results printed in this guide were
+produced by the same functions on answers recorded from the Global Soil Data
+Hub API (version 0.6.0) in October 2026. When you run the code yourself the
+data come live from the hub, so some numbers may differ.
+
+## 1. Install and load the package
+
+If soilhub is not installed yet, follow the [installation page](installation.html):
+two lines in the R console, once.
+
+Every time you start R, load the package:
+
+```{r}
+library(soilhub)
+```
+
+## 2. Sign in
+
+The hub needs to know who you are. You sign in with your university or hub
+account through your web browser: R never sees your password.
+
+```{r, eval = FALSE}
+soil <- soil_connect()
+```
+
+What happens, step by step:
+
+1. R prints a web address and a short code, like this:
+
+   ```
+   soilhub: to sign in, open https://kc.weatherprogapp.it/realms/ams/device and enter the code ABCD-EFGH
+     The code is valid for 10m; waiting for the browser step...
+   ```
+
+2. Open the address in your browser (R may open it for you), type the code
+   and sign in with your usual account.
+3. Approve the request. Back in R, `soil_connect()` finishes by itself.
+
+The object `soil` is your **session**: every function takes it as its first
+argument. The session renews itself when needed, so you can keep working
+for hours. If it expires (for example after a long pause), sign in again
+with `soil_login(soil)`.
+
+How long a session lasts is decided by the Keycloak server. Measured on
+18 October 2026: the access token is valid for 2 hours and is renewed
+automatically at your next call; a pause of 95 minutes without any call
+did not end the session; a session lasts at most 9 hours from the sign-in,
+then `soil_login(soil)` is needed.
+
+## 3. What am I allowed to do?
+
+Your account has **rights**. Most users have `soil:summary` (see what
+exists) and `soil:read` (read the data). `soil_whoami()` shows your rights
+and the functions they allow.
+
+```{r, eval = FALSE}
+soil_whoami(soil)
+```
+
+The output looks like this (shortened; the user name is yours):
+
+```
+#> <soil_identity> your-user-name
+#>   Rights:  soil:summary, soil:read (audience soil-api)
+#>   Token:   valid for 1h 59m (until ...)
+#>   Session: renewable
+#>   Functions by right:
+#>     soil:summary  yes soil_capabilities(), soil_datasets(), ...
+#>     soil:read     yes soil_observations(), soil_features(), ...
+#>     soil:publish  no  soil_run_open(), soil_publish_values(), ...
+#>     soil:admin    no  soil_register_variable(), soil_product(), ...
+```
+
+A "no" is normal for readers: publishing data is for a few accounts only.
+
+## 4. Which datasets are there?
+
+`soil_datasets()` returns one row per dataset of the hub.
+
+```{r}
+datasets <- soil_datasets(soil)
+nrow(datasets)
+```
+
+The table has many columns (title, counts, licence, citation, release...).
+Here we look at four of them:
+
+```{r}
+datasets[, c("name", "title", "profile_count", "horizon_count")]
+```
+
+The `name` column is the code you will use in the other functions (for
+example `"wosis_points"`). `profile_count` and `horizon_count` tell you how
+big each dataset is. The SOTER and SOTWIS **polygon** datasets are soil map
+units: their horizons belong to the profiles that represent the map units.
+
+To see everything about one dataset, use `soil_dataset()` with its name:
+
+```{r}
+soil_dataset(soil, "wosis_points")
+```
+
+This tells you where the data come from (the release), how much there is,
+under which licence you may use it and how to cite it.
+
+## 5. Which soil properties are measured?
+
+`soil_variables()` lists the soil properties (the hub calls them
+**variables**). Here we ask only for those of WoSIS:
+
+```{r}
+variables <- soil_variables(soil, dataset = "wosis_points")
+nrow(variables)
+```
+
+```{r}
+head(variables[, c("variable_code", "name")], 10)
+```
+
+The `variable_code` (for example `organic_carbon`) is the name of the column
+you will find in your data. The `name` says what was measured, with the
+method when it matters (pH in water or in CaCl2, bulk density dry or moist).
+
+## 6. How much data is in my area?
+
+Before reading data, ask how much there is. `soil_summary()` counts features,
+horizons and observations of a selection without transferring them. Here:
+WoSIS profiles in Kenya.
+
+```{r}
+kenya <- soil_summary(soil, datasets = "wosis_points", country = "KEN")
+kenya
+```
+
+WoSIS has about 2,300 profiles in Kenya with some 46,000 measured values:
+a size you can read directly. For very large selections (more than a million
+observations) you would use an export instead (see
+`vignette("exports", package = "soilhub")`).
+
+## 7. Read the measurements
+
+`soil_observations()` reads the data. You choose the dataset and the area.
+Here the area is a box around Vancouver (Canada), given as
+`c(west, south, east, north)` in degrees, and `max_rows = 5` keeps only the
+first five rows for this example (leave it out to read everything).
+
+```{r}
+vancouver <- c(-123.3, 49.0, -122.9, 49.4)
+x <- soil_observations(soil, datasets = "wosis_points", bbox = vancouver, max_rows = 5)
+nrow(x)
+```
+
+The result is a data frame with **one row per horizon**. First the columns
+that say where the horizon is:
+
+```{r}
+x[, c("feature_id", "horizon_name", "upper_depth_cm", "lower_depth_cm")]
+```
+
+Each `feature_id` is one profile site: here the first three rows are the
+horizons F, Ae and Bf of one profile, from 0 to 17 cm. The first two lines
+printed above the table (starting with `#`) are a short report of the
+package: how many horizons and profiles were read, and the reminder that the
+read is incomplete because we asked for 5 rows only.
+
+Then the measurements. Each soil property has a group of columns: the value,
+its unit, its method and `_n`.
+
+```{r}
+x[, c("horizon_name", "organic_carbon", "organic_carbon_units", "organic_carbon_n")]
+```
+
+`organic_carbon` is the measured value, `organic_carbon_units` its unit
+(g/kg here), and `organic_carbon_n` how many measurements the source holds
+for that horizon (1 here: one value per horizon).
+
+A column is an ordinary R vector, so the usual functions work:
+
+```{r}
+x$ph_cacl2
+mean(x$ph_cacl2)
+```
+
+`ph_cacl2` is the pH measured in a CaCl2 solution: these soils are very
+acid (pH 3.5 to 4.2).
+
+## 8. What does each column mean?
+
+`soil_columns()` describes the measurement columns of your table: unit,
+original code of the source, how many horizons have a value.
+
+```{r}
+info <- soil_columns(x)
+info[, c("column", "units", "source_codes", "horizon_count", "multi_value_cells")]
+```
+
+`source_codes` is the original WoSIS code (`orgc` for organic carbon): the
+package keeps the original terms of the source. `horizon_count` says how many
+of the horizons read have a value: here bulk density was measured in one
+horizon only.
+
+**Cells with several values.** In WoSIS a few cells hold more than one
+measurement of the same horizon (for example two clay contents from two
+analyses). Then the column (for example `clay`) holds the **mean** of the
+values, as WoSIS publishes it, and an extra column `clay_values` keeps all
+the original values. `multi_value_cells` above counts such cells: there are
+none in this small example, so there is no `_values` column.
+
+## 9. Save your data
+
+Save the table with `saveRDS()` and read it back later with `readRDS()`.
+Here we use a temporary folder; use your own folder in practice.
+
+```{r}
+file <- file.path(tempdir(), "vancouver-horizons.rds")
+saveRDS(x, file)
+y <- readRDS(file)
+nrow(y)
+```
+
+Save your **data**, never the session object `soil`: it contains your
+sign-in, which must not end up in a file or in a shared project.
+
+## 10. Cite the data
+
+Every dataset has its own citation and licence. `soil_citations()` tells you
+what to cite for the data you read:
+
+```{r}
+citations <- soil_citations(x)
+citations$citation_text
+```
+
+`soil_licences(x)` gives the terms of use in the same way. The page
+[How to cite](how-to-cite.html) explains what to cite (the data and the hub)
+and what the licences allow.
+
+## 11. Sign out
+
+At the end you can sign out; this forgets the sign-in kept in memory.
+
+```{r, eval = FALSE}
+soil_logout(soil)
+```
+
+## Where to go next
+
+- `vignette("raw-vs-revised", package = "soilhub")`: the data as published by
+  ISRIC, and the documented corrections you can ask for.
+- `vignette("first-layer", package = "soilhub")`: the first (surface) layer
+  of each profile, and the soil map components of SOTER and SOTWIS.
+- `vignette("exports", package = "soilhub")`: large selections and files
+  for GIS.
+- `vignette("writing-data", package = "soilhub")`: publishing derived values
+  (special rights needed).
+
+```{r teardown, include = FALSE}
+soilhub:::replay_stop(soil)
+```

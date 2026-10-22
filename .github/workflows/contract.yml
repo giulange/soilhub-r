@@ -1,0 +1,66 @@
+# Contract checks against the API (design 7.2, 7.4). Weekly and on demand.
+# No job needs a secret: the OpenAPI document is public, capabilities.json
+# and the recorded fixtures are committed (tools/record_fixtures.R).
+#
+# live-diff: the live openapi.json against tests/contract/openapi.json; a
+#   difference fails the job with the list and the full diff, and the owner
+#   decides whether the client follows (tools/update_contract_snapshots.R).
+# contract-suite: tests/contract against the snapshot and the live document.
+on:
+  schedule:
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+
+name: contract
+
+permissions: read-all
+
+jobs:
+  live-diff:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgload
+          needs: check
+
+      - name: Diff the live openapi.json against the snapshot
+        run: Rscript tools/update_contract_snapshots.R --check
+
+      - name: Full diff
+        if: failure()
+        run: |
+          curl -fsS https://soilhub.weatherprogapp.it/openapi.json | jq -S . > live.json
+          jq -S . tests/contract/openapi.json > snapshot.json
+          diff -u snapshot.json live.json || true
+
+  contract-suite:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgload, any::testthat, any::webfakes, any::withr
+          needs: check
+
+      - name: Contract suite against the snapshot
+        run: Rscript tests/contract/run.R snapshot
+
+      - name: Contract suite against the live openapi.json
+        if: always()
+        run: Rscript tests/contract/run.R live

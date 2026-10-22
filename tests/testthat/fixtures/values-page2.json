@@ -1,0 +1,94 @@
+{
+ "metadata": {
+  "schema_version": "1.0",
+  "request_id": null,
+  "filters": {},
+  "total_count": 4,
+  "returned_count": 2,
+  "limit": 2,
+  "offset": 2,
+  "has_more": false,
+  "warnings": [],
+  "value_count": 2
+ },
+ "values": [
+  {
+   "value_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000103",
+   "variable_code": "soil_quality_note",
+   "variable_name": "Variable 3",
+   "domain_code": "soil",
+   "value_type": "text",
+   "measurement_kind_code": "derived",
+   "target_level": "horizon",
+   "feature_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000001",
+   "profile_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000002",
+   "component_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000003",
+   "horizon_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000013",
+   "dataset_code": "wosis_points",
+   "provider_code": "isric",
+   "source_support": "point_observation",
+   "geometry_kind": "POINT",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.8,
+     -1.3
+    ]
+   },
+   "release_code": "2023-12",
+   "product_version_code": "socmodel_v1",
+   "run_id": 42,
+   "numeric_value": null,
+   "text_value": "good structure",
+   "boolean_value": null,
+   "json_value": null,
+   "value_status": "published",
+   "quality_code": null,
+   "valid_time_start": "2020-01-01T00:00:00+00:00",
+   "valid_time_end": null,
+   "depth_top_cm": 0.0,
+   "depth_bottom_cm": 30.0
+  },
+  {
+   "value_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000104",
+   "variable_code": "texture_fractions",
+   "variable_name": "Variable 4",
+   "domain_code": "soil",
+   "value_type": "json",
+   "measurement_kind_code": "derived",
+   "target_level": "profile",
+   "feature_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000001",
+   "profile_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000002",
+   "component_id": "4fa5fbe3-8fd4-4fb1-94cf-000000000003",
+   "horizon_id": null,
+   "dataset_code": "wosis_points",
+   "provider_code": "isric",
+   "source_support": "point_observation",
+   "geometry_kind": "POINT",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.8,
+     -1.3
+    ]
+   },
+   "release_code": "2023-12",
+   "product_version_code": "socmodel_v1",
+   "run_id": 42,
+   "numeric_value": null,
+   "text_value": null,
+   "boolean_value": null,
+   "json_value": {
+    "sand": 40,
+    "silt": 35,
+    "clay": 25
+   },
+   "value_status": "insufficient_data",
+   "quality_code": null,
+   "valid_time_start": "2020-01-01T00:00:00+00:00",
+   "valid_time_end": null,
+   "depth_top_cm": 0.0,
+   "depth_bottom_cm": 30.0
+  }
+ ]
+}
