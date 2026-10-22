@@ -1,0 +1,109 @@
+# How to cite
+
+When you publish results obtained with soilhub (a thesis, a paper, a
+report, a map), cite two things:
+
+1.  **the data**: the soil databases of ISRIC that you used. Their
+    licences ask you to cite them;
+2.  **the tool**: the Global Soil Data Hub and the soilhub package,
+    which gave you the data in that form.
+
+## 1. Cite the data
+
+Each dataset has its own citation. Read your data as usual; here, a few
+WoSIS profiles around Vancouver:
+
+``` r
+
+x <- soil_observations(soil, datasets = "wosis_points",
+                       bbox = c(-123.3, 49.0, -122.9, 49.4),
+                       max_rows = 5, progress = FALSE)
+```
+
+Then ask soilhub what to cite for the data in `x`:
+
+``` r
+
+citations <- soil_citations(x)
+writeLines(citations$citation_text)
+#> Batjes NH, Calisto L and de Sousa LM, 2024. WoSIS-latest: Standardised world soil profile data. ISRIC Soil Data Hub resource identifier: https://tinyurl.com/39xhaa9d. Date downloaded: 15/01/2024.
+```
+
+The text is the one published by ISRIC, unchanged. Copy it into your
+list of references. For WoSIS, ISRIC’s text ends with an example
+download date: write instead the date on which you read the data. If you
+read several datasets,
+[`soil_citations()`](https://giulange.github.io/soilhub-r/reference/soil_citations.md)
+returns one citation for each of them.
+
+For SOTER and SOTWIS, ISRIC gives no single citation for the whole
+dataset:
+[`soil_citations()`](https://giulange.github.io/soilhub-r/reference/soil_citations.md)
+then returns the notes of each source database (country or region),
+labelled as ISRIC labels them.
+
+## 2. Respect the licences
+
+Using the data is free, but under conditions set by the licence of each
+source.
+[`soil_licences()`](https://giulange.github.io/soilhub-r/reference/soil_citations.md)
+gives the licence of the data you read:
+
+``` r
+
+licences <- soil_licences(x)
+writeLines(licences$licence_text)
+#> Licenced per profile, as specified by data provider and indicated in the data
+```
+
+In short, for the datasets of the hub (October 2026):
+
+| Dataset | Licence | What it means for you |
+|----|----|----|
+| WISE | CC BY 3.0 | free use, cite the source |
+| SOTWIS | CC BY 3.0 | free use, cite the source |
+| SOTER | CC BY 3.0 for 12 databases; CC BY-NC 3.0 for Malawi | cite the source; no commercial use of the Malawi data |
+| WoSIS | a licence for each profile, chosen by the data provider | see below |
+
+**WoSIS** collects profiles from many providers, and each profile keeps
+the licence of its provider. Most profiles are public domain or CC BY
+(free use, cite the source), but about a quarter of the WoSIS layers are
+CC BY-NC (**no commercial use**) and a few are CC BY-SA (works derived
+from them must be shared under the same licence). The hub keeps the
+licence of every profile; showing it on each row of your data is planned
+for a next version of the hub. Until then, if your use is commercial,
+check with ISRIC before using WoSIS data.
+
+What the licence names mean:
+
+- **CC BY**: you may use, change and share the data, also commercially,
+  if you cite the source;
+- **CC BY-NC**: as CC BY, but **not for commercial purposes**;
+- **CC BY-SA**: as CC BY, and what you derive from the data must be
+  shared under the same licence;
+- **CC0** and **public domain**: no conditions (citing the source is
+  still good practice).
+
+## 3. Cite the hub and the package
+
+The data reach you through the **Global Soil Data Hub**, which keeps an
+exact copy of the ISRIC databases, and through this package. Cite them
+as well, especially if you used the revised view (`view = "revised"`):
+its rules are part of the hub, not of the ISRIC data.
+
+> Langella G. (2026). *soilhub: R client for the Global Soil Data Hub*
+> (version 0.2.0) \[software\]. <https://github.com/giulange/soilhub-r>
+
+A permanent identifier (DOI) will be added to this citation with the
+release of version 0.2.0.
+
+## 4. An example of a methods sentence
+
+> Soil profile data (WoSIS; Batjes et al., see the citation returned by
+> [`soil_citations()`](https://giulange.github.io/soilhub-r/reference/soil_citations.md))
+> were obtained from the Global Soil Data Hub with the R package soilhub
+> (Langella, 2026), in the raw view (data as published by ISRIC).
+
+Replace “raw view” with “revised view” if you used `view = "revised"`,
+and list the rules that changed your data with
+[`soil_revised_rules()`](https://giulange.github.io/soilhub-r/reference/soil_revised_rules.md).
